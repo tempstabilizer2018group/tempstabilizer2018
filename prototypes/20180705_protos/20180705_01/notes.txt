@@ -1,0 +1,8 @@
+2018-07-05_212941 Peter Maerki
+
+20180624 temp_stabilizer_2018_test.T3001
+20180624 temp_stabilizer_2018_spacer_test.T3001
+
+Abweichend von Schema bestückt:
+C2 nur 100n (weil ich keinen 470n hatte)
+

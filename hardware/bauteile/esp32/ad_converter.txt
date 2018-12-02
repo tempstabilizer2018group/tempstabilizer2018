@@ -1,0 +1,31 @@
+esp32_technical_reference_manual_en.pdf
+Seite 567
+
+empfohlen zu nutzen:
+SENSOR_VP
+SENSOR_VN
+
+also beim esp32wroom pin 4 oder 5
+
+
+https://esp-idf.readthedocs.io/en/v2.0/api/peripherals/adc.html
+
+
+Beispielcode
+https://github.com/espressif/esp-idf/blob/be81d2c16d7f4caeea9ceb29fece01510664caf3/examples/peripherals/adc/main/adc1_example_main.c
+
+https://github.com/micropython/micropython-esp32/issues/33
+
+Atten
+adc = machine.ADC(machine.Pin(35))
+adc.atten(machine.ADC.ATTN_11DB)
+# damit Spannungsbereich 0 bis 3.3V
+
+probleme
+https://github.com/micropython/micropython-esp32/issues/173
+
+Schlechte ADC
+https://github.com/espressif/esp-idf/issues/164
+
+
+http://esp-idf.readthedocs.io/en/latest/api-reference/peripherals/adc.html#adc-api-adc-calibration

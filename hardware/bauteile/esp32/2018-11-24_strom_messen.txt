@@ -1,0 +1,22 @@
+Tempstablizier rev1854
+2018-09-07_01 Stahl 4.6mA @ 30V: 138mW
+2018-09-07_03 Alu   4.6mA @ 30V: 138mW
+
+main.py
+import machine
+machine.sleep(10000)
+
+2018-09-07_01 Stahl 0.6mA @ 30V: 18mW
+2018-09-07_01 Alu   0.5mA @ 30V: 15mW
+Vergleich zu 'test_light_sleep.txt': 870uA @ 3.3V: 2.8mW
+
+Analyse der Einschaltdauer
+  def delay_ms(self, iDelay_ms):
+    if config_app.bHwDoLightSleep:
+      self.objHw.pin_gpio5.value(True)
+      machine.sleep(iDelay_ms)
+      self.objHw.pin_gpio5.value(False)
+      return
+    utime.sleep_ms(iDelay_ms)
+
+  => 120ms rechnen, 80ms schlafen

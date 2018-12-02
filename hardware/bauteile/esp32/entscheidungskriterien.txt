@@ -1,0 +1,28 @@
+ASPEKTE
+  LOWPOWER
+  Implementation:
+    - ESP32_MICROPYTHON_194
+    - ESP32_MICROPYTHON_ZERYNTH
+    - PYCOM
+
+KRITERIEN
+  DONE: LOWPOWER: Stromverbrauch
+  DONE: LOWPOWER: 200ms Timer
+  DONE: LOWPOWER: Stromverbrauch beim Wecken (Overhead)
+  DONE: WLAN: Strom bei SSID-Scan
+  DONE: WLAN: Zeit zum Verbindungsaufbau/Abbaum
+  DONE: PWM: Mit und ohne LOWPOWER
+  DONE: DAC: Mit und ohne LOWPOWER, Auflösung
+  DONE: RTC: Mit und ohne LOWPOWER
+  TODO: BOOT: Erkennen, warum gebootet wurde (Power-Up, Lowpower-Up, ...)
+  TODO: FILESYSTEM: Grösse, Recovery nach Crash, LOWPOWER
+  TODO: MICROPYTON: Stack, Heap-Grösse
+  DONE: TAKTFREQUENZ/SCALER: ...
+  DONE: RS232-Console: Mit und ohne LOWPOWER
+  RAM:
+  FLASH:
+    ESP32-WROOM-32 integrates 4 MB of external SPI flash
+    https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf
+
+FINDINGS
+  Ja ja

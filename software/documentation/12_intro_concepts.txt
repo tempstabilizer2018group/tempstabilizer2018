@@ -1,0 +1,63 @@
+Software Concepts
+=================
+
+class Controller
+----------------
+The controller implements the main flow of logic on the node. It also controls all of the timing aspects. When to upload files using wlan.
+
+portable_controller.py: class Controller
+  This is the central Class running on the Node.
+    def reboot(self):
+      raise Exception('Needs to be derived...')
+    def factoryHw(self):
+      return hw_hal.Hw()
+
+hw_controller.py: class HwController(portable_controller.Controller)
+  This implements the hardware-dependet logic. For example:
+    def reboot(self):
+      machine.reset()
+    def factoryHw(self):
+      return hw_hal.Hw()
+
+simulation_controller.py: class SimuliertController(portable_controller.Controller)
+  This implements the hardware-dependet logic. For example:
+    def reboot(self):
+      print('reboot()...')
+      sys.exit()
+    def factoryHw(self):
+      return simulation_hw_hal.Hw(objTagesmodell=portable_simuliert_tagesmodell.Tagesmodell())
+
+  Note: The simulated hardware not only simulates the hardware on the node. It also has to simulate the room where the node is in: The environment-temperature over time.
+
+class Hw
+--------
+This is the abstraction of the physical hardware directly connected to the node (in contrast of environmental aspects).
+
+The code excerpts below demonstrate the difference.
+
+hw_hal.py: class Hw
+  @property
+  def messe_fTempH_C(self):
+    return self.MAX30205.oneShotNormalB(I2C_ADDRESS_TempH)
+
+  In this code, the I2C bus is used to read the temperature from the chip.
+
+simulation_hw_hal.py: class Hw
+  @property
+  def messe_fTempH_C(self):
+    return self.__fTempH_C
+
+  def _timeIncrement(self, fTempEnvirons_C):
+    # Leistung zu H
+    fHLeistungW = self.fHeat_W - (self.__fTempH_C-fTempEnvirons_C)/fRH - (self.__fTempH_C-self.__fTempO_C)/fRHO
+    # Leistung zu O
+    fOLeistungW = (self.__fTempH_C-self.__fTempO_C)/fRHO - (self.__fTempO_C-fTempEnvirons_C) / fRO
+    fTempHnew_C = self.__fTempH_C + (fHLeistungW * config_app.iTimeProcess_O_H_ms / 1000.0 / fCH)
+    fTempOnew_C = self.__fTempO_C + (fOLeistungW * config_app.iTimeProcess_O_H_ms / 1000.0 / fCO)
+
+    self.__fTempH_C = fTempHnew_C
+    self.__fTempO_C = fTempOnew_C
+
+  In this code, the variable 'self.__fTempH_C' is returned. But every time the simulated time advances, '_timeIncrement(self, fTempEnvirons_C)' is called, which then updates '__fTempH_C'.
+  Note that in this calculation, the time 'iTimeProcess_O_H_ms', 'fTempEnvirons_C' and 'fXLeistungW' is used.
+  The calculation is base on the model discribed in <temp_stabilizer_2018>\concepts\thermische_simulation20180625_modell_hw.png. 

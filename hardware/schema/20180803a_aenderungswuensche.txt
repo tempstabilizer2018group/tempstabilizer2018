@@ -1,0 +1,10 @@
+2018-08-28_130319 Peter Maerki erledigt AB
+-----------------------------------------------
+
+
+2018-07-05_163723 Peter Maerki
+
+R2 Pads zu klein: soll 2010
+
+in Absprache gemaess 20180803a_temp_stabilizer_2018_esp32.odg
+20180717_01_entwurf_LT3391-3.3_prototyp.odg

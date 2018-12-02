@@ -1,0 +1,5 @@
+2018-09-07_114235 Peter Maerki
+
+01: R5, R6 Pullup nicht bestückt
+02: R5, R6 Pullup: 47k
+03: R5, R6 Pullup: 4k7

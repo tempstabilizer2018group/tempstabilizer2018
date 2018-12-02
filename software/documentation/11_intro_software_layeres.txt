@@ -1,0 +1,43 @@
+Filename conventions
+--------------------
+<temp_stabilizer_2018>\software\http_server\python
+  These files DON'T follow this convention.
+  TODO: Change filenames to follow the convention!
+
+<temp_stabilizer_2018>\software\node
+<temp_stabilizer_2018>\software\simulation
+<temp_stabilizer_2018>\software\simulation_tests
+  These files follow this convention
+
+  config_xxx.py
+    Configuration files. No dependencies
+
+  hw_xxx.py
+    Hardware (ESP32) dependent files. Runs only on ESP32 with micropython.
+
+  portable_xxx.py
+    Runs on Python 3 on Windows or Linux, but also on ESP32 with micropython!
+    No dependencies to Python 3 libraries (most of them are incompatible on Python 3 and Micropython).
+
+  simulation_xxx.py
+    These fils just run on full blown Python 3 on Windows or Linux. They don't run on ESP32.
+
+Software-Layering
+-----------------
+hw_xxx.py / simulation_xx.py: (Lowest Layer)
+  This code is kept as small as possible. It has it's simulated counterpart:
+    hw_controller.py          <-> simulation_controller.py
+    hw_hal.py                 <-> simulation_hw_hal.py
+    hw_test_pidh.py           <-> simulation_test_pidh.py
+    hw_test_pidh_pido.py      <-> simulation_test_pidh_pido.py
+    hw_test_pidh_pido_day.py  <-> simulation_test_pidh_pido_day.py
+
+portable_xxx: (Middleware Layer)
+  Most of the code which runs on the node is 'portable_xxx': It may be tested and optimized on Windows using simulated hardware.
+
+<temp_stabilizer_2018>\software\http_server\python (Server Layer)
+  This code run's on the webserver. However, for testing may also run on Windows/Linux.
+
+<temp_stabilizer_2018>\software\simulation_tests (Application Layer)
+  All files hw_test_xxx / simulation_test_xxx contain a main()!
+

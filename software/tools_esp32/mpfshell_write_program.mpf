@@ -1,0 +1,23 @@
+exec import os
+exec import flashbdev
+exec os.VfsFat.mkfs(flashbdev.bdev)
+
+ls
+
+md config
+md program
+md data
+
+lcd ../node
+put main.py
+
+lcd config
+cd config
+mput .*\.py
+
+lcd ../program
+cd ../program
+mput .*\.py
+
+exec import machine
+exec machine.reset()

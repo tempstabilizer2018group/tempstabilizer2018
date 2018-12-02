@@ -1,0 +1,110 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>9a703754-eb4e-4c84-acfb-d2ae12c6d6f8</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>simulation_tests\simulation_test_pidh_pido.py</StartupFile>
+    <SearchPath>tools_pyplot;simulation;http_server\python;node\config;node\program</SearchPath>
+    <WorkingDirectory>simulation_tests</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>project</Name>
+    <RootNamespace>project</RootNamespace>
+    <InterpreterId>Global|PythonCore|3.6</InterpreterId>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="grafana_log_reader_test.py" />
+    <Compile Include="http_server\python\apache_grafanahandler.py" />
+    <Compile Include="http_server\python\config_http_server.py" />
+    <Compile Include="http_server\python\grafana_log_config.py" />
+    <Compile Include="http_server\python\grafana_log_reader_lib.py" />
+    <Compile Include="http_server\python\http_influxdb_loadfiles.py" />
+    <Compile Include="http_server\python\http_server_lib.py" />
+    <Compile Include="http_server\python\rfc3339.py" />
+    <Compile Include="node\program\hw_urequests.py" />
+    <Compile Include="node\program\portable_grafana_datatypes.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|PythonCore|3.6" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="http_server\webroot\" />
+    <Folder Include="tools_pyplot\" />
+    <Compile Include="node\program\portable_persist.py" />
+    <Compile Include="simulation\simulation_http_server_utils.py" />
+    <Compile Include="simulation_tests\simulation_test_pidh_pido_day_http.py" />
+    <Compile Include="simulation_tests\simulation_test_pidh_pido_log_grafana.py" />
+    <Compile Include="tools_pyplot\pyplot.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="http_server" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="http_server" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="http_server\python" />
+    <Compile Include="http_server\python\grafana_log_reader.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="node\" />
+    <Compile Include="node\main.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="node\data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="node\program\" />
+    <Compile Include="node\program\hw_hal.py" />
+    <Compile Include="node\program\hw_max30205.py" />
+    <Compile Include="node\program\hw_mcp4725.py" />
+    <Compile Include="node\program\hw_test_pidh.py" />
+    <Compile Include="node\program\hw_test_pidh_pido.py" />
+    <Compile Include="node\program\hw_test_pidh_pido_day.py" />
+    <Compile Include="node\program\hw_controller.py" />
+    <Compile Include="node\program\portable_constants.py" />
+    <Compile Include="node\program\portable_controller.py" />
+    <Compile Include="node\program\portable_daymaxestimator.py" />
+    <Compile Include="node\program\portable_grafana_log_writer.py" />
+    <Compile Include="node\program\portable_pid_controller.py" />
+    <Compile Include="node\program\portable_simuliert_tagesmodell.py" />
+    <Compile Include="node\program\portable_tempstabilizer.py" />
+    <Compile Include="node\program\portable_ticks.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="node\config\" />
+    <Compile Include="node\config\config_app.py" />
+    <Compile Include="node\config\config_node.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="simulation\" />
+    <Compile Include="simulation\simulation_hw_hal.py" />
+    <Compile Include="simulation\simulation_controller.py" />
+    <Compile Include="simulation\simulation_pyplot.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="simulation_tests\" />
+    <Compile Include="simulation_tests\simulation_test_dayestimator.py" />
+    <Compile Include="simulation_tests\simulation_test_pidh.py" />
+    <Compile Include="simulation_tests\simulation_test_pidh_pido.py" />
+    <Compile Include="simulation_tests\simulation_test_pidh_pido_day.py" />
+    <Compile Include="simulation_tests\simulation_test_schrittantwort.py" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

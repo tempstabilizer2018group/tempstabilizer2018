@@ -1,0 +1,79 @@
+Return-Path: <eshop@phys.ethz.ch>
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on phd-mailscan.ethz.ch
+X-Spam-Level: 
+X-Spam-Status: No, score=-102.2 required=5.0 tests=ALL_TRUSTED,BAYES_00,
+	PHYS_AUTHENTICATED,PHYS_FROM_OUR_DOMAIN,RP_MATCHES_RCVD autolearn=ham
+	version=3.3.2
+X-Spam-Report: 
+	* -1.0 ALL_TRUSTED Passed through trusted hosts only via SMTP
+	*  -50 PHYS_FROM_OUR_DOMAIN to ourselves from an legitimate inside source
+	*  -50 PHYS_AUTHENTICATED our MX received e-mail from authenticated D-PHYS
+	*      user
+	* -1.0 RP_MATCHES_RCVD Envelope sender domain matches handover relay domain
+	* -0.2 BAYES_00 BODY: Bayes spam probability is 0 to 1%
+	*      [score: 0.0000]
+X-Original-To: pmaerki@phys.ethz.ch
+Delivered-To: pmaerki@phys.ethz.ch
+Received: from localhost (phd-mailscan.ethz.ch [192.168.127.2])
+	by phd-imap.ethz.ch (Postfix) with ESMTP id 3qvtSp5sKvzhyM
+	for <pmaerki@phys.ethz.ch>; Wed, 27 Apr 2016 10:30:34 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at phys.ethz.ch
+Received: from phd-mxin.ethz.ch ([IPv6:::ffff:192.168.127.53])
+	by localhost (phd-mailscan.ethz.ch [::ffff:192.168.127.2]) (amavisd-new, port 10024)
+	with LMTP id x7gfgwuleNYv for <pmaerki@phys.ethz.ch>;
+	Wed, 27 Apr 2016 10:30:34 +0200 (CEST)
+Received: from gaunt.ethz.ch (gaunt.ethz.ch [192.33.99.116])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: eshop@phd-mxin.ethz.ch)
+	by phd-mxin.ethz.ch (Postfix) with ESMTPSA id 3qvtSp4y6SzQ4x
+	for <pmaerki@phys.ethz.ch>; Wed, 27 Apr 2016 10:30:34 +0200 (CEST)
+Content-Type: text/plain; charset=utf-8
+Mime-Version: 1.0 (Mac OS X Mail 9.2 \(3112\))
+Subject: Re: Distrelec-Bestellung von Peter Maerki
+From: eshop <eshop@phys.ethz.ch>
+In-Reply-To: <3qs5H24dfPz1RGv@zwoelfi.ethz.ch>
+Date: Wed, 27 Apr 2016 10:30:34 +0200
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <BD252154-01B6-43B2-B753-57113AE96ABB@phys.ethz.ch>
+References: <3qs5H24dfPz1RGv@zwoelfi.ethz.ch>
+To: pmaerki@phys.ethz.ch
+X-Mailer: Apple Mail (2.3112)
+
+Sehr geehrter Kunde
+
+Die bestellten Artikel liegen zum Abholen bereit.
+
+Freundliche Gr=C3=BCsse
+
+M. Gresser
+
+> Am 22 Apr 2016 um 21:27 schrieb pmaerki@phys.ethz.ch:
+>=20
+> Peter Maerki
+> Ensslin E9
+> HPF
+> pmaerki@phys.ethz.ch
+> Tel.: 044 633 29 68
+> KoSt: 03439
+>=20
+>=20
+> Bitte bestellen Sie bei der n=C3=A4chsten Distrelec-Bestellung f=C3=BCr =
+mich die folgenden Artikel mit:
+>=20
+> Anzahl |  Art.No. |         Artikel          |  Total=20
+> ------------------------------------------------------
+>     1   128492    Stecker                        0.75
+>     1   128493    Stecker                        1.25
+>     1   127080    Stecker                        1.00
+>     1   127081    Stecker                        1.05
+> ------------------------------------------------------
+>                                         CHF      4.05
+>=20
+>=20
+> Sie werden per Email benachrichtigt, sobald die Artikel bereit liegen.
+>=20
+> Mit freundlichen Gr=C3=BCssen,
+> Peter Maerki - pmaerki@phys.ethz.ch
+>=20
+

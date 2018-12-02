@@ -1,0 +1,5 @@
+exec import os
+exec import flashbdev
+exec os.VfsFat.mkfs(flashbdev.bdev)
+
+ls

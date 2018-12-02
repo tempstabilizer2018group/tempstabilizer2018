@@ -1,0 +1,32 @@
+2018-09-06_141535 Peter Maerki
+
+Zum programmieren der 20180829 temp_stabilizer_2018.T3001
+
+Board 356-ESP32-DEVKITC 
+
+ESP32 Wroom weg gelötet
+R11, C9 entfernt (ist auch auf dem temp stabilizer)
+
+
+2018-09-08_102121 Peter Maerki
+
+Von Hand neuer Widerstand 5k1 zwischen 3V3 und IO0
+
+
+2018-09-08_112121 Hans Maerki
+
+C15 entfernt (https://readthedocs.com/projects/espressif-esp-idf/downloads/pdf/latest/ "Note on C15")
+
+
+Falls Probleme beim Flashen:
+  Beachte: "Pull up R6: minimal 47k, sonst Fehler bei Flashen"
+  Mögliche Lösung:
+    Auf "Prog Adapter Wroom" einen Boot-Button zwischen GND und SCL.
+    Falls
+      C:\Users\maerki>%ESPTOOL% --chip esp32 --port %ESPCOM% erase_flash
+      esptool.py v2.4.1
+      Serial port COM39
+      Connecting........_____.....___
+    Boot-Button drücken und Erase sollte beginnen.
+
+

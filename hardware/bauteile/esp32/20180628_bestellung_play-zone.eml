@@ -1,0 +1,135 @@
+Delivered-To: peter.maerki@gmail.com
+Received: by 2002:a02:9bd4:0:0:0:0:0 with SMTP id f20-v6csp505907jal;
+        Thu, 28 Jun 2018 08:29:00 -0700 (PDT)
+X-Google-Smtp-Source: AAOMgpfTCLu4i6QwoSyIf7TBicEYVdIfgOmEjsErXA3pxMaij6pQToAWbPHNPID6EX7Asqe1DFjH
+X-Received: by 2002:a1c:ec1:: with SMTP id 184-v6mr9003851wmo.84.1530199739946;
+        Thu, 28 Jun 2018 08:28:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1530199739; cv=none;
+        d=google.com; s=arc-20160816;
+        b=pwLcHQ6l/g7m5Y0H+ZUeO9Ds7uL84+U3BJ0lFR7TEHvKbTkjSoHXoZB71eJeHP+3yr
+         OGnVbN4crFf8MrASr7AZF5Gv4eNR4SKcg43W8sdl37xl5DJdbg2euW4mLtPxU8Vj58Uv
+         vIOvG9aURBTb5cLOHwcH0Kb3P6nUV42kiyeEvFhb7vsCnHJM0/0bslcXtq8wuD+YXUNA
+         kFoSvwa3cvdwR+bbUtIJSR7LdyNJGJ0sH9EibvoZBmmIzVLF1Nqzh3vSyLKWCaWCDH1l
+         VrgkV76N0KI0nH2LZ4jq8WXLQahyMvcpfRLVrk9LlBCIl31RrfME+YfgG3AxztIb5cym
+         YZdQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=message-id:mime-version:content-disposition
+         :content-transfer-encoding:date:from:subject:to
+         :arc-authentication-results;
+        bh=CMc/rPSP9aaQlzrYWPEN1JNhEnFkZShGTlnVcpYMqyo=;
+        b=ph9rdWWZbQwunGgDQmQEvMa+hrO4By8bZbmqDCsMqcxoFWowEx3jgec9hJnkdNpbEU
+         Y7TX9JApWYhRL4Eraw5j4cOCQSX5aQTdI/OV0oeQAIFOzv5LxvTHBWc7AotFxfs0d0Eg
+         O29+uttxoUw0YnzNDTk8kl0f8eEZ4i8e4A9qVm2pXvTXMr7jW3eMCsbJLAaw0h3qEHHQ
+         yfU1FArT+FsjjqpAZgc5BxO8MhwFbCgr8glCOjvxZS9GSDTmd252jjQQF4GjrGpjaTZo
+         YO39ClBLBuJPEM7Q7UljaFxY6xVZ4U0Jf+EFeueCHD96Apqf6dfKbsD4xnfUk8Oc740j
+         JlXw==
+ARC-Authentication-Results: i=1; mx.google.com;
+       spf=pass (google.com: domain of info@play-zone.ch designates 92.51.149.114 as permitted sender) smtp.mailfrom=info@play-zone.ch
+Return-Path: <info@play-zone.ch>
+Received: from www.klangspiel.ch (mail.klangspiel.ch. [92.51.149.114])
+        by mx.google.com with ESMTP id l3-v6si5156527wrb.290.2018.06.28.08.28.59
+        for <peter.maerki@gmail.com>;
+        Thu, 28 Jun 2018 08:28:59 -0700 (PDT)
+Received-SPF: pass (google.com: domain of info@play-zone.ch designates 92.51.149.114 as permitted sender) client-ip=92.51.149.114;
+Authentication-Results: mx.google.com;
+       spf=pass (google.com: domain of info@play-zone.ch designates 92.51.149.114 as permitted sender) smtp.mailfrom=info@play-zone.ch
+Received: from tux8.trendhosting-net.ch (mx1.trendhosting-net.ch [188.40.132.215])
+	by www.klangspiel.ch (Postfix) with ESMTP id 99D48E1C10
+	for <play-zone.ch.peter@ergoinfo.ch>; Thu, 28 Jun 2018 17:28:59 +0200 (CEST)
+Received: from tux17.trendhosting-net.ch ([88.198.218.158])
+	by tux8.trendhosting-net.ch with esmtp (Exim 4.89)
+	(envelope-from <info@play-zone.ch>)
+	id 1fYYqh-0006r0-NL; Thu, 28 Jun 2018 17:28:58 +0200
+Received: by tux17.trendhosting-net.ch (Postfix, from userid 2817)
+	id 006D111B4092; Thu, 28 Jun 2018 17:28:42 +0200 (CEST)
+To: =?utf-8?B?UGV0ZXIgTWFlcmtp?= <play-zone.ch.peter@ergoinfo.ch>
+Subject: =?utf-8?B?cGxheS16b25lLmNoOiBJaHJlIEJlc3RlbGx1bmcgTnIuICMgMTAwMDM1MTUx?=
+X-PHP-Originating-Script: 2817:Sendmail.php
+From: Play-Zone GmbH <info@play-zone.ch>
+Date: Thu, 28 Jun 2018 15:28:42 +0000
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+MIME-Version: 1.0
+Message-Id: <20180628152843.006D111B4092@tux17.trendhosting-net.ch>
+X-Originating-IP: 88.198.218.158
+X-Spampanel-Domain: intronet.ch
+X-Spampanel-Username: 88.198.218.158
+Authentication-Results: trendhosting-net.ch; auth=pass smtp.auth=88.198.218.158@intronet.ch
+X-Spampanel-Outgoing-Class: ham
+X-Spampanel-Outgoing-Evidence: Combined (0.20)
+X-Recommended-Action: accept
+X-Filter-ID: EX5BVjFpneJeBchSMxfU5p52GJvQFTxf5/jmZwRQS6F602E9L7XzfQH6nu9C/Fh9KJzpNe6xgvOx
+ q3u0UDjvO5EYERh8rSw0qMVAfmSaTlrIg/YIQQGtvkXx+YOYqaRA1iBQPp3vKzbR39sxB7meXA55
+ HJ1RL8AQ8UyReJCsook1pxGVYXg4WGa90ezDHTDOWmuNA8WTybi1JN85FSnfKSMZ6S3yLR82tVTs
+ c5PeRF3J+xYHPuWGpKzRHwi9JFN1dP6ngkaB7hxZpaIqRMvKwNLrygCciEZkmwxxjPu2gHLb0zYK
+ te9Ud27+oASI0WHiU8VE+Y6qYSAOyThMlac9VnuEOX5X+aI07tQv+JNpJZkn7bB5bp6MFPZxaDQ+
+ O9lv3DDg8h9WcDqBh3bPHWCKEq7rYHPaxoprYC9Mpp75qKuT4QjTAqjDWuJceWgqQP76t21LZljl
+ hkt5WuJtiKLN5w2rE6WYW1Tj2VOzoQoyQY3xVOP48ZmnVlO1dvB8ONRYBzYkpmLdptuJ3WC/L4L3
+ ukY9hlleS+Zkhw77mksKdfvjUCo78LynZ4lPx3U9lHJS31MusX2Xci0Z8D9aucAtXgVgnGjWDYNv
+ nzP0ACY0Ycc/BSKaw0a8kmKVKfi7pBJkJY+ljcpmWc/rbInMZNF4avdrxXPntgUPq1539GctZJnm
+ kEAsX6YDRooLvsCKPQ1vfOgZBfgePeipccID38C5fSBhHK18alILJlos9RZ8yAIz6qMyhL0G3C7O
+ 1TgPr0skfKffFGWwCk4sAg0OuCo3DH6/98fZyH4Yis8HAW3YHlHY3bGv1qsxO1mYfSr2czmi8ZZD
+ w6MG3E9U62qnI+GE+m4fH3DcCbXFrGx2USbIVNvMzrS+ipRTMma8gsCSR+Ag21h0A0ILgKwUM6WC
+ okVYXXT+p4JGge4cWaWiKkTLysBqocGTICmeD/g+HMRZqslFztMw17RabwRi3kLZ34RBu4swSIaG
+ 5FCnw5PwNtpXg3qtAF/VjuQBNQw3NP5kzUDY79uQwBfCInqgab6n7Zhxng==
+X-Report-Abuse-To: spam@tux7.trendhosting-net.ch
+
+<!--@vars=0D=0A{"store url=3D\"\"":"Store Url",=0D=0A"skin url=3D\"images/logo_email.gif\" _area=3D'frontend'":"Email Logo Image",=0D=0A"htmlescape var=3D$order.getCustomerName()":"Customer Name",=0D=
+=0A"var store.getFrontendName()":"Store Name",=0D=0A"store url=3D\"customer/account/\"":"Customer Account Url",=0D=0A"var order.increment_id":"Order Id",=0D=0A"var order.getCreatedAtFormated('long')":=
+"Order Created At (datetime)",=0D=0A"var order.getBillingAddress().format('html')":"Billing Address",=0D=0A"var payment_html":"Payment Details",=0D=0A"var order.getShippingAddress().format('html')":"S=
+hipping Address",=0D=0A"var order.getShippingDescription()":"Shipping Description",=0D=0A"layout handle=3D\"sales_email_order_items\" order=3D$order":"Order Items Grid",=0D=0A"var order.getEmailCustom=
+erNote()":"Email Order Note"}=0D=0A@-->=0D=0A=0D=0A<!--@styles=0D=0A=09body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }=0D=0A=09a { color:#1E7EC8; }=0D=0A@-->=0D=0A=
+=0D=0A<style type=3D"text/css">=0D=0A        tr.summary-details td {font-size: 10px; color: #626465; }=0D=0A</style>=0D=0A=0D=0A<div style=3D"font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;">=
+=0D=0A=09<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" width=3D"98%" style=3D"margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">=0D=0A=09=09<tr>=
+=0D=0A=09=09=09<td align=3D"center" valign=3D"top">=0D=0A=09=09=09=09<!-- [ header starts here] -->=0D=0A=09=09=09=09<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" width=3D"650">=0D=0A=09=09=
+=09=09=09<tr>=0D=0A=09=09=09=09=09=09<td valign=3D"top"><a href=3D"https://www.play-zone.ch/de/"><img src=3D"https://www.play-zone.ch/skin/frontend/default/f002/images/logo_email.gif" alt=3D"play-zone=
+.ch"  style=3D"margin-bottom:10px;" border=3D"0"/></a></td>=0D=0A=09=09=09=09=09</tr>=0D=0A=09=09=09=09</table>=0D=0A=09=09=09=09<!-- [ middle starts here] -->=0D=0A=09=09=09=09<table cellspacing=3D"0=
+" cellpadding=3D"0" border=3D"0" width=3D"650">=0D=0A=09=09=09=09=09<tr>=0D=0A=09=09=09=09=09=09<td valign=3D"top">=0D=0A=09=09=09=09=09=09=09<p><strong>Hallo Peter Maerki</strong>,<br/>Vielen Dank f=
+=C3=BCr Ihre Bestellung bei play-zone.ch. Sie k=C3=B6nnen den aktuellen Status Ihrer Bestellung jederzeit <a href=3D"https://www.play-zone.ch/de/customer/account/" style=3D"color:#1E7EC8;">in Ihrem Ku=
+ndenbereich</a> einsehen. Sollten Sie Fragen zu Ihrem Kundenkonto oder Ihrer Bestellung haben, senden Sie uns eine E-Mail an <a href=3D"mailto:info@play-zone.ch" style=3D"color:#1E7EC8;">info@play-zon=
+e.ch</a>.</p>=0D=0A=09=09=09=09=09=09=09=0D=0A=09=09=09=09=09=09=09<p>Wenn Sie eine Bestellung gegen Vorauskasse get=C3=A4tigt haben, finden Sie hier unter "Zahlungsmethode" die genauen Angaben zur Ue=
+berweisung (Kontonummer etc.). Bei einer Bestellung gegen Abholung werden wir Sie per Mail oder Telefon informieren, sobald die bestellten Artikel abholbereit sind.</p>=0D=0A<p>Bitte =C3=BCberpr=C3=BC=
+fen Sie nochmals, ob Sie Ihre Versandadresse korrekt angegeben haben. Sollte eine Zustellung aufgrund fehlerhaften oder fehlenden Angaben nicht m=C3=B6glich sein, f=C3=BChrt dies zu Verz=C3=B6gerungen=
+ sowie zus=C3=A4tzlichen Kosten.=0D=0A</p>=0D=0A<p>Nachfolgend finden Sie Ihre Bestellbest=C3=A4tigung, vielen Dank!</p>=0D=0A=09=09=09=09=09=09=09<h3 style=3D"border-bottom:2px solid #eee; font-size:=
+1.05em; padding-bottom:1px; ">Ihre Bestellung Nr. 100035151 <small>(28.06.2018 17:28:12)</small></h3>=0D=0A=09=09=09=09=09=09=09<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" width=3D"100%">=
+=0D=0A=09=09=09=09=09=09=09    <thead>=0D=0A=09=09=09=09=09=09=09        <tr>=0D=0A=09=09=09=09=09=09=09            <th align=3D"left" width=3D"48.5%" bgcolor=3D"#d9e5ee" style=3D"padding:5px 9px 6px=
+ 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">Rechnungsadresse:</th>=0D=0A=09=09=09=09=09=09=09            <th width=3D"3%"></th>=0D=0A=09=09=09=09=09=09=09            <th alig=
+n=3D"left" width=3D"48.5%" bgcolor=3D"#d9e5ee" style=3D"padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">Zahlungsmethode:</th>=0D=0A=09=09=09=09=09=09=09      =
+  </tr>=0D=0A=09=09=09=09=09=09=09    </thead>=0D=0A=09=09=09=09=09=09=09    <tbody>=0D=0A=09=09=09=09=09=09=09        <tr>=0D=0A=09=09=09=09=09=09=09            <td valign=3D"top" style=3D"padding:7p=
+x 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">=0D=0A=09=09=09=09=09=09=09                Herr Peter Maerki<br/>=0A=0AZelglistrasse 49<br />=0A=0A=0A=0AHombrechtikon,  863=
+4<br/>=0ASchweiz<br/>=0AT: 0447902290=0A=0D=0A=09=09=09=09=09=09=09            </td>=0D=0A=09=09=09=09=09=09=09            <td>&nbsp;</td>=0D=0A=09=09=09=09=09=09=09            <td valign=3D"top" styl=
+e=3D"padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">=0D=0A=09=09=09=09=09=09=09                <p><strong>PayPal Website Payments Standard</strong></p>=0A=0A<tab=
+le>=0A    <tbody>=0A            <tr>=0A            <th><strong>Bezahler E-Mail:</strong></th>=0A        </tr>=0A        <tr>=0A            <td>paypal.peter@klangspiel.ch</td>=0A        </tr>=0A      =
+  </tbody>=0A</table>=0A=0A=0D=0A=09=09=09=09=09=09=09            </td>=0D=0A=09=09=09=09=09=09=09        </tr>=0D=0A=09=09=09=09=09=09=09    </tbody>=0D=0A=09=09=09=09=09=09=09</table>=0D=0A=09=09=09=
+=09=09=09=09=0D=0A=09=09=09=09=09=09=09<br/>=0D=0A=09=09=09=09=09=09=09=0D=0A=09=09=09=09=09=09=09=0D=0A=09=09=09=09=09=09=09=0D=0A=09=09=09=09=09=09=09<table cellspacing=3D"0" cellpadding=3D"0" borde=
+r=3D"0" width=3D"100%">=0D=0A=09=09=09=09=09=09=09    <thead>=0D=0A=09=09=09=09=09=09=09        <tr>=0D=0A=09=09=09=09=09=09=09            <th align=3D"left" width=3D"48.5%" bgcolor=3D"#d9e5ee" style=
+=3D"padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">Versandadresse:</th>=0D=0A=09=09=09=09=09=09=09            <th width=3D"3%"></th>=0D=0A=09=09=09=09=09=09=
+=09            <th align=3D"left" width=3D"48.5%" bgcolor=3D"#d9e5ee" style=3D"padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;">Versandart:</th>=0D=0A=09=09=09=
+=09=09=09=09        </tr>=0D=0A=09=09=09=09=09=09=09    </thead>=0D=0A=09=09=09=09=09=09=09    <tbody>=0D=0A=09=09=09=09=09=09=09        <tr>=0D=0A=09=09=09=09=09=09=09            <td valign=3D"top" s=
+tyle=3D"padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">=0D=0A=09=09=09=09=09=09=09                Herr Peter Maerki<br/>=0A=0AZelglistrasse 49<br />=0A=0A=0A=0AH=
+ombrechtikon,  8634<br/>=0ASchweiz<br/>=0AT: 0447902290=0A=0D=0A=09=09=09=09=09=09=09            </td>=0D=0A=09=09=09=09=09=09=09            <td>&nbsp;</td>=0D=0A=09=09=09=09=09=09=09            <td v=
+align=3D"top" style=3D"padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;">=0D=0A=09=09=09=09=09=09=09                Versandart - A-Post Priority=0D=0A=09=09=09=09=
+=09=09=09            </td>=0D=0A=09=09=09=09=09=09=09        </tr>=0D=0A=09=09=09=09=09=09=09    </tbody>=0D=0A=09=09=09=09=09=09=09</table>=0D=0A=09=09=09=09=09=09=09=0D=0A=09=09=09=09=09=09=09<br/>=
+=0D=0A=09=09=09=09=09=09=09=0D=0A=09=09=09=09=09=09=09=0D=0A=09=09=09=09=09=09=09=0D=0A=09=09=09=09=09=09=09<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" width=3D"650" style=3D"border:1px so=
+lid #EAEAEA;">=0A    <thead>=0A        <tr>=0A            <th align=3D"left" bgcolor=3D"#EAEAEA" style=3D"font-size:13px; padding:3px 9px">Artikel</th>=0A            <th align=3D"left" bgcolor=3D"#EAE=
+AEA" style=3D"font-size:13px; padding:3px 9px">Artikelnummer</th>=0A            <th align=3D"center" bgcolor=3D"#EAEAEA" style=3D"font-size:13px; padding:3px 9px">Menge</th>=0A            <th align=3D=
+"right" bgcolor=3D"#EAEAEA" style=3D"font-size:13px; padding:3px 9px">Zwischensumme</th>=0A        </tr>=0A    </thead>=0A=0A            <tbody bgcolor=3D"#F6F6F6">=0A        <tr>=0A    <td align=3D"l=
+eft" valign=3D"top" style=3D"font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;">=0A        <strong style=3D"font-size:11px;">Espressif ESP32-DevKitC</strong>=0A                      =
+                                  </td>=0A    <td align=3D"left" valign=3D"top" style=3D"font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;">P00001626</td>=0A    <td align=3D"center" v=
+align=3D"top" style=3D"font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;">1</td>=0A    <td align=3D"right" valign=3D"top" style=3D"font-size:11px; padding:3px 9px; border-bottom:1px d=
+otted #CCCCCC;">=0A        =0A=0A                                                                    <span class=3D"price">Fr.=C2=A027.90</span>                                        </td>=0A</tr>=0A=
+    </tbody>=0A    =0A    <tbody>=0A                <tr class=3D"subtotal">=0A        <td colspan=3D"3" align=3D"right" style=3D"padding:3px 9px">=0A                        Zwischensumme             =
+       </td>=0A        <td align=3D"right" style=3D"padding:3px 9px">=0A                        <span class=3D"price">Fr.=C2=A027.90</span>                    </td>=0A    </tr>=0A            <tr class=
+=3D"shipping">=0A        <td colspan=3D"3" align=3D"right" style=3D"padding:3px 9px">=0A                        Versand &amp; Bearbeitung                    </td>=0A        <td align=3D"right" style=
+=3D"padding:3px 9px">=0A                        <span class=3D"price">Fr.=C2=A011.00</span>                    </td>=0A    </tr>=0A                =0A=0A<tr>=0A    <td colspan=3D"3" align=3D"right" st=
+yle=3D"padding:3px 9px">=0A                    enthaltene MwSt. (7.7%)            </td>=0A    <td align=3D"right" style=3D"padding:3px 9px"><span class=3D"price">Fr.=C2=A02.78</span></td>=0A</tr>=0A =
+           <tr class=3D"grand_total">=0A        <td colspan=3D"3" align=3D"right" style=3D"padding:3px 9px">=0A                        <strong>Gesamtsumme</strong>=0A                    </td>=0A     =
+   <td align=3D"right" style=3D"padding:3px 9px">=0A                        <strong><span class=3D"price">Fr.=C2=A038.90</span></strong>=0A                    </td>=0A    </tr>=0A        </tbody>=0A</=
+table>=0A=0D=0A=09=09=09=09=09=09=09<br/>=09=09=09=09=09=09=09=0D=0A=09=09=09=09=09=09=09=0D=0A=09=09=09=09=09=09</td>=0D=0A=09=09=09=09=09</tr>=0D=0A=09=09=09=09=09<tr>=0D=0A=09=09=09=09=09=09<td>=0D=
+=0A=09=09=09=09=09=09=09=0A<p><strong>play-zone.ch</strong></p>=0A=0A<p>=0A    PLAY-ZONE GmbH<br />=0A        Hinterbergstrasse 36<br />=0A    6312 Steinhausen</p>=0A=0A<p>=0A    Telefon: +41 41 740 2=
+0 33<br />=0A    : <br />=0A    Web: <a href=3D"http://www.play-zone.ch" title=3D"PLAY-ZONE GmbH">www.play-zone.ch</a><br />=0A    E-Mail: <a href=3D"mailto:info@play-zone.ch" title=3D"PLAY-ZONE GmbH"=
+>info@play-zone.ch</a>=0A</p>=0A=0A<p>=0A    Financial office: <br />=0A        </p>=0A=0A<p>=0A    CEO: Y. Puppetti<br />=0A    Addresse: PLAY-ZONE GmbH, Hinterbergstrasse 36, 6312 Steinhausen<br />=
+=0A            HR-Nummer: CH-400.4.036.031-0<br />=0A        </p>=0A=0A<p>=0A    Kontoinhaber: PLAY-ZONE GmbH, Hinterbergstrasse 36, 6312 Steinhausen<br />=0A    Postkonto: 80-569866-9<br />=0A    : <=
+br />=0A    Bankname: Postfinance<br />=0A            SWIFT: POFICHBEXXX<br />=0A                IBAN: CH79 0900 0000 8056 9866 9<br />=0A    </p>=0D=0A=09=09=09=09=09=09</td>=0D=0A=09=09=09=09=09</tr=
+>=0D=0A=09=09=09=09=09<tr><td style=3D"border-bottom:2px solid #eee;">&nbsp;</td></tr>=0D=0A=09=09=09=09</table>=0D=0A=09=09=09</td>=0D=0A=09=09</tr>=0D=0A=09</table>=0D=0A</div>=0D=0A

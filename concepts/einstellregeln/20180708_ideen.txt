@@ -1,0 +1,24 @@
+
+Auswertung Temperatur O
+Mittelwert über 10 Minuten 
+
+punkte = 10*60*5 = 3000
+summe von allen durch 3000
+einfach und schnell zu rechnen, rauschen geht weg
+
+
+
+fliessender median
+mittelwerte über 10 Minuten
+
+Speicher mit 144 Zahlen (1 tag oder halt 1 woche)
+neuer Messwert:
+weitest entfernter existierender Wert löschen, neue zahl einordnen
+
+damit fallen extreme raus
+
+auswahl set temperatur
+
+sortierte liste 3% wärmster
+
+alle gespeicherten temperaturen langsam reduzieren

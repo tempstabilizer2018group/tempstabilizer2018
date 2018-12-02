@@ -1,0 +1,6 @@
+iTime_s	iTimeEff_s	fTempH_C	fTempO_C	fDac_V	fHeat_W	fTempH_Setpoint_C	fTempO_Setpoint_C	PidH_bLimitLow	PidH_bLimitHigh	PidO_bLimitLow	PidO_bLimitHigh	PidO_fI	fTempEnvirons_C
+1.8	1.751	24.37	24.62	0.45	0.25	24.74	24.73	0	0	0	0	119.38	25.04
+3.8	3.751	24.35	24.61	0.47	0.36	24.81	24.73	0	0	0	0	119.60	25.04
+5.8	5.751	24.35	24.60	0.51	0.54	24.99	24.73	0	0	0	0	119.86	25.05
+7.8	7.751	24.34	24.60	0.53	0.67	25.05	24.73	0	0	0	0	120.13	25.04
+9.8	9.751	24.32	24.55	0.61	1.07	25.49	24.73	0	0	0	0	120.45	25.03

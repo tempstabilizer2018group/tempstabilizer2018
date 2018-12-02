@@ -1,0 +1,4 @@
+279-CRGH2010J68R
+
+Baugrösse 1210
+Leistung 1W

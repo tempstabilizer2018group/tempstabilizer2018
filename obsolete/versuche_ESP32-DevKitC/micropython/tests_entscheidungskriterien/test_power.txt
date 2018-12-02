@@ -1,0 +1,41 @@
+Gemessen mit USB-Verlängerungskabel von Peter
+
+Stromverbrauch nach Einschalten
+===========================
+50mA
+
+Stromverbrauch in Deepsleep
+===========================
+10mA
+
+import machine
+machine.deepsleep(10000)
+
+Stromverbauch als WLAN-Accesspoint
+==================================
+import network
+ap_if = network.WLAN(network.AP_IF)
+ap_if.active(True)
+ap_if.config(essid='ESP32-AP') # set the ESSID of the access point
+ap_if.ifconfig()
+==> Crash
+>>> ap_if.active(True)
+W (3287) phy_init: failed to load RF calibration data (0x1102), falling back to full calibration
+
+Stromverbauch als WLAN-Client
+=============================
+130mA nach: wlan.active(True)
+130mA während: wlan.scan(True)
+50mA nach: wlan.connect(...
+50mA nach: wlan.active(False)
+
+import network
+
+wlan = network.WLAN(network.STA_IF) # create station interface
+wlan.active(True)       # activate the interface
+wlan.scan()             # scan for access points
+wlan.isconnected()      # check if the station is connected to an AP
+wlan.connect('waffenplatzstrasse26', 'guguseli') # connect to an AP
+wlan.config('mac')      # get the interface's MAC adddress
+wlan.ifconfig()         # get the interface's IP/netmask/gw/DNS addresses
+

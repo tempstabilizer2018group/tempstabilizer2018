@@ -1,0 +1,68 @@
+import uos
+import esp
+import machine
+
+uos.getcwd()
+# '/'
+uos.listdir()
+# 'boot.py'
+
+
+esp.flash_size()
+# 4194304
+
+uos.statvfs('/')
+# (4096, 4096, 506, 505, 505, 0, 0, 0, 0, 255)
+# http://docs.micropython.org/en/latest/esp8266/library/uos.html?highlight=statvfs
+#  4096: file system block size
+#                   505: Number of free blocks
+#                                         255: maximum filename length
+#
+
+l = uos.statvfs('/')
+free_bytes = l[0]*l[3]
+# 2068480
+
+f = open('test.txt', 'w')
+for i in range(1000):
+  f.write('a'*1000)
+f.close()
+
+list(uos.ilistdir('/'))
+# [('boot.py', 32768, 0, 139), ('test.txt', 32768, 0, 1000000)]
+#  File: 32768  (Directory: 0x4000)
+#  Grösse: 1000000
+
+import machine
+machine.freq()
+# 240000000: 240'000'000
+
+---------------------------------
+GEHT NICHT!!!
+# configure RTC.ALARM0 to be able to wake the device
+rtc = machine.RTC()
+rtc.irq(trigger=rtc.ALARM0, wake=machine.DEEPSLEEP)
+
+# set RTC.ALARM0 to fire after 10 seconds (waking the device)
+rtc.alarm(rtc.ALARM0, 10000)
+
+# put the device to sleep
+machine.deepsleep()
+
+if machine.reset_cause() == machine.DEEPSLEEP_RESET:
+    print('woke from a deep sleep')
+else:
+    print('power on or hard reset')
+-------------------------
+machine.reset_cause()
+# 3
+machine.deepsleep()
+# Schläft für immer
+machine.deepsleep(10000)
+
+...
+machine.reset_cause()
+# 4: machine.DEEPSLEEP
+machine.wake_reason()
+# 3: machine.TIMER_WAKE
+

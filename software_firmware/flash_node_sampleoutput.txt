@@ -1,0 +1,28 @@
+>python -m esptool --port COM39 --chip esp32 erase_flash
+esptool.py v2.5.1
+Serial port COM39
+Connecting........_____....._____....._____....._____....._____....._____....._____
+
+A fatal error occurred: Failed to connect to ESP32: Timed out waiting for packet header
+
+Next step: Flashing the firmware
+Drücken Sie eine beliebige Taste . . .
+>python -m esptool --port COM39 --chip esp32 write_flash -z 0x1000 micropython\ports\esp32\build\application.bin
+esptool.py v2.5.1
+Serial port COM39
+Connecting........_____....._____....._____....._____....._____....._
+Chip is ESP32D0WDQ6 (revision 1)
+Features: WiFi, BT, Dual Core, 240MHz, VRef calibration in efuse
+MAC: 84:0d:8e:1b:c4:0c
+Uploading stub...
+Running stub...
+Stub running...
+Configuring flash size...
+Auto-detected Flash size: 4MB
+Compressed 1021840 bytes to 672555...
+Wrote 1021840 bytes (672555 compressed) at 0x00001000 in 59.8 seconds (effective 136.8 kbit/s)...
+Hash of data verified.
+
+Leaving...
+Hard resetting via RTS pin...
+Drücken Sie eine beliebige Taste . . .

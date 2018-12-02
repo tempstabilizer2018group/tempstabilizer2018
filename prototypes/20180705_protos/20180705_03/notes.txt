@@ -1,0 +1,8 @@
+2018-07-05_212941 Peter Maerki
+
+20180624 temp_stabilizer_2018_test.T3001
+20180624 temp_stabilizer_2018_spacer_test.T3001
+
+nur Temperatursensor TO montiert. Adresse angepasst auf 9Eh. Diese Leiterplatte kann unten an das Blech montiert werden, verdreht. Der Sensor ist dann gerade gegenüber dem anderen TO Sensor.
+
+Bezeichnung dieses Sensors: TO9E

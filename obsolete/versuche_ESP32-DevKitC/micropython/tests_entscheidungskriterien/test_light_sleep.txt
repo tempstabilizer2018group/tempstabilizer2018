@@ -1,0 +1,50 @@
+import machine
+import time
+
+machine.sleep(10000)
+# => 870uA
+
+pin0 = machine.Pin(0, machine.Pin.OUT)
+
+pwm22 = machine.PWM(machine.Pin(22, machine.Pin.OUT), freq=1000)
+pwm22.duty(200)
+
+# DAC 1: GPIO25
+dac25 = machine.DAC(machine.Pin(25, machine.Pin.OUT))
+dac25.write(100)
+# dac25.write(255)
+
+# DAC 2: GPIO26
+dac26 = machine.DAC(machine.Pin(26, machine.Pin.OUT))
+dac26.write(100)
+# dac26.write(255)
+
+while True:
+  pin0.value(1)
+  time.sleep(0.01)
+  pin0.value(0)
+  machine.sleep(100)
+
+
+# esp32_datasheet_en.pdf
+LED PWM
+APB clock of 80 MHz. Eight of these channels have the
+option of using the 8 MHz oscillator clock
+
+LEDC_TICK_SEL_HSTIMERx This bit is used to select APB_CLK or REF_TICK for high-speed timer
+LEDC_TICK_SEL_LSTIMERx This bit is used to select SLOW_CLK or REF_TICK for low-sp
+
+3.2.4.3 LEDC_SCLK Source
+The LEDC_SCLK clock source is selected by the LEDC_APB_CLK_SEL register, as shown in Table 15.
+
+ESP-Doc: https://esp-idf.readthedocs.io/en/latest/api-reference/peripherals/ledc.html
+  ==> Note that support for SLOW_CLOCK mentioned in this manual is not implemented in the LEDC API.
+  ==> Die Expressif IDF unterstützt den von uns gewünschten Mode NICHT!!!
+
+# ULP
+=====
+https://github.com/espressif/esp-iot-solution/tree/master/examples/ulp_examples
+https://github.com/ThomasWaldmann/py-esp32-ulp
+https://github.com/micropython/micropython/blob/master/ports/esp32/README.ulp.md
+
+
