@@ -1,6 +1,5 @@
 
 call ../set_environment.cmd
-@rem call simulation_tests_clean_results.bat
 
 del simulation_test_*.txt
 del simulation_test_*.png

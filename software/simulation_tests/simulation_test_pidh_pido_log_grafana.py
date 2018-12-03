@@ -6,7 +6,7 @@ def run(strFilename):
   strFilenamePng = strFilename.replace('.txt', '.png')
   assert strFilenamePng != strFilename
 
-  objDumper = grafana_log_reader.GrafanaPlotDumper(grafana_log_config.getPlotConfig())
+  objDumper = python3_grafana_log_reader.GrafanaPlotDumper(python3_grafana_log_config.getPlotConfig())
   objDumper.readFile(strFilename)
   objDumper.plot(strFilenamePng)
   # objDumper.show()

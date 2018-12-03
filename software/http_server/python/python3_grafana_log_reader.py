@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import python3_grafana_log_reader_lib
 
-class GrafanaPlotDumper(grafana_log_reader_lib.GrafanaDumper):
+class GrafanaPlotDumper(python3_grafana_log_reader_lib.GrafanaDumper):
   def __init__(self, objPlot):
-    grafana_log_reader_lib.GrafanaDumper.__init__(self)
+    python3_grafana_log_reader_lib.GrafanaDumper.__init__(self)
     self.objPlot = objPlot
 
   def addMeasurement(self, objGrafanaValue, iTime_ms, strValue):
