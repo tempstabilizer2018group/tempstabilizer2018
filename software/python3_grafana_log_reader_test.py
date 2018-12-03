@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import rfc3339
+import python3_rfc3339
 import influxdb
 
 import portable_grafana_log_reader

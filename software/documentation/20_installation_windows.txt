@@ -1,0 +1,5 @@
+All Windows-Batchfiles use a commen script to set the environment variables:
+
+temp_stabilizer_2018\software\set_environment.cmd
+
+You may add your computer there.

@@ -5,8 +5,8 @@ import config_node
 import portable_constants
 import portable_ticks
 import simulation_controller
-import http_server_lib
-import http_influxdb_loadfiles
+import python3_http_server_lib
+import python3_http_influxdb_loadfiles
 
 config_node.strNode = 4712
 config_node.strSite = 'httptest'

@@ -5,8 +5,8 @@ import time
 import platform
 import os.path
 
-import http_influxdb_loadfiles
-import http_server_lib
+import python3_http_influxdb_loadfiles
+import python3_http_server_lib
 import config_node
 import config_app
 

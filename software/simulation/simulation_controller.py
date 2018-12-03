@@ -19,7 +19,7 @@ import portable_simuliert_tagesmodell
 import portable_grafana_datatypes
 import simulation_pyplot
 import simulation_http_server_utils
-import http_server_lib
+import python3_http_server_lib
 
 class SimuliertController(portable_controller.Controller):
   def __init__(self, strFilenameFull):

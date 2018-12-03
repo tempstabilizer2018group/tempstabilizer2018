@@ -3,15 +3,15 @@ import os
 import shutil
 import traceback
 
-import rfc3339
+import python3_rfc3339
 import influxdb
 
 import config_app
 import config_http_server
 import time
-import http_server_lib
-import grafana_log_reader_lib
-import grafana_log_reader
+import python3_http_server_lib
+import python3_grafana_log_reader_lib
+import python3_grafana_log_reader
 
 class GrafanaInfluxGetNtpTime(grafana_log_reader_lib.GrafanaDumper):
   def __init__(self):
@@ -96,7 +96,7 @@ def writePng(strFilenameFull):
 
   print('%s: Writing PNG' % os.path.basename(strFilenamePngFull))
 
-  import grafana_log_config
+  import python3_grafana_log_config
 
   objDumper = grafana_log_reader.GrafanaPlotDumper(grafana_log_config.getPlotConfig())
   objDumper.readFile(strFilenameFull)

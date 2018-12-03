@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import grafana_log_config
-import grafana_log_reader
+import python3_grafana_log_config
+import python3_grafana_log_reader
 
 def run(strFilename):
   strFilenamePng = strFilename.replace('.txt', '.png')

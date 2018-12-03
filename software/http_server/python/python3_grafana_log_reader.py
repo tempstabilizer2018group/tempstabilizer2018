@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import grafana_log_reader_lib
+import python3_grafana_log_reader_lib
 
 class GrafanaPlotDumper(grafana_log_reader_lib.GrafanaDumper):
   def __init__(self, objPlot):

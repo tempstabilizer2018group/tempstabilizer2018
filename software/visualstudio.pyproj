@@ -21,14 +21,14 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="grafana_log_reader_test.py" />
+    <Compile Include="python3_grafana_log_reader_test.py" />
     <Compile Include="http_server\python\apache_grafanahandler.py" />
     <Compile Include="http_server\python\config_http_server.py" />
-    <Compile Include="http_server\python\grafana_log_config.py" />
-    <Compile Include="http_server\python\grafana_log_reader_lib.py" />
-    <Compile Include="http_server\python\http_influxdb_loadfiles.py" />
-    <Compile Include="http_server\python\http_server_lib.py" />
-    <Compile Include="http_server\python\rfc3339.py" />
+    <Compile Include="http_server\python\python3_grafana_log_config.py" />
+    <Compile Include="http_server\python\python3_grafana_log_reader_lib.py" />
+    <Compile Include="http_server\python\python3_http_influxdb_loadfiles.py" />
+    <Compile Include="http_server\python\python3_http_server_lib.py" />
+    <Compile Include="http_server\python\python3_rfc3339.py" />
     <Compile Include="node\program\hw_urequests.py" />
     <Compile Include="node\program\portable_grafana_datatypes.py" />
   </ItemGroup>
@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="http_server\python" />
-    <Compile Include="http_server\python\grafana_log_reader.py" />
+    <Compile Include="http_server\python\python3_grafana_log_reader.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="node\" />
