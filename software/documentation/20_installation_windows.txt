@@ -1,5 +1,22 @@
+Required software
+=================
+python3
+
+sudo easy_install3 -U pip
+sudo pip install --upgrade pip
+sudo pip install --upgrade requests
+
+pip3 install esptool
+pip3 install influxdb
+pip3 install mpfshell
+pip3 install matplotlib
+pip3 install PyGithub
+
+Windows environment
+===================
 All Windows-Batchfiles use a commen script to set the environment variables:
 
 temp_stabilizer_2018\software\set_environment.cmd
 
 You may add your computer there.
+
