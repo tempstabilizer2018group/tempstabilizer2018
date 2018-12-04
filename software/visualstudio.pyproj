@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>9a703754-eb4e-4c84-acfb-d2ae12c6d6f8</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>simulation_tests\simulation_test_pidh_pido.py</StartupFile>
+    <StartupFile>http_server\python\config_nodes.py</StartupFile>
     <SearchPath>tools_pyplot;simulation;http_server\python;node\config;node\program</SearchPath>
     <WorkingDirectory>simulation_tests</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="http_server\python\config_nodes.py" />
+    <Compile Include="http_server\python\python3_config_nodes_lib.py" />
+    <Compile Include="http_server\python\python3_github_pull.py" />
     <Compile Include="python3_grafana_log_reader_test.py" />
     <Compile Include="http_server\python\apache_grafanahandler.py" />
     <Compile Include="http_server\python\config_http_server.py" />
