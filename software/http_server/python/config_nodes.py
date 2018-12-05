@@ -21,6 +21,7 @@ listLabs.append({
   LAB_LABEL: 'labHombi',
   LAB_NAME: 'hombrechtikon',
   RESPONSIBLE: 'Peter Maerki',
+  GIT_REPO: 'hmaerki/temp_stabilizer_2018',
   GIT_TAGS: 'x1.0;y1.1',
   USER_TAG: '1',
   NODES: (
@@ -33,6 +34,7 @@ listLabs.append({
   LAB_LABEL: 'labY',
   LAB_NAME: 'ETH, LabY',
   RESPONSIBLE: 'Robin',
+  GIT_REPO: 'hmaerki/temp_stabilizer_2018',
   GIT_TAGS: 'y1.1;x1.0',
   USER_TAG: '1',
   NODES: (
