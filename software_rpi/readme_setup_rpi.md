@@ -33,6 +33,5 @@ git clone  --depth 1 https://github.com/hmaerki/temp_stabilizer_2018.git
 
 sudo bash -x ~pi/temp_stabilizer_2018/software_rpi/install_packages.sh
 
-
-# Configuration Accespoint
-# https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md
+# Reboot to activate access-point
+sudo reboot
