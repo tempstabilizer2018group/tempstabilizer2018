@@ -9,6 +9,7 @@ LAB_LABEL = 'strLabLabel'
 DICT_NODE = 'dictNode'
 # Lab
 RESPONSIBLE = 'strResposible'
+GIT_REPO = 'strGitRepo'
 GIT_TAGS = 'strGitTags'
 USER_TAG = 'strUserTag'
 NODES = 'listNodes'
@@ -25,6 +26,10 @@ class ConfigNode:
   @property
   def mac(self):
     return self.__dictLab[MAC]
+
+  @property
+  def strGitRepo(self):
+    return self.__dictLab[GIT_REPO]
 
   @property
   def strGitTags(self):
@@ -62,3 +67,18 @@ class ConfigNodes:
           # Success, we get here!
           self.findNodeByMac(strMac)
 
+def testConsitencyLabs(listLabs):
+  ''' 
+    Test if the configuration may collect all files from github.
+  '''
+  import python3_github_pull
+
+  for dictLab in listLabs:
+    try:
+      p = python3_github_pull.GithubPull(strDirectory='.')
+      p.setTags(dictLab[GIT_TAGS], strUserTag=dictLab[USER_TAG])
+      strTarFilenameFull = p.getTar()
+      print('Lab "%s": %s' % (dictLab[LAB_LABEL], strTarFilenameFull))
+    except Exception:
+      print('ERROR in Lab "%s"' % dictLab[LAB_LABEL])
+      raise

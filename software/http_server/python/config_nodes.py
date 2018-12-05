@@ -48,30 +48,25 @@ dictConfigNodes = {
 }
 
 if __name__ == '__main__':
-  import python3_github_pull
 
   # Test if the configuration may collect all files from github.
   
   objConfigNodes = ConfigNodes(dictConfigNodes)
   objConfigNodes.verifyConsistency()
+
   if True:
-    p = python3_github_pull.GithubPull(strDirectory='.')
-    p.setMac('840D8E1BC40C')
+    import python3_github_pull
+    strMac = '840D8E1BC40C'
+    if strMac == '840D8E1BC40C':
+      p = python3_github_pull.GitHubPullLocal(strDirectory='.')
+    else:
+      p = python3_github_pull.GithubPull(strDirectory='.')
+    p.setMac(strMac)
     strTarFilenameFull = p.getTar()
 
   if False:
-    for strMac in sorted(dictMacs.keys):
-      dictMac = dictMacs[strMAC]
-      print('  %s: "%s" %s %s' % (strMac, dictMac[LAB_NAME], dictMac[GIT_TAGS], dictMac[USER_TAG]))
+    import python3_config_nodes_lib
+    python3_config_nodes_lib.testConsitencyLabs(listLabs)
 
-  for dictLab in listLabs:
-    try:
-      p = python3_github_pull.GithubPull(strDirectory='.')
-      p.setTags(dictLab[GIT_TAGS], strUserTag=dictLab[USER_TAG])
-      strTarFilenameFull = p.getTar()
-      print('Lab "%s": %s' % (dictLab[LAB_LABEL], strTarFilenameFull))
-    except Exception:
-      print('ERROR in Lab "%s"' % dictLab[LAB_LABEL])
-      raise
 
 

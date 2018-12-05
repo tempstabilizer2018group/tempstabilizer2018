@@ -1,4 +1,16 @@
-#!/bin/sh
+#!/bin/sh -x
+
+# This script installs Visual Studio Code on the raspberry pi
+# run as root
+
+# See: http://code.headmelted.com/#linux-install-scripts
+# The original of the script is:
+# https://code.headmelted.com/installers/apt.sh
+# Bugfix: Added --allow-unauthenticated
+
+# Start Visual Studio Code
+#   code-oss
+
 
 echo "Detecting architecture...";
 MACHINE_MTYPE="$(uname -m)";
