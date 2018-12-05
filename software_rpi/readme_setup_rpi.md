@@ -31,7 +31,8 @@ git config --global user.email "hans@maerki.com"
 git config --global user.name "Hans Maerki"
 git clone  --depth 1 https://github.com/hmaerki/temp_stabilizer_2018.git
 
-sudo bash -x ~pi/temp_stabilizer_2018/software_rpi/install_packages.sh
+cd ~pi/temp_stabilizer_2018/software_rpi
+sudo bash -x ./install_packages.sh 2>&1 | tee install_packages.log
 
 # Reboot to activate access-point
 sudo reboot

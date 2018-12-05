@@ -17,6 +17,7 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-iptables-restore < /etc/iptables.ipv4.nat
+# Uncomment the following line to allow forwarding from wlan to ethernet
+# iptables-restore < /etc/iptables.ipv4.nat
 
 exit 0
