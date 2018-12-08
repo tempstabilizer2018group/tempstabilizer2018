@@ -2,6 +2,7 @@
 
 import io
 import os
+import urllib
 import logging
 
 # https://docs.python.org/3/library/tarfile.html
@@ -39,14 +40,17 @@ listReplacements = (
     (':', '-COLON-'),
 )
 
+listGitPrefixes = ('heads', 'tags')
+
 def escape(s):
   for strChar, strEscape in listReplacements:
     s = s.replace(strChar, strEscape)
   return s
 
-strFILENAME_VERSION = 'VERSION.TXT'
+# See: https://github.com/tempstabilizer2018group/micropython_esp32/blob/master/ports/esp32/modules/hw_update_ota.py
+strFILENAME_SW_VERSION = 'VERSION.TXT'
 
-class GithubPull:
+class GithubPullBase:
   def __init__(self, strDirectory=None):
     if strDirectory == None:
       strDirectory = os.path.join(os.path.dirname(__file__), '..', 'webroot')
@@ -60,16 +64,15 @@ class GithubPull:
     objNode = objConfigNodes.findNodeByMac(strMac)
 
     # remember it
-    self.setTags(objNode.strGitRepo, objNode.strGitTags, objNode.strUserTag)
+    self.setTags(objNode.strGitRepo, objNode.strGitTags)
 
-  def setTags(self,  strGitRepo, strGitTags, strUserTag):
+  def setTags(self,  strGitRepo, strGitTags):
     self._strGitRepo = strGitRepo
     self._strGitTags = strGitTags
     # Escape characters in the tags, but not the ';' between the git-tags
-    strGitTags = ';'.join(map(escape, strGitTags.split(';')))
-    strUserTag = escape(strUserTag)
+    self._strGitTagsEscaped = ';'.join(map(escape, strGitTags.split(';')))
 
-    self.__strTarFilename = 'node_%s_%s.tar' % (strGitTags, strUserTag)
+    self.__strTarFilename = 'node_%s.tar' % _strGitTagsEscaped
     self.__strTarFilenameFull = os.path.join(self.__strDirectory, self.__strTarFilename)
 
   def getTar(self):
@@ -80,10 +83,33 @@ class GithubPull:
     self.__writeTar(dictFiles)
     return self.__strTarFilenameFull
 
+  '''
+    'heads/master' is a Git-Tag: It may be retrieved from git
+    '5' is a User-Tag: Just to distinguish one version from another.
+  '''
+  def _isUserTag(self, strGitTag):
+    l = strGitTag.split('/', 1)
+    if len(l) > 1:
+      if l[0] in listGitPrefixes:
+        # 'heads/master'
+        # l[0]: 'heads'
+        return False
+    return True
+
+  '''
+    'heads/master' => 'master'
+  '''
+  def _getGitTagWithoutPrefix(self, strGitTag):
+    l = strGitTag.split('/', 1)
+    if len(l) > 1:
+      return l[1]
+    return l[0]
+
+
   def __getConfigNodesFromGithub(self):
     '''
       We read 'config_nodes.py' from github.
-      Then we call findTagsByMac(strMac) to get strGitTags, strUserTag
+      Then we call findTagsByMac(strMac) to get strGitTags
     '''
     logging.info('Get "config_nodes.py" from github....')
     dictConfigNodes = self._getConfigNodesFromGithub2()
@@ -106,7 +132,7 @@ class GithubPull:
     return None
 
   def __writeTar(self, dictFiles):
-    dictFiles[strFILENAME_VERSION] = bytes(self.__strTarFilename.encode('utf8'))
+    dictFiles[strFILENAME_SW_VERSION] = bytes(self._strGitTagsEscaped)
 
     with tarfile.open(self.__strTarFilenameFull, 'w') as tar:
       for strFilename, byteData in dictFiles.items():
@@ -114,18 +140,18 @@ class GithubPull:
         info.size = len(byteData)
         tar.addfile(info, io.BytesIO(byteData))
 
-class GitHubPullLocal(GithubPull):
-  '''
-    Instead of connecting to Github, this class reads from the local filesystem.
-    This is useful when developing software on the raspberry pi: When the node
-    does an update, the local code will be deployed.
-  '''
+'''
+  Instead of connecting to Github, this class reads from the local filesystem.
+  This is useful when developing software on the raspberry pi: When the node
+  does an update, the local code will be deployed.
+'''
+class GitHubPullLocal(GithubPullBase):
   def __init__(self, strDirectory=None):
     import config_nodes
     self.__strSourceDirectory = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
     self.__dictConfigNodes = config_nodes.dictConfigNodes
 
-    GithubPull.__init__(self, strDirectory)
+    GithubPullBase.__init__(self, strDirectory)
   
   def _getConfigNodesFromGithub2(self):
     return self.__dictConfigNodes
@@ -153,16 +179,16 @@ class GitHubPullLocal(GithubPull):
           dictFiles[strFilenameRelative2] = strContents
     return dictFiles
 
-class GitHubApiPull(GithubPull):
-  '''
-    This will use the Github API - but is limited by 60 requests...
-  '''
+'''
+  This will use the Github API - but is limited by 60 requests...
+'''
+class GitHubApiPull(GithubPullBase):
   def __init__(self, strDirectory=None):
     import config_nodes
     self.__strSourceDirectory = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
     self.__dictConfigNodes = config_nodes.dictConfigNodes
 
-    GithubPull.__init__(self, strDirectory)
+    GithubPullBase.__init__(self, strDirectory)
 
   def __openRepo(self, strGithubRepo):
     # objGithub = github.Github(strGithubUser, strGithubPw)
@@ -188,6 +214,9 @@ class GitHubApiPull(GithubPull):
 
     for strGitTag in self._strGitTags.split(';'):
       logging.debug('  Tag: %s' % strGitTag)
+      if self._isUserTag(strGitTag):
+        # User Tags don't pull from github
+        continue;
       try:
         objGitTag = objGitRepro.get_git_ref(strGitTag)
       except github.UnknownObjectException:
@@ -207,6 +236,82 @@ class GitHubApiPull(GithubPull):
           continue
         objGitContents = objGitRepro.get_file_contents(path=objGitFile.path, ref=strGitTag)
         dictFiles[strFilenameRelative2] = objGitContents.decoded_content
+    return dictFiles
+
+'''
+  This will use the Github public urls
+'''
+class GitHubPublicPull(GithubPullBase):
+  strUrlFileTemplate = 'https://raw.githubusercontent.com/%s/%s/%s'
+  strUrlZipTemplage = 'https://github.com/%s/archive/%s.zip'
+
+  def getFileUrl(self, strGithubRepoConfig, strTag, strFile):
+    strTagWithoutPrefix = self._getGitTagWithoutPrefix(strTag)
+    return self.strUrlFileTemplate % (strGithubRepoConfig, strTagWithoutPrefix, strFile)
+
+  def getZipUrl(self, strGithubRepoConfig, strTag):
+    strTagWithoutPrefix = self._getGitTagWithoutPrefix(strTag)
+    return self.strUrlZipTemplage % (strGithubRepoConfig, strGithubRepoConfig)
+
+  def getFromHttp(self, strUrl):
+    logging.info('get %s' % strUrl)
+    with urllib.request.urlopen(strUrl) as f:
+      bData = f.read()
+      return bData
+
+  def __init__(self, strDirectory=None):
+    GithubPullBase.__init__(self, strDirectory)
+
+  def _getConfigNodesFromGithub2(self):
+    # https://raw.githubusercontent.com/tempstabilizer2018group/tempstabilizer2018/master/software/http_server/python/config_nodes.py
+    strFileUrl = self.getFileUrl(strGithubRepoConfig, 'heads/master', strFILENAME_CONFIG_NODES)
+    bConfigNodes = self.getFromHttp(strFileUrl)
+    strConfigNodes = bConfigNodes.decode('utf-8')
+    dictGlobals = {}
+    dictLocals = {}
+    exec(strConfigNodes, dictGlobals, dictLocals)
+    return dictLocals['dictConfigNodes']
+
+  def __openRepo(self, strGithubRepo):
+    # objGithub = github.Github(strGithubUser, strGithubPw)
+    if strGithubToken == None:
+      objGithub = github.Github()
+    else:
+      objGithub = github.Github(login_or_token=strGithubToken)
+    return objGithub.get_repo(strGithubRepo)
+
+  def _fetchFromGithub(self):
+    objGitRepro = self.__openRepo(self._strGitRepo)
+
+    dictFiles = {}
+
+    for strGitTag in self._strGitTags.split(';'):
+      logging.debug('  Tag: %s' % strGitTag)
+      if self._isUserTag(strGitTag):
+        # User Tags don't pull from github
+        continue;
+      try:
+        objGitTag = objGitRepro.get_git_ref(strGitTag)
+      except github.UnknownObjectException:
+        raise Exception('Tag "%s" does not exist in git-repository "%s"' % (strGitTag, self._strGitRepo))
+
+      objGitTree = objGitRepro.get_git_tree(objGitTag.object.sha, recursive=True)
+      for objGitFile in objGitTree.tree:
+        logging.debug('    File: %s' % objGitFile.path)
+        strFilenameRelative2 = self._selectFile(objGitFile.path)
+        if strFilenameRelative2 == None:
+          continue
+        if objGitFile.path in dictFiles:
+          logging.debug('      Alreadey added, would be overwritten - skipped....')
+          continue
+        if objGitFile.type != 'blob':
+          logging.debug('      Not a blob, skipped....')
+          continue
+        strPath = objGitFile.path
+        # https://raw.githubusercontent.com/hmaerki/temp_stabilizer_2018/master/software/node/config/config_app.py
+        strFileUrl = self.getFileUrl(self._strGitRepo, strGitTag, strPath)
+        bFileContent = self.getFromHttp(strFileUrl)
+        dictFiles[strFilenameRelative2] = bFileContent
     return dictFiles
 
 if __name__ == '__main__':

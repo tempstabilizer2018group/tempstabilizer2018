@@ -32,7 +32,18 @@ git config --global user.name "Hans Maerki"
 git clone  --depth 1 https://github.com/hmaerki/temp_stabilizer_2018.git
 
 cd ~pi/temp_stabilizer_2018/software_rpi
-sudo bash -x ./install_packages.sh 2>&1 | tee install_packages.log
+sudo bash -x ./install_packages.sh | tee install_packages.log 2>&1
 
 # Reboot to activate access-point
 sudo reboot
+
+## Optional: Install Visual Studio Code
+
+See: https://code.headmelted.com/#linux-install-scripts
+
+mkdir visual_studio_code
+cd visual_studio_code
+sudo -s
+
+. <( wget -O - https://code.headmelted.com/installers/apt.sh )
+

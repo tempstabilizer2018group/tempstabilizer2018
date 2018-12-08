@@ -11,7 +11,6 @@ DICT_NODE = 'dictNode'
 RESPONSIBLE = 'strResposible'
 GIT_REPO = 'strGitRepo'
 GIT_TAGS = 'strGitTags'
-USER_TAG = 'strUserTag'
 NODES = 'listNodes'
 DICT_LAB = 'dictLab'
 # Container
@@ -34,10 +33,6 @@ class ConfigNode:
   @property
   def strGitTags(self):
     return self.__dictLab[GIT_TAGS]
-
-  @property
-  def strUserTag(self):
-    return self.__dictLab[USER_TAG]
 
 class ConfigNodes:
   def __init__(self, dictConfigNodes):
@@ -74,7 +69,7 @@ def testConsitencyLabs(listLabs):
   for dictLab in listLabs:
     try:
       p = python3_github_pull.GithubPull(strDirectory='.')
-      p.setTags(dictLab[GIT_TAGS], strUserTag=dictLab[USER_TAG])
+      p.setTags(dictLab[GIT_TAGS])
       strTarFilenameFull = p.getTar()
       print('Lab "%s": %s' % (dictLab[LAB_LABEL], strTarFilenameFull))
     except Exception:

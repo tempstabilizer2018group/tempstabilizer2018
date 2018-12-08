@@ -21,12 +21,11 @@ listLabs.append({
   LAB_LABEL: 'labHombi',
   LAB_NAME: 'hombrechtikon',
   RESPONSIBLE: 'Peter Maerki',
-  GIT_REPO: 'hmaerki/temp_stabilizer_2018',
+  GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
   # Select a tag: 'tags/v1.0.0'
   # Select the head of a branch: 'heads/master', 'heads/branchX'
   # GIT_TAGS: 'tags/x1.0;tags/y1.1',
-  GIT_TAGS: 'heads/master',
-  USER_TAG: '1',
+  GIT_TAGS: 'heads/master;1',
   NODES: (
     '20180907_01',
   )
@@ -37,10 +36,9 @@ listLabs.append({
   LAB_LABEL: 'labY',
   LAB_NAME: 'ETH, LabY',
   RESPONSIBLE: 'Robin',
-  GIT_REPO: 'hmaerki/temp_stabilizer_2018',
+  GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
   # GIT_TAGS: 'tags/y1.1;tags/x1.0',
-  GIT_TAGS: 'heads/master',
-  USER_TAG: '1',
+  GIT_TAGS: 'heads/master;1',
   NODES: (
     '20180907_03',
   )
@@ -64,8 +62,8 @@ if __name__ == '__main__':
     if strMac == '840D8E1BC40x':
       p = python3_github_pull.GitHubPullLocal()
     else:
-      p = python3_github_pull.GitHubApiPull()
-      # p = python3_github_pull.GithubPull()
+      # p = python3_github_pull.GitHubApiPull()
+      p = python3_github_pull.GitHubPublicPull()
     p.setMac(strMac)
     strTarFilenameFull = p.getTar()
     pass
