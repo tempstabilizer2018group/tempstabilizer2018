@@ -13,7 +13,7 @@ import python3_http_server_lib
 import python3_grafana_log_reader_lib
 import python3_grafana_log_reader
 
-class GrafanaInfluxGetNtpTime(grafana_log_reader_lib.GrafanaDumper):
+class GrafanaInfluxGetNtpTime(python3_grafana_log_reader_lib.GrafanaDumper):
   def __init__(self):
     grafana_log_reader_lib.GrafanaDumper.__init__(self)
     self.fSecondsSince1970_UnixEpochStart_StartOfFile = None
@@ -21,7 +21,7 @@ class GrafanaInfluxGetNtpTime(grafana_log_reader_lib.GrafanaDumper):
   def handleNtpTime(self, iTime_ms, iSecondsSince1970_UnixEpoch):
     self.fSecondsSince1970_UnixEpochStart_StartOfFile = iSecondsSince1970_UnixEpoch - iTime_ms/1000.0
 
-class GrafanaInfluxDbDumper(grafana_log_reader_lib.GrafanaDumper):
+class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
   def __init__(self, fSecondsSince1970_UnixEpochStart_StartOfFile):
     grafana_log_reader_lib.GrafanaDumper.__init__(self)
     self.__fSecondsSince1970_UnixEpochStart = fSecondsSince1970_UnixEpochStart_StartOfFile

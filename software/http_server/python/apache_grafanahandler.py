@@ -49,6 +49,8 @@ def handler(req):
   strDirectoryHttpServer = req.document_root()
 
   req.write("<p>python version: '%s'</p>" % platform.python_version())
+  req.write("<p>req.filename: '%s'</p>" % req.filename)
+  req.write("<p>req.uri: '%s'</p>" % req.uri)
   req.write("<p>strSite: '%s'</p>" % strSite)
   req.write("<p>strNode: '%s'</p>" % strNode)
   req.write("<p>strFilename: '%s'</p>" % strFilename)

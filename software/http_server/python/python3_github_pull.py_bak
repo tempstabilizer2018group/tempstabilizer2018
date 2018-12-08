@@ -141,19 +141,13 @@ class GithubPullBase:
     return None
 
   def __writeTar(self, dictFiles):
-    with tarfile.open(self.__strTarFilenameFull, 'w') as tar:
+    dictFiles[strFILENAME_SW_VERSION] = bytes(self._strGitTagsEscaped.encode('utf-8'))
 
-      def addFile(strFilename, byteData):
+    with tarfile.open(self.__strTarFilenameFull, 'w') as tar:
+      for strFilename, byteData in dictFiles.items():
         info = tarfile.TarInfo(name=strFilename)
         info.size = len(byteData)
         tar.addfile(info, io.BytesIO(byteData))
-
-      for strFilename, byteData in sorted(dictFiles.items()):
-        addFile(strFilename, byteData)
-
-      # The update iscomplete if the version file is written.
-      # Therefore this file goes last!
-      addFile(strFILENAME_SW_VERSION, bytes(self._strGitTagsEscaped.encode('utf8')))
 
 '''
   Instead of connecting to Github, this class reads from the local filesystem.
@@ -166,7 +160,7 @@ class GitHubPullLocal(GithubPullBase):
     self.__strSourceDirectory = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 
     # We may directly access config_nodes. However in apache, we must read the actual file!
-    # with io.open(config_nodes.__file__, 'r', encoding='utf8') as f:
+    # with io.open(config_nodes.__file__, 'r', encoding='utf-8') as f:
     with open(config_nodes.__file__, 'r') as f:
       strConfigNodes = f.read()
 
@@ -193,7 +187,7 @@ class GitHubPullLocal(GithubPullBase):
           continue
         print(strFilenameRelative2)
         strFilenameFull = os.path.join(strRootDirectory, strFilename)
-        with io.open(strFilenameFull, 'r', encoding='utf8') as fIn:
+        with io.open(strFilenameFull, 'r', encoding='utf-8') as fIn:
           strContents = fIn.read()
           strContents = strContents.encode('utf8')
           dictFiles[strFilenameRelative2] = strContents
@@ -281,7 +275,7 @@ class GitHubPublicPull(GithubPullBase):
     # https://raw.githubusercontent.com/tempstabilizer2018group/tempstabilizer2018/master/software/http_server/python/config_nodes.py
     strFileUrl = self.getFileUrl(strGithubRepoConfig, 'heads/master', strFILENAME_CONFIG_NODES)
     bConfigNodes = self.getFromHttp(strFileUrl)
-    strConfigNodes = bConfigNodes.decode('utf8')
+    strConfigNodes = bConfigNodes.decode('utf-8')
     return _getDictConfigNodesFromString(self, strConfigNodes)
 
   def __openRepo(self, strGithubRepo):
