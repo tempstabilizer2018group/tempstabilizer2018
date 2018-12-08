@@ -60,12 +60,10 @@ class ConfigNodes:
 
   def verifyConsistency(self):
     # Loop throug all nodes to verify if they are defined
-    for dictLab in self.__dictConfigNodes[LIST_LABS]:
-      for strSerial in dictLab[NODES]:
-        for dictNode in self.__dictConfigNodes[LIST_NODES]:
-          strMac = dictNode[MAC]
-          # Success, we get here!
-          self.findNodeByMac(strMac)
+    for dictNode in self.__dictConfigNodes[LIST_NODES]:
+      strMac = dictNode[MAC]
+      # Success, we get here!
+      self.findNodeByMac(strMac)
 
 def testConsitencyLabs(listLabs):
   ''' 
