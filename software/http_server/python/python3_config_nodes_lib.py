@@ -23,8 +23,12 @@ class ConfigNode:
     self.__dictNode = dictNode
 
   @property
-  def mac(self):
+  def strMac(self):
     return self.__dictLab[MAC]
+
+  @property
+  def strSerial(self):
+    return self.__dictNode[SERIAL]
 
   @property
   def strGitRepo(self):
@@ -33,6 +37,10 @@ class ConfigNode:
   @property
   def strGitTags(self):
     return self.__dictLab[GIT_TAGS]
+
+  @property
+  def strLabLabel(self):
+    return self.__dictLab[LAB_LABEL]
 
 class ConfigNodes:
   def __init__(self, dictConfigNodes):
@@ -54,11 +62,19 @@ class ConfigNodes:
     raise Exception('Mac "%s" has serial "%s". But no lab uses this serial.' % (strMac, strSerial))
 
   def verifyConsistency(self):
+    dictSerial2Lab = {}
     # Loop throug all nodes to verify if they are defined
     for dictNode in self.__dictConfigNodes[LIST_NODES]:
       strMac = dictNode[MAC]
       # Success, we get here!
-      self.findNodeByMac(strMac)
+      objConfigNode = self.findNodeByMac(strMac)
+      strSerial = objConfigNode.strSerial
+      strLabLabel = objConfigNode.strLabLabel
+      strLabLabel_ = dictSerial2Lab.get(strSerial, None)
+      if strLabLabel_ != None:
+        raise Exception('Mac "%s" may not be in two labs: %s/%s.' % (strLabLabel, strLabelLabel_))
+
+      dictSerial2Lab[strSerial] = objConfigNode.strLabLabel;
 
 def testConsitencyLabs(listLabs):
   ''' 

@@ -72,7 +72,7 @@ class GithubPullBase:
     # Escape characters in the tags, but not the ';' between the git-tags
     self._strGitTagsEscaped = ';'.join(map(escape, strGitTags.split(';')))
 
-    self.__strTarFilename = 'node_%s.tar' % _strGitTagsEscaped
+    self.__strTarFilename = 'node_%s.tar' % self._strGitTagsEscaped
     self.__strTarFilenameFull = os.path.join(self.__strDirectory, self.__strTarFilename)
 
   def getTar(self):
@@ -132,7 +132,7 @@ class GithubPullBase:
     return None
 
   def __writeTar(self, dictFiles):
-    dictFiles[strFILENAME_SW_VERSION] = bytes(self._strGitTagsEscaped)
+    dictFiles[strFILENAME_SW_VERSION] = bytes(self._strGitTagsEscaped, encoding='utf-8')
 
     with tarfile.open(self.__strTarFilenameFull, 'w') as tar:
       for strFilename, byteData in dictFiles.items():
@@ -247,6 +247,8 @@ class GitHubPublicPull(GithubPullBase):
 
   def getFileUrl(self, strGithubRepoConfig, strTag, strFile):
     strTagWithoutPrefix = self._getGitTagWithoutPrefix(strTag)
+    if strFile.startswith('/'):
+      strFile = strFile[1:]
     return self.strUrlFileTemplate % (strGithubRepoConfig, strTagWithoutPrefix, strFile)
 
   def getZipUrl(self, strGithubRepoConfig, strTag):
