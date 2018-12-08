@@ -61,10 +61,11 @@ if __name__ == '__main__':
   if True:
     import python3_github_pull
     strMac = '840D8E1BC40C'
-    if strMac == '840D8E1BC40':
+    if strMac == '840D8E1BC40x':
       p = python3_github_pull.GitHubPullLocal()
     else:
-      p = python3_github_pull.GithubPull()
+      p = python3_github_pull.GitHubApiPull()
+      # p = python3_github_pull.GithubPull()
     p.setMac(strMac)
     strTarFilenameFull = p.getTar()
     pass

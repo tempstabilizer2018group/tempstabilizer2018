@@ -20,8 +20,8 @@ import github
 
 import python3_config_nodes_lib
 
-strGithubRepoConfig = 'hmaerki/temp_stabilizer_2018'
-strGithubUser = 'tempstabilizer2018user'
+strGithubRepoConfig = 'tempstabilizer2018group/tempstabilizer2018'
+strGithubUser = 'tempstabilizer2018group'
 strGithubPw = 'xxx'
 strGithubToken = None
 
@@ -63,8 +63,8 @@ class GithubPull:
     self.setTags(objNode.strGitRepo, objNode.strGitTags, objNode.strUserTag)
 
   def setTags(self,  strGitRepo, strGitTags, strUserTag):
-    self.__strGitRepo = strGitRepo
-    self.__strGitTags = strGitTags
+    self._strGitRepo = strGitRepo
+    self._strGitTags = strGitTags
     # Escape characters in the tags, but not the ';' between the git-tags
     strGitTags = ';'.join(map(escape, strGitTags.split(';')))
     strUserTag = escape(strUserTag)
@@ -72,13 +72,13 @@ class GithubPull:
     self.__strTarFilename = 'node_%s_%s.tar' % (strGitTags, strUserTag)
     self.__strTarFilenameFull = os.path.join(self.__strDirectory, self.__strTarFilename)
 
-  def __openRepo(self, strGithubRepo):
-    # objGithub = github.Github(strGithubUser, strGithubPw)
-    if strGithubToken == None:
-      objGithub = github.Github()
-    else:
-      objGithub = github.Github(login_or_token=strGithubToken)
-    return objGithub.get_repo(strGithubRepo)
+  def getTar(self):
+    if os.path.exists(self.__strTarFilenameFull):
+      logging.info('Tarfile already in cache. skip download....')
+      return self.__strTarFilenameFull
+    dictFiles = self._fetchFromGithub()
+    self.__writeTar(dictFiles)
+    return self.__strTarFilenameFull
 
   def __getConfigNodesFromGithub(self):
     '''
@@ -89,23 +89,6 @@ class GithubPull:
     dictConfigNodes = self._getConfigNodesFromGithub2()
     objConfigNodes = python3_config_nodes_lib.ConfigNodes(dictConfigNodes)
     return objConfigNodes
-
-  def _getConfigNodesFromGithub2(self):
-    objGitRepro = self.__openRepo(strGithubRepoConfig)
-    objGitFile = objGitRepro.get_file_contents(path=strFILENAME_CONFIG_NODES, ref='heads/master')
-    strConfigNodes = objGitFile.decoded_content
-    dictGlobals = {}
-    dictLocals = {}
-    exec(strConfigNodes, dictGlobals, dictLocals)
-    return dictLocals['dictConfigNodes']
-
-  def getTar(self):
-    if os.path.exists(self.__strTarFilenameFull):
-      logging.info('Tarfile already in cache. skip download....')
-      return self.__strTarFilenameFull
-    dictFiles = self._fetchFromGithub()
-    self.__writeTar(dictFiles)
-    return self.__strTarFilenameFull
 
   def _selectFile(self, strFilenameRelative):
     '''
@@ -121,34 +104,6 @@ class GithubPull:
       # We are only interested in python-files
       return strFilenameRelative2
     return None
-
-  def _fetchFromGithub(self):
-    objGitRepro = self.__openRepo(self.__strGitRepo)
-
-    dictFiles = {}
-
-    for strGitTag in self.__strGitTags.split(';'):
-      logging.debug('  Tag: %s' % strGitTag)
-      try:
-        objGitTag = objGitRepro.get_git_ref(strGitTag)
-      except github.UnknownObjectException:
-        raise Exception('Tag "%s" does not exist in git-repository "%s"' % (strGitTag, self.__strGitRepo))
-
-      objGitTree = objGitRepro.get_git_tree(objGitTag.object.sha, recursive=True)
-      for objGitFile in objGitTree.tree:
-        logging.debug('    File: %s' % objGitFile.path)
-        strFilenameRelative2 = self._selectFile(objGitFile.path)
-        if strFilenameRelative2 == None:
-          continue
-        if objGitFile.path in dictFiles:
-          logging.debug('      Alreadey added, would be overwritten - skipped....')
-          continue
-        if objGitFile.type != 'blob':
-          logging.debug('      Not a blob, skipped....')
-          continue
-        objGitContents = objGitRepro.get_file_contents(path=objGitFile.path, ref=strGitTag)
-        dictFiles[strFilenameRelative2] = objGitContents.decoded_content
-    return dictFiles
 
   def __writeTar(self, dictFiles):
     dictFiles[strFILENAME_VERSION] = bytes(self.__strTarFilename.encode('utf8'))
@@ -196,6 +151,62 @@ class GitHubPullLocal(GithubPull):
           strContents = fIn.read()
           strContents = strContents.encode('utf8')
           dictFiles[strFilenameRelative2] = strContents
+    return dictFiles
+
+class GitHubApiPull(GithubPull):
+  '''
+    This will use the Github API - but is limited by 60 requests...
+  '''
+  def __init__(self, strDirectory=None):
+    import config_nodes
+    self.__strSourceDirectory = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+    self.__dictConfigNodes = config_nodes.dictConfigNodes
+
+    GithubPull.__init__(self, strDirectory)
+
+  def __openRepo(self, strGithubRepo):
+    # objGithub = github.Github(strGithubUser, strGithubPw)
+    if strGithubToken == None:
+      objGithub = github.Github()
+    else:
+      objGithub = github.Github(login_or_token=strGithubToken)
+    return objGithub.get_repo(strGithubRepo)
+
+  def _getConfigNodesFromGithub2(self):
+    objGitRepro = self.__openRepo(strGithubRepoConfig)
+    objGitFile = objGitRepro.get_file_contents(path=strFILENAME_CONFIG_NODES, ref='heads/master')
+    strConfigNodes = objGitFile.decoded_content
+    dictGlobals = {}
+    dictLocals = {}
+    exec(strConfigNodes, dictGlobals, dictLocals)
+    return dictLocals['dictConfigNodes']
+
+  def _fetchFromGithub(self):
+    objGitRepro = self.__openRepo(self._strGitRepo)
+
+    dictFiles = {}
+
+    for strGitTag in self._strGitTags.split(';'):
+      logging.debug('  Tag: %s' % strGitTag)
+      try:
+        objGitTag = objGitRepro.get_git_ref(strGitTag)
+      except github.UnknownObjectException:
+        raise Exception('Tag "%s" does not exist in git-repository "%s"' % (strGitTag, self._strGitRepo))
+
+      objGitTree = objGitRepro.get_git_tree(objGitTag.object.sha, recursive=True)
+      for objGitFile in objGitTree.tree:
+        logging.debug('    File: %s' % objGitFile.path)
+        strFilenameRelative2 = self._selectFile(objGitFile.path)
+        if strFilenameRelative2 == None:
+          continue
+        if objGitFile.path in dictFiles:
+          logging.debug('      Alreadey added, would be overwritten - skipped....')
+          continue
+        if objGitFile.type != 'blob':
+          logging.debug('      Not a blob, skipped....')
+          continue
+        objGitContents = objGitRepro.get_file_contents(path=objGitFile.path, ref=strGitTag)
+        dictFiles[strFilenameRelative2] = objGitContents.decoded_content
     return dictFiles
 
 if __name__ == '__main__':
