@@ -80,9 +80,9 @@ class GithubPullBase:
     self.__strTarFilenameFull = os.path.join(self.__strDirectory, self.__strTarFilename)
 
   def getTar(self):
-    if os.path.exists(self.__strTarFilenameFull):
-      logging.info('Tarfile already in cache. skip download....')
-      return self.__strTarFilenameFull
+    # if os.path.exists(self.__strTarFilenameFull):
+    #   logging.info('Tarfile already in cache. skip download....')
+    #   return self.__strTarFilenameFull
     dictFiles = self._fetchFromGithub()
     self.__writeTar(dictFiles)
     return self.__strTarFilenameFull

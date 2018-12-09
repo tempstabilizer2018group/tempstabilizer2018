@@ -7,6 +7,7 @@ import network
 
 import hw_hal
 import hw_urequests
+import hw_update_ota
 import config_app
 import config_node
 import portable_ticks
@@ -20,6 +21,10 @@ class HwController(portable_controller.Controller):
     portable_controller.Controller.__init__(self)
     self.__objLogConsoleInterval = portable_ticks.Interval(iInterval_ms=config_app.iLogHwConsoleInterval_ms)
     self.__objWlan = network.WLAN(network.STA_IF)
+    try:
+      uos.mkdir(config_app.DIRECTORY_DATA)
+    except:
+      pass
 
   def directoryData(self):
     return config_app.DIRECTORY_DATA
@@ -133,6 +138,8 @@ class HwController(portable_controller.Controller):
       strFilenameFull = '%s/%s' % (config_app.DIRECTORY_DATA, strFromFilename)
       strFilenameBase = strFromFilename.split('.')[0]
       self.__doHttpPost(strFilenameFull, strFilenameBase)
+
+    hw_update_ota.checkForNewSwAndReboot(self.__objWlan)
 
   def __doHttpPost(self, strFilenameFull, strFilenameBase):
     # uos.stat('main.py')
