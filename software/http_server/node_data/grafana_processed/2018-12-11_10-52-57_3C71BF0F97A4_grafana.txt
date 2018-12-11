@@ -1,0 +1,23 @@
+2 version 0.1
+3 mac 3C71BF0F97A4
+3 portable_ticks.iMaxTick_ms 1073741823
+10 grafana_type GrafanaValueFloatAvg('O', 'fTempO_C', 100.)
+5 messinterval_ms O 5000
+7 grafana_type GrafanaValueFloat('S', 'fTempO_Setpoint_C', 100.)
+5 messinterval_ms S 5000
+9 grafana_type GrafanaValueFloatAvg('H', 'fHeat_W', 100.)
+5 messinterval_ms H 5000
+7 grafana_type GrafanaValueFloatAvg('U', 'fTempEnvirons_C', 100.)
+5 messinterval_ms U 50000
+4 grafana_type GrafanaValueBoolTrue('L', 'PidH_bLimitHigh')
+5 messinterval_ms L 5000
+7 grafana_type GrafanaValueFloatAvg('z', 'fDACzeroHeat_V', 1000.)
+5 messinterval_ms z 5000
+7 grafana_type GrafanaValueFloat('F', 'fDiskFree_MBytes', 100.)
+4 messinterval_ms F 50000
+43 info networkOnce() took 2870 ms
+89 v O2371H0L-z1672S2267U2181F192
+5069 v z1671
+5180 v O2370z1670
+1137 info Button pressed < 2s: Force WLAN replication
+1000 ntptime 1544525577

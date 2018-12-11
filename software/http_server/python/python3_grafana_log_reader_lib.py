@@ -32,7 +32,7 @@ class GrafanaDumper:
     self.__dictObjGrafana = {}
     self.__dictValueMessinterval_ms = {}
 
-  def handleNode(self, iTime_ms, strSite, strNode):
+  def handleMac(self, iTime_ms, strMac):
     # May be overridden
     pass
 
@@ -84,9 +84,8 @@ class GrafanaDumper:
       self.strVersion = strPayload
       return
 
-    if strVerb == portable_grafana_datatypes.TAG_GRAFANA_SITE_NODE:
-      strSite, strNode = strPayload.split()
-      self.handleNode(iTime_ms, strSite, strNode)
+    if strVerb == portable_grafana_datatypes.TAG_GRAFANA_MAC:
+      self.handleMac(iTime_ms, strMac=strPayload)
       return
 
     if strVerb == portable_grafana_datatypes.TAG_GRAFANA_DATATYPE:

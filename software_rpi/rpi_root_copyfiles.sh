@@ -1,13 +1,34 @@
 # run as root!
-
 # copy all configuration files
 
+RPI_ROOT=~pi/tempstabilizer2018/software_rpi/rpi_root
+cd $RPI_ROOT
+
+systemctl stop apache2
 systemctl stop dnsmasq
 systemctl stop hostapd
 
-cd ~pi/temp_stabilizer_2018/software_rpi/rpi_root
+issymlink() {
+    test "$(readlink "${1}")";
+}
 
-tar cf - . | tar xvf - -C /
+# Copy files to /
+# tar cf - . | tar xvf - -C /
+
+# Create symbolic links
+# If a file 'xy.txt' exists, rename it to 'xy.txt.bak'.
+for f in $(find * -type f)
+do
+  echo ln -s $RPI_ROOT/$f /$f
+  if issymlink /$f; then
+    rm /$f
+  else
+    echo Make backup
+    mv /$f /${f}.bak
+  fi
+  ln -s $RPI_ROOT/$f /$f
+done
 
 systemctl start dnsmasq
 systemctl start hostapd
+systemctl start apache2

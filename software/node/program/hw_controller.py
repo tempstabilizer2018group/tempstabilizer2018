@@ -9,9 +9,9 @@ import hw_hal
 import hw_urequests
 import hw_update_ota
 import config_app
-import config_node
 import portable_ticks
 import portable_controller
+import portable_firmware_constants
 import portable_grafana_log_writer
 
 class HwController(portable_controller.Controller):
@@ -82,10 +82,10 @@ class HwController(portable_controller.Controller):
     # (b'ubx-92907', b'\x08j\n.a\x00', 10, -92, 3, False)
     # ]
     for listWlan in listWlans:
-      strSid = listWlan[0].decode()
-      if strSid == config_app.strWlanSidForTrigger:
+      strSsid = listWlan[0].decode()
+      if strSsid == config_app.strWlanSidForTrigger:
         print('strWlanSidForTrigger "%s": SEEN!' % config_app.strWlanSidForTrigger)
-        return True;
+        return True
     print('strWlanSidForTrigger "%s": NOT SEEN!' % config_app.strWlanSidForTrigger)
     return False
 
@@ -100,10 +100,10 @@ class HwController(portable_controller.Controller):
     return self.__objWlan.isconnected()
 
   def networkConnect(self):
-    print('networkConnect("%s")' % config_app.strWlanSid)
+    print('networkConnect("%s")' % config_app.strWlanSsid)
     if not self.__objWlan.active():
       self.__objWlan.active(True)
-    self.__objWlan.connect(config_app.strWlanSid, config_app.strWlanPw)
+    self.__objWlan.connect(config_app.strWlanSsid, config_app.strWlanPw)
     # Wait some time to get connected
     for iPause in range(10):
       # Do not use self.delay_ms(): Light sleep will kill the wlan!
@@ -139,23 +139,40 @@ class HwController(portable_controller.Controller):
       strFilenameBase = strFromFilename.split('.')[0]
       self.__doHttpPost(strFilenameFull, strFilenameBase)
 
-    hw_update_ota.checkForNewSwAndReboot(self.__objWlan)
+    bNewSwVersion = hw_update_ota.checkIfNewSwVersion(self.__objWlan)
+    if bNewSwVersion:
+      hw_update_ota.formatAndReboot()
+
 
   def __doHttpPost(self, strFilenameFull, strFilenameBase):
+    import gc
+    gc.collect()
+
     # uos.stat('main.py')
     # (32768, 0, 0, 0, 0, 0, 318, 595257990, 595257990, 595257990)
     iStreamlen = uos.stat(strFilenameFull)[6]
+    strHttpPostUrl = '%s%s?%s=%s&%s=%s' % (
+      config_app.strHttpPostServer,
+      config_app.strHttpPostPath,
+      portable_firmware_constants.strHTTP_ARG_MAC, config_app.strMAC,
+      portable_firmware_constants.strHTTP_ARG_FILENAME, strFilenameBase
+    )
+    print('POST: %s, len: %s' % (strHttpPostUrl, iStreamlen))
 
+    # strHttpPostUrl: http://www.tempstabilizer2018.org/upload?mac=ab01cd02ef03&filename=grafana
     with open(strFilenameFull, 'r') as fStream:
-      strParams = '?site=%s&node=%s&filename=%s' % (config_node.strSite, config_node.strNode, strFilenameBase)
-      strHttpPostUrl = config_app.strHttpPostUrl + strParams
-      print('POST: %s, len: %s' % (strHttpPostUrl, iStreamlen))
-
-      # strHttpPostUrl: http://tempstabilizer.positron.ch/push/upload.grafana?site=waffenplatz&node=4711&filename=grafana
       dictHeaders = {'Content-Type': 'application/text'}
       objResponse = hw_urequests.post(strHttpPostUrl, stream=fStream, streamlen=iStreamlen, headers=dictHeaders)
 
-    print('Response: %d %s' % (objResponse.status_code, objResponse.text))
+    print('Response: %d' % objResponse.status_code)
+    while True:
+      # This corresponds to 'objResponse.text' but doesn't allocate much memory
+      # s = objResponse.raw.read(1024).decode('utf-8')
+      b = objResponse.raw.read(1024)
+      if len(b) == 0:
+        break
+      print(b.decode('utf-8'), end='')
+    print('')
 
     if objResponse.status_code == 200:
       # If no error: Remove file

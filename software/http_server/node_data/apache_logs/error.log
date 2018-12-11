@@ -1,0 +1,928 @@
+[Tue Dec 11 10:30:31.075199 2018] [wsgi:info] [pid 13027:tid 1996161024] mod_wsgi (pid=13027): Attach interpreter ''.
+[Tue Dec 11 10:30:31.116892 2018] [wsgi:info] [pid 13027:tid 1996161024] mod_wsgi (pid=13027): Imported 'mod_wsgi'.
+[Tue Dec 11 10:30:59.139609 2018] [wsgi:info] [pid 13030:tid 1972368432] [client 192.168.4.18:65242] mod_wsgi (pid=13030, process='', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 10:31:03.784864 2018] [wsgi:error] [pid 13030:tid 1972368432] [client 192.168.4.18:65242] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_09-31-03_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 10:39:05.902398 2018] [wsgi:info] [pid 13027:tid 1996161024] mod_wsgi (pid=13027): Shutdown requested 'pi'.
+[Tue Dec 11 10:39:05.903146 2018] [wsgi:info] [pid 13027:tid 1996161024] mod_wsgi (pid=13027): Stopping process 'pi'.
+[Tue Dec 11 10:39:05.903311 2018] [wsgi:info] [pid 13027:tid 1996161024] mod_wsgi (pid=13027): Destroying interpreters.
+[Tue Dec 11 10:39:05.903369 2018] [wsgi:info] [pid 13027:tid 1996161024] mod_wsgi (pid=13027): Cleanup interpreter ''.
+[Tue Dec 11 10:39:06.001880 2018] [wsgi:info] [pid 13027:tid 1996161024] mod_wsgi (pid=13027): Terminating Python.
+[Tue Dec 11 10:39:06.070572 2018] [wsgi:info] [pid 13027:tid 1996161024] mod_wsgi (pid=13027): Python has shutdown.
+[Tue Dec 11 10:39:06.070781 2018] [wsgi:info] [pid 13027:tid 1996161024] mod_wsgi (pid=13027): Exiting process 'pi'.
+[Tue Dec 11 10:39:07.565329 2018] [wsgi:info] [pid 13155:tid 1996382208] mod_wsgi (pid=13155): Attach interpreter ''.
+[Tue Dec 11 10:39:07.606878 2018] [wsgi:info] [pid 13155:tid 1996382208] mod_wsgi (pid=13155): Imported 'mod_wsgi'.
+[Tue Dec 11 10:39:11.700907 2018] [wsgi:info] [pid 13155:tid 1965995056] mod_wsgi (pid=13155): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 10:39:11.805701 2018] [wsgi:info] [pid 13155:tid 1965995056] [remote 10.0.11.119:49839] mod_wsgi (pid=13155, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 10:40:44.815008 2018] [wsgi:info] [pid 13155:tid 1982772272] mod_wsgi (pid=13155): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:40:44.815315 2018] [wsgi:info] [pid 13155:tid 1996382208] mod_wsgi (pid=13155): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:40:44.815569 2018] [wsgi:info] [pid 13155:tid 1996382208] mod_wsgi (pid=13155): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:40:44.815625 2018] [wsgi:info] [pid 13155:tid 1996382208] mod_wsgi (pid=13155): Destroying interpreters.
+[Tue Dec 11 10:40:44.815689 2018] [wsgi:info] [pid 13155:tid 1996382208] mod_wsgi (pid=13155): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 10:40:44.816446 2018] [wsgi:info] [pid 13155:tid 1996382208] mod_wsgi (pid=13155): End interpreter '127.0.1.1|'.
+[Tue Dec 11 10:40:45.083876 2018] [wsgi:info] [pid 13155:tid 1996382208] mod_wsgi (pid=13155): Cleanup interpreter ''.
+[Tue Dec 11 10:40:45.139248 2018] [wsgi:info] [pid 13155:tid 1996382208] mod_wsgi (pid=13155): Terminating Python.
+[Tue Dec 11 10:40:45.217044 2018] [wsgi:info] [pid 13155:tid 1996382208] mod_wsgi (pid=13155): Python has shutdown.
+[Tue Dec 11 10:40:45.217234 2018] [wsgi:info] [pid 13155:tid 1996382208] mod_wsgi (pid=13155): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:40:45.595814 2018] [wsgi:info] [pid 13220:tid 1996382208] mod_wsgi (pid=13220): Attach interpreter ''.
+[Tue Dec 11 10:40:45.632213 2018] [wsgi:info] [pid 13220:tid 1996382208] mod_wsgi (pid=13220): Imported 'mod_wsgi'.
+[Tue Dec 11 10:41:02.146340 2018] [wsgi:info] [pid 13220:tid 1996382208] mod_wsgi (pid=13220): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:41:02.146837 2018] [wsgi:info] [pid 13220:tid 1996382208] mod_wsgi (pid=13220): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:41:02.146936 2018] [wsgi:info] [pid 13220:tid 1996382208] mod_wsgi (pid=13220): Destroying interpreters.
+[Tue Dec 11 10:41:02.147096 2018] [wsgi:info] [pid 13220:tid 1996382208] mod_wsgi (pid=13220): Cleanup interpreter ''.
+[Tue Dec 11 10:41:02.220839 2018] [wsgi:info] [pid 13220:tid 1996382208] mod_wsgi (pid=13220): Terminating Python.
+[Tue Dec 11 10:41:02.274910 2018] [wsgi:info] [pid 13220:tid 1996382208] mod_wsgi (pid=13220): Python has shutdown.
+[Tue Dec 11 10:41:02.275101 2018] [wsgi:info] [pid 13220:tid 1996382208] mod_wsgi (pid=13220): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:41:03.743286 2018] [wsgi:info] [pid 13245:tid 1996341248] mod_wsgi (pid=13245): Attach interpreter ''.
+[Tue Dec 11 10:41:03.782990 2018] [wsgi:info] [pid 13245:tid 1996341248] mod_wsgi (pid=13245): Imported 'mod_wsgi'.
+[Tue Dec 11 10:41:04.803230 2018] [core:info] [pid 13247:tid 1963979824] [client 10.0.11.119:49997] AH00128: File does not exist: /home/pi/tempstabilizer2018/software/http_server/webroot/index.htmlfavicon.ico
+[Tue Dec 11 10:41:04.832119 2018] [core:info] [pid 13247:tid 1955591216] [client 10.0.11.119:49997] AH00128: File does not exist: /home/pi/tempstabilizer2018/software/http_server/webroot/index.htmlfavicon.ico, referer: http://10.0.11.151/favicon.ico
+[Tue Dec 11 10:41:16.122816 2018] [core:info] [pid 13246:tid 1947202608] [client 10.0.11.119:49998] AH00128: File does not exist: /home/pi/tempstabilizer2018/software/http_server/webroot/index.htmlfavicon.ico, referer: http://10.0.11.151/
+[Tue Dec 11 10:41:19.139557 2018] [core:info] [pid 13246:tid 1938814000] [client 10.0.11.119:49998] AH00128: File does not exist: /home/pi/tempstabilizer2018/software/http_server/webroot/index.htmlversioncheck, referer: http://10.0.11.151/
+[Tue Dec 11 10:42:16.274803 2018] [reqtimeout:info] [pid 13246:tid 1922036784] [client 10.0.11.119:50026] AH01382: Request header read timeout
+[Tue Dec 11 10:44:40.203996 2018] [wsgi:info] [pid 13245:tid 1996341248] mod_wsgi (pid=13245): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:44:40.204521 2018] [wsgi:info] [pid 13245:tid 1996341248] mod_wsgi (pid=13245): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:44:40.204645 2018] [wsgi:info] [pid 13245:tid 1996341248] mod_wsgi (pid=13245): Destroying interpreters.
+[Tue Dec 11 10:44:40.204698 2018] [wsgi:info] [pid 13245:tid 1996341248] mod_wsgi (pid=13245): Cleanup interpreter ''.
+[Tue Dec 11 10:44:40.315503 2018] [wsgi:info] [pid 13245:tid 1996341248] mod_wsgi (pid=13245): Terminating Python.
+[Tue Dec 11 10:44:40.381190 2018] [wsgi:info] [pid 13245:tid 1996341248] mod_wsgi (pid=13245): Python has shutdown.
+[Tue Dec 11 10:44:40.381396 2018] [wsgi:info] [pid 13245:tid 1996341248] mod_wsgi (pid=13245): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:44:41.133450 2018] [wsgi:info] [pid 13395:tid 1995812864] mod_wsgi (pid=13395): Attach interpreter ''.
+[Tue Dec 11 10:44:41.175477 2018] [wsgi:info] [pid 13395:tid 1995812864] mod_wsgi (pid=13395): Imported 'mod_wsgi'.
+[Tue Dec 11 10:44:50.314395 2018] [wsgi:info] [pid 13395:tid 1965425712] mod_wsgi (pid=13395): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 10:44:50.419130 2018] [wsgi:info] [pid 13395:tid 1965425712] [remote 10.0.11.119:50303] mod_wsgi (pid=13395, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 10:45:42.362873 2018] [reqtimeout:info] [pid 13396:tid 1922036784] [client 10.0.11.119:50304] AH01382: Request header read timeout
+[Tue Dec 11 10:45:55.351787 2018] [wsgi:info] [pid 13395:tid 1982202928] mod_wsgi (pid=13395): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:45:55.352188 2018] [wsgi:info] [pid 13395:tid 1995812864] mod_wsgi (pid=13395): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:45:55.352506 2018] [wsgi:info] [pid 13395:tid 1995812864] mod_wsgi (pid=13395): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:45:55.352593 2018] [wsgi:info] [pid 13395:tid 1995812864] mod_wsgi (pid=13395): Destroying interpreters.
+[Tue Dec 11 10:45:55.352763 2018] [wsgi:info] [pid 13395:tid 1995812864] mod_wsgi (pid=13395): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 10:45:55.353615 2018] [wsgi:info] [pid 13395:tid 1995812864] mod_wsgi (pid=13395): End interpreter '127.0.1.1|'.
+[Tue Dec 11 10:45:55.666322 2018] [wsgi:info] [pid 13395:tid 1995812864] mod_wsgi (pid=13395): Cleanup interpreter ''.
+[Tue Dec 11 10:45:55.721537 2018] [wsgi:info] [pid 13395:tid 1995812864] mod_wsgi (pid=13395): Terminating Python.
+[Tue Dec 11 10:45:55.799236 2018] [wsgi:info] [pid 13395:tid 1995812864] mod_wsgi (pid=13395): Python has shutdown.
+[Tue Dec 11 10:45:55.799422 2018] [wsgi:info] [pid 13395:tid 1995812864] mod_wsgi (pid=13395): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:45:56.140646 2018] [wsgi:info] [pid 13459:tid 1995812864] mod_wsgi (pid=13459): Attach interpreter ''.
+[Tue Dec 11 10:45:56.177553 2018] [wsgi:info] [pid 13459:tid 1995812864] mod_wsgi (pid=13459): Imported 'mod_wsgi'.
+[Tue Dec 11 10:46:12.454260 2018] [wsgi:info] [pid 13459:tid 1995812864] mod_wsgi (pid=13459): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:46:12.454846 2018] [wsgi:info] [pid 13459:tid 1995812864] mod_wsgi (pid=13459): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:46:12.454965 2018] [wsgi:info] [pid 13459:tid 1995812864] mod_wsgi (pid=13459): Destroying interpreters.
+[Tue Dec 11 10:46:12.455015 2018] [wsgi:info] [pid 13459:tid 1995812864] mod_wsgi (pid=13459): Cleanup interpreter ''.
+[Tue Dec 11 10:46:12.542497 2018] [wsgi:info] [pid 13459:tid 1995812864] mod_wsgi (pid=13459): Terminating Python.
+[Tue Dec 11 10:46:12.602330 2018] [wsgi:info] [pid 13459:tid 1995812864] mod_wsgi (pid=13459): Python has shutdown.
+[Tue Dec 11 10:46:12.602522 2018] [wsgi:info] [pid 13459:tid 1995812864] mod_wsgi (pid=13459): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:46:14.410118 2018] [wsgi:info] [pid 13489:tid 1996419072] mod_wsgi (pid=13489): Attach interpreter ''.
+[Tue Dec 11 10:46:14.453902 2018] [wsgi:info] [pid 13489:tid 1996419072] mod_wsgi (pid=13489): Imported 'mod_wsgi'.
+[Tue Dec 11 10:46:25.473385 2018] [wsgi:info] [pid 13489:tid 1966031920] mod_wsgi (pid=13489): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 10:46:25.577793 2018] [wsgi:info] [pid 13489:tid 1966031920] [remote 10.0.11.119:50445] mod_wsgi (pid=13489, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 10:47:32.780976 2018] [wsgi:info] [pid 13489:tid 1982809136] mod_wsgi (pid=13489): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:47:32.781328 2018] [wsgi:info] [pid 13489:tid 1996419072] mod_wsgi (pid=13489): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:47:32.781543 2018] [wsgi:info] [pid 13489:tid 1996419072] mod_wsgi (pid=13489): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:47:32.781600 2018] [wsgi:info] [pid 13489:tid 1996419072] mod_wsgi (pid=13489): Destroying interpreters.
+[Tue Dec 11 10:47:32.781738 2018] [wsgi:info] [pid 13489:tid 1996419072] mod_wsgi (pid=13489): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 10:47:32.782508 2018] [wsgi:info] [pid 13489:tid 1996419072] mod_wsgi (pid=13489): End interpreter '127.0.1.1|'.
+[Tue Dec 11 10:47:33.079147 2018] [wsgi:info] [pid 13489:tid 1996419072] mod_wsgi (pid=13489): Cleanup interpreter ''.
+[Tue Dec 11 10:47:33.138395 2018] [wsgi:info] [pid 13489:tid 1996419072] mod_wsgi (pid=13489): Terminating Python.
+[Tue Dec 11 10:47:33.216940 2018] [wsgi:info] [pid 13489:tid 1996419072] mod_wsgi (pid=13489): Python has shutdown.
+[Tue Dec 11 10:47:33.217136 2018] [wsgi:info] [pid 13489:tid 1996419072] mod_wsgi (pid=13489): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:47:34.271199 2018] [wsgi:info] [pid 13553:tid 1996419072] mod_wsgi (pid=13553): Attach interpreter ''.
+[Tue Dec 11 10:47:34.309016 2018] [wsgi:info] [pid 13553:tid 1996419072] mod_wsgi (pid=13553): Imported 'mod_wsgi'.
+[Tue Dec 11 10:50:30.873888 2018] [wsgi:info] [pid 13553:tid 1996419072] mod_wsgi (pid=13553): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:50:30.874606 2018] [wsgi:info] [pid 13553:tid 1996419072] mod_wsgi (pid=13553): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:50:30.874715 2018] [wsgi:info] [pid 13553:tid 1996419072] mod_wsgi (pid=13553): Destroying interpreters.
+[Tue Dec 11 10:50:30.874761 2018] [wsgi:info] [pid 13553:tid 1996419072] mod_wsgi (pid=13553): Cleanup interpreter ''.
+[Tue Dec 11 10:50:30.976148 2018] [wsgi:info] [pid 13553:tid 1996419072] mod_wsgi (pid=13553): Terminating Python.
+[Tue Dec 11 10:50:31.039965 2018] [wsgi:info] [pid 13553:tid 1996419072] mod_wsgi (pid=13553): Python has shutdown.
+[Tue Dec 11 10:50:31.040189 2018] [wsgi:info] [pid 13553:tid 1996419072] mod_wsgi (pid=13553): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:50:32.640829 2018] [wsgi:info] [pid 13615:tid 1996128256] mod_wsgi (pid=13615): Attach interpreter ''.
+[Tue Dec 11 10:50:32.680900 2018] [wsgi:info] [pid 13615:tid 1996128256] mod_wsgi (pid=13615): Imported 'mod_wsgi'.
+[Tue Dec 11 10:50:36.652487 2018] [wsgi:info] [pid 13615:tid 1965741104] mod_wsgi (pid=13615): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 10:50:36.757144 2018] [wsgi:info] [pid 13615:tid 1965741104] [remote 10.0.11.119:50783] mod_wsgi (pid=13615, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 10:51:36.873996 2018] [wsgi:info] [pid 13615:tid 1996128256] mod_wsgi (pid=13615): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:51:36.874537 2018] [wsgi:info] [pid 13615:tid 1996128256] mod_wsgi (pid=13615): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:51:36.874648 2018] [wsgi:info] [pid 13615:tid 1996128256] mod_wsgi (pid=13615): Destroying interpreters.
+[Tue Dec 11 10:51:36.874744 2018] [wsgi:info] [pid 13615:tid 1996128256] mod_wsgi (pid=13615): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 10:51:36.875550 2018] [wsgi:info] [pid 13615:tid 1996128256] mod_wsgi (pid=13615): End interpreter '127.0.1.1|'.
+[Tue Dec 11 10:51:37.197050 2018] [wsgi:info] [pid 13615:tid 1996128256] mod_wsgi (pid=13615): Cleanup interpreter ''.
+[Tue Dec 11 10:51:37.258102 2018] [wsgi:info] [pid 13615:tid 1996128256] mod_wsgi (pid=13615): Terminating Python.
+[Tue Dec 11 10:51:37.344856 2018] [wsgi:info] [pid 13615:tid 1996128256] mod_wsgi (pid=13615): Python has shutdown.
+[Tue Dec 11 10:51:37.345046 2018] [wsgi:info] [pid 13615:tid 1996128256] mod_wsgi (pid=13615): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:51:38.299224 2018] [wsgi:info] [pid 13704:tid 1995599872] mod_wsgi (pid=13704): Attach interpreter ''.
+[Tue Dec 11 10:51:38.340832 2018] [wsgi:info] [pid 13704:tid 1995599872] mod_wsgi (pid=13704): Imported 'mod_wsgi'.
+[Tue Dec 11 10:51:41.145420 2018] [wsgi:info] [pid 13704:tid 1965212720] mod_wsgi (pid=13704): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 10:51:41.252923 2018] [wsgi:info] [pid 13704:tid 1965212720] [remote 10.0.11.119:50874] mod_wsgi (pid=13704, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 10:52:22.070369 2018] [wsgi:info] [pid 13704:tid 1965212720] [remote 10.0.11.119:50932] mod_wsgi (pid=13704): Force restart of process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:52:22.070642 2018] [wsgi:info] [pid 13704:tid 1995599872] mod_wsgi (pid=13704): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:52:22.070701 2018] [wsgi:info] [pid 13707:tid 1938814000] [client 10.0.11.119:50932] mod_wsgi (pid=13707): Connect after WSGI daemon process restart, attempt #1., referer: http://10.0.11.151/index.html
+[Tue Dec 11 10:52:22.070927 2018] [wsgi:info] [pid 13704:tid 1995599872] mod_wsgi (pid=13704): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:52:22.070993 2018] [wsgi:info] [pid 13704:tid 1995599872] mod_wsgi (pid=13704): Destroying interpreters.
+[Tue Dec 11 10:52:22.071059 2018] [wsgi:info] [pid 13704:tid 1995599872] mod_wsgi (pid=13704): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 10:52:22.072043 2018] [wsgi:info] [pid 13704:tid 1995599872] mod_wsgi (pid=13704): End interpreter '127.0.1.1|'.
+[Tue Dec 11 10:52:22.355197 2018] [wsgi:info] [pid 13704:tid 1995599872] mod_wsgi (pid=13704): Cleanup interpreter ''.
+[Tue Dec 11 10:52:22.412182 2018] [wsgi:info] [pid 13704:tid 1995599872] mod_wsgi (pid=13704): Terminating Python.
+[Tue Dec 11 10:52:22.490995 2018] [wsgi:info] [pid 13704:tid 1995599872] mod_wsgi (pid=13704): Python has shutdown.
+[Tue Dec 11 10:52:22.491184 2018] [wsgi:info] [pid 13704:tid 1995599872] mod_wsgi (pid=13704): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:52:23.146582 2018] [wsgi:info] [pid 13771:tid 1995599872] mod_wsgi (pid=13771): Attach interpreter ''.
+[Tue Dec 11 10:52:23.183627 2018] [wsgi:info] [pid 13771:tid 1995599872] mod_wsgi (pid=13771): Imported 'mod_wsgi'.
+[Tue Dec 11 10:52:23.453119 2018] [wsgi:info] [pid 13771:tid 1965212720] mod_wsgi (pid=13771): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 10:52:23.552515 2018] [wsgi:info] [pid 13771:tid 1965212720] [remote 10.0.11.119:50932] mod_wsgi (pid=13771, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 10:53:14.201849 2018] [reqtimeout:info] [pid 13705:tid 1913648176] [client 10.0.11.119:50933] AH01382: Request header read timeout
+[Tue Dec 11 10:53:28.441827 2018] [wsgi:info] [pid 13771:tid 1981989936] mod_wsgi (pid=13771): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:53:28.442148 2018] [wsgi:info] [pid 13771:tid 1995599872] mod_wsgi (pid=13771): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:53:28.442470 2018] [wsgi:info] [pid 13771:tid 1995599872] mod_wsgi (pid=13771): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:53:28.442535 2018] [wsgi:info] [pid 13771:tid 1995599872] mod_wsgi (pid=13771): Destroying interpreters.
+[Tue Dec 11 10:53:28.442610 2018] [wsgi:info] [pid 13771:tid 1995599872] mod_wsgi (pid=13771): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 10:53:28.443828 2018] [wsgi:info] [pid 13771:tid 1995599872] mod_wsgi (pid=13771): End interpreter '127.0.1.1|'.
+[Tue Dec 11 10:53:28.732791 2018] [wsgi:info] [pid 13771:tid 1995599872] mod_wsgi (pid=13771): Cleanup interpreter ''.
+[Tue Dec 11 10:53:28.791134 2018] [wsgi:info] [pid 13771:tid 1995599872] mod_wsgi (pid=13771): Terminating Python.
+[Tue Dec 11 10:53:28.881190 2018] [wsgi:info] [pid 13771:tid 1995599872] mod_wsgi (pid=13771): Python has shutdown.
+[Tue Dec 11 10:53:28.881379 2018] [wsgi:info] [pid 13771:tid 1995599872] mod_wsgi (pid=13771): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:53:30.223626 2018] [wsgi:info] [pid 13800:tid 1995599872] mod_wsgi (pid=13800): Attach interpreter ''.
+[Tue Dec 11 10:53:30.259858 2018] [wsgi:info] [pid 13800:tid 1995599872] mod_wsgi (pid=13800): Imported 'mod_wsgi'.
+[Tue Dec 11 10:53:41.014364 2018] [wsgi:info] [pid 13800:tid 1995599872] mod_wsgi (pid=13800): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:53:41.014922 2018] [wsgi:info] [pid 13800:tid 1995599872] mod_wsgi (pid=13800): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:53:41.015017 2018] [wsgi:info] [pid 13800:tid 1995599872] mod_wsgi (pid=13800): Destroying interpreters.
+[Tue Dec 11 10:53:41.015066 2018] [wsgi:info] [pid 13800:tid 1995599872] mod_wsgi (pid=13800): Cleanup interpreter ''.
+[Tue Dec 11 10:53:41.139853 2018] [wsgi:info] [pid 13800:tid 1995599872] mod_wsgi (pid=13800): Terminating Python.
+[Tue Dec 11 10:53:41.205335 2018] [wsgi:info] [pid 13800:tid 1995599872] mod_wsgi (pid=13800): Python has shutdown.
+[Tue Dec 11 10:53:41.205618 2018] [wsgi:info] [pid 13800:tid 1995599872] mod_wsgi (pid=13800): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:53:42.993774 2018] [wsgi:info] [pid 13832:tid 1995722752] mod_wsgi (pid=13832): Attach interpreter ''.
+[Tue Dec 11 10:53:43.053576 2018] [wsgi:info] [pid 13832:tid 1995722752] mod_wsgi (pid=13832): Imported 'mod_wsgi'.
+[Tue Dec 11 10:53:48.811061 2018] [wsgi:info] [pid 13832:tid 1965335600] mod_wsgi (pid=13832): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 10:53:48.912925 2018] [wsgi:info] [pid 13832:tid 1965335600] [remote 10.0.11.119:51049] mod_wsgi (pid=13832, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 10:54:40.603081 2018] [reqtimeout:info] [pid 13833:tid 1955591216] [client 10.0.11.119:51048] AH01382: Request header read timeout
+[Tue Dec 11 10:54:53.901289 2018] [wsgi:info] [pid 13832:tid 1982112816] mod_wsgi (pid=13832): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:54:53.901604 2018] [wsgi:info] [pid 13832:tid 1995722752] mod_wsgi (pid=13832): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:54:53.901883 2018] [wsgi:info] [pid 13832:tid 1995722752] mod_wsgi (pid=13832): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:54:53.901953 2018] [wsgi:info] [pid 13832:tid 1995722752] mod_wsgi (pid=13832): Destroying interpreters.
+[Tue Dec 11 10:54:53.902022 2018] [wsgi:info] [pid 13832:tid 1995722752] mod_wsgi (pid=13832): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 10:54:53.902770 2018] [wsgi:info] [pid 13832:tid 1995722752] mod_wsgi (pid=13832): End interpreter '127.0.1.1|'.
+[Tue Dec 11 10:54:54.167408 2018] [wsgi:info] [pid 13832:tid 1995722752] mod_wsgi (pid=13832): Cleanup interpreter ''.
+[Tue Dec 11 10:54:54.222291 2018] [wsgi:info] [pid 13832:tid 1995722752] mod_wsgi (pid=13832): Terminating Python.
+[Tue Dec 11 10:54:54.298618 2018] [wsgi:info] [pid 13832:tid 1995722752] mod_wsgi (pid=13832): Python has shutdown.
+[Tue Dec 11 10:54:54.298809 2018] [wsgi:info] [pid 13832:tid 1995722752] mod_wsgi (pid=13832): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:54:54.743774 2018] [wsgi:info] [pid 13901:tid 1995722752] mod_wsgi (pid=13901): Attach interpreter ''.
+[Tue Dec 11 10:54:54.785656 2018] [wsgi:info] [pid 13901:tid 1995722752] mod_wsgi (pid=13901): Imported 'mod_wsgi'.
+[Tue Dec 11 10:55:01.116956 2018] [wsgi:info] [pid 13901:tid 1965335600] mod_wsgi (pid=13901): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 10:55:01.209858 2018] [wsgi:info] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] mod_wsgi (pid=13901, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 10:55:05.684928 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] main.py
+[Tue Dec 11 10:55:05.686598 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] config/config_app.py
+[Tue Dec 11 10:55:05.688128 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/hw_test_pidh_pido.py
+[Tue Dec 11 10:55:05.688751 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/hw_controller.py
+[Tue Dec 11 10:55:05.690379 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/hw_test_pidh.py
+[Tue Dec 11 10:55:05.691034 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/portable_constants.py
+[Tue Dec 11 10:55:05.691559 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/portable_controller.py
+[Tue Dec 11 10:55:05.692461 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/portable_grafana_log_writer.py
+[Tue Dec 11 10:55:05.694083 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/portable_persist.py
+[Tue Dec 11 10:55:05.694727 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/hw_urequests.py
+[Tue Dec 11 10:55:05.695298 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/portable_daymaxestimator.py
+[Tue Dec 11 10:55:05.696007 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/portable_tempstabilizer.py
+[Tue Dec 11 10:55:05.696878 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/hw_mcp4725.py
+[Tue Dec 11 10:55:05.697453 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/portable_grafana_datatypes.py
+[Tue Dec 11 10:55:05.698024 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/hw_hal.py
+[Tue Dec 11 10:55:05.698538 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/portable_pid_controller.py
+[Tue Dec 11 10:55:05.699086 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/hw_test_pidh_pido_day.py
+[Tue Dec 11 10:55:05.699587 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/portable_firmware_constants.py
+[Tue Dec 11 10:55:05.700091 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/portable_simuliert_tagesmodell.py
+[Tue Dec 11 10:55:05.700594 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/portable_ticks.py
+[Tue Dec 11 10:55:05.701172 2018] [wsgi:error] [pid 13901:tid 1965335600] [remote 10.0.11.119:51147] program/hw_max30205.py
+[Tue Dec 11 10:55:51.002950 2018] [reqtimeout:info] [pid 13833:tid 1838150704] [client 10.0.11.119:51148] AH01382: Request header read timeout
+[Tue Dec 11 10:56:05.764139 2018] [wsgi:info] [pid 13901:tid 1982112816] mod_wsgi (pid=13901): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:56:05.764433 2018] [wsgi:info] [pid 13901:tid 1995722752] mod_wsgi (pid=13901): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:56:05.764686 2018] [wsgi:info] [pid 13901:tid 1995722752] mod_wsgi (pid=13901): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:56:05.764746 2018] [wsgi:info] [pid 13901:tid 1995722752] mod_wsgi (pid=13901): Destroying interpreters.
+[Tue Dec 11 10:56:05.764819 2018] [wsgi:info] [pid 13901:tid 1995722752] mod_wsgi (pid=13901): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 10:56:05.765590 2018] [wsgi:info] [pid 13901:tid 1995722752] mod_wsgi (pid=13901): End interpreter '127.0.1.1|'.
+[Tue Dec 11 10:56:06.034890 2018] [wsgi:info] [pid 13901:tid 1995722752] mod_wsgi (pid=13901): Cleanup interpreter ''.
+[Tue Dec 11 10:56:06.092326 2018] [wsgi:info] [pid 13901:tid 1995722752] mod_wsgi (pid=13901): Terminating Python.
+[Tue Dec 11 10:56:06.169702 2018] [wsgi:info] [pid 13901:tid 1995722752] mod_wsgi (pid=13901): Python has shutdown.
+[Tue Dec 11 10:56:06.169897 2018] [wsgi:info] [pid 13901:tid 1995722752] mod_wsgi (pid=13901): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:56:06.815089 2018] [wsgi:info] [pid 13918:tid 1995722752] mod_wsgi (pid=13918): Attach interpreter ''.
+[Tue Dec 11 10:56:06.853250 2018] [wsgi:info] [pid 13918:tid 1995722752] mod_wsgi (pid=13918): Imported 'mod_wsgi'.
+[Tue Dec 11 10:56:14.516956 2018] [wsgi:info] [pid 13918:tid 1965335600] mod_wsgi (pid=13918): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 10:56:14.612422 2018] [wsgi:info] [pid 13918:tid 1965335600] [remote 192.168.4.18:57016] mod_wsgi (pid=13918, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 10:56:18.865367 2018] [wsgi:error] [pid 13918:tid 1965335600] [remote 192.168.4.18:57016] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_09-56-18_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 10:57:19.549994 2018] [wsgi:info] [pid 13918:tid 1982112816] mod_wsgi (pid=13918): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:57:19.550365 2018] [wsgi:info] [pid 13918:tid 1995722752] mod_wsgi (pid=13918): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:57:19.550628 2018] [wsgi:info] [pid 13918:tid 1995722752] mod_wsgi (pid=13918): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:57:19.550689 2018] [wsgi:info] [pid 13918:tid 1995722752] mod_wsgi (pid=13918): Destroying interpreters.
+[Tue Dec 11 10:57:19.550826 2018] [wsgi:info] [pid 13918:tid 1995722752] mod_wsgi (pid=13918): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 10:57:19.551568 2018] [wsgi:info] [pid 13918:tid 1995722752] mod_wsgi (pid=13918): End interpreter '127.0.1.1|'.
+[Tue Dec 11 10:57:19.865108 2018] [wsgi:info] [pid 13918:tid 1995722752] mod_wsgi (pid=13918): Cleanup interpreter ''.
+[Tue Dec 11 10:57:19.937615 2018] [wsgi:info] [pid 13918:tid 1995722752] mod_wsgi (pid=13918): Terminating Python.
+[Tue Dec 11 10:57:20.027967 2018] [wsgi:info] [pid 13918:tid 1995722752] mod_wsgi (pid=13918): Python has shutdown.
+[Tue Dec 11 10:57:20.028218 2018] [wsgi:info] [pid 13918:tid 1995722752] mod_wsgi (pid=13918): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 10:57:20.931986 2018] [wsgi:info] [pid 13928:tid 1995722752] mod_wsgi (pid=13928): Attach interpreter ''.
+[Tue Dec 11 10:57:20.973994 2018] [wsgi:info] [pid 13928:tid 1995722752] mod_wsgi (pid=13928): Imported 'mod_wsgi'.
+[Tue Dec 11 11:00:24.259451 2018] [wsgi:info] [pid 13928:tid 1995722752] mod_wsgi (pid=13928): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:00:24.259919 2018] [wsgi:info] [pid 13928:tid 1995722752] mod_wsgi (pid=13928): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:00:24.260019 2018] [wsgi:info] [pid 13928:tid 1995722752] mod_wsgi (pid=13928): Destroying interpreters.
+[Tue Dec 11 11:00:24.260075 2018] [wsgi:info] [pid 13928:tid 1995722752] mod_wsgi (pid=13928): Cleanup interpreter ''.
+[Tue Dec 11 11:00:24.364732 2018] [wsgi:info] [pid 13928:tid 1995722752] mod_wsgi (pid=13928): Terminating Python.
+[Tue Dec 11 11:00:24.434649 2018] [wsgi:info] [pid 13928:tid 1995722752] mod_wsgi (pid=13928): Python has shutdown.
+[Tue Dec 11 11:00:24.434860 2018] [wsgi:info] [pid 13928:tid 1995722752] mod_wsgi (pid=13928): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:00:25.958587 2018] [wsgi:info] [pid 13964:tid 1996361728] mod_wsgi (pid=13964): Attach interpreter ''.
+[Tue Dec 11 11:00:26.005999 2018] [wsgi:info] [pid 13964:tid 1996361728] mod_wsgi (pid=13964): Imported 'mod_wsgi'.
+[Tue Dec 11 11:02:15.217735 2018] [wsgi:info] [pid 13964:tid 1965974576] mod_wsgi (pid=13964): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:02:15.313314 2018] [wsgi:info] [pid 13964:tid 1965974576] [remote 192.168.4.18:61054] mod_wsgi (pid=13964, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:02:19.562246 2018] [wsgi:error] [pid 13964:tid 1965974576] [remote 192.168.4.18:61054] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-02-19_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:03:20.258041 2018] [wsgi:info] [pid 13964:tid 1982751792] mod_wsgi (pid=13964): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:03:20.258501 2018] [wsgi:info] [pid 13964:tid 1996361728] mod_wsgi (pid=13964): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:03:20.258901 2018] [wsgi:info] [pid 13964:tid 1996361728] mod_wsgi (pid=13964): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:03:20.259034 2018] [wsgi:info] [pid 13964:tid 1996361728] mod_wsgi (pid=13964): Destroying interpreters.
+[Tue Dec 11 11:03:20.259138 2018] [wsgi:info] [pid 13964:tid 1996361728] mod_wsgi (pid=13964): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:03:20.260105 2018] [wsgi:info] [pid 13964:tid 1996361728] mod_wsgi (pid=13964): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:03:20.633507 2018] [wsgi:info] [pid 13964:tid 1996361728] mod_wsgi (pid=13964): Cleanup interpreter ''.
+[Tue Dec 11 11:03:20.712962 2018] [wsgi:info] [pid 13964:tid 1996361728] mod_wsgi (pid=13964): Terminating Python.
+[Tue Dec 11 11:03:20.798915 2018] [wsgi:info] [pid 13964:tid 1996361728] mod_wsgi (pid=13964): Python has shutdown.
+[Tue Dec 11 11:03:20.799121 2018] [wsgi:info] [pid 13964:tid 1996361728] mod_wsgi (pid=13964): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:03:22.115326 2018] [wsgi:info] [pid 14029:tid 1996361728] mod_wsgi (pid=14029): Attach interpreter ''.
+[Tue Dec 11 11:03:22.159518 2018] [wsgi:info] [pid 14029:tid 1996361728] mod_wsgi (pid=14029): Imported 'mod_wsgi'.
+[Tue Dec 11 11:05:30.627721 2018] [wsgi:info] [pid 14029:tid 1996361728] mod_wsgi (pid=14029): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:05:30.628239 2018] [wsgi:info] [pid 14029:tid 1996361728] mod_wsgi (pid=14029): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:05:30.628343 2018] [wsgi:info] [pid 14029:tid 1996361728] mod_wsgi (pid=14029): Destroying interpreters.
+[Tue Dec 11 11:05:30.628397 2018] [wsgi:info] [pid 14029:tid 1996361728] mod_wsgi (pid=14029): Cleanup interpreter ''.
+[Tue Dec 11 11:05:30.723587 2018] [wsgi:info] [pid 14029:tid 1996361728] mod_wsgi (pid=14029): Terminating Python.
+[Tue Dec 11 11:05:30.782194 2018] [wsgi:info] [pid 14029:tid 1996361728] mod_wsgi (pid=14029): Python has shutdown.
+[Tue Dec 11 11:05:30.782403 2018] [wsgi:info] [pid 14029:tid 1996361728] mod_wsgi (pid=14029): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:05:32.273054 2018] [wsgi:info] [pid 14086:tid 1996017664] mod_wsgi (pid=14086): Attach interpreter ''.
+[Tue Dec 11 11:05:32.314716 2018] [wsgi:info] [pid 14086:tid 1996017664] mod_wsgi (pid=14086): Imported 'mod_wsgi'.
+[Tue Dec 11 11:06:40.412611 2018] [wsgi:info] [pid 14086:tid 1965630512] mod_wsgi (pid=14086): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:06:40.508010 2018] [wsgi:info] [pid 14086:tid 1965630512] [remote 192.168.4.18:55625] mod_wsgi (pid=14086, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:07:05.991608 2018] [wsgi:info] [pid 14086:tid 1996017664] mod_wsgi (pid=14086): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:07:05.992283 2018] [wsgi:info] [pid 14086:tid 1996017664] mod_wsgi (pid=14086): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:07:05.992407 2018] [wsgi:info] [pid 14086:tid 1996017664] mod_wsgi (pid=14086): Destroying interpreters.
+[Tue Dec 11 11:07:05.992494 2018] [wsgi:info] [pid 14086:tid 1996017664] mod_wsgi (pid=14086): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:07:05.993489 2018] [wsgi:info] [pid 14086:tid 1996017664] mod_wsgi (pid=14086): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:07:06.312720 2018] [wsgi:info] [pid 14086:tid 1996017664] mod_wsgi (pid=14086): Cleanup interpreter ''.
+[Tue Dec 11 11:07:06.374398 2018] [wsgi:info] [pid 14086:tid 1996017664] mod_wsgi (pid=14086): Terminating Python.
+[Tue Dec 11 11:07:06.458279 2018] [wsgi:info] [pid 14086:tid 1996017664] mod_wsgi (pid=14086): Python has shutdown.
+[Tue Dec 11 11:07:06.458478 2018] [wsgi:info] [pid 14086:tid 1996017664] mod_wsgi (pid=14086): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:07:07.827537 2018] [wsgi:info] [pid 14176:tid 1996304384] mod_wsgi (pid=14176): Attach interpreter ''.
+[Tue Dec 11 11:07:07.868952 2018] [wsgi:info] [pid 14176:tid 1996304384] mod_wsgi (pid=14176): Imported 'mod_wsgi'.
+[Tue Dec 11 11:07:10.077290 2018] [wsgi:info] [pid 14176:tid 1965917232] mod_wsgi (pid=14176): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:07:10.178953 2018] [wsgi:info] [pid 14176:tid 1965917232] [remote 192.168.4.18:53910] mod_wsgi (pid=14176, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:07:14.506409 2018] [wsgi:error] [pid 14176:tid 1965917232] [remote 192.168.4.18:53910] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-07-14_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:07:14.510387 2018] [wsgi:error] [pid 14176:tid 1965917232] [remote 192.168.4.18:53910] loadFileIntoInfluxDb() failed: module 'portable_grafana_datatypes' has no attribute 'TAG_GRAFANA_SITE_NODE'
+[Tue Dec 11 11:08:15.308224 2018] [wsgi:info] [pid 14176:tid 1982694448] mod_wsgi (pid=14176): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:08:15.308615 2018] [wsgi:info] [pid 14176:tid 1996304384] mod_wsgi (pid=14176): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:08:15.308877 2018] [wsgi:info] [pid 14176:tid 1996304384] mod_wsgi (pid=14176): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:08:15.308933 2018] [wsgi:info] [pid 14176:tid 1996304384] mod_wsgi (pid=14176): Destroying interpreters.
+[Tue Dec 11 11:08:15.309002 2018] [wsgi:info] [pid 14176:tid 1996304384] mod_wsgi (pid=14176): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:08:15.309759 2018] [wsgi:info] [pid 14176:tid 1996304384] mod_wsgi (pid=14176): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:08:15.595789 2018] [wsgi:info] [pid 14176:tid 1996304384] mod_wsgi (pid=14176): Cleanup interpreter ''.
+[Tue Dec 11 11:08:15.652501 2018] [wsgi:info] [pid 14176:tid 1996304384] mod_wsgi (pid=14176): Terminating Python.
+[Tue Dec 11 11:08:15.732019 2018] [wsgi:info] [pid 14176:tid 1996304384] mod_wsgi (pid=14176): Python has shutdown.
+[Tue Dec 11 11:08:15.732207 2018] [wsgi:info] [pid 14176:tid 1996304384] mod_wsgi (pid=14176): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:08:16.701575 2018] [wsgi:info] [pid 14248:tid 1996304384] mod_wsgi (pid=14248): Attach interpreter ''.
+[Tue Dec 11 11:08:16.743033 2018] [wsgi:info] [pid 14248:tid 1996304384] mod_wsgi (pid=14248): Imported 'mod_wsgi'.
+[Tue Dec 11 11:13:08.483877 2018] [wsgi:info] [pid 14248:tid 1996304384] mod_wsgi (pid=14248): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:13:08.484365 2018] [wsgi:info] [pid 14248:tid 1996304384] mod_wsgi (pid=14248): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:13:08.484463 2018] [wsgi:info] [pid 14248:tid 1996304384] mod_wsgi (pid=14248): Destroying interpreters.
+[Tue Dec 11 11:13:08.484512 2018] [wsgi:info] [pid 14248:tid 1996304384] mod_wsgi (pid=14248): Cleanup interpreter ''.
+[Tue Dec 11 11:13:08.577484 2018] [wsgi:info] [pid 14248:tid 1996304384] mod_wsgi (pid=14248): Terminating Python.
+[Tue Dec 11 11:13:08.640126 2018] [wsgi:info] [pid 14248:tid 1996304384] mod_wsgi (pid=14248): Python has shutdown.
+[Tue Dec 11 11:13:08.640381 2018] [wsgi:info] [pid 14248:tid 1996304384] mod_wsgi (pid=14248): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:13:09.404303 2018] [wsgi:info] [pid 14448:tid 1995509760] mod_wsgi (pid=14448): Attach interpreter ''.
+[Tue Dec 11 11:13:09.446182 2018] [wsgi:info] [pid 14448:tid 1995509760] mod_wsgi (pid=14448): Imported 'mod_wsgi'.
+[Tue Dec 11 11:13:17.299585 2018] [wsgi:info] [pid 14448:tid 1965122608] mod_wsgi (pid=14448): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:13:17.401851 2018] [wsgi:info] [pid 14448:tid 1965122608] [remote 192.168.4.18:55231] mod_wsgi (pid=14448, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:13:21.921622 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:55231] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-13-21_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:13:21.925593 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:55231] loadFileIntoInfluxDb() failed: module 'portable_grafana_datatypes' has no attribute 'strHTTP_ARG_MAC'
+[Tue Dec 11 11:14:13.288917 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] main.py
+[Tue Dec 11 11:14:13.291138 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] config/config_app.py
+[Tue Dec 11 11:14:13.292816 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/hw_test_pidh_pido.py
+[Tue Dec 11 11:14:13.293456 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/hw_controller.py
+[Tue Dec 11 11:14:13.294020 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/hw_test_pidh.py
+[Tue Dec 11 11:14:13.294615 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/portable_constants.py
+[Tue Dec 11 11:14:13.295102 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/portable_controller.py
+[Tue Dec 11 11:14:13.295825 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/portable_grafana_log_writer.py
+[Tue Dec 11 11:14:13.296456 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/portable_persist.py
+[Tue Dec 11 11:14:13.296965 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/hw_urequests.py
+[Tue Dec 11 11:14:13.297483 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/portable_daymaxestimator.py
+[Tue Dec 11 11:14:13.298078 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/portable_tempstabilizer.py
+[Tue Dec 11 11:14:13.299360 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/hw_mcp4725.py
+[Tue Dec 11 11:14:13.300052 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/portable_grafana_datatypes.py
+[Tue Dec 11 11:14:13.300650 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/hw_hal.py
+[Tue Dec 11 11:14:13.301170 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/portable_pid_controller.py
+[Tue Dec 11 11:14:13.301830 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/hw_test_pidh_pido_day.py
+[Tue Dec 11 11:14:13.302364 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/portable_firmware_constants.py
+[Tue Dec 11 11:14:13.302869 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/portable_simuliert_tagesmodell.py
+[Tue Dec 11 11:14:13.303360 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/portable_ticks.py
+[Tue Dec 11 11:14:13.303963 2018] [wsgi:error] [pid 14448:tid 1965122608] [remote 192.168.4.18:64850] program/hw_max30205.py
+[Tue Dec 11 11:14:19.594834 2018] [wsgi:info] [pid 14448:tid 1995509760] mod_wsgi (pid=14448): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:14:19.595308 2018] [wsgi:info] [pid 14448:tid 1995509760] mod_wsgi (pid=14448): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:14:19.595389 2018] [wsgi:info] [pid 14448:tid 1995509760] mod_wsgi (pid=14448): Destroying interpreters.
+[Tue Dec 11 11:14:19.595465 2018] [wsgi:info] [pid 14448:tid 1995509760] mod_wsgi (pid=14448): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:14:19.596323 2018] [wsgi:info] [pid 14448:tid 1995509760] mod_wsgi (pid=14448): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:14:19.946411 2018] [wsgi:info] [pid 14448:tid 1995509760] mod_wsgi (pid=14448): Cleanup interpreter ''.
+[Tue Dec 11 11:14:20.019588 2018] [wsgi:info] [pid 14448:tid 1995509760] mod_wsgi (pid=14448): Terminating Python.
+[Tue Dec 11 11:14:20.108476 2018] [wsgi:info] [pid 14448:tid 1995509760] mod_wsgi (pid=14448): Python has shutdown.
+[Tue Dec 11 11:14:20.108657 2018] [wsgi:info] [pid 14448:tid 1995509760] mod_wsgi (pid=14448): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:14:21.283642 2018] [wsgi:info] [pid 14538:tid 1995960320] mod_wsgi (pid=14538): Attach interpreter ''.
+[Tue Dec 11 11:14:21.327474 2018] [wsgi:info] [pid 14538:tid 1995960320] mod_wsgi (pid=14538): Imported 'mod_wsgi'.
+[Tue Dec 11 11:14:36.071931 2018] [wsgi:info] [pid 14538:tid 1965573168] mod_wsgi (pid=14538): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:14:36.176533 2018] [wsgi:info] [pid 14538:tid 1965573168] [remote 192.168.4.18:57630] mod_wsgi (pid=14538, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:14:40.662311 2018] [wsgi:error] [pid 14538:tid 1965573168] [remote 192.168.4.18:57630] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-14-40_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:14:40.665905 2018] [wsgi:error] [pid 14538:tid 1965573168] [remote 192.168.4.18:57630] loadFileIntoInfluxDb() failed: module 'portable_grafana_datatypes' has no attribute 'strHTTP_ARG_MAC'
+[Tue Dec 11 11:15:41.511793 2018] [wsgi:info] [pid 14538:tid 1982350384] mod_wsgi (pid=14538): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:15:41.512120 2018] [wsgi:info] [pid 14538:tid 1995960320] mod_wsgi (pid=14538): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:15:41.512365 2018] [wsgi:info] [pid 14538:tid 1995960320] mod_wsgi (pid=14538): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:15:41.512426 2018] [wsgi:info] [pid 14538:tid 1995960320] mod_wsgi (pid=14538): Destroying interpreters.
+[Tue Dec 11 11:15:41.512492 2018] [wsgi:info] [pid 14538:tid 1995960320] mod_wsgi (pid=14538): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:15:41.513237 2018] [wsgi:info] [pid 14538:tid 1995960320] mod_wsgi (pid=14538): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:15:41.802459 2018] [wsgi:info] [pid 14538:tid 1995960320] mod_wsgi (pid=14538): Cleanup interpreter ''.
+[Tue Dec 11 11:15:41.890412 2018] [wsgi:info] [pid 14538:tid 1995960320] mod_wsgi (pid=14538): Terminating Python.
+[Tue Dec 11 11:15:42.033783 2018] [wsgi:info] [pid 14538:tid 1995960320] mod_wsgi (pid=14538): Python has shutdown.
+[Tue Dec 11 11:15:42.034123 2018] [wsgi:info] [pid 14538:tid 1995960320] mod_wsgi (pid=14538): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:15:43.281439 2018] [wsgi:info] [pid 14612:tid 1995960320] mod_wsgi (pid=14612): Attach interpreter ''.
+[Tue Dec 11 11:15:43.326878 2018] [wsgi:info] [pid 14612:tid 1995960320] mod_wsgi (pid=14612): Imported 'mod_wsgi'.
+[Tue Dec 11 11:16:37.147813 2018] [wsgi:info] [pid 14612:tid 1995960320] mod_wsgi (pid=14612): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:16:37.148297 2018] [wsgi:info] [pid 14612:tid 1995960320] mod_wsgi (pid=14612): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:16:37.148401 2018] [wsgi:info] [pid 14612:tid 1995960320] mod_wsgi (pid=14612): Destroying interpreters.
+[Tue Dec 11 11:16:37.148455 2018] [wsgi:info] [pid 14612:tid 1995960320] mod_wsgi (pid=14612): Cleanup interpreter ''.
+[Tue Dec 11 11:16:37.226566 2018] [wsgi:info] [pid 14612:tid 1995960320] mod_wsgi (pid=14612): Terminating Python.
+[Tue Dec 11 11:16:37.308714 2018] [wsgi:info] [pid 14612:tid 1995960320] mod_wsgi (pid=14612): Python has shutdown.
+[Tue Dec 11 11:16:37.308940 2018] [wsgi:info] [pid 14612:tid 1995960320] mod_wsgi (pid=14612): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:16:38.142859 2018] [wsgi:info] [pid 14650:tid 1995513856] mod_wsgi (pid=14650): Attach interpreter ''.
+[Tue Dec 11 11:16:38.184290 2018] [wsgi:info] [pid 14650:tid 1995513856] mod_wsgi (pid=14650): Imported 'mod_wsgi'.
+[Tue Dec 11 11:16:51.954387 2018] [wsgi:info] [pid 14650:tid 1965126704] mod_wsgi (pid=14650): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:16:52.048636 2018] [wsgi:info] [pid 14650:tid 1965126704] [remote 192.168.4.18:53417] mod_wsgi (pid=14650, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:16:56.321241 2018] [wsgi:error] [pid 14650:tid 1965126704] [remote 192.168.4.18:53417] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-16-56_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:16:56.439432 2018] [wsgi:error] [pid 14650:tid 1965126704] [remote 192.168.4.18:53417] loadFileIntoInfluxDb() failed: 'GrafanaInfluxDbDumper' object has no attribute '_GrafanaInfluxDbDumper__strSite'
+[Tue Dec 11 11:17:44.697937 2018] [wsgi:info] [pid 14650:tid 1995513856] mod_wsgi (pid=14650): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:17:44.698447 2018] [wsgi:info] [pid 14650:tid 1995513856] mod_wsgi (pid=14650): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:17:44.698632 2018] [wsgi:info] [pid 14650:tid 1995513856] mod_wsgi (pid=14650): Destroying interpreters.
+[Tue Dec 11 11:17:44.698719 2018] [wsgi:info] [pid 14650:tid 1995513856] mod_wsgi (pid=14650): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:17:44.699668 2018] [wsgi:info] [pid 14650:tid 1995513856] mod_wsgi (pid=14650): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:17:45.074788 2018] [wsgi:info] [pid 14650:tid 1995513856] mod_wsgi (pid=14650): Cleanup interpreter ''.
+[Tue Dec 11 11:17:45.134527 2018] [wsgi:info] [pid 14650:tid 1995513856] mod_wsgi (pid=14650): Terminating Python.
+[Tue Dec 11 11:17:45.217542 2018] [wsgi:info] [pid 14650:tid 1995513856] mod_wsgi (pid=14650): Python has shutdown.
+[Tue Dec 11 11:17:45.217725 2018] [wsgi:info] [pid 14650:tid 1995513856] mod_wsgi (pid=14650): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:17:46.077452 2018] [wsgi:info] [pid 14762:tid 1995550720] mod_wsgi (pid=14762): Attach interpreter ''.
+[Tue Dec 11 11:17:46.117365 2018] [wsgi:info] [pid 14762:tid 1995550720] mod_wsgi (pid=14762): Imported 'mod_wsgi'.
+[Tue Dec 11 11:17:49.439251 2018] [wsgi:info] [pid 14762:tid 1965163568] mod_wsgi (pid=14762): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:17:49.535465 2018] [wsgi:info] [pid 14762:tid 1965163568] [remote 192.168.4.18:63234] mod_wsgi (pid=14762, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:17:53.941513 2018] [wsgi:error] [pid 14762:tid 1965163568] [remote 192.168.4.18:63234] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-17-53_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:17:54.548786 2018] [wsgi:error] [pid 14762:tid 1965163568] [remote 192.168.4.18:63234] 2018-12-11_10-07-14_3C71BF0F97A4_grafana.txt: Writing 2248 measurements to InfluxDB...
+[Tue Dec 11 11:18:01.532763 2018] [wsgi:error] [pid 14762:tid 1965163568] [remote 192.168.4.18:63234] 2018-12-11_10-13-21_3C71BF0F97A4_grafana.txt: Writing 2332 measurements to InfluxDB...
+[Tue Dec 11 11:18:07.625067 2018] [wsgi:error] [pid 14762:tid 1965163568] [remote 192.168.4.18:63234] 2018-12-11_10-14-40_3C71BF0F97A4_grafana.txt: Writing 14 measurements to InfluxDB...
+[Tue Dec 11 11:18:07.732867 2018] [wsgi:error] [pid 14762:tid 1965163568] [remote 192.168.4.18:63234] 2018-12-11_09-56-18_3C71BF0F97A4_grafana.txt: Writing 0 measurements to InfluxDB...
+[Tue Dec 11 11:18:07.825774 2018] [wsgi:error] [pid 14762:tid 1965163568] [remote 192.168.4.18:63234] 2018-12-11_10-17-53_3C71BF0F97A4_grafana.txt: Writing 80 measurements to InfluxDB...
+[Tue Dec 11 11:18:08.178076 2018] [wsgi:error] [pid 14762:tid 1965163568] [remote 192.168.4.18:63234] loadFileIntoInfluxDb() failed: unsupported operand type(s) for +: 'float' and 'NoneType'
+[Tue Dec 11 11:19:08.208853 2018] [wsgi:info] [pid 14762:tid 1981940784] mod_wsgi (pid=14762): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:19:08.209164 2018] [wsgi:info] [pid 14762:tid 1995550720] mod_wsgi (pid=14762): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:19:08.209405 2018] [wsgi:info] [pid 14762:tid 1995550720] mod_wsgi (pid=14762): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:19:08.209466 2018] [wsgi:info] [pid 14762:tid 1995550720] mod_wsgi (pid=14762): Destroying interpreters.
+[Tue Dec 11 11:19:08.209535 2018] [wsgi:info] [pid 14762:tid 1995550720] mod_wsgi (pid=14762): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:19:08.210268 2018] [wsgi:info] [pid 14762:tid 1995550720] mod_wsgi (pid=14762): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:19:08.484880 2018] [wsgi:info] [pid 14762:tid 1995550720] mod_wsgi (pid=14762): Cleanup interpreter ''.
+[Tue Dec 11 11:19:08.570746 2018] [wsgi:info] [pid 14762:tid 1995550720] mod_wsgi (pid=14762): Terminating Python.
+[Tue Dec 11 11:19:08.668676 2018] [wsgi:info] [pid 14762:tid 1995550720] mod_wsgi (pid=14762): Python has shutdown.
+[Tue Dec 11 11:19:08.668914 2018] [wsgi:info] [pid 14762:tid 1995550720] mod_wsgi (pid=14762): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:19:09.031935 2018] [wsgi:info] [pid 14846:tid 1995550720] mod_wsgi (pid=14846): Attach interpreter ''.
+[Tue Dec 11 11:19:09.068302 2018] [wsgi:info] [pid 14846:tid 1995550720] mod_wsgi (pid=14846): Imported 'mod_wsgi'.
+[Tue Dec 11 11:21:56.548837 2018] [wsgi:info] [pid 14846:tid 1995550720] mod_wsgi (pid=14846): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:21:56.549494 2018] [wsgi:info] [pid 14846:tid 1995550720] mod_wsgi (pid=14846): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:21:56.549622 2018] [wsgi:info] [pid 14846:tid 1995550720] mod_wsgi (pid=14846): Destroying interpreters.
+[Tue Dec 11 11:21:56.549699 2018] [wsgi:info] [pid 14846:tid 1995550720] mod_wsgi (pid=14846): Cleanup interpreter ''.
+[Tue Dec 11 11:21:56.625329 2018] [wsgi:info] [pid 14846:tid 1995550720] mod_wsgi (pid=14846): Terminating Python.
+[Tue Dec 11 11:21:56.690146 2018] [wsgi:info] [pid 14846:tid 1995550720] mod_wsgi (pid=14846): Python has shutdown.
+[Tue Dec 11 11:21:56.692148 2018] [wsgi:info] [pid 14846:tid 1995550720] mod_wsgi (pid=14846): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:21:57.434198 2018] [wsgi:info] [pid 14956:tid 1995972608] mod_wsgi (pid=14956): Attach interpreter ''.
+[Tue Dec 11 11:21:57.472333 2018] [wsgi:info] [pid 14956:tid 1995972608] mod_wsgi (pid=14956): Imported 'mod_wsgi'.
+[Tue Dec 11 11:22:14.269099 2018] [wsgi:info] [pid 14956:tid 1965585456] mod_wsgi (pid=14956): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:22:14.365365 2018] [wsgi:info] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] mod_wsgi (pid=14956, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:22:18.818506 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] main.py
+[Tue Dec 11 11:22:18.820200 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] config/config_app.py
+[Tue Dec 11 11:22:18.821848 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/hw_test_pidh_pido.py
+[Tue Dec 11 11:22:18.822574 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/hw_controller.py
+[Tue Dec 11 11:22:18.823176 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/hw_test_pidh.py
+[Tue Dec 11 11:22:18.823717 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/portable_constants.py
+[Tue Dec 11 11:22:18.824220 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/portable_controller.py
+[Tue Dec 11 11:22:18.824963 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/portable_grafana_log_writer.py
+[Tue Dec 11 11:22:18.825620 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/portable_persist.py
+[Tue Dec 11 11:22:18.826165 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/hw_urequests.py
+[Tue Dec 11 11:22:18.826697 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/portable_daymaxestimator.py
+[Tue Dec 11 11:22:18.827366 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/portable_tempstabilizer.py
+[Tue Dec 11 11:22:18.828109 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/hw_mcp4725.py
+[Tue Dec 11 11:22:18.828634 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/portable_grafana_datatypes.py
+[Tue Dec 11 11:22:18.829210 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/hw_hal.py
+[Tue Dec 11 11:22:18.829739 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/portable_pid_controller.py
+[Tue Dec 11 11:22:18.830294 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/hw_test_pidh_pido_day.py
+[Tue Dec 11 11:22:18.830877 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/portable_firmware_constants.py
+[Tue Dec 11 11:22:18.831394 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/portable_simuliert_tagesmodell.py
+[Tue Dec 11 11:22:18.832128 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/portable_ticks.py
+[Tue Dec 11 11:22:18.832914 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:63100] program/hw_max30205.py
+[Tue Dec 11 11:22:42.035736 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:50335] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-22-42_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:22:42.048552 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:50335] 2018-12-11_10-22-42_3C71BF0F97A4_grafana.txt: Writing 14 measurements to InfluxDB...
+[Tue Dec 11 11:22:42.384895 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:50335] loadFileIntoInfluxDb() failed: unsupported operand type(s) for +: 'float' and 'NoneType'
+[Tue Dec 11 11:23:13.484583 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] main.py
+[Tue Dec 11 11:23:13.486168 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] config/config_app.py
+[Tue Dec 11 11:23:13.488061 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/hw_test_pidh_pido.py
+[Tue Dec 11 11:23:13.488924 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/hw_controller.py
+[Tue Dec 11 11:23:13.489657 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/hw_test_pidh.py
+[Tue Dec 11 11:23:13.490350 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/portable_constants.py
+[Tue Dec 11 11:23:13.491197 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/portable_controller.py
+[Tue Dec 11 11:23:13.493741 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/portable_grafana_log_writer.py
+[Tue Dec 11 11:23:13.495654 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/portable_persist.py
+[Tue Dec 11 11:23:13.496637 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/hw_urequests.py
+[Tue Dec 11 11:23:13.497521 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/portable_daymaxestimator.py
+[Tue Dec 11 11:23:13.498479 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/portable_tempstabilizer.py
+[Tue Dec 11 11:23:13.499577 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/hw_mcp4725.py
+[Tue Dec 11 11:23:13.500435 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/portable_grafana_datatypes.py
+[Tue Dec 11 11:23:13.501304 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/hw_hal.py
+[Tue Dec 11 11:23:13.502741 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/portable_pid_controller.py
+[Tue Dec 11 11:23:13.503958 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/hw_test_pidh_pido_day.py
+[Tue Dec 11 11:23:13.505027 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/portable_firmware_constants.py
+[Tue Dec 11 11:23:13.505917 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/portable_simuliert_tagesmodell.py
+[Tue Dec 11 11:23:13.506736 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/portable_ticks.py
+[Tue Dec 11 11:23:13.507808 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:58500] program/hw_max30205.py
+[Tue Dec 11 11:23:37.976692 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:64746] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-23-37_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:23:37.989991 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:64746] 2018-12-11_10-23-37_3C71BF0F97A4_grafana.txt: Writing 18 measurements to InfluxDB...
+[Tue Dec 11 11:23:38.232224 2018] [wsgi:error] [pid 14956:tid 1965585456] [remote 192.168.4.18:64746] loadFileIntoInfluxDb() failed: unsupported operand type(s) for +: 'float' and 'NoneType'
+[Tue Dec 11 11:24:38.605953 2018] [wsgi:info] [pid 14956:tid 1982362672] mod_wsgi (pid=14956): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:24:38.606317 2018] [wsgi:info] [pid 14956:tid 1995972608] mod_wsgi (pid=14956): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:24:38.606578 2018] [wsgi:info] [pid 14956:tid 1995972608] mod_wsgi (pid=14956): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:24:38.606641 2018] [wsgi:info] [pid 14956:tid 1995972608] mod_wsgi (pid=14956): Destroying interpreters.
+[Tue Dec 11 11:24:38.606711 2018] [wsgi:info] [pid 14956:tid 1995972608] mod_wsgi (pid=14956): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:24:38.607457 2018] [wsgi:info] [pid 14956:tid 1995972608] mod_wsgi (pid=14956): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:24:38.893263 2018] [wsgi:info] [pid 14956:tid 1995972608] mod_wsgi (pid=14956): Cleanup interpreter ''.
+[Tue Dec 11 11:24:38.955368 2018] [wsgi:info] [pid 14956:tid 1995972608] mod_wsgi (pid=14956): Terminating Python.
+[Tue Dec 11 11:24:39.037614 2018] [wsgi:info] [pid 14956:tid 1995972608] mod_wsgi (pid=14956): Python has shutdown.
+[Tue Dec 11 11:24:39.037785 2018] [wsgi:info] [pid 14956:tid 1995972608] mod_wsgi (pid=14956): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:24:39.639576 2018] [wsgi:info] [pid 15050:tid 1995972608] mod_wsgi (pid=15050): Attach interpreter ''.
+[Tue Dec 11 11:24:39.675811 2018] [wsgi:info] [pid 15050:tid 1995972608] mod_wsgi (pid=15050): Imported 'mod_wsgi'.
+[Tue Dec 11 11:25:26.154373 2018] [wsgi:info] [pid 15050:tid 1965585456] mod_wsgi (pid=15050): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:25:26.248846 2018] [wsgi:info] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] mod_wsgi (pid=15050, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:25:30.874208 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] main.py
+[Tue Dec 11 11:25:30.876083 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] config/config_app.py
+[Tue Dec 11 11:25:30.877820 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/hw_test_pidh_pido.py
+[Tue Dec 11 11:25:30.878611 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/hw_controller.py
+[Tue Dec 11 11:25:30.879270 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/hw_test_pidh.py
+[Tue Dec 11 11:25:30.879905 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/portable_constants.py
+[Tue Dec 11 11:25:30.880474 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/portable_controller.py
+[Tue Dec 11 11:25:30.881323 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/portable_grafana_log_writer.py
+[Tue Dec 11 11:25:30.882163 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/portable_persist.py
+[Tue Dec 11 11:25:30.882806 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/hw_urequests.py
+[Tue Dec 11 11:25:30.883416 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/portable_daymaxestimator.py
+[Tue Dec 11 11:25:30.884227 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/portable_tempstabilizer.py
+[Tue Dec 11 11:25:30.885223 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/hw_mcp4725.py
+[Tue Dec 11 11:25:30.885925 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/portable_grafana_datatypes.py
+[Tue Dec 11 11:25:30.886622 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/hw_hal.py
+[Tue Dec 11 11:25:30.887279 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/portable_pid_controller.py
+[Tue Dec 11 11:25:30.887950 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/hw_test_pidh_pido_day.py
+[Tue Dec 11 11:25:30.888590 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/portable_firmware_constants.py
+[Tue Dec 11 11:25:30.889252 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/portable_simuliert_tagesmodell.py
+[Tue Dec 11 11:25:30.890098 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/portable_ticks.py
+[Tue Dec 11 11:25:30.891064 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:58887] program/hw_max30205.py
+[Tue Dec 11 11:25:50.464976 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:57361] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-25-50_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:25:50.478838 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:57361] 2018-12-11_10-25-50_3C71BF0F97A4_grafana.txt: Writing 14 measurements to InfluxDB...
+[Tue Dec 11 11:25:50.715564 2018] [wsgi:error] [pid 15050:tid 1965585456] [remote 192.168.4.18:57361] loadFileIntoInfluxDb() failed: unsupported operand type(s) for +: 'float' and 'NoneType'
+[Tue Dec 11 11:26:50.911750 2018] [wsgi:info] [pid 15050:tid 1982362672] mod_wsgi (pid=15050): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:26:50.912077 2018] [wsgi:info] [pid 15050:tid 1995972608] mod_wsgi (pid=15050): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:26:50.912338 2018] [wsgi:info] [pid 15050:tid 1995972608] mod_wsgi (pid=15050): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:26:50.912399 2018] [wsgi:info] [pid 15050:tid 1995972608] mod_wsgi (pid=15050): Destroying interpreters.
+[Tue Dec 11 11:26:50.912467 2018] [wsgi:info] [pid 15050:tid 1995972608] mod_wsgi (pid=15050): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:26:50.913177 2018] [wsgi:info] [pid 15050:tid 1995972608] mod_wsgi (pid=15050): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:26:51.213270 2018] [wsgi:info] [pid 15050:tid 1995972608] mod_wsgi (pid=15050): Cleanup interpreter ''.
+[Tue Dec 11 11:26:51.268563 2018] [wsgi:info] [pid 15050:tid 1995972608] mod_wsgi (pid=15050): Terminating Python.
+[Tue Dec 11 11:26:51.346328 2018] [wsgi:info] [pid 15050:tid 1995972608] mod_wsgi (pid=15050): Python has shutdown.
+[Tue Dec 11 11:26:51.346524 2018] [wsgi:info] [pid 15050:tid 1995972608] mod_wsgi (pid=15050): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:26:51.780389 2018] [wsgi:info] [pid 15064:tid 1995972608] mod_wsgi (pid=15064): Attach interpreter ''.
+[Tue Dec 11 11:26:51.817683 2018] [wsgi:info] [pid 15064:tid 1995972608] mod_wsgi (pid=15064): Imported 'mod_wsgi'.
+[Tue Dec 11 11:29:45.891517 2018] [wsgi:info] [pid 15064:tid 1965585456] mod_wsgi (pid=15064): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:29:45.984881 2018] [wsgi:info] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] mod_wsgi (pid=15064, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:29:50.837746 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] main.py
+[Tue Dec 11 11:29:50.839668 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] config/config_app.py
+[Tue Dec 11 11:29:50.841525 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/hw_test_pidh_pido.py
+[Tue Dec 11 11:29:50.842561 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/hw_controller.py
+[Tue Dec 11 11:29:50.843595 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/hw_test_pidh.py
+[Tue Dec 11 11:29:50.844405 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/portable_constants.py
+[Tue Dec 11 11:29:50.845187 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/portable_controller.py
+[Tue Dec 11 11:29:50.846240 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/portable_grafana_log_writer.py
+[Tue Dec 11 11:29:50.847216 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/portable_persist.py
+[Tue Dec 11 11:29:50.847988 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/hw_urequests.py
+[Tue Dec 11 11:29:50.848742 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/portable_daymaxestimator.py
+[Tue Dec 11 11:29:50.849623 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/portable_tempstabilizer.py
+[Tue Dec 11 11:29:50.850655 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/hw_mcp4725.py
+[Tue Dec 11 11:29:50.851478 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/portable_grafana_datatypes.py
+[Tue Dec 11 11:29:50.852413 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/hw_hal.py
+[Tue Dec 11 11:29:50.853143 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/portable_pid_controller.py
+[Tue Dec 11 11:29:50.853835 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/hw_test_pidh_pido_day.py
+[Tue Dec 11 11:29:50.854442 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/portable_firmware_constants.py
+[Tue Dec 11 11:29:50.855036 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/portable_simuliert_tagesmodell.py
+[Tue Dec 11 11:29:50.855629 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/portable_ticks.py
+[Tue Dec 11 11:29:50.856399 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:56502] program/hw_max30205.py
+[Tue Dec 11 11:30:10.232340 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] main.py
+[Tue Dec 11 11:30:10.234104 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] config/config_app.py
+[Tue Dec 11 11:30:10.235994 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/hw_test_pidh_pido.py
+[Tue Dec 11 11:30:10.236865 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/hw_controller.py
+[Tue Dec 11 11:30:10.237638 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/hw_test_pidh.py
+[Tue Dec 11 11:30:10.238337 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/portable_constants.py
+[Tue Dec 11 11:30:10.238961 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/portable_controller.py
+[Tue Dec 11 11:30:10.239810 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/portable_grafana_log_writer.py
+[Tue Dec 11 11:30:10.240606 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/portable_persist.py
+[Tue Dec 11 11:30:10.241303 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/hw_urequests.py
+[Tue Dec 11 11:30:10.242109 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/portable_daymaxestimator.py
+[Tue Dec 11 11:30:10.243020 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/portable_tempstabilizer.py
+[Tue Dec 11 11:30:10.244100 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/hw_mcp4725.py
+[Tue Dec 11 11:30:10.244856 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/portable_grafana_datatypes.py
+[Tue Dec 11 11:30:10.245706 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/hw_hal.py
+[Tue Dec 11 11:30:10.246433 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/portable_pid_controller.py
+[Tue Dec 11 11:30:10.247173 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/hw_test_pidh_pido_day.py
+[Tue Dec 11 11:30:10.247853 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/portable_firmware_constants.py
+[Tue Dec 11 11:30:10.248536 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/portable_simuliert_tagesmodell.py
+[Tue Dec 11 11:30:10.249211 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/portable_ticks.py
+[Tue Dec 11 11:30:10.249968 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:51332] program/hw_max30205.py
+[Tue Dec 11 11:30:44.001266 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:49298] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-30-44_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:30:44.016375 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:49298] 2018-12-11_10-30-44_3C71BF0F97A4_grafana.txt: Writing 22 measurements to InfluxDB...
+[Tue Dec 11 11:30:44.267978 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:49298] loadFileIntoInfluxDb() failed: unsupported operand type(s) for +: 'float' and 'NoneType'
+[Tue Dec 11 11:31:34.588198 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] main.py
+[Tue Dec 11 11:31:34.590110 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] config/config_app.py
+[Tue Dec 11 11:31:34.592643 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/hw_test_pidh_pido.py
+[Tue Dec 11 11:31:34.593621 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/hw_controller.py
+[Tue Dec 11 11:31:34.594420 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/hw_test_pidh.py
+[Tue Dec 11 11:31:34.595141 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/portable_constants.py
+[Tue Dec 11 11:31:34.595789 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/portable_controller.py
+[Tue Dec 11 11:31:34.596679 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/portable_grafana_log_writer.py
+[Tue Dec 11 11:31:34.597418 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/portable_persist.py
+[Tue Dec 11 11:31:34.597958 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/hw_urequests.py
+[Tue Dec 11 11:31:34.598525 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/portable_daymaxestimator.py
+[Tue Dec 11 11:31:34.599164 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/portable_tempstabilizer.py
+[Tue Dec 11 11:31:34.599973 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/hw_mcp4725.py
+[Tue Dec 11 11:31:34.600567 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/portable_grafana_datatypes.py
+[Tue Dec 11 11:31:34.601188 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/hw_hal.py
+[Tue Dec 11 11:31:34.601831 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/portable_pid_controller.py
+[Tue Dec 11 11:31:34.602512 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/hw_test_pidh_pido_day.py
+[Tue Dec 11 11:31:34.603091 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/portable_firmware_constants.py
+[Tue Dec 11 11:31:34.603674 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/portable_simuliert_tagesmodell.py
+[Tue Dec 11 11:31:34.604242 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/portable_ticks.py
+[Tue Dec 11 11:31:34.605074 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:54301] program/hw_max30205.py
+[Tue Dec 11 11:31:55.815548 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:61394] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-31-55_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:31:55.827678 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:61394] 2018-12-11_10-31-55_3C71BF0F97A4_grafana.txt: Writing 14 measurements to InfluxDB...
+[Tue Dec 11 11:31:56.035363 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:61394] loadFileIntoInfluxDb() failed: unsupported operand type(s) for +: 'float' and 'NoneType'
+[Tue Dec 11 11:32:29.291970 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] main.py
+[Tue Dec 11 11:32:29.293369 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] config/config_app.py
+[Tue Dec 11 11:32:29.294887 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/hw_test_pidh_pido.py
+[Tue Dec 11 11:32:29.295477 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/hw_controller.py
+[Tue Dec 11 11:32:29.296048 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/hw_test_pidh.py
+[Tue Dec 11 11:32:29.296580 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/portable_constants.py
+[Tue Dec 11 11:32:29.297080 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/portable_controller.py
+[Tue Dec 11 11:32:29.297806 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/portable_grafana_log_writer.py
+[Tue Dec 11 11:32:29.298446 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/portable_persist.py
+[Tue Dec 11 11:32:29.298958 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/hw_urequests.py
+[Tue Dec 11 11:32:29.299478 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/portable_daymaxestimator.py
+[Tue Dec 11 11:32:29.300083 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/portable_tempstabilizer.py
+[Tue Dec 11 11:32:29.300741 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/hw_mcp4725.py
+[Tue Dec 11 11:32:29.301245 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/portable_grafana_datatypes.py
+[Tue Dec 11 11:32:29.301974 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/hw_hal.py
+[Tue Dec 11 11:32:29.302507 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/portable_pid_controller.py
+[Tue Dec 11 11:32:29.303055 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/hw_test_pidh_pido_day.py
+[Tue Dec 11 11:32:29.303556 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/portable_firmware_constants.py
+[Tue Dec 11 11:32:29.304055 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/portable_simuliert_tagesmodell.py
+[Tue Dec 11 11:32:29.304554 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/portable_ticks.py
+[Tue Dec 11 11:32:29.305113 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:55762] program/hw_max30205.py
+[Tue Dec 11 11:32:49.463074 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:59464] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-32-49_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:32:49.587092 2018] [wsgi:error] [pid 15064:tid 1965585456] [remote 192.168.4.18:59464] loadFileIntoInfluxDb() failed: unsupported operand type(s) for +: 'float' and 'NoneType'
+[Tue Dec 11 11:33:50.106376 2018] [wsgi:info] [pid 15064:tid 1982362672] mod_wsgi (pid=15064): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:33:50.106745 2018] [wsgi:info] [pid 15064:tid 1995972608] mod_wsgi (pid=15064): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:33:50.107000 2018] [wsgi:info] [pid 15064:tid 1995972608] mod_wsgi (pid=15064): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:33:50.107059 2018] [wsgi:info] [pid 15064:tid 1995972608] mod_wsgi (pid=15064): Destroying interpreters.
+[Tue Dec 11 11:33:50.107124 2018] [wsgi:info] [pid 15064:tid 1995972608] mod_wsgi (pid=15064): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:33:50.107867 2018] [wsgi:info] [pid 15064:tid 1995972608] mod_wsgi (pid=15064): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:33:50.398615 2018] [wsgi:info] [pid 15064:tid 1995972608] mod_wsgi (pid=15064): Cleanup interpreter ''.
+[Tue Dec 11 11:33:50.455473 2018] [wsgi:info] [pid 15064:tid 1995972608] mod_wsgi (pid=15064): Terminating Python.
+[Tue Dec 11 11:33:50.534441 2018] [wsgi:info] [pid 15064:tid 1995972608] mod_wsgi (pid=15064): Python has shutdown.
+[Tue Dec 11 11:33:50.534628 2018] [wsgi:info] [pid 15064:tid 1995972608] mod_wsgi (pid=15064): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:33:51.264883 2018] [wsgi:info] [pid 15239:tid 1995972608] mod_wsgi (pid=15239): Attach interpreter ''.
+[Tue Dec 11 11:33:51.301506 2018] [wsgi:info] [pid 15239:tid 1995972608] mod_wsgi (pid=15239): Imported 'mod_wsgi'.
+[Tue Dec 11 11:35:04.888173 2018] [wsgi:info] [pid 15239:tid 1965585456] mod_wsgi (pid=15239): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:35:05.008428 2018] [wsgi:info] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] mod_wsgi (pid=15239, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:35:10.033169 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] main.py
+[Tue Dec 11 11:35:10.034975 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] config/config_app.py
+[Tue Dec 11 11:35:10.036644 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/hw_test_pidh_pido.py
+[Tue Dec 11 11:35:10.037873 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/hw_controller.py
+[Tue Dec 11 11:35:10.038542 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/hw_test_pidh.py
+[Tue Dec 11 11:35:10.039124 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/portable_constants.py
+[Tue Dec 11 11:35:10.040003 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/portable_controller.py
+[Tue Dec 11 11:35:10.041267 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/portable_grafana_log_writer.py
+[Tue Dec 11 11:35:10.042481 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/portable_persist.py
+[Tue Dec 11 11:35:10.043162 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/hw_urequests.py
+[Tue Dec 11 11:35:10.043719 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/portable_daymaxestimator.py
+[Tue Dec 11 11:35:10.044395 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/portable_tempstabilizer.py
+[Tue Dec 11 11:35:10.045140 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/hw_mcp4725.py
+[Tue Dec 11 11:35:10.045677 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/portable_grafana_datatypes.py
+[Tue Dec 11 11:35:10.046247 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/hw_hal.py
+[Tue Dec 11 11:35:10.046772 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/portable_pid_controller.py
+[Tue Dec 11 11:35:10.047327 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/hw_test_pidh_pido_day.py
+[Tue Dec 11 11:35:10.047903 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/portable_firmware_constants.py
+[Tue Dec 11 11:35:10.048438 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/portable_simuliert_tagesmodell.py
+[Tue Dec 11 11:35:10.048964 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/portable_ticks.py
+[Tue Dec 11 11:35:10.049555 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:62507] program/hw_max30205.py
+[Tue Dec 11 11:35:31.553230 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:63964] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-35-31_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:35:31.566368 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:63964] 2018-12-11_10-35-31_3C71BF0F97A4_grafana.txt: Writing 14 measurements to InfluxDB...
+[Tue Dec 11 11:35:31.786484 2018] [wsgi:error] [pid 15239:tid 1965585456] [remote 192.168.4.18:63964] loadFileIntoInfluxDb() failed: unsupported operand type(s) for +: 'float' and 'NoneType'
+[Tue Dec 11 11:36:31.836230 2018] [wsgi:info] [pid 15239:tid 1982362672] mod_wsgi (pid=15239): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:36:31.836593 2018] [wsgi:info] [pid 15239:tid 1995972608] mod_wsgi (pid=15239): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:36:31.836866 2018] [wsgi:info] [pid 15239:tid 1995972608] mod_wsgi (pid=15239): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:36:31.836929 2018] [wsgi:info] [pid 15239:tid 1995972608] mod_wsgi (pid=15239): Destroying interpreters.
+[Tue Dec 11 11:36:31.836996 2018] [wsgi:info] [pid 15239:tid 1995972608] mod_wsgi (pid=15239): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:36:31.837719 2018] [wsgi:info] [pid 15239:tid 1995972608] mod_wsgi (pid=15239): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:36:32.127217 2018] [wsgi:info] [pid 15239:tid 1995972608] mod_wsgi (pid=15239): Cleanup interpreter ''.
+[Tue Dec 11 11:36:32.187105 2018] [wsgi:info] [pid 15239:tid 1995972608] mod_wsgi (pid=15239): Terminating Python.
+[Tue Dec 11 11:36:32.289397 2018] [wsgi:info] [pid 15239:tid 1995972608] mod_wsgi (pid=15239): Python has shutdown.
+[Tue Dec 11 11:36:32.289579 2018] [wsgi:info] [pid 15239:tid 1995972608] mod_wsgi (pid=15239): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:36:33.458115 2018] [wsgi:info] [pid 15290:tid 1995972608] mod_wsgi (pid=15290): Attach interpreter ''.
+[Tue Dec 11 11:36:33.498041 2018] [wsgi:info] [pid 15290:tid 1995972608] mod_wsgi (pid=15290): Imported 'mod_wsgi'.
+[Tue Dec 11 11:36:43.045424 2018] [wsgi:info] [pid 15290:tid 1965585456] mod_wsgi (pid=15290): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:36:43.150911 2018] [wsgi:info] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] mod_wsgi (pid=15290, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:36:48.029423 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] main.py
+[Tue Dec 11 11:36:48.031072 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] config/config_app.py
+[Tue Dec 11 11:36:48.032668 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/hw_test_pidh_pido.py
+[Tue Dec 11 11:36:48.033311 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/hw_controller.py
+[Tue Dec 11 11:36:48.033883 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/hw_test_pidh.py
+[Tue Dec 11 11:36:48.034408 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/portable_constants.py
+[Tue Dec 11 11:36:48.034898 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/portable_controller.py
+[Tue Dec 11 11:36:48.035626 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/portable_grafana_log_writer.py
+[Tue Dec 11 11:36:48.036346 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/portable_persist.py
+[Tue Dec 11 11:36:48.036854 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/hw_urequests.py
+[Tue Dec 11 11:36:48.037373 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/portable_daymaxestimator.py
+[Tue Dec 11 11:36:48.038017 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/portable_tempstabilizer.py
+[Tue Dec 11 11:36:48.038728 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/hw_mcp4725.py
+[Tue Dec 11 11:36:48.039243 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/portable_grafana_datatypes.py
+[Tue Dec 11 11:36:48.039809 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/hw_hal.py
+[Tue Dec 11 11:36:48.040322 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/portable_pid_controller.py
+[Tue Dec 11 11:36:48.040866 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/hw_test_pidh_pido_day.py
+[Tue Dec 11 11:36:48.041361 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/portable_firmware_constants.py
+[Tue Dec 11 11:36:48.041955 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/portable_simuliert_tagesmodell.py
+[Tue Dec 11 11:36:48.042468 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/portable_ticks.py
+[Tue Dec 11 11:36:48.043109 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:56593] program/hw_max30205.py
+[Tue Dec 11 11:37:08.924589 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:50411] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-37-08_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:37:09.039341 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:50411] loadFileIntoInfluxDb() failed: unsupported operand type(s) for +: 'float' and 'NoneType'
+[Tue Dec 11 11:38:05.870403 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] main.py
+[Tue Dec 11 11:38:05.872109 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] config/config_app.py
+[Tue Dec 11 11:38:05.874015 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/hw_test_pidh_pido.py
+[Tue Dec 11 11:38:05.874889 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/hw_controller.py
+[Tue Dec 11 11:38:05.875789 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/hw_test_pidh.py
+[Tue Dec 11 11:38:05.876523 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/portable_constants.py
+[Tue Dec 11 11:38:05.877164 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/portable_controller.py
+[Tue Dec 11 11:38:05.878140 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/portable_grafana_log_writer.py
+[Tue Dec 11 11:38:05.878995 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/portable_persist.py
+[Tue Dec 11 11:38:05.879688 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/hw_urequests.py
+[Tue Dec 11 11:38:05.880339 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/portable_daymaxestimator.py
+[Tue Dec 11 11:38:05.881161 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/portable_tempstabilizer.py
+[Tue Dec 11 11:38:05.882359 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/hw_mcp4725.py
+[Tue Dec 11 11:38:05.883211 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/portable_grafana_datatypes.py
+[Tue Dec 11 11:38:05.883979 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/hw_hal.py
+[Tue Dec 11 11:38:05.884763 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/portable_pid_controller.py
+[Tue Dec 11 11:38:05.885505 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/hw_test_pidh_pido_day.py
+[Tue Dec 11 11:38:05.886160 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/portable_firmware_constants.py
+[Tue Dec 11 11:38:05.886739 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/portable_simuliert_tagesmodell.py
+[Tue Dec 11 11:38:05.887282 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/portable_ticks.py
+[Tue Dec 11 11:38:05.887951 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51584] program/hw_max30205.py
+[Tue Dec 11 11:38:27.650788 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51287] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-38-27_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:38:27.665323 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51287] 2018-12-11_10-38-27_3C71BF0F97A4_grafana.txt: Writing 14 measurements to InfluxDB...
+[Tue Dec 11 11:38:27.889498 2018] [wsgi:error] [pid 15290:tid 1965585456] [remote 192.168.4.18:51287] loadFileIntoInfluxDb() failed: unsupported operand type(s) for +: 'float' and 'NoneType'
+[Tue Dec 11 11:39:28.437824 2018] [wsgi:info] [pid 15290:tid 1982362672] mod_wsgi (pid=15290): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:39:28.438142 2018] [wsgi:info] [pid 15290:tid 1995972608] mod_wsgi (pid=15290): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:39:28.438399 2018] [wsgi:info] [pid 15290:tid 1995972608] mod_wsgi (pid=15290): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:39:28.438458 2018] [wsgi:info] [pid 15290:tid 1995972608] mod_wsgi (pid=15290): Destroying interpreters.
+[Tue Dec 11 11:39:28.438529 2018] [wsgi:info] [pid 15290:tid 1995972608] mod_wsgi (pid=15290): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:39:28.439237 2018] [wsgi:info] [pid 15290:tid 1995972608] mod_wsgi (pid=15290): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:39:28.727726 2018] [wsgi:info] [pid 15290:tid 1995972608] mod_wsgi (pid=15290): Cleanup interpreter ''.
+[Tue Dec 11 11:39:28.784801 2018] [wsgi:info] [pid 15290:tid 1995972608] mod_wsgi (pid=15290): Terminating Python.
+[Tue Dec 11 11:39:28.881464 2018] [wsgi:info] [pid 15290:tid 1995972608] mod_wsgi (pid=15290): Python has shutdown.
+[Tue Dec 11 11:39:28.881738 2018] [wsgi:info] [pid 15290:tid 1995972608] mod_wsgi (pid=15290): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:39:29.751818 2018] [wsgi:info] [pid 15334:tid 1995972608] mod_wsgi (pid=15334): Attach interpreter ''.
+[Tue Dec 11 11:39:29.799374 2018] [wsgi:info] [pid 15334:tid 1995972608] mod_wsgi (pid=15334): Imported 'mod_wsgi'.
+[Tue Dec 11 11:40:13.013831 2018] [wsgi:info] [pid 15334:tid 1965585456] mod_wsgi (pid=15334): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:40:13.106747 2018] [wsgi:info] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] mod_wsgi (pid=15334, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:40:17.724841 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] main.py
+[Tue Dec 11 11:40:17.726512 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] config/config_app.py
+[Tue Dec 11 11:40:17.728031 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/hw_test_pidh_pido.py
+[Tue Dec 11 11:40:17.728613 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/hw_controller.py
+[Tue Dec 11 11:40:17.729183 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/hw_test_pidh.py
+[Tue Dec 11 11:40:17.729711 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/portable_constants.py
+[Tue Dec 11 11:40:17.730270 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/portable_controller.py
+[Tue Dec 11 11:40:17.731031 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/portable_grafana_log_writer.py
+[Tue Dec 11 11:40:17.731837 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/portable_persist.py
+[Tue Dec 11 11:40:17.732383 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/hw_urequests.py
+[Tue Dec 11 11:40:17.732907 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/portable_daymaxestimator.py
+[Tue Dec 11 11:40:17.733576 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/portable_tempstabilizer.py
+[Tue Dec 11 11:40:17.734292 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/hw_mcp4725.py
+[Tue Dec 11 11:40:17.734817 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/portable_grafana_datatypes.py
+[Tue Dec 11 11:40:17.735386 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/hw_hal.py
+[Tue Dec 11 11:40:17.735908 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/portable_pid_controller.py
+[Tue Dec 11 11:40:17.736463 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/hw_test_pidh_pido_day.py
+[Tue Dec 11 11:40:17.736993 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/portable_firmware_constants.py
+[Tue Dec 11 11:40:17.737601 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/portable_simuliert_tagesmodell.py
+[Tue Dec 11 11:40:17.738152 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/portable_ticks.py
+[Tue Dec 11 11:40:17.738814 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:65525] program/hw_max30205.py
+[Tue Dec 11 11:40:38.124498 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:58570] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-40-38_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:40:38.137480 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:58570] 2018-12-11_10-40-38_3C71BF0F97A4_grafana.txt: Writing 14 measurements to InfluxDB...
+[Tue Dec 11 11:40:38.370236 2018] [wsgi:error] [pid 15334:tid 1965585456] [remote 192.168.4.18:58570] loadFileIntoInfluxDb() failed: unsupported operand type(s) for +: 'float' and 'NoneType'
+[Tue Dec 11 11:41:38.891794 2018] [wsgi:info] [pid 15334:tid 1982362672] mod_wsgi (pid=15334): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:41:38.892116 2018] [wsgi:info] [pid 15334:tid 1995972608] mod_wsgi (pid=15334): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:41:38.892369 2018] [wsgi:info] [pid 15334:tid 1995972608] mod_wsgi (pid=15334): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:41:38.892428 2018] [wsgi:info] [pid 15334:tid 1995972608] mod_wsgi (pid=15334): Destroying interpreters.
+[Tue Dec 11 11:41:38.892498 2018] [wsgi:info] [pid 15334:tid 1995972608] mod_wsgi (pid=15334): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:41:38.893238 2018] [wsgi:info] [pid 15334:tid 1995972608] mod_wsgi (pid=15334): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:41:39.211529 2018] [wsgi:info] [pid 15334:tid 1995972608] mod_wsgi (pid=15334): Cleanup interpreter ''.
+[Tue Dec 11 11:41:39.276240 2018] [wsgi:info] [pid 15334:tid 1995972608] mod_wsgi (pid=15334): Terminating Python.
+[Tue Dec 11 11:41:39.365378 2018] [wsgi:info] [pid 15334:tid 1995972608] mod_wsgi (pid=15334): Python has shutdown.
+[Tue Dec 11 11:41:39.365579 2018] [wsgi:info] [pid 15334:tid 1995972608] mod_wsgi (pid=15334): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:41:39.791627 2018] [wsgi:info] [pid 15367:tid 1995972608] mod_wsgi (pid=15367): Attach interpreter ''.
+[Tue Dec 11 11:41:39.828503 2018] [wsgi:info] [pid 15367:tid 1995972608] mod_wsgi (pid=15367): Imported 'mod_wsgi'.
+[Tue Dec 11 11:42:02.582406 2018] [wsgi:info] [pid 15367:tid 1995972608] mod_wsgi (pid=15367): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:42:02.582928 2018] [wsgi:info] [pid 15367:tid 1995972608] mod_wsgi (pid=15367): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:42:02.583030 2018] [wsgi:info] [pid 15367:tid 1995972608] mod_wsgi (pid=15367): Destroying interpreters.
+[Tue Dec 11 11:42:02.583076 2018] [wsgi:info] [pid 15367:tid 1995972608] mod_wsgi (pid=15367): Cleanup interpreter ''.
+[Tue Dec 11 11:42:02.686334 2018] [wsgi:info] [pid 15367:tid 1995972608] mod_wsgi (pid=15367): Terminating Python.
+[Tue Dec 11 11:42:02.753863 2018] [wsgi:info] [pid 15367:tid 1995972608] mod_wsgi (pid=15367): Python has shutdown.
+[Tue Dec 11 11:42:02.754085 2018] [wsgi:info] [pid 15367:tid 1995972608] mod_wsgi (pid=15367): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:42:04.308920 2018] [wsgi:info] [pid 15402:tid 1995726848] mod_wsgi (pid=15402): Attach interpreter ''.
+[Tue Dec 11 11:42:04.352621 2018] [wsgi:info] [pid 15402:tid 1995726848] mod_wsgi (pid=15402): Imported 'mod_wsgi'.
+[Tue Dec 11 11:42:33.870220 2018] [wsgi:info] [pid 15402:tid 1965339696] mod_wsgi (pid=15402): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:42:33.978851 2018] [wsgi:info] [pid 15402:tid 1965339696] [remote 192.168.4.18:51112] mod_wsgi (pid=15402, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:42:38.334025 2018] [wsgi:error] [pid 15402:tid 1965339696] [remote 192.168.4.18:51112] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-42-38_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:42:38.454532 2018] [wsgi:error] [pid 15402:tid 1965339696] [remote 192.168.4.18:51112] loadFileIntoInfluxDb() failed: 
+[Tue Dec 11 11:43:39.301835 2018] [wsgi:info] [pid 15402:tid 1982116912] mod_wsgi (pid=15402): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:43:39.302262 2018] [wsgi:info] [pid 15402:tid 1995726848] mod_wsgi (pid=15402): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:43:39.302561 2018] [wsgi:info] [pid 15402:tid 1995726848] mod_wsgi (pid=15402): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:43:39.302624 2018] [wsgi:info] [pid 15402:tid 1995726848] mod_wsgi (pid=15402): Destroying interpreters.
+[Tue Dec 11 11:43:39.302696 2018] [wsgi:info] [pid 15402:tid 1995726848] mod_wsgi (pid=15402): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:43:39.303633 2018] [wsgi:info] [pid 15402:tid 1995726848] mod_wsgi (pid=15402): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:43:39.671744 2018] [wsgi:info] [pid 15402:tid 1995726848] mod_wsgi (pid=15402): Cleanup interpreter ''.
+[Tue Dec 11 11:43:39.762548 2018] [wsgi:info] [pid 15402:tid 1995726848] mod_wsgi (pid=15402): Terminating Python.
+[Tue Dec 11 11:43:39.855035 2018] [wsgi:info] [pid 15402:tid 1995726848] mod_wsgi (pid=15402): Python has shutdown.
+[Tue Dec 11 11:43:39.855253 2018] [wsgi:info] [pid 15402:tid 1995726848] mod_wsgi (pid=15402): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:43:40.431495 2018] [wsgi:info] [pid 15479:tid 1995726848] mod_wsgi (pid=15479): Attach interpreter ''.
+[Tue Dec 11 11:43:40.468344 2018] [wsgi:info] [pid 15479:tid 1995726848] mod_wsgi (pid=15479): Imported 'mod_wsgi'.
+[Tue Dec 11 11:43:54.993665 2018] [wsgi:info] [pid 15479:tid 1995726848] mod_wsgi (pid=15479): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:43:54.994194 2018] [wsgi:info] [pid 15479:tid 1995726848] mod_wsgi (pid=15479): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:43:54.994314 2018] [wsgi:info] [pid 15479:tid 1995726848] mod_wsgi (pid=15479): Destroying interpreters.
+[Tue Dec 11 11:43:54.994368 2018] [wsgi:info] [pid 15479:tid 1995726848] mod_wsgi (pid=15479): Cleanup interpreter ''.
+[Tue Dec 11 11:43:55.084336 2018] [wsgi:info] [pid 15479:tid 1995726848] mod_wsgi (pid=15479): Terminating Python.
+[Tue Dec 11 11:43:55.144594 2018] [wsgi:info] [pid 15479:tid 1995726848] mod_wsgi (pid=15479): Python has shutdown.
+[Tue Dec 11 11:43:55.144791 2018] [wsgi:info] [pid 15479:tid 1995726848] mod_wsgi (pid=15479): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:43:56.821173 2018] [wsgi:info] [pid 15505:tid 1996173312] mod_wsgi (pid=15505): Attach interpreter ''.
+[Tue Dec 11 11:43:56.861470 2018] [wsgi:info] [pid 15505:tid 1996173312] mod_wsgi (pid=15505): Imported 'mod_wsgi'.
+[Tue Dec 11 11:44:45.486317 2018] [wsgi:info] [pid 15505:tid 1965786160] mod_wsgi (pid=15505): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:44:45.590289 2018] [wsgi:info] [pid 15505:tid 1965786160] [remote 192.168.4.18:53596] mod_wsgi (pid=15505, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:44:49.926869 2018] [wsgi:error] [pid 15505:tid 1965786160] [remote 192.168.4.18:53596] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-44-49_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:44:49.952551 2018] [wsgi:error] [pid 15505:tid 1965786160] [remote 192.168.4.18:53596] 2018-12-11_10-44-49_3C71BF0F97A4_grafana.txt: Writing 66 measurements to InfluxDB...
+[Tue Dec 11 11:44:50.306670 2018] [wsgi:error] [pid 15505:tid 1965786160] [remote 192.168.4.18:53596] loadFileIntoInfluxDb() failed: 
+[Tue Dec 11 11:45:51.121748 2018] [wsgi:info] [pid 15505:tid 1982563376] mod_wsgi (pid=15505): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:45:51.122029 2018] [wsgi:info] [pid 15505:tid 1996173312] mod_wsgi (pid=15505): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:45:51.122261 2018] [wsgi:info] [pid 15505:tid 1996173312] mod_wsgi (pid=15505): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:45:51.122320 2018] [wsgi:info] [pid 15505:tid 1996173312] mod_wsgi (pid=15505): Destroying interpreters.
+[Tue Dec 11 11:45:51.122391 2018] [wsgi:info] [pid 15505:tid 1996173312] mod_wsgi (pid=15505): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:45:51.123155 2018] [wsgi:info] [pid 15505:tid 1996173312] mod_wsgi (pid=15505): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:45:51.426716 2018] [wsgi:info] [pid 15505:tid 1996173312] mod_wsgi (pid=15505): Cleanup interpreter ''.
+[Tue Dec 11 11:45:51.484970 2018] [wsgi:info] [pid 15505:tid 1996173312] mod_wsgi (pid=15505): Terminating Python.
+[Tue Dec 11 11:45:51.573607 2018] [wsgi:info] [pid 15505:tid 1996173312] mod_wsgi (pid=15505): Python has shutdown.
+[Tue Dec 11 11:45:51.573808 2018] [wsgi:info] [pid 15505:tid 1996173312] mod_wsgi (pid=15505): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:45:52.714271 2018] [wsgi:info] [pid 15571:tid 1996173312] mod_wsgi (pid=15571): Attach interpreter ''.
+[Tue Dec 11 11:45:52.751243 2018] [wsgi:info] [pid 15571:tid 1996173312] mod_wsgi (pid=15571): Imported 'mod_wsgi'.
+[Tue Dec 11 11:48:39.845163 2018] [wsgi:info] [pid 15571:tid 1965786160] mod_wsgi (pid=15571): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:48:39.942408 2018] [wsgi:info] [pid 15571:tid 1965786160] [remote 192.168.4.18:61642] mod_wsgi (pid=15571, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:48:44.247728 2018] [wsgi:error] [pid 15571:tid 1965786160] [remote 192.168.4.18:61642] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-48-44_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:48:44.288858 2018] [wsgi:error] [pid 15571:tid 1965786160] [remote 192.168.4.18:61642] 2018-12-11_10-48-44_3C71BF0F97A4_grafana.txt: Writing 126 measurements to InfluxDB...
+[Tue Dec 11 11:48:44.766945 2018] [wsgi:error] [pid 15571:tid 1965786160] [remote 192.168.4.18:61642] loadFileIntoInfluxDb() failed: 
+[Tue Dec 11 11:49:45.598523 2018] [wsgi:info] [pid 15571:tid 1982563376] mod_wsgi (pid=15571): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:49:45.598837 2018] [wsgi:info] [pid 15571:tid 1996173312] mod_wsgi (pid=15571): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:49:45.599071 2018] [wsgi:info] [pid 15571:tid 1996173312] mod_wsgi (pid=15571): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:49:45.599128 2018] [wsgi:info] [pid 15571:tid 1996173312] mod_wsgi (pid=15571): Destroying interpreters.
+[Tue Dec 11 11:49:45.599193 2018] [wsgi:info] [pid 15571:tid 1996173312] mod_wsgi (pid=15571): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:49:45.599919 2018] [wsgi:info] [pid 15571:tid 1996173312] mod_wsgi (pid=15571): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:49:45.906823 2018] [wsgi:info] [pid 15571:tid 1996173312] mod_wsgi (pid=15571): Cleanup interpreter ''.
+[Tue Dec 11 11:49:45.963118 2018] [wsgi:info] [pid 15571:tid 1996173312] mod_wsgi (pid=15571): Terminating Python.
+[Tue Dec 11 11:49:46.043539 2018] [wsgi:info] [pid 15571:tid 1996173312] mod_wsgi (pid=15571): Python has shutdown.
+[Tue Dec 11 11:49:46.043748 2018] [wsgi:info] [pid 15571:tid 1996173312] mod_wsgi (pid=15571): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:49:46.962279 2018] [wsgi:info] [pid 15577:tid 1996173312] mod_wsgi (pid=15577): Attach interpreter ''.
+[Tue Dec 11 11:49:46.999209 2018] [wsgi:info] [pid 15577:tid 1996173312] mod_wsgi (pid=15577): Imported 'mod_wsgi'.
+[Tue Dec 11 11:51:25.943939 2018] [wsgi:info] [pid 15577:tid 1996173312] mod_wsgi (pid=15577): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:51:25.944350 2018] [wsgi:info] [pid 15577:tid 1996173312] mod_wsgi (pid=15577): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:51:25.944436 2018] [wsgi:info] [pid 15577:tid 1996173312] mod_wsgi (pid=15577): Destroying interpreters.
+[Tue Dec 11 11:51:25.944484 2018] [wsgi:info] [pid 15577:tid 1996173312] mod_wsgi (pid=15577): Cleanup interpreter ''.
+[Tue Dec 11 11:51:26.046348 2018] [wsgi:info] [pid 15577:tid 1996173312] mod_wsgi (pid=15577): Terminating Python.
+[Tue Dec 11 11:51:26.110792 2018] [wsgi:info] [pid 15577:tid 1996173312] mod_wsgi (pid=15577): Python has shutdown.
+[Tue Dec 11 11:51:26.110992 2018] [wsgi:info] [pid 15577:tid 1996173312] mod_wsgi (pid=15577): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:51:26.907055 2018] [wsgi:info] [pid 15654:tid 1996140544] mod_wsgi (pid=15654): Attach interpreter ''.
+[Tue Dec 11 11:51:26.946366 2018] [wsgi:info] [pid 15654:tid 1996140544] mod_wsgi (pid=15654): Imported 'mod_wsgi'.
+[Tue Dec 11 11:51:52.805131 2018] [wsgi:info] [pid 15654:tid 1965753392] mod_wsgi (pid=15654): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:51:52.899934 2018] [wsgi:info] [pid 15654:tid 1965753392] [remote 192.168.4.18:64356] mod_wsgi (pid=15654, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:51:57.143198 2018] [wsgi:error] [pid 15654:tid 1965753392] [remote 192.168.4.18:64356] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-51-57_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:51:57.252818 2018] [wsgi:error] [pid 15654:tid 1965753392] [remote 192.168.4.18:64356] loadFileIntoInfluxDb() failed: This file has no StartOfFile-Time: /home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-02-19_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:52:20.170223 2018] [wsgi:error] [pid 15654:tid 1965753392] [remote 192.168.4.18:57620] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-52-20_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:52:20.222055 2018] [wsgi:error] [pid 15654:tid 1965753392] [remote 192.168.4.18:57620] 2018-12-11_10-52-20_3C71BF0F97A4_grafana.txt: Writing 166 measurements to InfluxDB...
+[Tue Dec 11 11:52:42.541716 2018] [wsgi:error] [pid 15654:tid 1965753392] [remote 192.168.4.18:50833] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-52-42_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:52:42.556657 2018] [wsgi:error] [pid 15654:tid 1965753392] [remote 192.168.4.18:50833] 2018-12-11_10-52-42_3C71BF0F97A4_grafana.txt: Writing 24 measurements to InfluxDB...
+[Tue Dec 11 11:52:57.061786 2018] [wsgi:error] [pid 15654:tid 1965753392] [remote 192.168.4.18:62980] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-52-57_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:52:57.077072 2018] [wsgi:error] [pid 15654:tid 1965753392] [remote 192.168.4.18:62980] 2018-12-11_10-52-57_3C71BF0F97A4_grafana.txt: Writing 20 measurements to InfluxDB...
+[Tue Dec 11 11:53:17.911266 2018] [wsgi:error] [pid 15654:tid 1965753392] [remote 192.168.4.18:52103] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-53-17_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:53:17.925711 2018] [wsgi:error] [pid 15654:tid 1965753392] [remote 192.168.4.18:52103] 2018-12-11_10-53-17_3C71BF0F97A4_grafana.txt: Writing 14 measurements to InfluxDB...
+[Tue Dec 11 11:54:18.386885 2018] [wsgi:info] [pid 15654:tid 1982530608] mod_wsgi (pid=15654): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:54:18.387203 2018] [wsgi:info] [pid 15654:tid 1996140544] mod_wsgi (pid=15654): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:54:18.387440 2018] [wsgi:info] [pid 15654:tid 1996140544] mod_wsgi (pid=15654): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:54:18.387499 2018] [wsgi:info] [pid 15654:tid 1996140544] mod_wsgi (pid=15654): Destroying interpreters.
+[Tue Dec 11 11:54:18.387564 2018] [wsgi:info] [pid 15654:tid 1996140544] mod_wsgi (pid=15654): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:54:18.388295 2018] [wsgi:info] [pid 15654:tid 1996140544] mod_wsgi (pid=15654): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:54:18.669743 2018] [wsgi:info] [pid 15654:tid 1996140544] mod_wsgi (pid=15654): Cleanup interpreter ''.
+[Tue Dec 11 11:54:18.725305 2018] [wsgi:info] [pid 15654:tid 1996140544] mod_wsgi (pid=15654): Terminating Python.
+[Tue Dec 11 11:54:18.807741 2018] [wsgi:info] [pid 15654:tid 1996140544] mod_wsgi (pid=15654): Python has shutdown.
+[Tue Dec 11 11:54:18.807936 2018] [wsgi:info] [pid 15654:tid 1996140544] mod_wsgi (pid=15654): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:54:20.018453 2018] [wsgi:info] [pid 15774:tid 1996140544] mod_wsgi (pid=15774): Attach interpreter ''.
+[Tue Dec 11 11:54:20.057495 2018] [wsgi:info] [pid 15774:tid 1996140544] mod_wsgi (pid=15774): Imported 'mod_wsgi'.
+[Tue Dec 11 11:58:07.643997 2018] [wsgi:info] [pid 15774:tid 1965753392] mod_wsgi (pid=15774): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:58:07.748473 2018] [wsgi:info] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] mod_wsgi (pid=15774, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:58:12.303341 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] main.py
+[Tue Dec 11 11:58:12.305006 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] config/config_app.py
+[Tue Dec 11 11:58:12.306510 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/hw_test_pidh_pido.py
+[Tue Dec 11 11:58:12.307079 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/hw_controller.py
+[Tue Dec 11 11:58:12.307634 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/hw_test_pidh.py
+[Tue Dec 11 11:58:12.308159 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/portable_constants.py
+[Tue Dec 11 11:58:12.308656 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/portable_controller.py
+[Tue Dec 11 11:58:12.309460 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/portable_grafana_log_writer.py
+[Tue Dec 11 11:58:12.310095 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/portable_persist.py
+[Tue Dec 11 11:58:12.310601 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/hw_urequests.py
+[Tue Dec 11 11:58:12.311118 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/portable_daymaxestimator.py
+[Tue Dec 11 11:58:12.311838 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/portable_tempstabilizer.py
+[Tue Dec 11 11:58:12.312598 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/hw_mcp4725.py
+[Tue Dec 11 11:58:12.313123 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/portable_grafana_datatypes.py
+[Tue Dec 11 11:58:12.313688 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/hw_hal.py
+[Tue Dec 11 11:58:12.314212 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/portable_pid_controller.py
+[Tue Dec 11 11:58:12.314753 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/hw_test_pidh_pido_day.py
+[Tue Dec 11 11:58:12.315249 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/portable_firmware_constants.py
+[Tue Dec 11 11:58:12.315754 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/portable_simuliert_tagesmodell.py
+[Tue Dec 11 11:58:12.316251 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/portable_ticks.py
+[Tue Dec 11 11:58:12.316871 2018] [wsgi:error] [pid 15774:tid 1965753392] [remote 192.168.4.18:52359] program/hw_max30205.py
+[Tue Dec 11 11:59:12.371767 2018] [wsgi:info] [pid 15774:tid 1982530608] mod_wsgi (pid=15774): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:59:12.372104 2018] [wsgi:info] [pid 15774:tid 1996140544] mod_wsgi (pid=15774): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:59:12.372357 2018] [wsgi:info] [pid 15774:tid 1996140544] mod_wsgi (pid=15774): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:59:12.372417 2018] [wsgi:info] [pid 15774:tid 1996140544] mod_wsgi (pid=15774): Destroying interpreters.
+[Tue Dec 11 11:59:12.372485 2018] [wsgi:info] [pid 15774:tid 1996140544] mod_wsgi (pid=15774): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 11:59:12.373238 2018] [wsgi:info] [pid 15774:tid 1996140544] mod_wsgi (pid=15774): End interpreter '127.0.1.1|'.
+[Tue Dec 11 11:59:12.637561 2018] [wsgi:info] [pid 15774:tid 1996140544] mod_wsgi (pid=15774): Cleanup interpreter ''.
+[Tue Dec 11 11:59:12.693114 2018] [wsgi:info] [pid 15774:tid 1996140544] mod_wsgi (pid=15774): Terminating Python.
+[Tue Dec 11 11:59:12.783729 2018] [wsgi:info] [pid 15774:tid 1996140544] mod_wsgi (pid=15774): Python has shutdown.
+[Tue Dec 11 11:59:12.783929 2018] [wsgi:info] [pid 15774:tid 1996140544] mod_wsgi (pid=15774): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 11:59:13.278113 2018] [wsgi:info] [pid 15842:tid 1996140544] mod_wsgi (pid=15842): Attach interpreter ''.
+[Tue Dec 11 11:59:13.315392 2018] [wsgi:info] [pid 15842:tid 1996140544] mod_wsgi (pid=15842): Imported 'mod_wsgi'.
+[Tue Dec 11 11:59:44.535309 2018] [wsgi:info] [pid 15842:tid 1965753392] mod_wsgi (pid=15842): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 11:59:44.631550 2018] [wsgi:info] [pid 15842:tid 1965753392] [remote 192.168.4.18:50670] mod_wsgi (pid=15842, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 11:59:48.989764 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:50670] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_10-59-48_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 11:59:49.013008 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:50670] 2018-12-11_10-59-48_3C71BF0F97A4_grafana.txt: Writing 52 measurements to InfluxDB...
+[Tue Dec 11 12:00:43.410628 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:50977] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_11-00-43_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 12:00:43.433222 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:50977] 2018-12-11_11-00-43_3C71BF0F97A4_grafana.txt: Writing 36 measurements to InfluxDB...
+[Tue Dec 11 12:00:52.332762 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] main.py
+[Tue Dec 11 12:00:52.334345 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] config/config_app.py
+[Tue Dec 11 12:00:52.335833 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/hw_test_pidh_pido.py
+[Tue Dec 11 12:00:52.336416 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/hw_controller.py
+[Tue Dec 11 12:00:52.336974 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/hw_test_pidh.py
+[Tue Dec 11 12:00:52.337499 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/portable_constants.py
+[Tue Dec 11 12:00:52.337991 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/portable_controller.py
+[Tue Dec 11 12:00:52.338705 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/portable_grafana_log_writer.py
+[Tue Dec 11 12:00:52.339336 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/portable_persist.py
+[Tue Dec 11 12:00:52.339838 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/hw_urequests.py
+[Tue Dec 11 12:00:52.340355 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/portable_daymaxestimator.py
+[Tue Dec 11 12:00:52.340951 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/portable_tempstabilizer.py
+[Tue Dec 11 12:00:52.341644 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/hw_mcp4725.py
+[Tue Dec 11 12:00:52.342329 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/portable_grafana_datatypes.py
+[Tue Dec 11 12:00:52.342892 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/hw_hal.py
+[Tue Dec 11 12:00:52.343409 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/portable_pid_controller.py
+[Tue Dec 11 12:00:52.343976 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/hw_test_pidh_pido_day.py
+[Tue Dec 11 12:00:52.344476 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/portable_firmware_constants.py
+[Tue Dec 11 12:00:52.344974 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/portable_simuliert_tagesmodell.py
+[Tue Dec 11 12:00:52.345470 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/portable_ticks.py
+[Tue Dec 11 12:00:52.346076 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:61913] program/hw_max30205.py
+[Tue Dec 11 12:01:43.792771 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:49750] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_11-01-43_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 12:01:43.809887 2018] [wsgi:error] [pid 15842:tid 1965753392] [remote 192.168.4.18:49750] 2018-12-11_11-01-43_3C71BF0F97A4_grafana.txt: Writing 34 measurements to InfluxDB...
+[Tue Dec 11 12:02:44.242990 2018] [wsgi:info] [pid 15842:tid 1982530608] mod_wsgi (pid=15842): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 12:02:44.243315 2018] [wsgi:info] [pid 15842:tid 1996140544] mod_wsgi (pid=15842): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 12:02:44.243628 2018] [wsgi:info] [pid 15842:tid 1996140544] mod_wsgi (pid=15842): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 12:02:44.243686 2018] [wsgi:info] [pid 15842:tid 1996140544] mod_wsgi (pid=15842): Destroying interpreters.
+[Tue Dec 11 12:02:44.243751 2018] [wsgi:info] [pid 15842:tid 1996140544] mod_wsgi (pid=15842): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 12:02:44.244492 2018] [wsgi:info] [pid 15842:tid 1996140544] mod_wsgi (pid=15842): End interpreter '127.0.1.1|'.
+[Tue Dec 11 12:02:44.536198 2018] [wsgi:info] [pid 15842:tid 1996140544] mod_wsgi (pid=15842): Cleanup interpreter ''.
+[Tue Dec 11 12:02:44.591945 2018] [wsgi:info] [pid 15842:tid 1996140544] mod_wsgi (pid=15842): Terminating Python.
+[Tue Dec 11 12:02:44.675692 2018] [wsgi:info] [pid 15842:tid 1996140544] mod_wsgi (pid=15842): Python has shutdown.
+[Tue Dec 11 12:02:44.675883 2018] [wsgi:info] [pid 15842:tid 1996140544] mod_wsgi (pid=15842): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 12:02:45.506738 2018] [wsgi:info] [pid 15857:tid 1996140544] mod_wsgi (pid=15857): Attach interpreter ''.
+[Tue Dec 11 12:02:45.543318 2018] [wsgi:info] [pid 15857:tid 1996140544] mod_wsgi (pid=15857): Imported 'mod_wsgi'.
+[Tue Dec 11 12:55:07.506683 2018] [wsgi:info] [pid 15857:tid 1965753392] mod_wsgi (pid=15857): Create interpreter '127.0.1.1|'.
+[Tue Dec 11 12:55:07.600694 2018] [wsgi:info] [pid 15857:tid 1965753392] [remote 192.168.4.18:50972] mod_wsgi (pid=15857, process='wsgitempstabilizer2018', application='127.0.1.1|'): Loading WSGI script '/home/pi/tempstabilizer2018/software/http_server/python/python3_wsgi_app.wsgi'.
+[Tue Dec 11 12:55:11.873101 2018] [wsgi:error] [pid 15857:tid 1965753392] [remote 192.168.4.18:50972] strFilenameFull:/home/pi/tempstabilizer2018/software/http_server/node_data/grafana_to_process/2018-12-11_11-55-11_3C71BF0F97A4_grafana.txt
+[Tue Dec 11 12:55:12.060347 2018] [wsgi:error] [pid 15857:tid 1965753392] [remote 192.168.4.18:50972] 2018-12-11_11-55-11_3C71BF0F97A4_grafana.txt: Writing 654 measurements to InfluxDB...
+[Tue Dec 11 12:56:14.476667 2018] [wsgi:info] [pid 15857:tid 1982530608] mod_wsgi (pid=15857): Daemon process idle inactivity timer expired, stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 12:56:14.476976 2018] [wsgi:info] [pid 15857:tid 1996140544] mod_wsgi (pid=15857): Shutdown requested 'wsgitempstabilizer2018'.
+[Tue Dec 11 12:56:14.477219 2018] [wsgi:info] [pid 15857:tid 1996140544] mod_wsgi (pid=15857): Stopping process 'wsgitempstabilizer2018'.
+[Tue Dec 11 12:56:14.477281 2018] [wsgi:info] [pid 15857:tid 1996140544] mod_wsgi (pid=15857): Destroying interpreters.
+[Tue Dec 11 12:56:14.477349 2018] [wsgi:info] [pid 15857:tid 1996140544] mod_wsgi (pid=15857): Destroy interpreter '127.0.1.1|'.
+[Tue Dec 11 12:56:14.478086 2018] [wsgi:info] [pid 15857:tid 1996140544] mod_wsgi (pid=15857): End interpreter '127.0.1.1|'.
+[Tue Dec 11 12:56:14.801579 2018] [wsgi:info] [pid 15857:tid 1996140544] mod_wsgi (pid=15857): Cleanup interpreter ''.
+[Tue Dec 11 12:56:14.872521 2018] [wsgi:info] [pid 15857:tid 1996140544] mod_wsgi (pid=15857): Terminating Python.
+[Tue Dec 11 12:56:14.973131 2018] [wsgi:info] [pid 15857:tid 1996140544] mod_wsgi (pid=15857): Python has shutdown.
+[Tue Dec 11 12:56:14.973337 2018] [wsgi:info] [pid 15857:tid 1996140544] mod_wsgi (pid=15857): Exiting process 'wsgitempstabilizer2018'.
+[Tue Dec 11 12:56:15.928681 2018] [wsgi:info] [pid 15967:tid 1996140544] mod_wsgi (pid=15967): Attach interpreter ''.
+[Tue Dec 11 12:56:15.991074 2018] [wsgi:info] [pid 15967:tid 1996140544] mod_wsgi (pid=15967): Imported 'mod_wsgi'.

@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "documentation"
+		},
+		{
+			"path": "http_server"
+		},
+		{
+			"path": "http_server/python"
+		},
+		{
+			"path": "http_server/webroot"
+		},
+		{
+			"path": "node/program"
+		}
+	],
+	"settings": {
+		"python.pythonPath": "/usr/bin/python3;${workspaceFolder}/http_server/node/program;${workspaceFolder}/http_server/python",
+	}
+}

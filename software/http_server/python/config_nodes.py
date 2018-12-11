@@ -1,4 +1,4 @@
-## -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from python3_config_nodes_lib import *
 
@@ -25,7 +25,7 @@ listLabs.append({
   # Select a tag: 'tags/v1.0.0'
   # Select the head of a branch: 'heads/master', 'heads/branchX'
   # GIT_TAGS: 'tags/x1.0;tags/y1.1',
-  GIT_TAGS: 'heads/master;2',
+  GIT_TAGS: 'heads/master;1',
   NODES: (
     '20180907_01',
   )

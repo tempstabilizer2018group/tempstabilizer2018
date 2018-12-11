@@ -1,0 +1,115 @@
+# -*- coding: utf-8 -*-
+
+import os
+import sys
+import cgi
+
+strCurrentDirectory = os.path.dirname(__file__)
+sys.path.append(strCurrentDirectory)
+sys.path.append(os.path.join(strCurrentDirectory, '../node/config'))
+sys.path.append(os.path.join(strCurrentDirectory, '../node/program'))
+
+import portable_firmware_constants
+
+strSTATUS_200 = '200 OK'
+strSTATUS_204 = '204 NO_CONTENT'
+strSTATUS_400 = '400 BAD_REQUEST'
+strCONTENTTYPE_TEXT = 'text/plain'
+strCONTENTTYPE_BINARY = 'application/octet-stream'
+
+def response(start_response, strMessage, strStatus=strSTATUS_200, strContentType=strCONTENTTYPE_TEXT):
+  output = bytes(strMessage, 'utf-8')
+  response_headers = [('Content-type', strContentType),
+                ('Content-Length', str(len(output)))]
+  start_response(strStatus, response_headers)
+  return [output]
+
+def badRequest(start_response, strMessage):
+  return response(start_response, strMessage, strStatus=strSTATUS_400)
+
+def ok(start_response, strMessage):
+  return response(start_response, strMessage, strStatus=strSTATUS_400)
+
+def getArg(environ, strArg):
+  # Returns a dictionary in which the values are lists
+  d = cgi.parse_qs(environ['QUERY_STRING'])
+   
+  # Returns the first value.
+  listValues = d.get(strArg, None)
+  if listValues == None:
+    raise ValueError('Required argument "%s" missing!' % strArg)
+  return listValues[0]
+
+def handle_get(environ, start_response):
+  import python3_github_pull
+
+  strMac = getArg(environ, portable_firmware_constants.strHTTP_ARG_MAC)
+  strVersion = getArg(environ, portable_firmware_constants.strHTTP_ARG_VERSION)
+
+  p = python3_github_pull.GitHubPullLocal()
+  strVersionGit = p.setMac(strMac)
+
+  if environ['PATH_INFO'] == portable_firmware_constants.strHTTP_PATH_SOFTWAREUPDATE:
+    # GET /softwareupdate?mac=3C71BF0F97A4&version=heads-SLASH-master;1
+    strTarContent = p.getTarContent()
+    if strTarContent == None:
+      # Unknown Mac
+      # Return "204 No content"
+      return response(start_response, '', strStatus=strSTATUS_204)
+
+    return ok(start_response, strTarContent)
+
+  if environ['PATH_INFO'] == portable_firmware_constants.strHTTP_PATH_VERSIONCHECK:
+    # GET /versioncheck?mac=3C71BF0F97A4&version=heads-SLASH-master;1
+    return ok(start_response, strVersionGit)
+
+  return badRequest(start_response, 'Unkown path "%s"!' % environ['PATH_INFO'])
+
+def handle_post(environ, start_response):
+  # Returns a dictionary in which the values are lists
+  d = cgi.parse_qs(environ['QUERY_STRING'])
+
+  if environ['PATH_INFO'] == portable_firmware_constants.strHTTP_PATH_UPLOAD:
+    import python3_http_influxdb_loadfiles
+
+    # http://localhost/push/upload.grafana
+    strMac = getArg(environ, prtable_firmware_constants.strHTTP_ARG_MAC)
+    strFilename = getArg(environ, portable_firmware_constants.strHTTP_ARG_FILENAME)
+
+    # When the method is POST the variable will be sent^M
+    # in the HTTP request body which is passed by the WSGI server^M
+    # in the file like wsgi.input environment variable.^M
+    try:
+      request_body_size = int(environ.get('CONTENT_LENGTH', 0))
+    except (ValueError):
+      request_body_size = 0
+    strLogData = environ['wsgi.input'].read(request_body_size)
+
+    strFilenameFull = http_influxdb_loadfiles.http_write_data(strMac, strFilename, strLogData)
+    strRespone = "<p>strLogData: '%s'...<p>\n" % strLogData[0:10]
+    strRespone += "<p>strFilenameFull: '%s'<p>\n" % strFilenameFull
+
+    return ok(start_response, strRespone)
+
+  return badRequest(start_response, 'Unkown path "%s"!' % environ['PATH_INFO'])
+
+def application(environ, start_response):
+  try:
+
+    if environ['REQUEST_METHOD'] == 'GET':
+      return handle_get(environ, start_response)
+    
+    if environ['REQUEST_METHOD'] == 'POST':
+      return handle_post(environ, start_response)
+
+    return badRequest(start_response, 'Unkown method "%s"!' % environ['REQUEST_METHOD'])
+
+  except:
+    import traceback
+    strResonse = traceback.format_exc()
+    return badRequest(start_response, strResonse)
+  # GET /push/upload.grafana
+  # GET /pull/software.download?mac=3C71BF0F97A4&version=none
+
+  # GET /pull/versioncheck.download?mac=3C71BF0F97A4&version=heads-SLASH-master;1
+

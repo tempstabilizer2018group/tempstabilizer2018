@@ -72,9 +72,9 @@ class ConfigNodes:
       strLabLabel = objConfigNode.strLabLabel
       strLabLabel_ = dictSerial2Lab.get(strSerial, None)
       if strLabLabel_ != None:
-        raise Exception('Mac "%s" may not be in two labs: %s/%s.' % (strLabLabel, strLabelLabel_))
+        raise Exception('Mac "%s" may not be in two labs: %s/%s.' % (strLabLabel, strLabLabel_))
 
-      dictSerial2Lab[strSerial] = objConfigNode.strLabLabel;
+      dictSerial2Lab[strSerial] = objConfigNode.strLabLabel
 
 def testConsitencyLabs(listLabs):
   ''' 

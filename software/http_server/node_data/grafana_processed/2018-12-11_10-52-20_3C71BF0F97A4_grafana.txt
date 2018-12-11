@@ -1,0 +1,67 @@
+2 version 0.1
+3 mac 3C71BF0F97A4
+3 portable_ticks.iMaxTick_ms 1073741823
+7 grafana_type GrafanaValueFloatAvg('O', 'fTempO_C', 100.)
+5 messinterval_ms O 5000
+7 grafana_type GrafanaValueFloat('S', 'fTempO_Setpoint_C', 100.)
+5 messinterval_ms S 5000
+7 grafana_type GrafanaValueFloatAvg('H', 'fHeat_W', 100.)
+4 messinterval_ms H 5000
+8 grafana_type GrafanaValueFloatAvg('U', 'fTempEnvirons_C', 100.)
+4 messinterval_ms U 50000
+5 grafana_type GrafanaValueBoolTrue('L', 'PidH_bLimitHigh')
+4 messinterval_ms L 5000
+7 grafana_type GrafanaValueFloatAvg('z', 'fDACzeroHeat_V', 1000.)
+5 messinterval_ms z 5000
+7 grafana_type GrafanaValueFloat('F', 'fDiskFree_MBytes', 100.)
+4 messinterval_ms F 50000
+5875 v O2345H0L-z1684S2245U2151F192
+923 info Button pressed < 2s: Force WLAN replication
+5694 v O2354H0L-z1684S2254U2153F191
+4976 v O2357z1683
+5091 v z1682
+4988 v z1681
+1593 info Button pressed < 2s: Force WLAN replication
+5694 v O2358H0L-z1684S2258U2156F191
+4978 v O2360z1683
+5096 v z1682
+4987 v z1681
+5093 v O2361z1680
+4987 v z1678
+5096 v z1677
+4158 info Button pressed < 2s: Force WLAN replication
+25 info networkOnce() took 8373 ms
+91 v O2359H0L-z1675S2258U2162F191
+5066 v O2361
+5093 v z1673
+4990 v O2362z1672
+5093 v z1671
+4990 v z1670
+5095 v O2363z1669
+20163 v U2163
+30245 v O2362
+20165 v U2164
+15072 v O2361
+15173 v O2362
+4988 v O2360
+15177 v U2167
+4986 v O2359
+10084 v O2358
+10083 v O2357
+15176 v O2356
+10090 v U2168
+4997 v z1670
+5096 v O2355
+10087 v O2354
+5774 info Button pressed < 2s: Force WLAN replication
+5695 v O2367H0L-z1684S2267U2177F191
+4975 v O2368z1683
+5097 v O2369z1682
+128 info Button pressed < 2s: Force WLAN replication
+25 info networkOnce() took 8052 ms
+36 v O2369H0L-z1681S2267F191
+5066 v O2370
+5095 v z1679
+4986 v z1678
+4211 info Button pressed < 2s: Force WLAN replication
+1000 ntptime 1544525540
