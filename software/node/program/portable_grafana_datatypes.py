@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 TAG_GRAFANA_VERSION = 'version'
-TAG_GRAFANA_SITE_NODE = 'node'
+TAG_GRAFANA_MAC = 'mac'
 TAG_GRAFANA_DATATYPE = 'grafana_type'
 TAG_GRAFANA_VALUE = 'v'
 TAG_GRAFANA_NTP = 'ntptime'

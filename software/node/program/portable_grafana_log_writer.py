@@ -4,7 +4,6 @@ import os
 import portable_grafana_datatypes
 import portable_ticks
 import config_app
-import config_node
 
 '''
 Optimierungspotential:
@@ -64,7 +63,7 @@ class GrafanaProtocol:
       return
 
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VERSION, '0.1')
-    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_SITE_NODE, '%s %s' % (config_node.strSite, config_node.strNode))
+    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MAC, config_app.strMAC)
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MAXTICK_MS, portable_ticks.objTicks.iMaxTicks_ms)
 
     def logAuxiliary(objGrafanaValue, iModuloPull):

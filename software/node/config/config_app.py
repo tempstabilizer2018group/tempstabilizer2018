@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+import sys
 import portable_constants
+import portable_firmware_constants
 
 LOGFILENAME_TABDELIMITED = 'log.txt'
 LOGFILENAME_STATISTICS = 'statistics.txt'
@@ -10,16 +12,26 @@ DIRECTORY_DATA = 'data'
 DIRECTORY_CONFIG = 'config'
 DIRECTORY_PROGRAM = 'program'
 
-strHttpPostUrl = 'http://tempstabilizer.positron.ch/push/upload.grafana'
+strHttpPostPath = '/upload'
+strHttpPostServer = 'http://www.tempstabilizer2018.org'
+strHttpPostServer = 'http://192.168.4.1'
 
-# strWlanSid = 'rosw_z3'
+strMAC = 'softmac'
+if sys.platform == 'esp32':
+  import hw_update_ota
+  strMAC = hw_update_ota.strMAC
+
+# strWlanSsid = 'rosw_z3'
 # strWlanChannel = 0
 # strWlanPw = 'temp5taB'
 
-strWlanSid = 'waffenplatzstrasse26'
+# strWlanSsid = 'waffenplatzstrasse26'
+# strWlanPw = 'gugxi'.replace('x', 'usel')
+
+strWlanSsid = portable_firmware_constants.strWLAN_SSID
+strWlanPw = portable_firmware_constants.strWLAN_PW
 # Channel 0: All 11 channels
 strWlanChannel = 6
-strWlanPw = 'gugxi'.replace('x', 'usel')
 
 # None: Es wird jedesmal versucht, über das Netzwerk Daten abzusetzen.
 strWlanSidForTrigger = 'rumenigge'

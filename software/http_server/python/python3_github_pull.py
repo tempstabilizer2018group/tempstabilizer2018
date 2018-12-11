@@ -20,6 +20,7 @@ import github
 # https://raw.githubusercontent.com/hmaerki/temp_stabilizer_2018/master/software/http_server/python/config_http_server.py
 
 import python3_config_nodes_lib
+import config_http_server
 
 strGithubRepoConfig = 'tempstabilizer2018group/tempstabilizer2018'
 strGithubUser = 'tempstabilizer2018group'
@@ -53,8 +54,8 @@ strFILENAME_SW_VERSION = 'VERSION.TXT'
 class GithubPullBase:
   def __init__(self, strDirectory=None):
     if strDirectory == None:
-      # strDirectory = os.path.join(os.path.dirname(__file__), '..', 'webroot')
-      strDirectory = '/tmp'
+      strDirectory = os.path.join(os.path.dirname(__file__), '..', 'node_data', 'swdownload')
+      # strDirectory = '/tmp'
     self.__strDirectory = os.path.abspath(strDirectory)
 
   def setMac(self, strMac):
@@ -80,12 +81,29 @@ class GithubPullBase:
     self.__strTarFilenameFull = os.path.join(self.__strDirectory, self.__strTarFilename)
 
   def getTar(self):
-    if os.path.exists(self.__strTarFilenameFull):
-      logging.info('Tarfile already in cache. skip download....')
-      return self.__strTarFilenameFull
+    def useCache():
+      if config_http_server.strGithubPullLocal:
+        # We want the locally changed files be in the next download
+        return False
+      return config_http_server.bCacheTarFiles
+
+    if useCache():
+      if os.path.exists(self.__strTarFilenameFull):
+        logging.info('Tarfile already in cache. skip download....')
+        return self.__strTarFilenameFull
+
     dictFiles = self._fetchFromGithub()
     self.__writeTar(dictFiles)
     return self.__strTarFilenameFull
+
+  def getTarContent(self):
+    strFilenameFull = self.getTar()
+    if strFilenameFull == None:
+      # Unknown Mac
+      return None
+    with open(strFilenameFull, 'rb') as f:
+      strTarContent = f.read()
+    return strTarContent
 
   '''
     'heads/master' is a Git-Tag: It may be retrieved from git
