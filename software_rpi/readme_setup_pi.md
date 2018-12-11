@@ -32,7 +32,11 @@ git config --global user.name "Hans Maerki"
 git clone  --depth 1 https://github.com/hmaerki/temp_stabilizer_2018.git
 
 cd ~pi/temp_stabilizer_2018/software_rpi
-sudo bash -x ./install_packages.sh | tee install_packages.log 2>&1
+sudo bash -x ./install_packages_pi.sh | tee install_packages_pi.log 2>&1
+sudo bash -x ./install_packages_http.sh | tee install_packages_http.log 2>&1
+
+sudo bash -x ./root_copyfiles_pi.sh | tee root_copyfiles_pi.log 2>&1
+sudo bash -x ./root_copyfiles_http.sh | tee root_copyfiles_http.log 2>&1
 
 # Reboot to activate access-point
 sudo reboot

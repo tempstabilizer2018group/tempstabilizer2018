@@ -5,8 +5,6 @@ ROOT=~pi/tempstabilizer2018/software_rpi/root_http
 cd $ROOT
 
 systemctl stop apache2
-systemctl stop dnsmasq
-systemctl stop hostapd
 
 issymlink() {
     test "$(readlink "${1}")";
@@ -29,6 +27,4 @@ do
   ln -s $ROOT/$f /$f
 done
 
-systemctl start dnsmasq
-systemctl start hostapd
 systemctl start apache2
