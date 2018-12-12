@@ -4,6 +4,8 @@
 ROOT=~pi/tempstabilizer2018/software_rpi/root_pi
 cd $ROOT
 
+chmod a+x $ROOT/etc/rc.local
+
 systemctl stop dnsmasq
 systemctl stop hostapd
 

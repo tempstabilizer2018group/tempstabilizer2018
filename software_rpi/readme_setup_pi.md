@@ -39,9 +39,9 @@ sudo pip3 install --upgrade pip
 # GIT REPOSITORY
 git config --global user.email "hans@maerki.com"
 git config --global user.name "Hans Maerki"
-git clone  --depth 1 https://github.com/tempstabilizer2018group/tempstabilizer2018.git
+git clone https://github.com/tempstabilizer2018group/tempstabilizer2018.git
 
-~pi/tempstabilizer2018/software_rpi/install_after_git_clone_http.sh
+sudo bash -x ~pi/tempstabilizer2018/software_rpi/install_after_git_clone_http.sh
 
 
 # INSTALL PACKAGES REQUIRED BY TEMPSTABILIZER
@@ -53,13 +53,12 @@ sudo bash -x ./install_packages_http.sh | tee install_packages_http.log 2>&1
 sudo bash -x ./root_copyfiles_pi.sh | tee root_copyfiles_pi.log 2>&1
 sudo bash -x ./root_copyfiles_http.sh | tee root_copyfiles_http.log 2>&1
 
-sudo bash -x ./install_bridge_pi.sh | tee install_bridge_pi.log 2>&1
+# COPY CONFIGURATION FILES
+cd ~pi/tempstabilizer2018/software_rpi
+sudo bash -x ./install_after_git_clone_http.sh | tee install_after_git_clone_http.log 2>&1
 
 # Reboot to activate access-point
 sudo reboot
-
-# COPY CONFIGURATION FILES
-sudo bash -x ./install_after_git_clone_http.sh | tee install_after_git_clone_http.log 2>&1
 
 ## Optional: Install Visual Studio Code
 
