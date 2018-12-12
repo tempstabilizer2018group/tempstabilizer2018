@@ -1,10 +1,7 @@
 # run as root!
-# Install software for the pi
-# The software for the http-server  will be installed in another script
+# Install the bridge for the pi
 
-apt-get -y install rpi-update dnsmasq hostapd bridge-utils
-rpi-update
+brctl addbr br0
 
-# python 3.5
-pip3 install mpfshell esptool matplotlib
+brctl addif br0 eth0 wlan0
 
