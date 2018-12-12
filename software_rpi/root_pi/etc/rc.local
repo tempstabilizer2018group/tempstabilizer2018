@@ -20,4 +20,10 @@ fi
 # Uncomment the following line to allow forwarding from wlan to ethernet
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
+# This will allow wlan only to access www.tempstabilizer2018.org
+iptables -A FORWARD -o eth0 -p tcp --dest !83.169.46.38 -m state -j DROP
+# iptables -A FORWARD -o eth0 -p tcp --dest 83.169.46.38 -m state -j ACCEPT
+# This will prevent wlan to access any host
+# iptables -A FORWARD -o eth0 -j DROP
+
 exit 0

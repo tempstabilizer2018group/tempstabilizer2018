@@ -1,0 +1,3 @@
+software_rpi/*.log
+software/http_server/webroot/*.tar
+software/http_server/node_data/**
