@@ -21,13 +21,6 @@ if sys.platform == 'esp32':
   import hw_update_ota
   strMAC = hw_update_ota.strMAC
 
-# strWlanSsid = 'rosw_z3'
-# strWlanChannel = 0
-# strWlanPw = 'temp5taB'
-
-# strWlanSsid = 'waffenplatzstrasse26'
-# strWlanPw = 'gugxi'.replace('x', 'usel')
-
 strWlanSsid = portable_firmware_constants.strWLAN_SSID
 strWlanPw = portable_firmware_constants.strWLAN_PW
 # Channel 0: All 11 channels

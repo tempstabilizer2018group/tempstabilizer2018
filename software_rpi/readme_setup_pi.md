@@ -14,7 +14,7 @@ https://www.raspberrypi.org/documentation/hardware/raspberrypi/bootmodes/msd.md
 echo program_usb_boot_mode=1 | sudo tee -a /boot/config.txt
 
 ## After first Boot
-Location: United States, American English, Timezone Adak
+Location: United Kingdom, British English, Timezone London
 Check: Use US Keyboard
 User pi / raspberry
 Set new password: xxx
@@ -27,19 +27,39 @@ reboot
 
 -> you may use ssh now
 
+# PREPARATION
+sudo apt-get update
+sudo apt-get -y upgrade
+sudo apt-get -y autoremove
+
+sudo pip3 install --upgrade pip
+sudo apt-get install python3-pip --reinstall
+sudo pip3 install --upgrade pip
+
+# GIT REPOSITORY
 git config --global user.email "hans@maerki.com"
 git config --global user.name "Hans Maerki"
-git clone  --depth 1 https://github.com/hmaerki/temp_stabilizer_2018.git
+git clone  --depth 1 https://github.com/tempstabilizer2018group/tempstabilizer2018.git
 
-cd ~pi/temp_stabilizer_2018/software_rpi
+~pi/tempstabilizer2018/software_rpi/install_after_git_clone_http.sh
+
+
+# INSTALL PACKAGES REQUIRED BY TEMPSTABILIZER
+cd ~pi/tempstabilizer2018/software_rpi
+
 sudo bash -x ./install_packages_pi.sh | tee install_packages_pi.log 2>&1
 sudo bash -x ./install_packages_http.sh | tee install_packages_http.log 2>&1
 
 sudo bash -x ./root_copyfiles_pi.sh | tee root_copyfiles_pi.log 2>&1
 sudo bash -x ./root_copyfiles_http.sh | tee root_copyfiles_http.log 2>&1
 
+sudo bash -x ./install_bridge_pi.sh | tee install_bridge_pi.log 2>&1
+
 # Reboot to activate access-point
 sudo reboot
+
+# COPY CONFIGURATION FILES
+sudo bash -x ./install_after_git_clone_http.sh | tee install_after_git_clone_http.log 2>&1
 
 ## Optional: Install Visual Studio Code
 
@@ -49,5 +69,5 @@ mkdir visual_studio_code
 cd visual_studio_code
 sudo -s
 
-. <( wget -O - https://code.headmelted.com/installers/apt.sh )
-
+# . <( wget -O - https://code.headmelted.com/installers/apt.sh )
+bash -x ~pi/tempstabilizer2018/software_rpi/install_visual_studio_code.sh

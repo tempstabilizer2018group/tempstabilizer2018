@@ -2,7 +2,15 @@
 
 '''
   I2C-Interface to the MAX30205 "Human Body Temperature Sensor"
+  https://datasheets.maximintegrated.com/en/ds/MAX30205.pdf
+  Addressrange: 0x80 - 0xBE
 '''
+# MCP3021A5T-E/OT
+# https://www.mouser.ch/datasheet/2/268/21805a-74229.pdf
+# http://www.python-exemplary.com/index_en.php?inhalt_links=navigation_en.inc.php&inhalt_mitte=raspi/en/light.inc.php
+# 1001 101
+# '0x%02X' % 0b01001101 = 0x4D
+# '0x%02X' % 0b11001101 = 0xCD
 
 import array
 import portable_ticks
