@@ -32,6 +32,8 @@ sudo apt-get update
 sudo apt-get -y upgrade
 sudo apt-get -y autoremove
 
+# pip3 is somehow buggy
+# These sequences seemed to help
 sudo pip3 install --upgrade pip
 sudo apt-get install python3-pip --reinstall
 sudo pip3 install --upgrade pip
