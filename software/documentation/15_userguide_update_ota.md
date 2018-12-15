@@ -16,7 +16,7 @@ If the filesystem is empty, a software update will be started.
 - Place the Raspberry Pi in WLAN-reach
 - Raspberry Pi: Start the update-server
 - You may want to observer the update
-  - Raspberry Pi: tail -f 'xxx'
+  - Raspberry Pi: tail -f '/home/pi/tempstabilizer2018/software/http_server/node_data/apache_logs/access.log'
   - Observe the ESP32-RS232-Output
   - Observe the events on Grafana
   - Observe the update-page on the webserver
