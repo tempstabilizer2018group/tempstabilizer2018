@@ -205,6 +205,9 @@ class GitHubPullLocal(GithubPullBase):
       strRootDirectoryRelative = strRootDirectory[len(self.__strSourceDirectory)+1:]
       strRootDirectoryRelative = strRootDirectoryRelative.replace('\\', '/')
       for strFilename in listFilenames:
+        if strFilename.find('.git') >= 0:
+          # For example '.gitignore'
+          continue
         strFilenameRelative = strRootDirectoryRelative + '/' + strFilename
         strFilenameRelative2 = self._selectFile(strFilenameRelative)
         if strFilenameRelative2 == None:
