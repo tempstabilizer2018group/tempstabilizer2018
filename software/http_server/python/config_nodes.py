@@ -57,20 +57,7 @@ if __name__ == '__main__':
   objConfigNodes.verifyConsistency()
 
   if True:
-    import python3_github_pull
-    strMac = '840D8E1BC40C'
-    if strMac == '840D8E1BC40x':
-      p = python3_github_pull.GitHubPullLocal()
-    else:
-      # p = python3_github_pull.GitHubApiPull()
-      p = python3_github_pull.GitHubPublicPull()
-    p.setMac(strMac)
+    import config_http_server
+    p = config_http_server.factoryGitHubPull(strMac)
     strTarFilenameFull = p.getTar()
     pass
-
-  if False:
-    import python3_config_nodes_lib
-    python3_config_nodes_lib.testConsitencyLabs(listLabs)
-
-
-

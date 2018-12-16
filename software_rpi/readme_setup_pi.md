@@ -31,7 +31,7 @@ reboot
 
 ## PREPARATION ONLY HTTP-Server
 As root:
-useradd pi --shell /bin/bash
+useradd pi --create-home --shell /bin/bash
 adduser pi sudo
 passwd pi
 xxx
@@ -54,7 +54,7 @@ git config --global user.email "hans@maerki.com"
 git config --global user.name "Hans Maerki"
 git clone https://github.com/tempstabilizer2018group/tempstabilizer2018.git
 
-sudo bash -x ~pi/tempstabilizer2018/software_rpi/install_after_git_clone_http.sh
+bash -x ~pi/tempstabilizer2018/software_rpi/install_after_git_clone_http.sh
 
 
 ## INSTALL PACKAGES REQUIRED BY TEMPSTABILIZER
@@ -72,6 +72,10 @@ sudo bash -x ./install_after_git_clone_http.sh | tee install_after_git_clone_htt
 
 ## Reboot to activate access-point
 sudo reboot
+
+### Setup fluxdb as in 21_handling_influxdb.md
+
+### Setup grafana as in 21_handling_grafana.md
 
 ### Optional: Install Visual Studio Code
 
