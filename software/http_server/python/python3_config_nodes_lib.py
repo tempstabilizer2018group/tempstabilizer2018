@@ -66,6 +66,9 @@ class ConfigNodes:
     # Loop throug all nodes to verify if they are defined
     for dictNode in self.__dictConfigNodes[LIST_NODES]:
       strMac = dictNode[MAC]
+      strHexUppderCase = '0123456789ABCDEF'
+      if not all(c in '0123456789ABCDEF' for c in strMac):
+        raise Exception('Mac "%s" must only contain uppercase characters "%s".' % (strMac, strHexUppderCase))
       # Success, we get here!
       objConfigNode = self.findNodeByMac(strMac)
       strSerial = objConfigNode.strSerial

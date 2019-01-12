@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import uos
 import utime
+import uerrno
 import machine
 import config_app
 
 import hw_max30205
 import hw_mcp4725
+import hw_mcp3021
 
 import portable_ticks
 
@@ -55,12 +57,22 @@ class Hw:
 
     self.MAX30205 = hw_max30205.MAX30205(self.i2c)
     self.MCP4725 = hw_mcp4725.MCP4725(self.i2c)
+    self.MCP3021 = hw_mcp3021.MCP3021(self.i2c)
 
     self.MCP4725.config(power_down='Off' ,value=0x0000, eeprom=True)
 
   def startTempMeasurement(self):
     self.MAX30205.oneShotNormalA(I2C_ADDRESS_TempH)
     self.MAX30205.oneShotNormalA(I2C_ADDRESS_TempO)
+
+  @property
+  def messe_fHV_V(self):
+    try:
+      return self.MCP3021.readV()
+    except OSError as osError:
+      if osError.args[0] == uerrno.ENODEV:
+        return 20.01
+      raise
 
   @property
   def messe_fTempH_C(self):
@@ -122,13 +134,13 @@ class Hw:
 
 def setTempOS():
   hw = Hw()
-  print('fTempH: %03f %03f' % (hw_hal.messe_fTempH_C, hw_hal.messe_fTempO_C))
+  print('fTempH: %03f %03f' % (hw.messe_fTempH_C, hw.messe_fTempO_C))
 
-  fTempOS_C, fTempHyst_C = hw_hal.MAX30205.getTempOS(hw_max30205.I2C_ADDRESS_B)
+  fTempOS_C, fTempHyst_C = hw.MAX30205.getTempOS(hw_max30205.I2C_ADDRESS_B)
   print('fTempOS/fTempHyst: %03f %03f' % (fTempOS_C, fTempHyst_C))
 
-  # hw_hal.MAX30205.setTempOS(hw_max30205.I2C_ADDRESS_B, 35.0, 34.5)
-  hw_hal.MAX30205.setTempOS(hw_max30205.I2C_ADDRESS_B, 40.0, 39.5)
+  # hw.MAX30205.setTempOS(hw_max30205.I2C_ADDRESS_B, 35.0, 34.5)
+  hw.MAX30205.setTempOS(hw_max30205.I2C_ADDRESS_B, 40.0, 39.5)
 
-  fTempOS_C, fTempHyst_C = hw_hal.MAX30205.getTempOS(hw_max30205.I2C_ADDRESS_B)
+  fTempOS_C, fTempHyst_C = hw.MAX30205.getTempOS(hw_max30205.I2C_ADDRESS_B)
   print('fTempOS/fTempHyst: %03f %03f' % (fTempOS_C, fTempHyst_C))

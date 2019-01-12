@@ -14,7 +14,7 @@ DIRECTORY_PROGRAM = 'program'
 
 strHttpPostPath = '/upload'
 strHttpPostServer = 'http://www.tempstabilizer2018.org'
-strHttpPostServer = 'http://192.168.4.1'
+# strHttpPostServer = 'http://192.168.4.1'
 
 strMAC = 'softmac'
 if sys.platform == 'esp32':

@@ -123,6 +123,7 @@ class Controller:
     self.objHw.startTempMeasurement()
 
     self.objTs.find_fDACzeroHeat(self.objHw)
+    print('portable_tempstabilizer.prepare(): Supply Voltage fHW_V is %0.2f V' % self.objHw.messe_fHV_V)
 
     self.__fTempO_SensorLast = self.objHw.messe_fTempH_C
     self.__fTempH_SensorLast = self.objHw.messe_fTempO_C
