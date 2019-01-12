@@ -23,6 +23,17 @@ class ConfigNode:
     self.__dictNode = dictNode
 
   @property
+  def strLabName(self):
+    return self.__dictLab[LAB_NAME]
+  @property
+  def strLabLabel(self):
+    return self.__dictLab[LAB_LABEL]
+
+  @property
+  def strName(self):
+    return self.__dictNode[NAME]
+
+  @property
   def strMac(self):
     return self.__dictLab[MAC]
 

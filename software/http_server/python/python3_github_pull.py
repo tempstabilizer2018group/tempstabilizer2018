@@ -57,21 +57,25 @@ class GithubPullBase:
       strDirectory = os.path.join(os.path.dirname(__file__), '..', 'node_data', 'swdownload')
       # strDirectory = '/tmp'
     self.__strDirectory = os.path.abspath(strDirectory)
+    self._strGitRepo = None
+    self._strGitTags = None
 
   def setMac(self, strMac):
     # Get the most actual config file from github
     objConfigNodes = self.__getConfigNodesFromGithub()
 
     # Find the mac we are looking for
-    objNode = objConfigNodes.findNodeByMac(strMac)
+    self.objNode = objConfigNodes.findNodeByMac(strMac)
 
     # remember it
-    self.setTags(objNode.strGitRepo, objNode.strGitTags)
+    self.setTags(self.objNode.strGitRepo, self.objNode.strGitTags)
 
     # return the version string
     return self._strGitTagsEscaped
 
   def setTags(self,  strGitRepo, strGitTags):
+    assert self._strGitRepo == None, 'This methode must only be called once!'
+    assert self._strGitTags == None, 'This methode must only be called once!'
     self._strGitRepo = strGitRepo
     self._strGitTags = strGitTags
     # Escape characters in the tags, but not the ';' between the git-tags
@@ -81,13 +85,7 @@ class GithubPullBase:
     self.__strTarFilenameFull = os.path.join(self.__strDirectory, self.__strTarFilename)
 
   def getTar(self):
-    def useCache():
-      if config_http_server.strGithubPullLocal:
-        # We want the locally changed files be in the next download
-        return False
-      return config_http_server.bCacheTarFiles
-
-    if useCache():
+    if config_http_server.bCacheTarFiles:
       if os.path.exists(self.__strTarFilenameFull):
         logging.info('Tarfile already in cache. skip download....')
         return self.__strTarFilenameFull
@@ -239,7 +237,7 @@ class GitHubApiPull(GithubPullBase):
     objGitRepro = self.__openRepo(strGithubRepoConfig)
     objGitFile = objGitRepro.get_file_contents(path=strFILENAME_CONFIG_NODES, ref='heads/master')
     strConfigNodes = objGitFile.decoded_content
-    return _getDictConfigNodesFromString(self, strConfigNodes)
+    return self._getDictNodesFromString(strConfigNodes)
 
   def _fetchFromGithub(self):
     objGitRepro = self.__openRepo(self._strGitRepo)
@@ -303,7 +301,7 @@ class GitHubPublicPull(GithubPullBase):
     strFileUrl = self.getFileUrl(strGithubRepoConfig, 'heads/master', strFILENAME_CONFIG_NODES)
     bConfigNodes = self.getFromHttp(strFileUrl)
     strConfigNodes = bConfigNodes.decode('utf8')
-    return _getDictConfigNodesFromString(self, strConfigNodes)
+    return self._getDictNodesFromString(strConfigNodes)
 
   def __openRepo(self, strGithubRepo):
     # objGithub = github.Github(strGithubUser, strGithubPw)
