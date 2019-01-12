@@ -8,10 +8,8 @@
 # MCP3021A5T-E/OT
 # https://www.mouser.ch/datasheet/2/268/21805a-74229.pdf
 # http://www.python-exemplary.com/index_en.php?inhalt_links=navigation_en.inc.php&inhalt_mitte=raspi/en/light.inc.php
-# 1001 101
 # '0x%02X' % 0b01001101 = 0x4D
 # '0x%02X' % 0b11001101 = 0xCD
-
 
 # A2, A1, A0
 I2C_ADDRESS = 0x4D  # 1, 0, 1

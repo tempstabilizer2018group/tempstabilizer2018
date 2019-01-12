@@ -46,38 +46,51 @@ class CachedLog:
 
 class GrafanaProtocol:
   def __init__(self, objLog, bFileExists=False):
+    self.bFileExists = bFileExists
     self.__objLog = objLog
     self.__iLastTicks_ms = portable_ticks.objTicks.ticks_ms()
     self.__iCounter = -1
     self.__objInterval = portable_ticks.Interval(iInterval_ms=config_app.iGrafanaLogInterval_ms)
+    self.__listGrafanaValueTempEnvirons = ()
 
     self.__objGrafanaValue_TempO = portable_grafana_datatypes.GrafanaValueFloatAvg('O', 'fTempO_C', 100.0)
     self.__objGrafanaValue_TempO_Setpoint = portable_grafana_datatypes.GrafanaValueFloat('S', 'fTempO_Setpoint_C', 100.0)
     self.__objGrafanaValue_Heat = portable_grafana_datatypes.GrafanaValueFloatAvg('H', 'fHeat_W', 100.0)
-    self.__objGrafanaValue_TempEnvirons = portable_grafana_datatypes.GrafanaValueFloatAvg('U', 'fTempEnvirons_C', 100.0)
     self.__objGrafanaValue_PidH_bLimitHigh = portable_grafana_datatypes.GrafanaValueBoolTrue('L', 'PidH_bLimitHigh')
     self.__objGrafanaValue_DACzeroHeat = portable_grafana_datatypes.GrafanaValueFloatAvg('z', 'fDACzeroHeat_V', 1000.0)
+    self.__objGrafanaValue_SupplyVoltage = portable_grafana_datatypes.GrafanaValueFloat('U', 'fSupplyVoltage_V', 100.0)
     self.__objGrafanaValue_DiskFree = portable_grafana_datatypes.GrafanaValueFloat('F', 'fDiskFree_MBytes', 100.0)
 
-    if bFileExists:
+    if self.bFileExists:
       return
 
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VERSION, '0.1')
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MAC, config_app.strMAC)
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MAXTICK_MS, portable_ticks.objTicks.iMaxTicks_ms)
 
-    def logAuxiliary(objGrafanaValue, iModuloPull):
-      self.logLine(portable_grafana_datatypes.TAG_GRAFANA_DATATYPE, objGrafanaValue.getConstructor())
-      if config_app.bGrafanaSkipEqualValues:
-        self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MESSINTERVAL_MS, '%s %d' % (objGrafanaValue.strTag, iModuloPull*config_app.iGrafanaLogInterval_ms))
+    self.__logAuxiliary(self.__objGrafanaValue_TempO, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
+    self.__logAuxiliary(self.__objGrafanaValue_TempO_Setpoint, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
+    self.__logAuxiliary(self.__objGrafanaValue_Heat, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
+    self.__logAuxiliary(self.__objGrafanaValue_PidH_bLimitHigh, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
+    self.__logAuxiliary(self.__objGrafanaValue_DACzeroHeat, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
+    self.__logAuxiliary(self.__objGrafanaValue_SupplyVoltage, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
+    self.__logAuxiliary(self.__objGrafanaValue_DiskFree, config_app.iMODULO_GRAFANALOG_SLOW_PULL)
 
-    logAuxiliary(self.__objGrafanaValue_TempO, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
-    logAuxiliary(self.__objGrafanaValue_TempO_Setpoint, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
-    logAuxiliary(self.__objGrafanaValue_Heat, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
-    logAuxiliary(self.__objGrafanaValue_TempEnvirons, config_app.iMODULO_GRAFANALOG_SLOW_PULL)
-    logAuxiliary(self.__objGrafanaValue_PidH_bLimitHigh, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
-    logAuxiliary(self.__objGrafanaValue_DACzeroHeat, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
-    logAuxiliary(self.__objGrafanaValue_DiskFree, config_app.iMODULO_GRAFANALOG_SLOW_PULL)
+  def __logAuxiliary(self, objGrafanaValue, iModuloPull):
+    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_DATATYPE, objGrafanaValue.getConstructor())
+    if config_app.bGrafanaSkipEqualValues:
+      self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MESSINTERVAL_MS, '%s %d' % (objGrafanaValue.strTag, iModuloPull*config_app.iGrafanaLogInterval_ms))
+
+  def setListEnvironsAddressI2C(self, listAddressI2C):
+    # Temperatures will be named 'r', 's', 't', ...
+    iChar = ord('r')
+    def f(iAddressI2C):
+      return portable_grafana_datatypes.GrafanaValueFloat(chr(iChar), 'fTempEnvirons_%02X_C' % iAddressI2C, 100.0)
+    self.__listGrafanaValueTempEnvirons = list(map(f, listAddressI2C))
+    if self.bFileExists:
+      return
+    for objGrafanaValue in self.__listGrafanaValueTempEnvirons:
+      self.__logAuxiliary(objGrafanaValue, config_app.iMODULO_GRAFANALOG_SLOW_PULL)
 
   def close(self):
     self.__objLog.close()
@@ -116,12 +129,6 @@ class GrafanaProtocol:
       self.__objGrafanaValue_PidH_bLimitHigh.pushValue(objTs.bFetMax_W_Limit_High)
       self.__objGrafanaValue_DACzeroHeat.pushValue(objTs.fDACzeroHeat_V)
 
-    if (self.__iCounter % config_app.iMODULO_GRAFANALOG_SLOW_PUSH) == 0:
-      fTempEnvirons_C = objHw.messe_fTempEnvirons_C
-      if fTempEnvirons_C != None:
-        self.__objGrafanaValue_TempEnvirons.pushValue(fTempEnvirons_C)
-      iDiskFree_MBytes = objHw.messe_iDiskFree_MBytes
-
     listValues = []
 
     def pullValue(objGrafanaValue):
@@ -141,12 +148,24 @@ class GrafanaProtocol:
       pullValue(self.__objGrafanaValue_DACzeroHeat)
 
       # self.__objGrafanaValue_TempO_Setpoint is not AVG. So we only need to pushValue() once per pullValue()
+      fHV_V = objHw.messe_fHV_V
+      self.__objGrafanaValue_SupplyVoltage.pushValue(fHV_V)
+      pullValue(self.__objGrafanaValue_SupplyVoltage)
+
+      # self.__objGrafanaValue_TempO_Setpoint is not AVG. So we only need to pushValue() once per pullValue()
       self.__objGrafanaValue_TempO_Setpoint.pushValue(objTs.fTempO_Setpoint_C)
       pullValue(self.__objGrafanaValue_TempO_Setpoint)
 
     if (self.__iCounter % config_app.iMODULO_GRAFANALOG_SLOW_PULL) == 0:
-      pullValue(self.__objGrafanaValue_TempEnvirons)
+      # self.__listGrafanaValueTempEnvirons is not AVG. So we only need to pushValue() once per pullValue()
+      listTempEnvirons_C = objHw.messe_listTempEnvirons_C
+      assert len(listTempEnvirons_C) == len(self.__listGrafanaValueTempEnvirons)
+      for fTempEnvirons_C, objGrafanaValueTempEnviron_C in zip(listTempEnvirons_C, self.__listGrafanaValueTempEnvirons):
+        objGrafanaValueTempEnviron_C.pushValue(fTempEnvirons_C)
+        pullValue(objGrafanaValueTempEnviron_C)
+  
       # self.__objGrafanaValue_DiskFree is not AVG. So we only need to pushValue() once per pullValue()
+      iDiskFree_MBytes = objHw.messe_iDiskFree_MBytes
       self.__objGrafanaValue_DiskFree.pushValue(iDiskFree_MBytes)
       pullValue(self.__objGrafanaValue_DiskFree)
 
@@ -154,5 +173,5 @@ class GrafanaProtocol:
       self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VALUE, ''.join(listValues))
 
 if __name__ == '__main__':
-  objFloat = GrafanaValueFloat('S', 'fTempO_Setpoint_C', 1000.0)
+  objFloat = portable_grafana_datatypes.GrafanaValueFloat('S', 'fTempO_Setpoint_C', 1000.0)
   listFloatInput = (1.0, 1.0, 1.1, 1.1, 1.1, 20.0)

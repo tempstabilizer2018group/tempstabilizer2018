@@ -5,21 +5,38 @@
   https://datasheets.maximintegrated.com/en/ds/MAX30205.pdf
   Addressrange: 0x80 - 0xBE
 '''
-# MCP3021A5T-E/OT
-# https://www.mouser.ch/datasheet/2/268/21805a-74229.pdf
-# http://www.python-exemplary.com/index_en.php?inhalt_links=navigation_en.inc.php&inhalt_mitte=raspi/en/light.inc.php
-# 1001 101
-# '0x%02X' % 0b01001101 = 0x4D
-# '0x%02X' % 0b11001101 = 0xCD
-
 import array
 import portable_ticks
 
+# NOTE: In the datasheet, the address is multiplied by 2. For example 0x48 is 0x90 in the datasheet.
+
 # A2, A1, A0
-I2C_ADDRESS_A = 0x90  # 0, 0, 0
-I2C_ADDRESS_B = 0x92  # 0, 0, 1
-I2C_ADDRESS_C = 0x94 # 0, 1, 0
-I2C_ADDRESS_D = 0x96 # 0, 1, 1
+I2C_ADDRESS_A = 0x48 # 0x90  # 0, 0, 0
+I2C_ADDRESS_B = 0x49 # 0x92  # 0, 0, 1
+I2C_ADDRESS_C = 0x4A # 0x94 # 0, 1, 0
+I2C_ADDRESS_D = 0x4B # 0x96 # 0, 1, 1
+
+I2C_ADDRESS_MIN = 0x40 # 0x80
+I2C_ADDRESS_MAX = 0x5F # 0xBE
+
+def isEnvironI2C(iI2C):
+  '''
+    returns true if this i2c-address is to measure environment tempertatures
+  '''
+  if iI2C < I2C_ADDRESS_MIN:
+    return False
+  if iI2C > I2C_ADDRESS_MAX:
+    return False
+  if iI2C in (I2C_ADDRESS_A, I2C_ADDRESS_B):
+    # These sensors measure TempO_C and Temp_H_c
+    return False
+  return True
+
+def filterEnvironsI2C(listDevicesI2C):
+  '''
+    Selects all devices from the list which measure environment tempertatures
+  '''
+  return list(filter(isEnvironI2C, listDevicesI2C))
 
 REG_TEMP = 0b00000000
 REG_CONFIG = 0b00000001
@@ -54,7 +71,7 @@ class MAX30205:
       iTemp = int(fTemp*TEMP_64C/64.0)
       iTempMSB = (iTemp>>8)&0xFF
       iTempLSB = iTemp&0xFF
-      self.i2c.writeto_mem(i2cAddress>>1, iRegister, array.array('b', (iTempMSB, iTempLSB)))
+      self.i2c.writeto_mem(i2cAddress, iRegister, array.array('b', (iTempMSB, iTempLSB)))
 
     write(REG_T_OS, fTempOS_C)
     write(REG_T_HYST, fTempHyst_C)
@@ -72,7 +89,7 @@ class MAX30205:
     '''
       read temperature (2 bytes)
     '''
-    bTemp = self.i2c.readfrom_mem(i2cAddress>>1, iRegister, 2)
+    bTemp = self.i2c.readfrom_mem(i2cAddress, iRegister, 2)
     iTemp = int((bTemp[0]<<8) | bTemp[1])
     fTemp = iTemp*64.0/TEMP_64C
     return fTemp
@@ -81,7 +98,7 @@ class MAX30205:
     '''
       Start Oneshot and Shutdown afterwards
     '''
-    self.i2c.writeto_mem(i2cAddress>>1, REG_CONFIG, array.array('b', (REG_CONFIG_ONESHOT|REG_CONFIG_SHUTDOWN,)))
+    self.i2c.writeto_mem(i2cAddress, REG_CONFIG, array.array('b', (REG_CONFIG_ONESHOT|REG_CONFIG_SHUTDOWN,)))
 
   def oneShotNormalB(self, i2cAddress):
     fTemp = self.__readTemp(i2cAddress, REG_TEMP)

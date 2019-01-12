@@ -1,13 +1,13 @@
 {
 	"folders": [
 		{
-			"path": "config"
+			"path": "node/config"
 		},
 		{
 			"path": "node/program"
 		},
 		{
-			"path": "/home/pi/tempstabilizer2018/software/tools_pyplot"
+			"path": "tools_pyplot"
 		}
 	]
 }

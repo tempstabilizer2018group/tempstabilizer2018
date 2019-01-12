@@ -46,11 +46,11 @@ class HwController(portable_controller.Controller):
     if bIntervalOver:
       # During the next loop, the Stopwatch will log
       portable_ticks.bDoStopwatch = True
-      fTempEnvirons_C = self.objHw.messe_fTempEnvirons_C
       strTempEnvirons_C = '-'
-      if fTempEnvirons_C != None:
-        strTempEnvirons_C = '%0.2fC' % fTempEnvirons_C
-      print('%0.3fs %s %0.2f(%0.2f)C %0.2f(%0.2f)C %0.3f' % (portable_ticks.objTicks.ticks_ms()/1000.0, strTempEnvirons_C, self.objTs.fTempO_C, self.objTs.fTempO_Setpoint_C, self.objTs.fTempH_C, self.objTs.fTempH_Setpoint_C, self.objTs.fDac_V))
+      listTempEnvirons_C = self.objHw.messe_listTempEnvirons_C
+      if len(listTempEnvirons_C) > 0:
+        strTempEnvirons_C = ','.join(map(lambda f:'%0.2fC' % f, listTempEnvirons_C ))
+      print('%0.3fs %sC %0.2f(%0.2f)C %0.2f(%0.2f)C %0.3f' % (portable_ticks.objTicks.ticks_ms()/1000.0, strTempEnvirons_C, self.objTs.fTempO_C, self.objTs.fTempO_Setpoint_C, self.objTs.fTempH_C, self.objTs.fTempH_Setpoint_C, self.objTs.fDac_V))
 
   def reboot(self):
     machine.reset()
@@ -125,6 +125,7 @@ class HwController(portable_controller.Controller):
       self.logException(e, '__networkReplicate()')
 
     self.openLogs()
+    self.objGrafanaProtocol.setListEnvironsAddressI2C(self.objHw.listEnvironsAddressI2C)
 
   def __networkReplicate(self):
     # TODO:

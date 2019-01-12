@@ -5,13 +5,14 @@
 from machine import I2C
 
 #The MCP4725 has support from 2 addresses
-BUS_ADDRESS = [0x60,0x61]
+I2C_ADDRESS_A = 0x60
+I2C_ADDRESS_B = 0x61
 
 #The device supports a few power down modes on startup and during operation 
 POWER_DOWN_MODE = {'Off':0, '1k':1, '100k':2, '500k':3}
         
 class MCP4725:
-    def __init__(self,i2c, address=BUS_ADDRESS[0]) :
+    def __init__(self,i2c, address=I2C_ADDRESS_A) :
         self.i2c=i2c
         self.address=address
         self._writeBuffer=bytearray(2)

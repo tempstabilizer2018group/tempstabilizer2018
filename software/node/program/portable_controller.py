@@ -22,12 +22,10 @@ class Controller:
     self.__iTicksButtonPressed_ms = None
     self.__fTempO_SensorLast = -1000.0
     self.__fTempH_SensorLast = -1000.0
-    self.fLog = self.factoryLog()
-    self.objGrafanaProtocol = self.factoryGrafanaLog()
+    self.openLogs()
     self.objHw = self.factoryHw()
+    self.objGrafanaProtocol.setListEnvironsAddressI2C(self.objHw.listEnvironsAddressI2C)
     self.objTs = self.factoryTempStabilizer()
-    if self.fLog != None:
-      self.objTs.logHeader(self.fLog)
 
   def ticks_init(self):
     # May be derived and overridden
@@ -122,8 +120,9 @@ class Controller:
 
     self.objHw.startTempMeasurement()
 
+    print('portable_tempstabilizer.prepare(): Supply Voltage fHV_V is %0.2f V' % self.objHw.messe_fHV_V)
+
     self.objTs.find_fDACzeroHeat(self.objHw)
-    print('portable_tempstabilizer.prepare(): Supply Voltage fHW_V is %0.2f V' % self.objHw.messe_fHV_V)
 
     self.__fTempO_SensorLast = self.objHw.messe_fTempH_C
     self.__fTempH_SensorLast = self.objHw.messe_fTempO_C

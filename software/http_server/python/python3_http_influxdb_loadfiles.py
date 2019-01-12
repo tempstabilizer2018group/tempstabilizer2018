@@ -122,7 +122,7 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
   def __writeToInfluxDB(self, strFilenameFull):
     # Set up influxDB connection
     # url, port, user, pw, db
-    print('InfluxDB %s:%d %s' % (config_http_server.strInfluxDbHost, config_http_server.strInfluxDbPort, config_http_server.strInfluxDbDatabase)
+    print('InfluxDB %s:%d %s' % (config_http_server.strInfluxDbHost, config_http_server.strInfluxDbPort, config_http_server.strInfluxDbDatabase))
     objInfluxDBClient = influxdb.InfluxDBClient(config_http_server.strInfluxDbHost, config_http_server.strInfluxDbPort, '', '', config_http_server.strInfluxDbDatabase)
 
     # Write data to influxDB

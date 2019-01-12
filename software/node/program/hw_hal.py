@@ -53,26 +53,51 @@ class Hw:
     self.__objHwI2cEnvironsInterval = portable_ticks.Interval(iInterval_ms=config_app.iHwI2cEnvironsInterval_ms, bForceFirstTime=True)
 
     self.i2c = machine.I2C(freq=1000000, scl=pin_scl, sda=pin_sda) 
-    # i2c.scan()
+    self.listAddressI2C = self.i2c.scan()
+    self.listAddressI2C = sorted(self.listAddressI2C)
+    self.listEnvironsAddressI2C = hw_max30205.filterEnvironsI2C(self.listAddressI2C)
+    self.listEnvironsAddressI2C.remove(hw_mcp3021.I2C_ADDRESS)
+    def listToHexString(list):
+      return ','.join(map(lambda v: '0x%02X' % v, list))
+    print('listAddressI2C:', listToHexString(self.listAddressI2C))
+    print('listEnvironsAddressI2C:', listToHexString(self.listEnvironsAddressI2C))
 
     self.MAX30205 = hw_max30205.MAX30205(self.i2c)
     self.MCP4725 = hw_mcp4725.MCP4725(self.i2c)
-    self.MCP3021 = hw_mcp3021.MCP3021(self.i2c)
+    self.MCP3021 = None
+    if hw_mcp3021.I2C_ADDRESS in self.listAddressI2C:
+      self.MCP3021 = hw_mcp3021.MCP3021(self.i2c)
 
     self.MCP4725.config(power_down='Off' ,value=0x0000, eeprom=True)
+
+    # Make sure, that 'self.__fHV_V' is defined
+    self.messe_fHV_V
 
   def startTempMeasurement(self):
     self.MAX30205.oneShotNormalA(I2C_ADDRESS_TempH)
     self.MAX30205.oneShotNormalA(I2C_ADDRESS_TempO)
 
   @property
+  def cached_fHV_V(self):
+    return self.__fHV_V
+
+  @property
   def messe_fHV_V(self):
+    self.__fHV_V = self.__messe_fHV_V()
+    return self.__fHV_V
+
+  def __messe_fHV_V(self):
+    if self.MCP3021 != None:
+      return self.MCP3021.readV()
+    return 20.01
+    '''
     try:
       return self.MCP3021.readV()
     except OSError as osError:
       if osError.args[0] == uerrno.ENODEV:
         return 20.01
       raise
+    '''
 
   @property
   def messe_fTempH_C(self):
@@ -83,19 +108,10 @@ class Hw:
     return self.MAX30205.oneShotNormalB(I2C_ADDRESS_TempO)
 
   @property
-  def messe_fTempEnvirons_C(self):
-    '''
-       The environs-detector may be connected or not.
-     '''
-    try:
-      bIntervalOver, iDummy = self.__objHwI2cEnvironsInterval.isIntervalOver()
-      if bIntervalOver:
-        portable_ticks.count('hw_hal.Hw.messe_fTempEnvirons_C')
-        fTempEnvirons_C = self.MAX30205.oneShotNormal(I2C_ADDRESS_Environs)
-      return fTempEnvirons_C
-    except:
-      return None
-
+  def messe_listTempEnvirons_C(self):
+    map(self.MAX30205.oneShotNormalA, self.listEnvironsAddressI2C)
+    listTempEnvirons_C = list(map(self.MAX30205.oneShotNormalB, self.listEnvironsAddressI2C))
+    return listTempEnvirons_C
 
   @property
   def messe_iDiskFree_MBytes(self):
