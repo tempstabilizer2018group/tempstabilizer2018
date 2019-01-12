@@ -24,7 +24,8 @@ class Controller:
     self.__fTempH_SensorLast = -1000.0
     self.openLogs()
     self.objHw = self.factoryHw()
-    self.objGrafanaProtocol.setListEnvironsAddressI2C(self.objHw.listEnvironsAddressI2C)
+    self.objGrafanaProtocol = self.factoryGrafanaProtocol()
+    self.attachFileToGrafanaProtocol()
     self.objTs = self.factoryTempStabilizer()
 
   def ticks_init(self):
@@ -46,7 +47,6 @@ class Controller:
     return False
 
   def openLogs(self):
-    self.objGrafanaProtocol = self.factoryGrafanaLog()
     self.fLog = self.factoryLog()
     if self.fLog != None:
       self.objTs.logHeader(self.fLog)
@@ -82,12 +82,16 @@ class Controller:
     fOut = portable_grafana_log_writer.CachedLog(strFilename)
     return fOut
 
-  def factoryGrafanaLog(self):
-    # May be derived and overridden
+  def factoryGrafanaProtocol(self):
+    return portable_grafana_log_writer.GrafanaProtocol(self.objHw.listEnvironsAddressI2C)
+
+  def attachFileToGrafanaProtocol(self):
     strFilename = self.filenameGrafanaLog()
     bFileExists = self.__fileExists(strFilename)
-    objGrafanaLog = self.factoryCachedFile(strFilename)
-    return portable_grafana_log_writer.GrafanaProtocol(objGrafanaLog, bFileExists=bFileExists)
+    objCachedFile = self.factoryCachedFile(strFilename)
+    self.objGrafanaProtocol.attachFile(objCachedFile)
+    if not bFileExists:
+      self.objGrafanaProtocol.writeHeader()
 
   def factoryLog(self):
     # May be derived and overridden

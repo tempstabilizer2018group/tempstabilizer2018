@@ -45,55 +45,53 @@ class CachedLog:
     self.__flush()
 
 class GrafanaProtocol:
-  def __init__(self, objLog, bFileExists=False):
-    self.bFileExists = bFileExists
-    self.__objLog = objLog
+  def __init__(self, listAddressI2C):
+    self.__objLog = None
     self.__iLastTicks_ms = portable_ticks.objTicks.ticks_ms()
     self.__iCounter = -1
     self.__objInterval = portable_ticks.Interval(iInterval_ms=config_app.iGrafanaLogInterval_ms)
-    self.__listGrafanaValueTempEnvirons = ()
+
+    # Temperatures will be named 'r', 's', 't', ...
+    iChar = ord('r')
+    def f(iAddressI2C):
+      return portable_grafana_datatypes.GrafanaValueFloat(chr(iChar), 'fTempEnvirons_C_%02X' % iAddressI2C, 20.0)
+    self.__listGrafanaValueTempEnvirons = list(map(f, listAddressI2C))
 
     self.__objGrafanaValue_TempO = portable_grafana_datatypes.GrafanaValueFloatAvg('O', 'fTempO_C', 100.0)
-    self.__objGrafanaValue_TempO_Setpoint = portable_grafana_datatypes.GrafanaValueFloat('S', 'fTempO_Setpoint_C', 100.0)
+    self.__objGrafanaValue_TempO_Setpoint = portable_grafana_datatypes.GrafanaValueFloat('S', 'fTempO_Setpoint_C', 20.0)
     self.__objGrafanaValue_Heat = portable_grafana_datatypes.GrafanaValueFloatAvg('H', 'fHeat_W', 100.0)
     self.__objGrafanaValue_PidH_bLimitHigh = portable_grafana_datatypes.GrafanaValueBoolTrue('L', 'PidH_bLimitHigh')
     self.__objGrafanaValue_DACzeroHeat = portable_grafana_datatypes.GrafanaValueFloatAvg('z', 'fDACzeroHeat_V', 1000.0)
-    self.__objGrafanaValue_SupplyVoltage = portable_grafana_datatypes.GrafanaValueFloat('U', 'fSupplyVoltage_V', 100.0)
+    self.__objGrafanaValue_SupplyVoltage = portable_grafana_datatypes.GrafanaValueFloat('U', 'fSupplyVoltage_V', 1.0)
     self.__objGrafanaValue_DiskFree = portable_grafana_datatypes.GrafanaValueFloat('F', 'fDiskFree_MBytes', 100.0)
 
-    if self.bFileExists:
-      return
-
+  def writeHeader(self):
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VERSION, '0.1')
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MAC, config_app.strMAC)
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MAXTICK_MS, portable_ticks.objTicks.iMaxTicks_ms)
 
-    self.__logAuxiliary(self.__objGrafanaValue_TempO, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
-    self.__logAuxiliary(self.__objGrafanaValue_TempO_Setpoint, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
-    self.__logAuxiliary(self.__objGrafanaValue_Heat, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
-    self.__logAuxiliary(self.__objGrafanaValue_PidH_bLimitHigh, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
-    self.__logAuxiliary(self.__objGrafanaValue_DACzeroHeat, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
-    self.__logAuxiliary(self.__objGrafanaValue_SupplyVoltage, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
-    self.__logAuxiliary(self.__objGrafanaValue_DiskFree, config_app.iMODULO_GRAFANALOG_SLOW_PULL)
+    def logAuxiliary(objGrafanaValue, iModuloPull):
+      self.logLine(portable_grafana_datatypes.TAG_GRAFANA_DATATYPE, objGrafanaValue.getConstructor())
+      if config_app.bGrafanaSkipEqualValues:
+        self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MESSINTERVAL_MS, '%s %d' % (objGrafanaValue.strTag, iModuloPull*config_app.iGrafanaLogInterval_ms))
 
-  def __logAuxiliary(self, objGrafanaValue, iModuloPull):
-    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_DATATYPE, objGrafanaValue.getConstructor())
-    if config_app.bGrafanaSkipEqualValues:
-      self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MESSINTERVAL_MS, '%s %d' % (objGrafanaValue.strTag, iModuloPull*config_app.iGrafanaLogInterval_ms))
+    logAuxiliary(self.__objGrafanaValue_TempO, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
+    logAuxiliary(self.__objGrafanaValue_TempO_Setpoint, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
+    logAuxiliary(self.__objGrafanaValue_Heat, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
+    logAuxiliary(self.__objGrafanaValue_PidH_bLimitHigh, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
+    logAuxiliary(self.__objGrafanaValue_DACzeroHeat, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
+    logAuxiliary(self.__objGrafanaValue_SupplyVoltage, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
+    logAuxiliary(self.__objGrafanaValue_DiskFree, config_app.iMODULO_GRAFANALOG_SLOW_PULL)
 
-  def setListEnvironsAddressI2C(self, listAddressI2C):
-    # Temperatures will be named 'r', 's', 't', ...
-    iChar = ord('r')
-    def f(iAddressI2C):
-      return portable_grafana_datatypes.GrafanaValueFloat(chr(iChar), 'fTempEnvirons_%02X_C' % iAddressI2C, 100.0)
-    self.__listGrafanaValueTempEnvirons = list(map(f, listAddressI2C))
-    if self.bFileExists:
-      return
     for objGrafanaValue in self.__listGrafanaValueTempEnvirons:
-      self.__logAuxiliary(objGrafanaValue, config_app.iMODULO_GRAFANALOG_SLOW_PULL)
+      logAuxiliary(objGrafanaValue, config_app.iMODULO_GRAFANALOG_SLOW_PULL)
+
+  def attachFile(self, objLog):
+    self.__objLog = objLog
 
   def close(self):
     self.__objLog.close()
+    self.__objLog = None
 
   def logInfo(self, strWarning):
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_INFO, strWarning)
