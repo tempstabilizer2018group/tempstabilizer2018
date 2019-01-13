@@ -2,17 +2,11 @@
 import os
 
 import portable_grafana_datatypes
+from portable_grafana_datatypes import INFLUXDB_TAG_NODE
+from portable_grafana_datatypes import INFLUXDB_TAG_ENVIRONS
 import portable_ticks
 import config_app
 
-'''
-Optimierungspotential:
- - Ein Wert wird geschrieben, wenn er sich verändert. Aber frühstens wieder in iMODULO_xxx
- - Statt einem Zeichen ohne Wert wird nichts geschrieben.
-   - a) Ein leeres Zeichen wird aber mindestens alle iMODULO geschrieben
-   - b) Dafür wird wird vor dem nächsten Wert die ms hineingeschrieben bei welcher der letzte Wert gemessen wurde.
-   - c) Am Anfang des Files wird dem reader ein Hint gegeben, alle wieviele Millisekunden ein Wert gemessen wird. So kann der Empfänger fehlende Werte einsetzen.
-'''
 def nextFilename(strFilenameTemplate='test_hw_pidh_pido_day_log_%02d.txt'):
   listFiles = os.listdir()
   for i in range(100):
@@ -35,7 +29,7 @@ class CachedLog:
     self.__flush()
 
   def __flush(self):
-    print('flush()')
+    print('flush()', self.strFilename)
     with open(self.strFilename, 'a') as fLog:
       for strLine in self.listBuf:
         fLog.write(strLine)
@@ -54,19 +48,19 @@ class GrafanaProtocol:
     # Temperatures will be named 'r', 's', 't', ...
     iChar = ord('r')
     def f(iAddressI2C):
-      return portable_grafana_datatypes.GrafanaValueFloat(chr(iChar), 'fTempEnvirons_C_%02X' % iAddressI2C, 20.0)
+      return portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_ENVIRONS, chr(iChar), 'fTempEnvirons_C_%02X' % iAddressI2C, 20.0)
     self.__listGrafanaValueTempEnvirons = list(map(f, listAddressI2C))
 
-    self.__objGrafanaValue_TempO = portable_grafana_datatypes.GrafanaValueFloatAvg('O', 'fTempO_C', 100.0)
-    self.__objGrafanaValue_TempO_Setpoint = portable_grafana_datatypes.GrafanaValueFloat('S', 'fTempO_Setpoint_C', 20.0)
-    self.__objGrafanaValue_Heat = portable_grafana_datatypes.GrafanaValueFloatAvg('H', 'fHeat_W', 100.0)
-    self.__objGrafanaValue_PidH_bLimitHigh = portable_grafana_datatypes.GrafanaValueBoolTrue('L', 'PidH_bLimitHigh')
-    self.__objGrafanaValue_DACzeroHeat = portable_grafana_datatypes.GrafanaValueFloatAvg('z', 'fDACzeroHeat_V', 1000.0)
-    self.__objGrafanaValue_SupplyVoltage = portable_grafana_datatypes.GrafanaValueFloat('U', 'fSupplyVoltage_V', 1.0)
-    self.__objGrafanaValue_DiskFree = portable_grafana_datatypes.GrafanaValueFloat('F', 'fDiskFree_MBytes', 100.0)
+    self.__objGrafanaValue_TempO = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'O', 'fTempO_C', 100.0)
+    self.__objGrafanaValue_TempO_Setpoint = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'S', 'fTempO_Setpoint_C', 20.0)
+    self.__objGrafanaValue_Heat = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'H', 'fHeat_W', 100.0)
+    self.__objGrafanaValue_PidH_bLimitHigh = portable_grafana_datatypes.GrafanaValueBoolTrue(INFLUXDB_TAG_NODE, 'L', 'PidH_bLimitHigh')
+    self.__objGrafanaValue_DACzeroHeat = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'z', 'fDACzeroHeat_V', 1000.0)
+    self.__objGrafanaValue_SupplyVoltage = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'U', 'fSupplyVoltage_V', 1.0)
+    self.__objGrafanaValue_DiskFree = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'F', 'fDiskFree_MBytes', 100.0)
 
   def writeHeader(self):
-    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VERSION, '0.1')
+    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VERSION, '1.0')
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MAC, config_app.strMAC)
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MAXTICK_MS, portable_ticks.objTicks.iMaxTicks_ms)
 
@@ -87,6 +81,7 @@ class GrafanaProtocol:
       logAuxiliary(objGrafanaValue, config_app.iMODULO_GRAFANALOG_SLOW_PULL)
 
   def attachFile(self, objLog):
+    assert self.__objLog == None, 'There is already a file attached!'
     self.__objLog = objLog
 
   def close(self):
@@ -146,8 +141,8 @@ class GrafanaProtocol:
       pullValue(self.__objGrafanaValue_DACzeroHeat)
 
       # self.__objGrafanaValue_TempO_Setpoint is not AVG. So we only need to pushValue() once per pullValue()
-      fHV_V = objHw.messe_fHV_V
-      self.__objGrafanaValue_SupplyVoltage.pushValue(fHV_V)
+      fSupplyHV_V = objHw.messe_fSupplyHV_V
+      self.__objGrafanaValue_SupplyVoltage.pushValue(fSupplyHV_V)
       pullValue(self.__objGrafanaValue_SupplyVoltage)
 
       # self.__objGrafanaValue_TempO_Setpoint is not AVG. So we only need to pushValue() once per pullValue()

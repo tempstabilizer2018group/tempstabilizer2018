@@ -55,8 +55,7 @@ class Hw:
     self.i2c = machine.I2C(freq=1000000, scl=pin_scl, sda=pin_sda) 
     self.listAddressI2C = self.i2c.scan()
     self.listAddressI2C = sorted(self.listAddressI2C)
-    self.listEnvironsAddressI2C = hw_max30205.filterEnvironsI2C(self.listAddressI2C)
-    self.listEnvironsAddressI2C.remove(hw_mcp3021.I2C_ADDRESS)
+    self.listEnvironsAddressI2C = hw_max30205.filterEnvironsI2C(self.listAddressI2C, hw_mcp3021.I2C_ADDRESS)
     def listToHexString(list):
       return ','.join(map(lambda v: '0x%02X' % v, list))
     print('listAddressI2C:', listToHexString(self.listAddressI2C))
@@ -89,13 +88,16 @@ class Hw:
   def __messe_fHV_V(self):
     if self.MCP3021 != None:
       return self.MCP3021.readV()
-    return 20.01
+    # We don't know the supply voltage - this may happen on old hardware.
+    # We assume a high supply voltage to prevent overheat.
+    return 47.11
+
     '''
     try:
       return self.MCP3021.readV()
     except OSError as osError:
       if osError.args[0] == uerrno.ENODEV:
-        return 20.01
+        return 47.11
       raise
     '''
 

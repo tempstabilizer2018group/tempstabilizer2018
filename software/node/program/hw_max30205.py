@@ -19,23 +19,24 @@ I2C_ADDRESS_D = 0x4B # 0x96 # 0, 1, 1
 I2C_ADDRESS_MIN = 0x40 # 0x80
 I2C_ADDRESS_MAX = 0x5F # 0xBE
 
-def isEnvironI2C(iI2C):
-  '''
-    returns true if this i2c-address is to measure environment tempertatures
-  '''
-  if iI2C < I2C_ADDRESS_MIN:
-    return False
-  if iI2C > I2C_ADDRESS_MAX:
-    return False
-  if iI2C in (I2C_ADDRESS_A, I2C_ADDRESS_B):
-    # These sensors measure TempO_C and Temp_H_c
-    return False
-  return True
-
-def filterEnvironsI2C(listDevicesI2C):
+def filterEnvironsI2C(listDevicesI2C, I2C_ADDRESS_converterAD):
   '''
     Selects all devices from the list which measure environment tempertatures
   '''
+
+  def isEnvironI2C(iI2C):
+    '''
+      returns true if this i2c-address is to measure environment tempertatures
+    '''
+    if iI2C < I2C_ADDRESS_MIN:
+      return False
+    if iI2C > I2C_ADDRESS_MAX:
+      return False
+    if iI2C in (I2C_ADDRESS_A, I2C_ADDRESS_B, I2C_ADDRESS_converterAD):
+      # These sensors measure TempO_C and Temp_H_c
+      return False
+    return True
+
   return list(filter(isEnvironI2C, listDevicesI2C))
 
 REG_TEMP = 0b00000000
