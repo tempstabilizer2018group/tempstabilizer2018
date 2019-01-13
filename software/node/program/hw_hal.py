@@ -68,7 +68,7 @@ class Hw:
     if hw_mcp3021.I2C_ADDRESS in self.listAddressI2C:
       self.MCP3021 = hw_mcp3021.MCP3021(self.i2c)
 
-    self.MCP4725.config(power_down='Off' ,value=0x0000, eeprom=True)
+    self.MCP4725.config(power_down='Off', value=0x0000, eeprom=True)
 
     # Make sure, that 'self.__fHV_V' is defined
     self.messe_fHV_V
