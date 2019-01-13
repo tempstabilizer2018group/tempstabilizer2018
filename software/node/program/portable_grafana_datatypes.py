@@ -9,13 +9,16 @@ TAG_GRAFANA_WARNING = 'warning'
 TAG_GRAFANA_ERROR = 'error'
 TAG_GRAFANA_MESSINTERVAL_MS = 'messinterval_ms'
 TAG_GRAFANA_MAXTICK_MS = 'portable_ticks.iMaxTick_ms'
+INFLUXDB_TAG_NODE = 'node'
+INFLUXDB_TAG_ENVIRONS = 'environs'
 
 def Instantiate(strConstructor):
   objGrafanaValue = eval(strConstructor)
   return objGrafanaValue
 
 class GrafanaValueBase:
-  def __init__(self, strTag, strName):
+  def __init__(self, strInfluxDbTag, strTag, strName):
+    self.strInfluxDbTag = strInfluxDbTag
     self.strTag = strTag
     self.strName = strName
     self.__strValueActual = None
@@ -28,15 +31,15 @@ class GrafanaValueBase:
 
   def getConstructor(self):
     strAdditionalArguments = self._getAdditionalArguments()
-    return "%s('%s', '%s'%s)" % (type(self).__name__, self.strTag, self.strName, strAdditionalArguments)
+    return "%s('%s', '%s', '%s'%s)" % (type(self).__name__, self.strInfluxDbTag, self.strTag, self.strName, strAdditionalArguments)
 
 class GrafanaValueFloatAvg(GrafanaValueBase):
   '''
     Der Wert wird gemittelt.
     Hat der Wert sich nicht geändert, so wird '' zurückgegeben.
   '''
-  def __init__(self, strTag, strName, __fFactor=100000.0):
-    GrafanaValueBase.__init__(self, strTag, strName)
+  def __init__(self, strInfluxDbTag, strTag, strName, __fFactor=100000.0):
+    GrafanaValueBase.__init__(self, strInfluxDbTag, strTag, strName)
     self.__fFactor = __fFactor
     self.__fSum = 0.0
     self.__iCount = 0
@@ -68,8 +71,8 @@ class GrafanaValueFloat(GrafanaValueBase):
   '''
     Hat der Wert sich nicht geändert, so wird '' zurückgegeben.
   '''
-  def __init__(self, strTag, strName, __fFactor=100000.0):
-    GrafanaValueBase.__init__(self, strTag, strName)
+  def __init__(self, strInfluxDbTag, strTag, strName, __fFactor=100000.0):
+    GrafanaValueBase.__init__(self, strInfluxDbTag, strTag, strName)
     self.__fFactor = __fFactor
     self.fValue = None
 
@@ -98,8 +101,8 @@ class GrafanaValueBoolTrue(GrafanaValueBase):
     Falls der Wert irgendwann True war, wird '+' zurückgegeben, sonst '-'.
     Hat der Wert sich nicht geändert, so wird '' zurückgegeben.
   '''
-  def __init__(self, strTag, strName):
-    GrafanaValueBase.__init__(self, strTag, strName)
+  def __init__(self, strInfluxDbTag, strTag, strName):
+    GrafanaValueBase.__init__(self, strInfluxDbTag, strTag, strName)
     self.bValue = False
 
   def pushValue(self, bValue):
