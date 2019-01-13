@@ -14,9 +14,8 @@
 # A2, A1, A0
 I2C_ADDRESS = 0x4D  # 1, 0, 1
 
-REG_AD = 0b00000000
-
-fMAXVALUE = float(0x03FF)
+MAXVALUE = 0x03FF
+fMAXVALUE = float(MAXVALUE+1)
 
 fR13_OHM = 10000000.0
 fR14_OHM = 510000.0
@@ -37,7 +36,9 @@ class MCP3021:
     '''
       returns a value between 0x0000 and 0x03FF
     '''
-    bValue = self.i2c.readfrom_mem(I2C_ADDRESS, REG_AD, 2)
-    iValueRaw = int((bValue[0]<<8) | bValue[1])
+    bValue = self.i2c.readfrom(I2C_ADDRESS, 2)
+    iUpperByte = bValue[0] & 0x0F
+    iLowerByte = bValue[1] & 0xFC
+    iValueRaw = int(iUpperByte<<6) + int(iLowerByte>>2)
     return iValueRaw
 

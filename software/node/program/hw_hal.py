@@ -69,23 +69,12 @@ class Hw:
 
     self.MCP4725.config(power_down='Off', value=0x0000, eeprom=True)
 
-    # Make sure, that 'self.__fHV_V' is defined
-    self.messe_fHV_V
-
   def startTempMeasurement(self):
     self.MAX30205.oneShotNormalA(I2C_ADDRESS_TempH)
     self.MAX30205.oneShotNormalA(I2C_ADDRESS_TempO)
 
   @property
-  def cached_fHV_V(self):
-    return self.__fHV_V
-
-  @property
-  def messe_fHV_V(self):
-    self.__fHV_V = self.__messe_fHV_V()
-    return self.__fHV_V
-
-  def __messe_fHV_V(self):
+  def messe_fSupplyHV_V(self):
     if self.MCP3021 != None:
       return self.MCP3021.readV()
     # We don't know the supply voltage - this may happen on old hardware.

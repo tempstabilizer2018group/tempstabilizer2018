@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import math
 
 import portable_daymaxestimator
 import portable_ticks
@@ -12,10 +13,6 @@ fTempH_Limit_High = 140.0
 fFetMin_W = 0.0 # [W] Limiten des H-Reglers
 
 fTemp_Tolerance_MAX30205 = 0.5
-
-# Theoretische Kennlinie DAC [V] zu Leistung [W]
-fSupplyHV_V = 48.0 # Maximale Speisung vom FET
-fR2 = 3.0	# Widerstand unter FET
 
 # Zeitkonstante zum Erhoehen der Spannung
 fTauIncrease_fHeat_s = 10.0
@@ -58,6 +55,7 @@ class TempStabilizer:
       if not objHw.bZeroHeat:
         iDuration_ms = portable_ticks.objTicks.ticks_diff(portable_ticks.objTicks.ticks_ms(), iTicksStart_ms)
         fCorrection_V = 1.58350 - 1.60900 # Fehlerkorrektur durch schnelle Rampe (siehe unten)
+        fCorrection_V += -0.16 # Fehlerkorrektur durch Schaltpunkt ZERO_HEAT bei 4.3mA
         self.fDACzeroHeat_V += fCorrection_V
         print('TempStabilizer.find_fDACzeroHeat(): fDACzeroHeat_V %0.5f in %d ms' % (self.fDACzeroHeat_V, iDuration_ms))
         objHw.fDac_V = 0.0
@@ -81,14 +79,14 @@ class TempStabilizer:
   def fHeat_W(self):
     return self._objPidH.fOutputValueLimited
 
-  @property
-  def fDac_V(self):
+  def fDac_V(self, fSupplyHV_V):
     # [V]
     # 0 bis 3.3V
-   fDAC_V = self.fHeat_W * fR2 / fSupplyHV_V + self.fDACzeroHeat_V
-   # Limitieren auf den möglichen Spannungsbereich des DAC
-   fDAC_V = min(max(0.0, fDAC_V), 3.3)
-   return fDAC_V
+    fCurrent = self.fHeat_W / fSupplyHV_V
+    fDAC_V = -0.2724*math.exp(-fCurrent/0.01068)+3.003*fCurrent+0.3045 + self.fDACzeroHeat_V
+    # Limitieren auf den möglichen Spannungsbereich des DAC
+    fDAC_V = min(max(0.0, fDAC_V), 3.3)
+    return fDAC_V
 
   @property
   def bFetMax_W_Limit_High(self):

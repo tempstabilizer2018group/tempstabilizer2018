@@ -18,13 +18,14 @@ class HwController(portable_controller.Controller):
   def __init__(self, strFilenameFull):
     self.strFilenameFull = strFilenameFull
     print('Programm: %s' % self.strFilenameFull)
+    try:
+      uos.mkdir(config_app.DIRECTORY_DATA)
+      print('Created directory: "%s"' % config_app.DIRECTORY_DATA)
+    except:
+      print('Directory already exists: "%s"' % config_app.DIRECTORY_DATA)
     portable_controller.Controller.__init__(self)
     self.__objLogConsoleInterval = portable_ticks.Interval(iInterval_ms=config_app.iLogHwConsoleInterval_ms)
     self.__objWlan = network.WLAN(network.STA_IF)
-    try:
-      uos.mkdir(config_app.DIRECTORY_DATA)
-    except:
-      pass
 
   def directoryData(self):
     return config_app.DIRECTORY_DATA
@@ -50,7 +51,7 @@ class HwController(portable_controller.Controller):
       listTempEnvirons_C = self.objHw.messe_listTempEnvirons_C
       if len(listTempEnvirons_C) > 0:
         strTempEnvirons_C = ','.join(map(lambda f:'%0.2fC' % f, listTempEnvirons_C ))
-      print('%0.3fs %s %0.2f(%0.2f)C %0.2f(%0.2f)C %0.3f' % (portable_ticks.objTicks.ticks_ms()/1000.0, strTempEnvirons_C, self.objTs.fTempO_C, self.objTs.fTempO_Setpoint_C, self.objTs.fTempH_C, self.objTs.fTempH_Setpoint_C, self.objTs.fDac_V))
+      print('%0.3fs %s %0.2f(%0.2f)C %0.2f(%0.2f)C %0.3f' % (portable_ticks.objTicks.ticks_ms()/1000.0, strTempEnvirons_C, self.objTs.fTempO_C, self.objTs.fTempO_Setpoint_C, self.objTs.fTempH_C, self.objTs.fTempH_Setpoint_C, self.objHw.fDac_V))
 
   def reboot(self):
     machine.reset()
