@@ -24,6 +24,7 @@
     <Compile Include="http_server\python\config_nodes.py" />
     <Compile Include="http_server\python\python3_config_nodes_lib.py" />
     <Compile Include="http_server\python\python3_github_pull.py" />
+    <Compile Include="node\program\hw_mcp3021.py" />
     <Compile Include="python3_grafana_log_reader_test.py" />
     <Compile Include="http_server\python\config_http_server.py" />
     <Compile Include="http_server\python\python3_grafana_log_config.py" />

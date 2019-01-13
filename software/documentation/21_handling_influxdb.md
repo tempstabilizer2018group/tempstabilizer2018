@@ -12,8 +12,8 @@ CREATE DATABASE tempstabilizer2018
 CREATE USER pi WITH PASSWORD 'XXXentercorreptpwXXXX' WITH ALL PRIVILEGES
 exit
 
-USE tempstabilizer
-INSERT tempH,host=node4711 value=22.3
+USE tempstabilizer2018
+INSERT tempH,node=node4711 value=22.3
 SELECT * from tempH
 exit
 
