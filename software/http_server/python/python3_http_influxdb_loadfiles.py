@@ -113,7 +113,7 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
         'node': self.__strNodeName,
       },
       'fields': {
-        objGrafanaValue.strName: fValue,
+         objGrafanaValue.strName: fValue,
       },
     }
 
