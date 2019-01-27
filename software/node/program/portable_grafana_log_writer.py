@@ -48,21 +48,22 @@ class GrafanaProtocol:
     # Temperatures will be named 'r', 's', 't', ...
     iChar = ord('r')
     def f(iAddressI2C):
-      return portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_ENVIRONS, chr(iChar), 'fTempEnvirons_C_%02X' % iAddressI2C, 20.0)
+      return portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_ENVIRONS, chr(iChar), 'fTempEnvirons_C_%02X' % iAddressI2C, 1000.0)
     self.__listGrafanaValueTempEnvirons = list(map(f, listAddressI2C))
 
-    self.__objGrafanaValue_TempO = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'O', 'fTempO_C', 100.0)
-    self.__objGrafanaValue_TempO_Setpoint = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'S', 'fTempO_Setpoint_C', 20.0)
+    self.__objGrafanaValue_TempO = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'O', 'fTempO_C', 1000.0)
+    self.__objGrafanaValue_TempO_Setpoint = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'S', 'fTempO_Setpoint_C', 1000.0)
     self.__objGrafanaValue_Heat = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'H', 'fHeat_W', 100.0)
     self.__objGrafanaValue_PidH_bLimitHigh = portable_grafana_datatypes.GrafanaValueBoolTrue(INFLUXDB_TAG_NODE, 'L', 'PidH_bLimitHigh')
     self.__objGrafanaValue_DACzeroHeat = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'z', 'fDACzeroHeat_V', 1000.0)
     self.__objGrafanaValue_SupplyVoltage = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'U', 'fSupplyVoltage_V', 1.0)
     self.__objGrafanaValue_DiskFree = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'F', 'fDiskFree_MBytes', 100.0)
 
-  def writeHeader(self):
+  def writeHeader(self, iI2cFrequencySelected):
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VERSION, '1.0')
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MAC, config_app.strMAC)
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MAXTICK_MS, portable_ticks.objTicks.iMaxTicks_ms)
+    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_I2C_FREQUENCY_SELECTED_HZ, iI2cFrequencySelected)
 
     def logAuxiliary(objGrafanaValue, iModuloPull):
       self.logLine(portable_grafana_datatypes.TAG_GRAFANA_DATATYPE, objGrafanaValue.getConstructor())
@@ -117,6 +118,7 @@ class GrafanaProtocol:
     self.__iCounter += 1
 
     if (self.__iCounter % config_app.iMODULO_GRAFANALOG_MEDIUM_PUSH) == 0:
+      # TODO: We could push TempO every time when it was measured. This would give a much better resolution
       self.__objGrafanaValue_TempO.pushValue(objTs.fTempO_C)
       self.__objGrafanaValue_Heat.pushValue(objTs.fHeat_W)
       self.__objGrafanaValue_PidH_bLimitHigh.pushValue(objTs.bFetMax_W_Limit_High)
@@ -149,12 +151,14 @@ class GrafanaProtocol:
       self.__objGrafanaValue_TempO_Setpoint.pushValue(objTs.fTempO_Setpoint_C)
       pullValue(self.__objGrafanaValue_TempO_Setpoint)
 
-    if (self.__iCounter % config_app.iMODULO_GRAFANALOG_SLOW_PULL) == 0:
-      # self.__listGrafanaValueTempEnvirons is not AVG. So we only need to pushValue() once per pullValue()
+    if (self.__iCounter % config_app.iMODULO_GRAFANALOG_SLOW_PUSH) == 0:
       listTempEnvirons_C = objHw.messe_listTempEnvirons_C
       assert len(listTempEnvirons_C) == len(self.__listGrafanaValueTempEnvirons)
       for fTempEnvirons_C, objGrafanaValueTempEnviron_C in zip(listTempEnvirons_C, self.__listGrafanaValueTempEnvirons):
         objGrafanaValueTempEnviron_C.pushValue(fTempEnvirons_C)
+
+    if (self.__iCounter % config_app.iMODULO_GRAFANALOG_SLOW_PULL) == 0:
+      for objGrafanaValueTempEnviron_C in self.__listGrafanaValueTempEnvirons:
         pullValue(objGrafanaValueTempEnviron_C)
   
       # self.__objGrafanaValue_DiskFree is not AVG. So we only need to pushValue() once per pullValue()

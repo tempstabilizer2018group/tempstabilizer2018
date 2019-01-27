@@ -91,7 +91,7 @@ class Controller:
     objCachedFile = self.factoryCachedFile(strFilename)
     self.objGrafanaProtocol.attachFile(objCachedFile)
     if not bFileExists:
-      self.objGrafanaProtocol.writeHeader()
+      self.objGrafanaProtocol.writeHeader(self.objHw.iI2cFrequencySelected)
 
   def factoryLog(self):
     # May be derived and overridden

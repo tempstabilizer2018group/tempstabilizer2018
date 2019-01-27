@@ -9,6 +9,7 @@ TAG_GRAFANA_WARNING = 'warning'
 TAG_GRAFANA_ERROR = 'error'
 TAG_GRAFANA_MESSINTERVAL_MS = 'messinterval_ms'
 TAG_GRAFANA_MAXTICK_MS = 'portable_ticks.iMaxTick_ms'
+TAG_GRAFANA_I2C_FREQUENCY_SELECTED_HZ = 'iI2cFrequencySelected_Hz'
 INFLUXDB_TAG_NODE = 'node'
 INFLUXDB_TAG_ENVIRONS = 'environs'
 

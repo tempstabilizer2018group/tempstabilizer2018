@@ -52,8 +52,10 @@ class Hw:
     self.iTimeStart_ms = utime.ticks_ms()
     self.__objHwI2cEnvironsInterval = portable_ticks.Interval(iInterval_ms=config_app.iHwI2cEnvironsInterval_ms, bForceFirstTime=True)
 
-    self.i2c = machine.I2C(freq=1000000, scl=pin_scl, sda=pin_sda) 
+    self.i2c = machine.I2C(freq=1000, scl=pin_scl, sda=pin_sda)
     self.listAddressI2C = self.i2c.scan()
+    self.findAndSetSpeedI2C()
+
     self.listAddressI2C = sorted(self.listAddressI2C)
     self.listEnvironsAddressI2C = hw_max30205.filterEnvironsI2C(self.listAddressI2C, hw_mcp3021.I2C_ADDRESS)
     def listToHexString(list):
@@ -68,6 +70,24 @@ class Hw:
       self.MCP3021 = hw_mcp3021.MCP3021(self.i2c)
 
     self.MCP4725.config(power_down='Off', value=0x0000, eeprom=True)
+
+  def findAndSetSpeedI2C(self):
+    SAFETY_FACTOR = 5
+    MINFREQ = 1000
+    MAXFREQ = 1000000*SAFETY_FACTOR
+    STEP = 10000
+    self.iI2cFrequencySelected = MAXFREQ // SAFETY_FACTOR
+    print('findAndSetSpeedI2C')
+    for iI2cFrequency in range(MINFREQ, MAXFREQ+STEP, STEP):
+      self.i2c.init(scl=pin_scl, sda=pin_sda, freq=iI2cFrequency)
+      listAddressI2C = self.i2c.scan()
+
+      if self.listAddressI2C != listAddressI2C:
+        print('findAndSetSpeedI2C: I2C errors at frequency', iI2cFrequency)
+        self.iI2cFrequencySelected = iI2cFrequency // SAFETY_FACTOR
+        break
+    self.i2c.init(scl=pin_scl, sda=pin_sda, freq=self.iI2cFrequencySelected)
+    print('findAndSetSpeedI2C: iI2cFrequencySelected:', self.iI2cFrequencySelected)
 
   def startTempMeasurement(self):
     self.MAX30205.oneShotNormalA(I2C_ADDRESS_TempH)
