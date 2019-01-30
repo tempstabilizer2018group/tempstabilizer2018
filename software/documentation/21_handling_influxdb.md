@@ -17,7 +17,7 @@ http://www.andremiller.net/content/grafana-and-influxdb-quickstart-on-ubuntu
 
 influx
 CREATE DATABASE tempstabilizer2018
-CREATE USER pi WITH PASSWORD 'XXXentercorreptpwXXXX' WITH ALL PRIVILEGES
+CREATE USER pi WITH PASSWORD '<<<strInfluxDbPw>>>' WITH ALL PRIVILEGES
 exit
 
 USE tempstabilizer2018

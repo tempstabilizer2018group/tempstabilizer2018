@@ -1,14 +1,15 @@
 # Handling Grafana
 
-http://10.0.11.237:3000/datasources/new
-  Name: tempstabilizer
+http://tempstabilizer2018.org:3000/datasources/new
   Type: InfluxDB
+  Name: tempstabilizer2018
+  Default: Yes
   HTTP-URL: http://localhost:8086
-  HTTP-Access: proxy
-  Auto-Basic Auth: No
-  Auto-TLS Client Auth: No
-  InfluxDB Details-Database: tempstabilizer
-   InfluxDB Details-User: maerki maerki
+  HTTP-Access: Server (Default)
+  Auth: uncheck all
+  InfluxDB Details-Database: tempstabilizer2018
+  InfluxDB Details-User: pi
+  InfluxDB Details-Password: <<<strInfluxDbPw>>>
 
 Create new Dashboard - New Panel - Graph
   Query: SELECT "value" FROM "tempH" WHERE $timeFilter GROUP BY "host"

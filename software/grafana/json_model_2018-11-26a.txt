@@ -496,7 +496,7 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "tempstabilizer",
+        "datasource": "tempstabilizer2018",
         "hide": 0,
         "includeAll": true,
         "label": "Site",
@@ -520,7 +520,7 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "tempstabilizer",
+        "datasource": "tempstabilizer2018",
         "hide": 0,
         "includeAll": true,
         "label": "Node",
@@ -570,7 +570,7 @@
     ]
   },
   "timezone": "",
-  "title": "Tempstabilizer",
+  "title": "tempstabilizer2018",
   "uid": "GLa1HKfmk",
   "version": 23
 }
