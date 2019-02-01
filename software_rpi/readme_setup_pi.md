@@ -29,7 +29,16 @@ reboot
 
 -> you may use ssh now
 
-## PREPARATION ONLY HTTP-Server
+## PREPARATION ONLY HTTP-Server: Set Locale
+As root:
+dpkg-reconfigure locales
+  en_US.UTF-8 UTF-8
+echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale
+reboot
+update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 LANGUAGE
+reboot
+
+## PREPARATION ONLY HTTP-Server: User pi
 As root:
 useradd pi --create-home --shell /bin/bash
 adduser pi sudo
