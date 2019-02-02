@@ -1,6 +1,13 @@
 # Userguide: Software Update
 
-## Step 1: Format Filesystem
+## Step 1: Hotspot
+Setup Hotspot
+- SID: TempSabilizer2018
+- PW: wmm_enabled
+- WPA PSK
+- Channel 6
+
+## Step 2: Format Filesystem
 
 - Power down
 - Press button
@@ -9,7 +16,7 @@
   - The filesystem is now formated
 - Release button
 
-## Step 2: Update software
+## Step 3: Update software
 
 If the filesystem is empty, a software update will be started.
 
