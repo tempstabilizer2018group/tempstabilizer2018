@@ -163,7 +163,7 @@ def handle_post(environ, start_response):
     strRespone = "<p>strLogData: '%s'...<p>\n" % strLogData[0:10]
     strRespone += "<p>strFilenameFull: '%s'<p>\n" % strFilenameFull
 
-    return ok(start_response, strRespone)
+    return ok(start_response, strRespone, strContentType=strCONTENTTYPE_HTML)
 
   raise WsgiException(start_response, 'Unkown path "%s"!' % environ['PATH_INFO'])
 
