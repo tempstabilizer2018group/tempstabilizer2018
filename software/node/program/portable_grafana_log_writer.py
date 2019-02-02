@@ -46,12 +46,12 @@ class GrafanaProtocol:
     self.__objInterval = portable_ticks.Interval(iInterval_ms=config_app.iGrafanaLogInterval_ms)
 
     # Temperatures will be named 'r', 's', 't', ...
-    iChar = ord('r')-1
-    def f(iAddressI2C):
-      nonlocal iChar
+    iChar = ord('r')
+    self.__listGrafanaValueTempEnvirons = []
+    for iAddressI2C in listAddressI2C:
+      objVal = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_ENVIRONS, chr(iChar), '%02X' % iAddressI2C, 1000.0)
+      self.__listGrafanaValueTempEnvirons.append(objVal)
       iChar += 1
-      return portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_ENVIRONS, chr(iChar), '%02X' % iAddressI2C, 1000.0)
-    self.__listGrafanaValueTempEnvirons = list(map(f, listAddressI2C))
 
     self.__objGrafanaValue_TempO = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'O', 'fTempO_C', 1000.0)
     self.__objGrafanaValue_TempO_Setpoint = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'S', 'fTempO_Setpoint_C', 1000.0)
