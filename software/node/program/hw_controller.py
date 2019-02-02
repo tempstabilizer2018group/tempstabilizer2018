@@ -11,16 +11,24 @@ import hw_update_ota
 import config_app
 import portable_ticks
 import portable_controller
+import portable_constants
 import portable_firmware_constants
 import portable_grafana_log_writer
 
 def updateConfigAppByVERSION():
   with open(portable_firmware_constants.strFILENAME_VERSION, 'r') as f:
-    # s= heads/master;1;iPollForWlanInterval_ms=60*1000;iHwLedModulo=10
+    # s = heads/master;1;iPollForWlanInterval_ms=60*1000;iHwLedModulo=10
     s = f.read()
-  # strAux= 1;iPollForWlanInterval_ms=60*1000;iHwLedModulo=10
+
+  # strAux = 1;config-UNDERSCORE-app.iPollForWlanInterval-UNDERSCORE-ms=60*1000;config-UNDERSCORE-app.iHwLedModulo=12
   strAux = s.split(';', 1)[1]
-  exec(strAux, config_app.__dict__)
+  # Unescape
+  for strChar, strEscape in portable_constants.listReplacements:
+    strAux = strAux.replace(strEscape, strChar)
+  # strAux = 1;iPollForWlanInterval_ms=60*1000;iHwLedModulo=12
+
+  print('exec("' + strAux + '")')
+  exec(strAux)
 
 class HwController(portable_controller.Controller):
   def __init__(self, strFilenameFull):

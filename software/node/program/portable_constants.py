@@ -16,3 +16,10 @@ YEAR_S = 365*DAY_S
 #TODO: Redundant? Warum nicht in portable_daymaxestimator.py?
 TIME_CALC_FTEMPO_SETPOINT_MS = 6 * MINUTE_MS
 TIME_INTERVAL_FTEMPO_SETPOINT_MS = 3 * HOUR_MS
+
+listReplacements = (
+    ('_', '-UNDERSCORE-'),
+    ('/', '-SLASH-'),
+    (';', '-SEMICOLON-'),
+    (':', '-COLON-'),
+)

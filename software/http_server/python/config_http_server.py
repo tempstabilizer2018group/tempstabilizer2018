@@ -9,8 +9,8 @@ strInfluxDbNameOrigin = 'origin'
 # After changing this file you might need to restart apache!
 # sudo systemctl restart apache2
 
-# if set to True, instead of getting the files from github, the will be lookedup locally
-bGithubPullLocal = True
+# if set to True, instead of getting the files from github, they will be lookedup locally
+bGithubPullLocal = False
 
 # Cache tar-files (the software-updates) to make downloads faster
 bCacheTarFiles = False

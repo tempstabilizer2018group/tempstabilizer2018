@@ -34,9 +34,9 @@ listLabs.append({
   # Select a tag: 'tags/v1.0.0'
   # Select the head of a branch: 'heads/master', 'heads/branchX'
   # GIT_TAGS: 'tags/x1.0;tags/y1.1',
-  GIT_TAGS: 'heads/master;1;iPollForWlanInterval_ms=60*1000',
+  GIT_TAGS: 'heads/master;1;config_app.iPollForWlanInterval_ms=60*1000',
   NODES: (
-    ('20180907_01', ';iHwLedModulo=10'),
+    ('20180907_01', ';config_app.iHwLedModulo=10'),
 
     ('20181217_11', ''),
     ('20181217_12', ''),
@@ -46,7 +46,7 @@ listLabs.append({
     ('20181217_16', ''),
     ('20181217_17', ''),
     ('20181217_18', ''),
-    ('20181217_19', ''),
+    ('20181217_19', ';config_app.iHwLedModulo=2'),
     ('20181217_20', ''),
     ('20181217_21', ''),
     ('20181217_22', ''),

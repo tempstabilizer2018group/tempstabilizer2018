@@ -21,6 +21,7 @@ import github
 
 import python3_config_nodes_lib
 import portable_firmware_constants
+import portable_constants
 import config_http_server
 
 strGithubRepoConfig = 'tempstabilizer2018group/tempstabilizer2018'
@@ -35,17 +36,10 @@ assert '\\' not in strFILENAME_CONFIG_NODES
 assert not strDIRECTORY_NODE.startswith('/')
 assert '\\' not in strDIRECTORY_NODE
 
-listReplacements = (
-    ('_', '-UNDERSCORE-'),
-    ('/', '-SLASH-'),
-    (';', '-SEMICOLON-'),
-    (':', '-COLON-'),
-)
-
 listGitPrefixes = ('heads', 'tags')
 
 def escape(s):
-  for strChar, strEscape in listReplacements:
+  for strChar, strEscape in portable_constants.listReplacements:
     s = s.replace(strChar, strEscape)
   return s
 
