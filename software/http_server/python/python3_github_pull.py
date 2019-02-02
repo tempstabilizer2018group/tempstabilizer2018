@@ -221,7 +221,7 @@ class GitHubPullLocal(GithubPullBase):
         strFilenameRelative2 = self._selectFile(strFilenameRelative)
         if strFilenameRelative2 == None:
           continue
-        print(strFilenameRelative2)
+        # print(strFilenameRelative2)
         strFilenameFull = os.path.join(strRootDirectory, strFilename)
         with io.open(strFilenameFull, 'r', encoding='utf8') as fIn:
           strContents = fIn.read()
