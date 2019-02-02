@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>9a703754-eb4e-4c84-acfb-d2ae12c6d6f8</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>http_server\python\python3_http_influxdb_loadfiles.py</StartupFile>
+    <StartupFile>http_server\python\python3_httpserver_standalone.py</StartupFile>
     <SearchPath>tools_pyplot;simulation;http_server\python;node\config;node\program</SearchPath>
     <WorkingDirectory>simulation_tests</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -24,6 +24,9 @@
     <Compile Include="http_server\python\config_nodes.py" />
     <Compile Include="http_server\python\python3_config_nodes_lib.py" />
     <Compile Include="http_server\python\python3_github_pull.py" />
+    <Compile Include="http_server\python\python3_httpserver_standalone.py" />
+    <Compile Include="http_server\python\python3_wsgi_app.py" />
+    <Compile Include="node\program\portable_firmware_constants.py" />
     <Compile Include="node\program\hw_mcp3021.py" />
     <Compile Include="python3_grafana_log_reader_test.py" />
     <Compile Include="http_server\python\config_http_server.py" />

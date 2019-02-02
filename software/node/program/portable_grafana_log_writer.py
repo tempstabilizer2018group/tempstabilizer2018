@@ -48,7 +48,7 @@ class GrafanaProtocol:
     # Temperatures will be named 'r', 's', 't', ...
     iChar = ord('r')
     def f(iAddressI2C):
-      return portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_ENVIRONS, chr(iChar), 'fTempEnvirons_C_%02X' % iAddressI2C, 1000.0)
+      return portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_ENVIRONS, chr(iChar), '%02X' % iAddressI2C, 1000.0)
     self.__listGrafanaValueTempEnvirons = list(map(f, listAddressI2C))
 
     self.__objGrafanaValue_TempO = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'O', 'fTempO_C', 1000.0)

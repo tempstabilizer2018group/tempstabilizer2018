@@ -21,11 +21,11 @@ CREATE USER pi WITH PASSWORD '<<<strInfluxDbPw>>>' WITH ALL PRIVILEGES
 exit
 
 USE tempstabilizer2018
-INSERT tempH,node=node4711 value=22.3
-SELECT * from tempH
+INSERT fTempO_C,node=node4711 value=22.3
+SELECT * from fTempO_C
 exit
 
-curl -i -XPOST 'http://localhost:8086/write?db=tempstabilizer' --data-binary 'tempH,node=node4711 value=22.6'
+curl -i -XPOST 'http://localhost:8086/write?db=tempstabilizer' --data-binary 'fTempO_C,node=node4711 value=22.6'
 
 curl -i -XPOST 'http://localhost:8086/write?db=tempstabilizer' --data-binary 'tempO,node=node4711 value=21.0'
 
@@ -49,21 +49,50 @@ labHombi
 > SHOW SERIES
 key
 ---
-labHombi,node=name_20181217_11
-labHombi,node=name_20181217_12
-labHombi,node=name_20181217_13
-labHombi,node=name_20181217_14
-labHombi,node=name_20181217_16
-labHombi,node=name_20181217_17
-labHombi,node=name_20181217_19
-labHombi,node=name_20181217_20
-labHombi,node=name_20181217_21
-labHombi,node=name_20181217_22
-labHombi,node=name_20181217_23
-labHombi,node=name_20181217_24
-labHombi,node=name_20181217_25
-labHombi,node=steel
+labHombi,node=12,origin=tempstabilizer2018
+labHombi,node=16,origin=tempstabilizer2018
+labHombi,node=17,origin=tempstabilizer2018
+labHombi,node=18,origin=tempstabilizer2018
+labHombi,node=20,origin=tempstabilizer2018
+labHombi,node=22,origin=tempstabilizer2018
+labHombi,node=23,origin=tempstabilizer2018
+labHombi,node=24,origin=tempstabilizer2018
+labHombi,node=steel,origin=tempstabilizer2018
 
+> SHOW SERIES from /.*/ WHERE node='24'
+key
+labHombi,node=24,origin=tempstabilizer2018
+
+> SHOW SERIES from /.*/ WHERE origin='tempstabilizer2018'
+key
+labHombi,node=11,origin=tempstabilizer2018
+labHombi,node=12,origin=tempstabilizer2018
+labHombi,node=13,origin=tempstabilizer2018
+labHombi,node=14,origin=tempstabilizer2018
+labHombi,node=15,origin=tempstabilizer2018
+labHombi,node=16,origin=tempstabilizer2018
+labHombi,node=17,origin=tempstabilizer2018
+labHombi,node=18,origin=tempstabilizer2018
+labHombi,node=20,origin=tempstabilizer2018
+labHombi,node=22,origin=tempstabilizer2018
+labHombi,node=23,origin=tempstabilizer2018
+labHombi,node=24,origin=tempstabilizer2018
+
+> SHOW SERIES WHERE origin='tempstabilizer2018'
+key
+labHombi,node=11,origin=tempstabilizer2018
+labHombi,node=12,origin=tempstabilizer2018
+labHombi,node=13,origin=tempstabilizer2018
+labHombi,node=14,origin=tempstabilizer2018
+labHombi,node=15,origin=tempstabilizer2018
+labHombi,node=16,origin=tempstabilizer2018
+labHombi,node=17,origin=tempstabilizer2018
+labHombi,node=18,origin=tempstabilizer2018
+labHombi,node=20,origin=tempstabilizer2018
+labHombi,node=22,origin=tempstabilizer2018
+labHombi,node=23,origin=tempstabilizer2018
+labHombi,node=24,origin=tempstabilizer2018
+ 
 > SHOW TAG KEYS
 name: labHombi
 tagKey
@@ -99,37 +128,54 @@ fTempEnvirons_C_59 float
 fTempO_C           float
 fTempO_Setpoint_C  float
 
+> SHOW TAG KEYS FROM labHombi
+name: labHombi
+--------------
+tagKey
+environs
+node
+origin
+
+
 > SHOW series FROM labHombi
 key
 ---
-labHombi,node=name_20181217_11
-labHombi,node=name_20181217_12
-labHombi,node=name_20181217_13
-labHombi,node=name_20181217_14
-labHombi,node=name_20181217_16
-labHombi,node=name_20181217_17
-labHombi,node=name_20181217_19
-labHombi,node=name_20181217_20
-labHombi,node=name_20181217_21
-labHombi,node=name_20181217_22
-labHombi,node=name_20181217_23
-labHombi,node=name_20181217_24
-labHombi,node=name_20181217_25
-labHombi,node=steel
+labHombi,node=11,origin=tempstabilizer2018
+labHombi,node=12,origin=tempstabilizer2018
+labHombi,node=13,origin=tempstabilizer2018
+labHombi,node=14,origin=tempstabilizer2018
+labHombi,node=15,origin=tempstabilizer2018
+labHombi,node=16,origin=tempstabilizer2018
+labHombi,node=17,origin=tempstabilizer2018
+labHombi,node=18,origin=tempstabilizer2018
+labHombi,node=20,origin=tempstabilizer2018
+labHombi,node=22,origin=tempstabilizer2018
+labHombi,node=23,origin=tempstabilizer2018
+labHombi,node=24,origin=tempstabilizer2018
+labHombi,node=steel,origin=tempstabilizer2018
 
 ----------------
-SELECT count(value) FROM tempH
-SELECT count(value) FROM tempH WHERE node='node4711'
+SELECT count(fTempO_C) FROM labHombi
+SELECT count(fTempO_C) FROM labHombi WHERE node='24'
+SELECT * FROM labHombi where node = '17' limit 5
+SELECT * FROM labHombi where environs = '17' limit 5
 
 DROP SERIES FROM /.*/
+
+DROP SERIES WHERE origin='tempstabilizer2018'
+
 ----------------
-SELECT time,node,value FROM tempH
+SELECT time,fTempO_C,fHeat_W FROM labHombi
 
-SHOW TAG VALUES FROM tempH WITH KEY in ("node")
+SHOW TAG VALUES FROM fTempO_C WITH KEY in ("node")
 
+select * from labHombi
+select fTempO_C from labHombi
 
-
-
+select *::field FROM labHombi
+select fTempO_C::field FROM labHombi
+select fTempO_C::field,node::tag from labHombi
+select fTempEnvirons_C_50::field,node::tag from labHombi
 
 ------------------------ Min Max Avg
 https://www.neteye-blog.com/2017/02/how-to-tune-your-grafana-dashboards/
@@ -138,7 +184,7 @@ https://www.neteye-blog.com/2017/02/how-to-tune-your-grafana-dashboards/
 =================================
 SHOW TAG VALUES FROM fTempO_C WITH KEY in ("node")
 
-SHOW field KEYS FROM [[site]]
+SHOW field KEYS FROM labHombi
 
 
 SHOW TAG VALUES with key = "node"
@@ -152,6 +198,12 @@ key  value
 ---  -----
 node 4713
 node 4714
+
+SHOW TAG VALUES with key = "origin"
+name: labHombi
+--------------
+key     value
+origin  tempstabilizer2018
 
 SHOW TAG VALUES from "httptest2" with key = "node"
 name: httptest2

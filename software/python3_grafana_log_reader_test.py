@@ -89,15 +89,6 @@ class InfluxDumper:
     print('Writing %d measurements...' % len(self.listMeasurements))
     objInfluxDBClient.write_points(self.listMeasurements, time_precision='s', protocol='json')
 
-  '''
-  GrafanaValueFloatAvg('O', 'fTempO_C', 1000.0),
-  GrafanaValueFloatAvg('S', 'fTempO_Setpoint_C', 1000.0),
-  GrafanaValueFloatAvg('H', 'fHeat_W',  100.0),
-  GrafanaValueFloatAvg('U', 'fTempEnvirons_C',  1000.0),
-  GrafanaValueBoolTrue('L', 'PidH_bLimitHigh'),
-  GrafanaValueFloatAvg('z', 'portable_tempstabilizer.fDACzeroHeat_V', 1000.0),
-  '''
-
 def run(strFilename):
   objDumper = InfluxDumper()
   with open(strFilename, 'r') as fLog:

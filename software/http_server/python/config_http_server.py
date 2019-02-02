@@ -3,6 +3,8 @@
 strInfluxDbDatabase = 'tempstabilizer2018'
 strInfluxDbHost = 'www.tempstabilizer2018.org'
 strInfluxDbPort = 8086
+strInfluxDbTagOrigin = 'tempstabilizer2018'
+strInfluxDbNameOrigin = 'origin'
 
 # After changing this file you might need to restart apache!
 # sudo systemctl restart apache2

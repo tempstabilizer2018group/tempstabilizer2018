@@ -12,6 +12,7 @@ import time
 import python3_http_server_lib
 import python3_grafana_log_reader_lib
 import python3_grafana_log_reader
+import portable_grafana_datatypes
 
 def http_write_data(strMac, strFilename, strLogData):
   '''
@@ -45,12 +46,19 @@ def http_write_data(strMac, strFilename, strLogData):
 
   strFilenameFull = write_data(strMac, strFilename, strLogData)
 
+  __processFiles()
+
+  return strFilenameFull
+
+def __processFiles():
   processFiles(python3_http_server_lib.strHttpServerToProcessDirectory,
                           python3_http_server_lib.strHttpServerProcessedDirectory,
                           python3_http_server_lib.strHttpServerFailedDirectory,
                           bWritePng=False)
 
-  return strFilenameFull
+def openInfluxDb():
+  print('InfluxDB %s:%d %s' % (config_http_server.strInfluxDbHost, config_http_server.strInfluxDbPort, config_http_server.strInfluxDbDatabase))
+  return influxdb.InfluxDBClient(config_http_server.strInfluxDbHost, config_http_server.strInfluxDbPort, '', '', config_http_server.strInfluxDbDatabase)
 
 class GrafanaInfluxGetNtpTime(python3_grafana_log_reader_lib.GrafanaDumper):
   def __init__(self):
@@ -106,14 +114,25 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
     assert self.__fSecondsSince1970_UnixEpochStart != None
     strTime = python3_rfc3339.timestamptostr(iTime_ms/1000.0 + self.__fSecondsSince1970_UnixEpochStart)
 
+    # fDiskFree_MBytes
+    strFieldName = objGrafanaValue.strName
+    # 17
+    strTagName = self.__strNodeName
+    # print(objGrafanaValue.strInfluxDbTag)
+    if objGrafanaValue.strInfluxDbTag == portable_grafana_datatypes.INFLUXDB_TAG_ENVIRONS:
+      strFieldName = 'fTempEnvirons_C'
+      # 58
+      strTagName += '-' + objGrafanaValue.strName
+
     dictMeasurement = {
       'time': strTime,
       'measurement': self.__strLabLabel,
       'tags': {
-        'node': self.__strNodeName,
+        objGrafanaValue.strInfluxDbTag: strTagName,
+        config_http_server.strInfluxDbNameOrigin: config_http_server.strInfluxDbTagOrigin,
       },
       'fields': {
-         objGrafanaValue.strName: fValue,
+        strFieldName: fValue,
       },
     }
 
@@ -123,12 +142,14 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
     # Set up influxDB connection
     # url, port, user, pw, db
     print('InfluxDB %s:%d %s' % (config_http_server.strInfluxDbHost, config_http_server.strInfluxDbPort, config_http_server.strInfluxDbDatabase))
-    objInfluxDBClient = influxdb.InfluxDBClient(config_http_server.strInfluxDbHost, config_http_server.strInfluxDbPort, '', '', config_http_server.strInfluxDbDatabase)
+    objInfluxDBClient = openInfluxDb()
 
     # Write data to influxDB
     # https://influxdb-python.readthedocs.io/en/latest/api-documentation.html?highlight=time_precision
     print('%s: Writing %d measurements to InfluxDB...' % (os.path.basename(strFilenameFull), len(self.__listMeasurements)))
     objInfluxDBClient.write_points(self.__listMeasurements, time_precision='s', protocol='json')
+
+    objInfluxDBClient.close()
 
   def readFileAndWriteToDB(self, strFilenameFull):
     self.readFile(strFilenameFull)
@@ -165,7 +186,7 @@ def processFiles(strDirectoryToBeProcessed, strDirectoryProcessed=None, strDirec
       continue
     strFromFilenameFull = os.path.join(strDirectoryToBeProcessed, strFilename)
 
-    if strFilename.endswith(config_app.LOGFILENAME_GRAFANA):
+    if strFilename.endswith('_' + config_app.LOGFILENAME_GRAFANA):
       try:
         loadFileIntoInfluxDb(strFromFilenameFull)
       except Exception as e:
@@ -182,6 +203,27 @@ def processFiles(strDirectoryToBeProcessed, strDirectoryProcessed=None, strDirec
     if strDirectoryProcessed != None:
       strToFilenameFull = os.path.join(strDirectoryProcessed, strFilename)
       shutil.move(strFromFilenameFull, strToFilenameFull)
+
+def delete():
+  '''
+    Dangerous! Will delete the whole database!
+  '''
+  objInfluxDBClient = openInfluxDb()
+  # objInfluxDBClient.delete_series()
+  objInfluxDBClient.delete_series(tags={config_http_server.strInfluxDbNameOrigin: config_http_server.strInfluxDbTagOrigin})
+  objInfluxDBClient.close()
+
+def reload_all():
+  for strFilename in os.listdir(python3_http_server_lib.strHttpServerProcessedDirectory):
+    if not strFilename.endswith('.txt'):
+      continue
+    strFromFilenameFull = os.path.join(python3_http_server_lib.strHttpServerProcessedDirectory, strFilename)
+
+    if strFilename.endswith('_' + config_app.LOGFILENAME_GRAFANA):
+      strToFilenameFull = os.path.join(python3_http_server_lib.strHttpServerToProcessDirectory, strFilename)
+      shutil.move(strFromFilenameFull, strToFilenameFull)
+
+  __processFiles()
 
 if __name__ == '__main__':
   # loadFileIntoInfluxDb(r'C:\Projekte\temp_stabilizer_2018\temp_stabilizer_2018\software_regler\http_server\node_data\to_process\2018-11-04_16-52-47_httptest_4712_grafana.txt')

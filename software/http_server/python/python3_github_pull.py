@@ -84,6 +84,10 @@ class GithubPullBase:
     self.__strTarFilename = 'node_%s.tar' % self._strGitTagsEscaped
     self.__strTarFilenameFull = os.path.join(self.__strDirectory, self.__strTarFilename)
 
+  @property
+  def strTarFilename(self):
+    return self.__strTarFilename
+
   def getTar(self):
     if config_http_server.bCacheTarFiles:
       if os.path.exists(self.__strTarFilenameFull):
@@ -156,7 +160,14 @@ class GithubPullBase:
       return strFilenameRelative2
     return None
 
+  def createDirectoryIfNeeded(self):
+    strDirectory = os.path.dirname(self.__strTarFilenameFull)
+    if not os.path.exists(strDirectory):
+      os.makedirs(strDirectory)
+
   def __writeTar(self, dictFiles):
+    self.createDirectoryIfNeeded()
+
     with tarfile.open(self.__strTarFilenameFull, 'w') as tar:
 
       def addFile(strFilename, byteData):
