@@ -14,6 +14,14 @@ import portable_controller
 import portable_firmware_constants
 import portable_grafana_log_writer
 
+def updateConfigAppByVERSION():
+  with open(portable_firmware_constants.strFILENAME_VERSION, 'r') as f:
+    # s= heads/master;1;iPollForWlanInterval_ms=60*1000;iHwLedModulo=10
+    s = f.read()
+  # strAux= 1;iPollForWlanInterval_ms=60*1000;iHwLedModulo=10
+  strAux = s.split(';', 1)[1]
+  exec(strAux, config_app.__dict__)
+
 class HwController(portable_controller.Controller):
   def __init__(self, strFilenameFull):
     self.strFilenameFull = strFilenameFull

@@ -12,5 +12,7 @@ config_app.bUseNetwork = True
 config_app.bHwDoLightSleep = True
 config_app.bWriteLogStatistics = False
 
+hw_controller.updateConfigAppByVERSION()
+
 controller = hw_controller.HwController(__file__)
 controller.runForever()

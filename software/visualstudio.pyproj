@@ -88,7 +88,6 @@
   <ItemGroup>
     <Folder Include="node\config\" />
     <Compile Include="node\config\config_app.py" />
-    <Compile Include="node\config\config_node.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="simulation\" />

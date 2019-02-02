@@ -20,6 +20,7 @@ import github
 # https://raw.githubusercontent.com/hmaerki/temp_stabilizer_2018/master/software/http_server/python/config_http_server.py
 
 import python3_config_nodes_lib
+import portable_firmware_constants
 import config_http_server
 
 strGithubRepoConfig = 'tempstabilizer2018group/tempstabilizer2018'
@@ -47,9 +48,6 @@ def escape(s):
   for strChar, strEscape in listReplacements:
     s = s.replace(strChar, strEscape)
   return s
-
-# See: https://github.com/tempstabilizer2018group/micropython_esp32/blob/master/ports/esp32/modules/hw_update_ota.py
-strFILENAME_SW_VERSION = 'VERSION.TXT'
 
 class GithubPullBase:
   def __init__(self, strDirectory=None):
@@ -180,7 +178,7 @@ class GithubPullBase:
 
       # The update iscomplete if the version file is written.
       # Therefore this file goes last!
-      addFile(strFILENAME_SW_VERSION, bytes(self._strGitTagsEscaped.encode('utf8')))
+      addFile(portable_firmware_constants.strFILENAME_VERSION, bytes(self._strGitTagsEscaped.encode('utf8')))
 
 '''
   Instead of connecting to Github, this class reads from the local filesystem.

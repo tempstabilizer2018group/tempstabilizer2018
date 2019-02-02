@@ -18,13 +18,15 @@ LIST_NODES = 'listNodes'
 LIST_LABS = 'listLabs'
 
 class ConfigNode:
-  def __init__(self, dictLab, dictNode):
+  def __init__(self, dictLab, dictNode, strConfigAux):
     self.__dictLab = dictLab
     self.__dictNode = dictNode
+    self.__strConfigAux = strConfigAux
 
   @property
   def strLabName(self):
     return self.__dictLab[LAB_NAME]
+
   @property
   def strLabLabel(self):
     return self.__dictLab[LAB_LABEL]
@@ -47,7 +49,7 @@ class ConfigNode:
 
   @property
   def strGitTags(self):
-    return self.__dictLab[GIT_TAGS]
+    return self.__dictLab[GIT_TAGS] + self.__strConfigAux
 
   @property
   def strLabLabel(self):
@@ -67,8 +69,9 @@ class ConfigNodes:
 
     strSerial = dictNode[SERIAL]
     for dictLab in  self.__dictConfigNodes[LIST_LABS]:
-      if strSerial in dictLab[NODES]:
-        return ConfigNode(dictLab, dictNode)
+      for strSerial_, strConfigAux in dictLab[NODES]:
+        if strSerial_ == strSerial:
+          return ConfigNode(dictLab, dictNode, strConfigAux)
 
     raise Exception('Mac "%s" has serial "%s". But no lab uses this serial.' % (strMac, strSerial))
 
