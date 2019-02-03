@@ -18,7 +18,6 @@ class Persist:
       print(config_app.LOGFILENAME_PERSIST + ': loaded')
     except:
       print(config_app.LOGFILENAME_PERSIST + ': missing')
-      pass
 
   @property
   def loaded(self):

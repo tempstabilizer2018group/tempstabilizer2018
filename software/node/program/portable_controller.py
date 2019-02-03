@@ -18,12 +18,19 @@ class Controller:
     self.ticks_init()
     self.__objPersist = portable_persist.Persist(self.directoryData())
     self.__iLedModulo = 0
-    self.__objPollForWlanInterval = portable_ticks.Interval(iInterval_ms=config_app.iPollForWlanInterval_ms, bForceFirstTime=False)
     self.__iTicksButtonPressed_ms = None
     self.__fTempO_SensorLast = -1000.0
     self.__fTempH_SensorLast = -1000.0
     self.openLogs()
     self.objHw = self.factoryHw()
+    # On reboot: start with Wlan
+    bForceWlanFirstTime = self.objHw.isPowerOnReboot()
+    if self.__fileExists(config_app.FILENAME_REPLICATE_ONCE):
+      self.remove(config_app.FILENAME_REPLICATE_ONCE)
+      print('removed:', config_app.FILENAME_REPLICATE_ONCE)
+      bForceWlanFirstTime = True
+    print('bForceWlanFirstTime:', bForceWlanFirstTime)
+    self.__objPollForWlanInterval = portable_ticks.Interval(iInterval_ms=config_app.iPollForWlanInterval_ms, bForceFirstTime=bForceWlanFirstTime)
     self.objGrafanaProtocol = self.factoryGrafanaProtocol()
     self.attachFileToGrafanaProtocol()
     self.objTs = self.factoryTempStabilizer()

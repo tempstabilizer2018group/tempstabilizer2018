@@ -18,11 +18,12 @@ TIME_CALC_FTEMPO_SETPOINT_MS = 6 * MINUTE_MS
 TIME_INTERVAL_FTEMPO_SETPOINT_MS = 3 * HOUR_MS
 
 listReplacements = (
-    ('_', '-UNDERSCORE-'),
-    ('/', '-SLASH-'),
-    (';', '-SEMICOLON-'),
-    (':', '-COLON-'),
+    ('_', '-SCO-'),
+    ('/', '-SLA-'),
+    (';', '-SEMI-'),
+    (':', '-COL-'),
     ("'", '-APR-'),
     ('"', '-APR-'),
     ('*', '-STR-'),
+    (' ', '-SP-'),
 )
