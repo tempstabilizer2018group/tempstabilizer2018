@@ -145,10 +145,10 @@ class GithubPullBase:
       strFilenameRelative is absolute within the Git-repostitory and in the local filesystem relativ to the Git-root.
       The filename returned is relative to the node-folder which will be deployed to the target.
     '''
-    assert not strFilenameRelative[0] in r'.\/', ('Backslash in "%s"' % strFilenameRelative)
     if not strFilenameRelative.startswith(strDIRECTORY_NODE):
       # We are only interested in files of the node-directory
       return None
+    assert not strFilenameRelative[0] in r'.\/', ('Backslash in "%s"' % strFilenameRelative)
     strFilenameRelative2 = strFilenameRelative[len(strDIRECTORY_NODE)+1:]
     if strFilenameRelative2.endswith('.py'):
       # We are only interested in python-files

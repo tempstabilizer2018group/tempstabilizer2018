@@ -24,4 +24,5 @@ listReplacements = (
     (':', '-COLON-'),
     ("'", '-APR-'),
     ('"', '-APR-'),
+    ('*', '-STR-'),
 )

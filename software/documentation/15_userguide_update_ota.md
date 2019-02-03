@@ -2,10 +2,10 @@
 
 ## Step 1: Hotspot
 Setup Hotspot
-- SID: TempSabilizer2018
-- PW: wmm_enabled
+- SSID: TempStabilizer2018
+- <RPI3_WLAN_PW>
 - WPA PSK
-- Channel 6
+- Channel: 6
 
 ## Step 2: Format Filesystem
 
@@ -29,3 +29,33 @@ If the filesystem is empty, a software update will be started.
   - Observe the update-page on the webserver
 - Power on the temp_stabilizer_2018
   - The temp_stabilizer_2018 will start the software-update
+
+## Where the SW-Update is coming from
+
+The softwareupdate may come from four places:
+
+HTTP-Server               | local/remote | http://<server>/versioncheck?mac=3C71BF0F97A4&version=none
+:------------------------:|:------------:| ----------------------------------------------------------
+rpi                       | local        | ...;strRepro='local on raspberrypi'
+rpi                       | remote       | ...;strRepro='github.com via raspberrypi'
+tempstabilizer2018.org    | local        | ...;strRepro='local on tempstabilizer2018.org'
+tempstabilizer2018.org    | remote       | ...;strRepro='github.com via tempstabilizer2018.org'
+
+You may open `http://<server>\intro.html` and call `/versioncheck`. This will display the versionstring as shown in the table above.
+
+### local/remote: config_http_server.py
+```
+# True: Don't connect to www.github.com and get the files locally
+# False: Get files from www.github.com
+bGithubPullLocal = False
+```
+
+To switch between local/remote, the above file must be edited and apache restarted `sudo systemctl restart apache2`.
+
+### rpi/tempstabilizer2018.org
+
+The node gets the update from Rpi if:
+- Rpi is running
+- Rpi-Apache is running
+- Rpi-Wlan in on
+

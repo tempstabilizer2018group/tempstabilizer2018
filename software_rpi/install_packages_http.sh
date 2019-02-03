@@ -4,7 +4,7 @@
 
 # See: http://docs.grafana.org/installation/debian/
 
-hostnamectl set-hostname www.tempstabilizer2018.org
+hostnamectl set-hostname tempstabilizer2018.org
 
 apt-get install -y apt-transport-https
 echo "deb https://packages.grafana.com/oss/deb stable main" > /etc/apt/sources.list.d/grafana.list
