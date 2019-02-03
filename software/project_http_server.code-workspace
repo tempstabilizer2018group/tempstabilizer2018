@@ -13,6 +13,9 @@
 			"path": "http_server/webroot"
 		},
 		{
+			"path": "node/config"
+		},
+		{
 			"path": "node/program"
 		}
 	],

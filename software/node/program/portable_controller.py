@@ -18,15 +18,32 @@ class Controller:
     self.ticks_init()
     self.__objPersist = portable_persist.Persist(self.directoryData())
     self.__iLedModulo = 0
-    self.__objPollForWlanInterval = portable_ticks.Interval(iInterval_ms=config_app.iPollForWlanInterval_ms, bForceFirstTime=False)
     self.__iTicksButtonPressed_ms = None
     self.__fTempO_SensorLast = -1000.0
     self.__fTempH_SensorLast = -1000.0
     self.openLogs()
     self.objHw = self.factoryHw()
+
+    self.__objPollForWlanInterval = portable_ticks.Interval(iInterval_ms=config_app.iPollForWlanInterval_ms, bForceFirstTime=False)
+    self.__forceWlanFirstTime()
+
     self.objGrafanaProtocol = self.factoryGrafanaProtocol()
     self.attachFileToGrafanaProtocol()
     self.objTs = self.factoryTempStabilizer()
+
+  def __forceWlanFirstTime(self):
+    # On PowerOn: start with Wlan
+    bForceWlanFirstTime = self.objHw.isPowerOnReboot()
+    if self.__fileExists(config_app.FILENAME_REPLICATE_ONCE):
+      self.remove(config_app.FILENAME_REPLICATE_ONCE)
+      print('removed:', config_app.FILENAME_REPLICATE_ONCE)
+      bForceWlanFirstTime = True
+
+    if not bForceWlanFirstTime:
+      return
+
+    self.__objPollForWlanInterval.doForce(iNextTick_ms=config_app.iPollForWlanOnce_ms)
+    print('bForceWlanFirstTime=True: Will replicate in %ds' % (config_app.iPollForWlanOnce_ms // 1000))
 
   def ticks_init(self):
     # May be derived and overridden

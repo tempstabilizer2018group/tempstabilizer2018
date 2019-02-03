@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import math
 
+import config_app
 import portable_daymaxestimator
 import portable_ticks
 import portable_pid_controller
@@ -27,7 +28,18 @@ class TempStabilizer:
 
     self._objDayMaxEstimator = objDayMaxEstimator
     if objDayMaxEstimator == None:
-      self._objDayMaxEstimator = portable_daymaxestimator.DayMaxEstimator(portable_ticks.objTicks.ticks_ms())
+      if config_app.bSetpointFix:
+        class SetpointFix:
+          def __init__(self):
+            self.fOutputValue = config_app.fTempSetpointFix_C
+          def start(self, iTicks_ms, fTempO_Sensor, objPersist=None):
+            pass
+          def process(self, iTicks_ms, fTempO_Sensor, bFetMin_W_Limit_Low):
+            pass
+        self._objDayMaxEstimator = SetpointFix()
+      else:
+        self._objDayMaxEstimator = portable_daymaxestimator.DayMaxEstimator(portable_ticks.objTicks.ticks_ms())
+      print('Setpoint from ' + self._objDayMaxEstimator.__class__.__name__)
 
     self._objPidO = objPidO
     if objPidO == None:

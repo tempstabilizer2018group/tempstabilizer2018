@@ -93,6 +93,9 @@ class Hw:
     self.MAX30205.oneShotNormalA(I2C_ADDRESS_TempH)
     self.MAX30205.oneShotNormalA(I2C_ADDRESS_TempO)
 
+  def isPowerOnReboot(self):
+    return machine.PWRON_RESET == machine.reset_cause()
+
   @property
   def messe_fSupplyHV_V(self):
     if self.MCP3021 != None:

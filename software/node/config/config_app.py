@@ -7,6 +7,7 @@ LOGFILENAME_TABDELIMITED = 'log.txt'
 LOGFILENAME_STATISTICS = 'statistics.txt'
 LOGFILENAME_GRAFANA = 'grafana.txt'
 LOGFILENAME_PERSIST = 'persist.txt'
+FILENAME_REPLICATE_ONCE = 'replicate_once.py'
 
 DIRECTORY_DATA = 'data'
 DIRECTORY_CONFIG = 'config'
@@ -67,6 +68,9 @@ bUseNetwork = False
 # After this interval the WLAN will polled
 iPollForWlanInterval_ms = 10 * portable_constants.MINUTE_MS
 
+# After Powerup or after Softwareupdate: Wlan will be polled 'iPollForWlanOnce_ms' after boot
+iPollForWlanOnce_ms = 10 * portable_constants.SECOND_MS
+
 # Interval to write persist setpoint temperature and time
 # None: Do not persist
 iPersistInterval_ms = 10 * portable_constants.MINUTE_MS
@@ -101,7 +105,6 @@ iMODULO_GRAFANALOG_MEDIUM_PULL = 5
 iMODULO_GRAFANALOG_SLOW_PUSH = 10
 iMODULO_GRAFANALOG_SLOW_PULL = 50
 
-bControllerOn = True
 # True: Setpoint is 'fTempFixEstimator_C'
 # False: Use DayMaxEstimator
 bSetpointFix = False
@@ -110,19 +113,17 @@ bSetpointFix = False
 fTempSetpointFix_C = 0.0
 
 def setVirgin():
-  global bControllerOn
-  bControllerOn = False
+  setFixtemp(0.0)
 
   global iPollForWlanInterval_ms
   iPollForWlanInterval_ms = 30 * portable_constants.SECOND_MS
 
   global iPersistInterval_ms
-  # None: Do not persist
+  # None: Do not persit
   iPersistInterval_ms = None
 
 def setOff():
-  global bControllerOn
-  bControllerOn = False
+  setFixtemp(0.0)
 
   global iPollForWlanInterval_ms
   iPollForWlanInterval_ms = 30 * portable_constants.SECOND_MS

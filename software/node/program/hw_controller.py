@@ -17,11 +17,14 @@ import portable_grafana_log_writer
 
 def updateConfigAppByVERSION():
   with open(portable_firmware_constants.strFILENAME_VERSION, 'r') as f:
-    # s = heads/master;1;iPollForWlanInterval_ms=60*1000;iHwLedModulo=10
-    s = f.read()
+    # strVersion = heads/master;1;iPollForWlanInterval_ms=60*1000;iHwLedModulo=10
+    strVersion = f.read()
+
+  print('MAC:', config_app.strMAC)
+  print('VERSION.TXT:', strVersion)
 
   # strAux = 1;config-UNDERSCORE-app.iPollForWlanInterval-UNDERSCORE-ms=60*1000;config-UNDERSCORE-app.iHwLedModulo=12
-  strAux = s.split(';', 1)[1]
+  strAux = strVersion.split(';', 1)[1]
   # Unescape
   for strChar, strEscape in portable_constants.listReplacements:
     strAux = strAux.replace(strEscape, strChar)

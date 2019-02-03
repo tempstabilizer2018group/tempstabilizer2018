@@ -105,7 +105,6 @@ class DayMaxEstimator:
     self.objTemperatureList = TemperatureList(fTempO_Sensor)
     self.iStartTime_ms = iTicks_ms
 
-  # return: fSetpoint_C
   def process(self, iTicks_ms, fTempO_Sensor, bFetMin_W_Limit_Low):
     iDiffTicks_ms = portable_ticks.objTicks.ticks_diff(iTicks_ms, self.iNextDayEstimatorTicks_ms)
     if iDiffTicks_ms > 0:
