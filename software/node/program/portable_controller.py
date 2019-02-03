@@ -23,6 +23,7 @@ class Controller:
     self.__fTempH_SensorLast = -1000.0
     self.openLogs()
     self.objHw = self.factoryHw()
+    self.objHw.fDac_V = 0.0
 
     self.__objPollForWlanInterval = portable_ticks.Interval(iInterval_ms=config_app.iPollForWlanInterval_ms, bForceFirstTime=False)
     self.__forceWlanFirstTime()

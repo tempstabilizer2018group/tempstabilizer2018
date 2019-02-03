@@ -92,6 +92,8 @@ class HwController(portable_controller.Controller):
     # scan_time_ms < 0: Passive scan
     # channel: 0: All 11 channels
     scan_time_ms = 200
+    if config_app.strWlanChannel == 0:
+      scan_time_ms = 1000
     channel = config_app.strWlanChannel
     listWlans = self.__objWlan.scan(scan_time_ms, channel)
     # wlan.scan()
@@ -162,8 +164,8 @@ class HwController(portable_controller.Controller):
 
     bNewSwVersion = hw_update_ota.checkIfNewSwVersion(self.__objWlan)
     if bNewSwVersion:
+      self.objHw.fDac_V = 0.0
       hw_update_ota.formatAndReboot()
-
 
   def __doHttpPost(self, strFilenameFull, strFilenameBase):
     import gc
