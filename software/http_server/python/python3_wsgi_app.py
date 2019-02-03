@@ -25,11 +25,6 @@ strCONTENTTYPE_BINARY = 'application/octet-stream'
 strHTTP_PATH_INFLUXDB_DELETE = '/influxdb_delete'
 strHTTP_PATH_INFLUXDB_RELOAD_ALL = '/influxdb_reload_all'
 
-def getContentType(strUrl):
-  strExt = os.path.splitext(strUrl)[1]
-  strContentType = dictContentTypes.get(strExt, strCONTENTTYPE_TEXT)
-  return strContentType
-
 def responseBytes(start_response, strMessage, strFilename=None, strStatus=strSTATUS_200, strContentType=strCONTENTTYPE_TEXT):
   response_headers = [('Content-type', strContentType),
                 ('Content-Length', str(len(strMessage)))]

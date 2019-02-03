@@ -100,3 +100,39 @@ iMODULO_GRAFANALOG_MEDIUM_PUSH = 1
 iMODULO_GRAFANALOG_MEDIUM_PULL = 5
 iMODULO_GRAFANALOG_SLOW_PUSH = 10
 iMODULO_GRAFANALOG_SLOW_PULL = 50
+
+bControllerOn = True
+# True: Setpoint is 'fTempFixEstimator_C'
+# False: Use DayMaxEstimator
+bSetpointFix = False
+
+# Setpoint if 'bSetpointFix = True'
+fTempSetpointFix_C = 0.0
+
+def setVirgin():
+  global bControllerOn
+  bControllerOn = False
+
+  global iPollForWlanInterval_ms
+  iPollForWlanInterval_ms = 30 * portable_constants.SECOND_MS
+
+  global iPersistInterval_ms
+  # None: Do not persist
+  iPersistInterval_ms = None
+
+def setOff():
+  global bControllerOn
+  bControllerOn = False
+
+  global iPollForWlanInterval_ms
+  iPollForWlanInterval_ms = 30 * portable_constants.SECOND_MS
+
+def setFixtemp(fTemp_C):
+  global bSetpointFix
+  bSetpointFix = True
+
+  global fTempSetpointFix_C
+  fTempSetpointFix_C = fTemp_C
+
+def setAutomatic():
+  pass
