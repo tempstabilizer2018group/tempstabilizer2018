@@ -2,6 +2,7 @@
 
 import io
 import os
+import socket
 import urllib
 import logging
 
@@ -70,6 +71,8 @@ class GithubPullBase:
     assert self._strGitTags == None, 'This methode must only be called once!'
     self._strGitRepo = strGitRepo
     self._strGitTags = strGitTags
+
+    strGitTags += ";strRepro='%s'" % self._getRepro()
     # Escape characters in the tags, but not the ';' between the git-tags
     self._strGitTagsEscaped = ';'.join(map(escape, strGitTags.split(';')))
 
@@ -191,7 +194,10 @@ class GitHubPullLocal(GithubPullBase):
 
     self.__dictConfigNodes = self._getDictNodesFromString(strConfigNodes)
     GithubPullBase.__init__(self, strDirectory)
-  
+
+  def _getRepro(self):
+    return 'local on ' + socket.gethostname()
+
   def _getConfigNodesFromGithub2(self):
     return self.__dictConfigNodes
 
@@ -235,6 +241,9 @@ class GitHubApiPull(GithubPullBase):
     else:
       objGithub = github.Github(login_or_token=strGithubToken)
     return objGithub.get_repo(strGithubRepo)
+
+  def _getRepro(self):
+    return 'www.github.com via %s' % socket.gethostname()
 
   def _getConfigNodesFromGithub2(self):
     objGitRepro = self.__openRepo(strGithubRepoConfig)
@@ -298,6 +307,9 @@ class GitHubPublicPull(GithubPullBase):
 
   def __init__(self, strDirectory=None):
     GithubPullBase.__init__(self, strDirectory)
+
+  def _getRepro(self):
+    return 'www.github.com via %s' % socket.gethostname()
 
   def _getConfigNodesFromGithub2(self):
     # https://raw.githubusercontent.com/tempstabilizer2018group/tempstabilizer2018/master/software/http_server/python/config_nodes.py
