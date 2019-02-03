@@ -9,10 +9,14 @@ strInfluxDbNameOrigin = 'origin'
 # After changing this file you might need to restart apache!
 # sudo systemctl restart apache2
 
-# if set to True, instead of getting the files from github, they will be lookedup locally
+# True: Don't connect to www.github.com and get the files locally
+# False: Get files from www.github.com
 bGithubPullLocal = False
 
-# Cache tar-files (the software-updates) to make downloads faster
+# True: If a update-tar-file is already in the cache: Use it
+#   Use this option on a productive system or not at all...
+# False: Create a update-tar-file even and override a file which is already in the cache.
+#   Use this option when developing locally on the software.
 bCacheTarFiles = False
 
 if bGithubPullLocal:
@@ -20,26 +24,16 @@ if bGithubPullLocal:
   # Therfore: No cache!
   bCacheTarFiles = False
 
-strMacUnderTest = '840D8E1BC40C'
-
-def factoryGitHubPull(strMac):
+def factoryGitHubPull():
   '''
     There are different implementation of GitHubPull.
     Specially pulling from the local filesystem or from github.
     This will return an puller and assign the mac-addresse.
   '''
-  def factory():
-    import python3_github_pull
-    if bGithubPullLocal:
-      return python3_github_pull.GitHubPullLocal()
+  import python3_github_pull
 
-    if strMac == strMacUnderTest:
-      return python3_github_pull.GitHubPullLocal()
+  if bGithubPullLocal:
+    return python3_github_pull.GitHubPullLocal()
 
-    # return python3_github_pull.GitHubApiPull()
-    return python3_github_pull.GitHubPublicPull()
-
-  p = factory()
-  p.setMac(strMac)
-
-  return p
+  # return python3_github_pull.GitHubApiPull()
+  return python3_github_pull.GitHubPublicPull()

@@ -22,4 +22,6 @@ listReplacements = (
     ('/', '-SLASH-'),
     (';', '-SEMICOLON-'),
     (':', '-COLON-'),
+    ("'", '-APR-'),
+    ('"', '-APR-'),
 )

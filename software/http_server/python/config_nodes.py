@@ -83,6 +83,6 @@ if __name__ == '__main__':
 
   if False:
     import config_http_server
-    p = config_http_server.factoryGitHubPull(strMac)
+    p = config_http_server.factoryGitHubPull()
     strTarFilenameFull = p.getTar()
     pass

@@ -105,6 +105,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="http_server\python\python3_wsgi_app.wsgi" />
+    <Content Include="http_server\webroot\favicon.ico" />
+    <Content Include="http_server\webroot\index.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

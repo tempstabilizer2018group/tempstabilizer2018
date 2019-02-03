@@ -10,6 +10,7 @@ sys.path.append(os.path.join(strFileDirectory, '../../node/config'))
 sys.path.append(os.path.join(strFileDirectory, '../../node/program'))
 
 import config_app
+import config_http_server
 import portable_firmware_constants
 import python3_http_influxdb_loadfiles
 
@@ -118,7 +119,7 @@ def handle_get(environ, start_response):
   strMac = getArg(environ, portable_firmware_constants.strHTTP_ARG_MAC)
   strVersion = getArg(environ, portable_firmware_constants.strHTTP_ARG_VERSION)
 
-  p = python3_github_pull.GitHubPullLocal()
+  p = config_http_server.factoryGitHubPull()
   strVersionGit = p.setMac(strMac)
 
   if strPathInfo == portable_firmware_constants.strHTTP_PATH_SOFTWAREUPDATE:

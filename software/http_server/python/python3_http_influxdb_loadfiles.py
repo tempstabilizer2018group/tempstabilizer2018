@@ -81,7 +81,7 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
     self.__fSecondsSince1970_UnixEpochStart = fSecondsSince1970_UnixEpochStart_StartOfFile
     self.__listMeasurements = []
 
-    p = config_http_server.factoryGitHubPull(strMac)
+    p = config_http_server.factoryGitHubPull()
     self.__strNodeName = p.objNode.strName
     self.__strLabLabel = p.objNode.strLabLabel
 

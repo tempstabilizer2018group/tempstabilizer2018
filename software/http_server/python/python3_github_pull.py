@@ -260,7 +260,7 @@ class GitHubApiPull(GithubPullBase):
       logging.debug('  Tag: %s' % strGitTag)
       if self._isUserTag(strGitTag):
         # User Tags don't pull from github
-        continue;
+        continue
       try:
         objGitTag = objGitRepro.get_git_ref(strGitTag)
       except github.UnknownObjectException:
@@ -335,7 +335,7 @@ class GitHubPublicPull(GithubPullBase):
       logging.debug('  Tag: %s' % strGitTag)
       if self._isUserTag(strGitTag):
         # User Tags don't pull from github
-        continue;
+        continue
       try:
         objGitTag = objGitRepro.get_git_ref(strGitTag)
       except github.UnknownObjectException:
