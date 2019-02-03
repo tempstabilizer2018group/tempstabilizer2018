@@ -16,5 +16,4 @@
 - SSID: TempStabilizer2018
 - <RPI3_WLAN_PW>
 - WPA PSK
-- Channel: 6
 

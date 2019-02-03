@@ -24,7 +24,7 @@ if sys.platform == 'esp32':
 strWlanSsid = portable_firmware_constants.strWLAN_SSID
 strWlanPw = portable_firmware_constants.strWLAN_PW
 # Channel 0: All 11 channels
-strWlanChannel = 6
+strWlanChannel = 0
 
 # None: Es wird jedesmal versucht, über das Netzwerk Daten abzusetzen.
 strWlanSidForTrigger = 'rumenigge'

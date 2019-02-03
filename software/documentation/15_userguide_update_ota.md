@@ -5,7 +5,6 @@ Setup Hotspot
 - SSID: TempStabilizer2018
 - <RPI3_WLAN_PW>
 - WPA PSK
-- Channel: 6
 
 ## Step 2: Format Filesystem
 
