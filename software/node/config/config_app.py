@@ -68,6 +68,9 @@ bUseNetwork = False
 # After this interval the WLAN will polled
 iPollForWlanInterval_ms = 10 * portable_constants.MINUTE_MS
 
+# After Powerup or after Softwareupdate: Wlan will be polled 'iPollForWlanOnce_ms' after boot
+iPollForWlanOnce_ms = 10 * portable_constants.SECOND_MS
+
 # Interval to write persist setpoint temperature and time
 # None: Do not persist
 iPersistInterval_ms = 10 * portable_constants.MINUTE_MS

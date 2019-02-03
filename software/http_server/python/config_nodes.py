@@ -40,7 +40,8 @@ listLabs.append({
   # ;config_app.iHwLedModulo=30
   # ;config_app.setFixtemp(27.0)
   # ;config_app.iPollForWlanInterval_ms=60*60*1000
-  GIT_TAGS: 'heads/master;13',
+  # ;config_app.setOff()
+  GIT_TAGS: 'heads/master;15;config_app.setVirgin()',
   NODES: (
     ('20180907_01', ''),
 

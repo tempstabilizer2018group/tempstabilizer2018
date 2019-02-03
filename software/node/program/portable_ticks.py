@@ -211,13 +211,16 @@ class Interval:
   def __init__(self, iInterval_ms, bForceFirstTime=True):
     self.__iLastTicks_ms = objTicks.ticks_ms()
     self.__iInterval_ms = iInterval_ms
-    self.bForce = bForceFirstTime
+    if bForceFirstTime:
+      self.doForce()
 
-  def doForce(self):
+  def doForce(self, iNextTick_ms=0):
     '''
       Next time isIntervalOver() will be called it will trigger.
     '''
-    self.bForce = True
+    if iNextTick_ms > self.__iInterval_ms:
+      return
+    self.__iLastTicks_ms = objTicks.ticks_add(self.__iLastTicks_ms, iNextTick_ms-self.__iInterval_ms)
 
   def iTimeElapsed_ms(self, iTicksNow_ms):
     '''
@@ -234,8 +237,7 @@ class Interval:
     iTicksNow_ms = objTicks.ticks_ms()
     iEffectiveIntervalDuration_ms = self.iTimeElapsed_ms(iTicksNow_ms)
     assert iEffectiveIntervalDuration_ms >= 0
-    if self.bForce or (iEffectiveIntervalDuration_ms >= self.__iInterval_ms):
-      self.bForce = False
+    if iEffectiveIntervalDuration_ms >= self.__iInterval_ms:
       self.__iLastTicks_ms = iTicksNow_ms
       # Triggered
       return True, iEffectiveIntervalDuration_ms
