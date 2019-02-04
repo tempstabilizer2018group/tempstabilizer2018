@@ -59,7 +59,7 @@ listLabs.append({
     ('20181217_22', ''),
     ('20181217_23', ';config_app.setFixtemp(23.0)'),
     ('20181217_24', ';config_app.setFixtemp(23.0)'),
-    ('20181217_25', ';config_app.iHwLedModulo=1'),
+    ('20181217_25', ''),
   )
 })
 
