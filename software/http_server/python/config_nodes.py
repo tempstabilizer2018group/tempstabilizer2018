@@ -24,7 +24,7 @@ listNodes.append({ MAC: '3C71BF16D03C', SERIAL: '20181217_21', NAME: '21', })
 listNodes.append({ MAC: '3C71BF16BCA0', SERIAL: '20181217_22', NAME: '22', })
 listNodes.append({ MAC: '3C71BF16BCC0', SERIAL: '20181217_23', NAME: '23', })
 listNodes.append({ MAC: '3C71BF16D05C', SERIAL: '20181217_24', NAME: '24', })
-listNodes.append({ MAC: '3C71BF16BCA4', SERIAL: '20181217_25', NAME: '25', })
+listNodes.append({ MAC: '3C71BF16BCA4', SERIAL: '20181217_25', NAME: 'ETH25', })
 
 listLabs.append({
   LAB_LABEL: 'labHombi',
