@@ -62,7 +62,7 @@ listLabs.append({
 
 
 listLabs.append({
-  LAB_LABEL: 'ETHE9',
+  LAB_LABEL: 'ETH-E9',
   LAB_NAME: 'Hoenggerberg',
   RESPONSIBLE: 'Peter Maerki',
   GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
