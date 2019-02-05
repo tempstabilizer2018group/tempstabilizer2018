@@ -53,12 +53,33 @@ listLabs.append({
     ('20181217_16', ''),
     ('20181217_17', ''),
     ('20181217_18', ''),
-    ('20181217_19', ''),
-    ('20181217_20', ''),
     ('20181217_21', ''),
     ('20181217_22', ''),
     ('20181217_23', ';config_app.setFixtemp(23.0)'),
     ('20181217_24', ';config_app.setFixtemp(23.0)'),
+  )
+})
+
+
+listLabs.append({
+  LAB_LABEL: 'ETH-E9',
+  LAB_NAME: 'Hoenggerberg',
+  RESPONSIBLE: 'Peter Maerki',
+  GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
+  # Select a tag: 'tags/v1.0.0'
+  # Select the head of a branch: 'heads/master', 'heads/branchX'
+  # GIT_TAGS: 'tags/x1.0;tags/y1.1',
+  #
+  # Examples
+  # ;config_app.setVirgin()
+  # ;config_app.iHwLedModulo=30
+  # ;config_app.setFixtemp(27.0)
+  # ;config_app.iPollForWlanInterval_ms=60*60*1000
+  # ;config_app.setOff()
+  GIT_TAGS: 'heads/master;3;config_app.iPollForWlanInterval_ms=10*60*1000',
+  NODES: (
+    ('20181217_19', ''),
+    ('20181217_20', ''),
     ('20181217_25', ''),
   )
 })
