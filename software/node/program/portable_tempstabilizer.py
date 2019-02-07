@@ -95,12 +95,8 @@ class TempStabilizer:
     # 0 bis 3.3V
     
     # Fehlerkorrektur:
-    # bZeroHeat schaltet bei 3.3V / 1E6*3k3 = 10.9 mV
-    # ergibt einen Strom von 10.9 mV / 3 Ohm = 3.6 mA
-    # die Abschnuergrenze des FET: fDACzeroHeat_V ist experimentell ca. um fCorrectionFET_V tiefer.
-    fCorrection_FET_V = 0.16
     fCurrent = self.fHeat_W / fSupplyHV_V
-    fDAC_V = -0.2724*math.exp(-fCurrent/0.01068)+3.003*fCurrent+0.3045 + self.fDACzeroHeat_V - fCorrection_FET_V
+    fDAC_V = -0.2724*math.exp(-fCurrent/0.01068)+3.003*fCurrent+0.3045 + self.fDACzeroHeat_V - 0.161
     # Limitieren auf den möglichen Spannungsbereich des DAC
     fDAC_V = min(max(0.0, fDAC_V), 3.3)
     return fDAC_V
