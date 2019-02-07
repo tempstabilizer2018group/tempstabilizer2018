@@ -21,6 +21,12 @@ fTauIncrease_fHeat_s = 10.0
 # Falls zu heiss: Leistungslimit reduzieren
 fHeat_W_reduction_per_s = 0.1
 
+# Fehlerkorrektur:
+# bZeroHeat schaltet bei 3.3V / 1E6*3k3 = 10.9 mV
+# ergibt einen Strom von 10.9 mV / 3 Ohm = 3.6 mA
+# die Abschnuergrenze des FET: fDACzeroHeat_V ist experimentell ca. um fCorrectionFET_V tiefer.
+FET_V = 0.16
+
 class TempStabilizer:
   def __init__(self, objDayMaxEstimator=None, objPidO=None, objPidH=None):
     self.fHeat_W_gefiltert = 0.0
