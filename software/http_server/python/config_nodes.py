@@ -80,7 +80,7 @@ listLabs.append({
   NODES: (
     ('20181217_19', ';config_app.setFixtemp(25.0)'),
     ('20181217_20', ';config_app.setFixtemp(25.0)'),
-    ('20181217_25', ''),
+    ('20181217_25', ';config_app.setFixtemp(23.0)'),
   )
 })
 
