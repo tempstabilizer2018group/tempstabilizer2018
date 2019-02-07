@@ -25,6 +25,7 @@ class TempStabilizer:
   def __init__(self, objDayMaxEstimator=None, objPidO=None, objPidH=None):
     self.fHeat_W_gefiltert = 0.0
     self.fHeat_W_LimitHigh = 0.0
+    self.bZeroHeatForecast = False
 
     self._objDayMaxEstimator = objDayMaxEstimator
     if objDayMaxEstimator == None:
@@ -93,12 +94,19 @@ class TempStabilizer:
   def fDac_V(self, fSupplyHV_V):
     # [V]
     # 0 bis 3.3V
-    
+
     # Fehlerkorrektur:
     fCurrent = self.fHeat_W / fSupplyHV_V
     fDAC_V = -0.2724*math.exp(-fCurrent/0.01068)+3.003*fCurrent+0.3045 + self.fDACzeroHeat_V - 0.161
     # Limitieren auf den möglichen Spannungsbereich des DAC
     fDAC_V = min(max(0.0, fDAC_V), 3.3)
+    
+#    Todo Peter mit Hans: korrekt machen
+#    if bZeroHeatForecast == False and bZeroHeat == True:
+#      self.fDACzeroHeat_V += 0.00001
+#    if bZeroHeatForecast == True and bZeroHeat == False:
+#      self.fDACzeroHeat_V -= 0.00001
+#    self.bZeroHeatForecast = fCurrent < 0.004 # Prognose wie bZeroHeat sein sollte
     return fDAC_V
 
   @property
