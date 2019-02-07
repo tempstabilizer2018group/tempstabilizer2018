@@ -21,12 +21,6 @@ fTauIncrease_fHeat_s = 10.0
 # Falls zu heiss: Leistungslimit reduzieren
 fHeat_W_reduction_per_s = 0.1
 
-# Fehlerkorrektur:
-# bZeroHeat schaltet bei 3.3V / 1E6*3k3 = 10.9 mV
-# ergibt einen Strom von 10.9 mV / 3 Ohm = 3.6 mA
-# die Abschnuergrenze des FET: fDACzeroHeat_V ist experimentell ca. um fCorrectionFET_V tiefer.
-fCorrection_FET_V = -0.16
-
 class TempStabilizer:
   def __init__(self, objDayMaxEstimator=None, objPidO=None, objPidH=None):
     self.fHeat_W_gefiltert = 0.0
@@ -73,7 +67,6 @@ class TempStabilizer:
       if not objHw.bZeroHeat:
         iDuration_ms = portable_ticks.objTicks.ticks_diff(portable_ticks.objTicks.ticks_ms(), iTicksStart_ms)
         fCorrection_V = 1.58350 - 1.60900 # Fehlerkorrektur durch schnelle Rampe (siehe unten)
-        fCorrection_V += fCorrection_FET_V # Fehlerkorrektur durch Schaltpunkt ZERO_HEAT bei 4.3mA
         self.fDACzeroHeat_V += fCorrection_V
         print('TempStabilizer.find_fDACzeroHeat(): fDACzeroHeat_V %0.5f in %d ms' % (self.fDACzeroHeat_V, iDuration_ms))
         objHw.fDac_V = 0.0
@@ -100,8 +93,14 @@ class TempStabilizer:
   def fDac_V(self, fSupplyHV_V):
     # [V]
     # 0 bis 3.3V
+    
+    # Fehlerkorrektur:
+    # bZeroHeat schaltet bei 3.3V / 1E6*3k3 = 10.9 mV
+    # ergibt einen Strom von 10.9 mV / 3 Ohm = 3.6 mA
+    # die Abschnuergrenze des FET: fDACzeroHeat_V ist experimentell ca. um fCorrectionFET_V tiefer.
+    fCorrection_FET_V = 0.16
     fCurrent = self.fHeat_W / fSupplyHV_V
-    fDAC_V = -0.2724*math.exp(-fCurrent/0.01068)+3.003*fCurrent+0.3045 + self.fDACzeroHeat_V
+    fDAC_V = -0.2724*math.exp(-fCurrent/0.01068)+3.003*fCurrent+0.3045 + self.fDACzeroHeat_V - fCorrection_FET_V
     # Limitieren auf den möglichen Spannungsbereich des DAC
     fDAC_V = min(max(0.0, fDAC_V), 3.3)
     return fDAC_V
