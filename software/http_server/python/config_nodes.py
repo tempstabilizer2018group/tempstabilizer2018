@@ -78,9 +78,9 @@ listLabs.append({
   # ;config_app.setOff()
   GIT_TAGS: 'heads/master;7;config_app.iPollForWlanInterval_ms=2*60*1000',
   NODES: (
-    ('20181217_19', ';config_app.setFixtemp(25.0)'),
-    ('20181217_20', ';config_app.setFixtemp(25.0)'),
-    ('20181217_25', ';config_app.setFixtemp(24.5)'),
+    ('20181217_19', ';config_app.setFixtemp(26.0)'),
+    ('20181217_20', ';config_app.setFixtemp(26.0)'),
+    ('20181217_25', ';config_app.setFixtemp(26.0)'),
   )
 })
 
