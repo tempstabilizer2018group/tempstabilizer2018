@@ -7,6 +7,7 @@ LOGFILENAME_TABDELIMITED = 'log.txt'
 LOGFILENAME_STATISTICS = 'statistics.txt'
 LOGFILENAME_GRAFANA = 'grafana.txt'
 LOGFILENAME_PERSIST = 'persist.txt'
+LOGFILENAME_ERROR = 'error.txt'
 FILENAME_REPLICATE_ONCE = 'replicate_once.py'
 
 DIRECTORY_DATA = 'data'
@@ -35,6 +36,10 @@ strWlanSidForTrigger = None
 # A big file could break HTTP-Post when using to much memory.
 iHttpPostBigTestfile = 1024*1024
 iHttpPostBigTestfile = None
+
+# True: Run Watchdog at program-start and feed() it
+# False: Do not use Watchdog
+bUseWatchdog = True
 
 # When starting:
 # fTempO_Start = messe_fTempO_C + fStart_Increment_fTempO_C
@@ -79,7 +84,7 @@ iPersistInterval_ms = 10 * portable_constants.MINUTE_MS
 iLogHwConsoleInterval_ms = 2 * portable_constants.SECOND_MS
 iLogHwConsoleInterval_ms = 30 * portable_constants.SECOND_MS
 iHwI2cEnvironsInterval_ms = 10 * portable_constants.SECOND_MS
-iHwLedModulo = 25
+iHwLedModulo = 5
 bHwDoLightSleep = True
 
 # Simuliert only

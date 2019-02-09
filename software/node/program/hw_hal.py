@@ -4,6 +4,7 @@ import utime
 import uerrno
 import machine
 import config_app
+import hw_update_ota
 
 import hw_max30205
 import hw_mcp4725
@@ -30,14 +31,14 @@ I2C_ADDRESS_TempO = hw_max30205.I2C_ADDRESS_A
 I2C_ADDRESS_TempH = hw_max30205.I2C_ADDRESS_B
 I2C_ADDRESS_Environs = 0x9E
 
-# Taster
+# Button
 pin_button = machine.Pin(16, machine.Pin.IN, machine.Pin.PULL_UP)
 # hv_ok
 pin_hv_ok = machine.Pin(17, machine.Pin.IN)
 # zero_heat
 pin_zero_heat = machine.Pin(21, machine.Pin.IN)
-# LED
-pin_led = machine.Pin(22, machine.Pin.OUT)
+# LED - this is implemented in the Firmware 'hw_update_ota'.
+# pin_led = machine.Pin(22, machine.Pin.OUT)
 
 # KO
 pin_gpio5 = machine.Pin(5, machine.Pin.OUT)
@@ -46,6 +47,11 @@ pin_gpio19 = machine.Pin(19, machine.Pin.OUT)
 
 pin_sda = machine.Pin(15, machine.Pin.IN, machine.Pin.PULL_UP) 
 pin_scl = machine.Pin(2, machine.Pin.IN, machine.Pin.PULL_UP)
+
+if config_app.bUseWatchdog:
+  hw_update_ota.activateWatchdog()
+
+feedWatchdog = hw_update_ota.feedWatchdog
 
 class Hw:
   def __init__(self):
@@ -79,6 +85,7 @@ class Hw:
     self.iI2cFrequencySelected = MAXFREQ // SAFETY_FACTOR
     print('findAndSetSpeedI2C')
     for iI2cFrequency in range(MINFREQ, MAXFREQ+STEP, STEP):
+      hw_update_ota.feedWatchdog()
       self.i2c.init(scl=pin_scl, sda=pin_sda, freq=iI2cFrequency)
       listAddressI2C = self.i2c.scan()
 
@@ -90,6 +97,7 @@ class Hw:
     print('findAndSetSpeedI2C: iI2cFrequencySelected:', self.iI2cFrequencySelected)
 
   def startTempMeasurement(self):
+    hw_update_ota.feedWatchdog()
     self.MAX30205.oneShotNormalA(I2C_ADDRESS_TempH)
     self.MAX30205.oneShotNormalA(I2C_ADDRESS_TempO)
 
@@ -150,17 +158,14 @@ class Hw:
   # Voltage between 0.0 and 3.3V
   @fDac_V.setter
   def fDac_V(self, fDac_V_param):
+    hw_update_ota.feedWatchdog()
     self.__fDac_V__ = fDac_V_param
     iDac = int(fDac_V_param * 0x0FFF / 3.3)
     iDac = min(0x0FFF, max(0, iDac))
     self.MCP4725.write(iDac)
 
   def setLed(self, bOn):
-    pin_led.value(bOn)
-
-  def toggleLed(self):
-    portable_ticks.count('hw_hal.toggleLed()')
-    pin_led.value(not pin_led.value())
+    hw_update_ota.objGpio.setLed(bOn)
 
 def setTempOS():
   hw = Hw()

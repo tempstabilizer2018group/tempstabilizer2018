@@ -160,10 +160,14 @@ class Controller:
     raise Exception('Needs to be derived...')
 
   def ledBlink(self):
+    '''
+      Turns the LED on after some time. The LED will be switched off after the PID-calculation.
+    '''
     self.__iLedModulo += 1
     if self.__iTicksButtonPressed_ms == None:
       bOn = self.__iLedModulo % config_app.iHwLedModulo == 0
-      self.objHw.setLed(bOn)
+      if bOn:
+        self.objHw.setLed(True)
 
   def runOnce(self):
     '''
@@ -245,6 +249,10 @@ class Controller:
     #  uerrno.errorcode[uerrno.EEXIST]
     strMsg = '%s returned %s' % (strFunction, str(objException))
     self.objGrafanaProtocol.logWarning(strMsg)
+    self.logException2(objException, strMsg)
+
+  def logException2(self, objException, strMsg):
+    # May be derived and overridden
     print(strMsg)
     sys.print_exception(objException)
 
@@ -252,8 +260,6 @@ class Controller:
     self.prepare()
     while True:
       iStartTicks_ms = portable_ticks.objTicks.ticks_ms()
-
-      self.ledBlink()
 
       iStopwatch_us = portable_ticks.stopwatch()
       self.networkOnce()
@@ -272,7 +278,7 @@ class Controller:
       iStopwatch_us = portable_ticks.stopwatch()
       bSuccess = self.runOnce()
       portable_ticks.stopwatch_end(iStopwatch_us, 'self.runOnce()')
-      if  bSuccess:
+      if bSuccess:
         portable_ticks.count('portable_controller.runForever().logOnce()')
         iStopwatch_us = portable_ticks.stopwatch()
         self.logOnce()
@@ -283,7 +289,9 @@ class Controller:
       self.sleepOnce(iStartTicks_ms)
       if self.exit():
         break
+      self.ledBlink()
       self.objHw.startTempMeasurement()
+      self.objHw.setLed(False)
     self.done()
 
   def handleButton(self):

@@ -11,4 +11,6 @@ sudo picocom -b 115200 /dev/ttyUSB0
 
 verlassen: control a, dann control x
 
-HTTP-Get http://192.168.4.1/softwareupdate?mac=B4E62DF69969&version=none
+
+
+

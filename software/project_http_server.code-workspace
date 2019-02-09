@@ -7,16 +7,7 @@
 			"path": "http_server"
 		},
 		{
-			"path": "http_server/python"
-		},
-		{
-			"path": "http_server/webroot"
-		},
-		{
-			"path": "node/config"
-		},
-		{
-			"path": "node/program"
+			"path": "node"
 		}
 	],
 	"settings": {

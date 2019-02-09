@@ -12,11 +12,17 @@ listFiles = uos.listdir()
 
 - isButtonPressed():
 
-- isPowerOnBoot():
+- bPowerOnBoot:
+- bWatchdogBoot:
+
+## Watchdog
+
+- activateWatchdog()
+- feedWatchdog()
 
 ## Bootup logic
 
-if isButtonPressed() and isPowerOnBoot():
+if isButtonPressed() and bPowerOnBoot:
   print 'Button presed. Format'
   formatAndReboot()
 
