@@ -58,7 +58,7 @@ class GrafanaProtocol:
     self.__objGrafanaValue_Heat = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'H', 'fHeat_W', 100.0)
     self.__objGrafanaValue_PidH_bLimitHigh = portable_grafana_datatypes.GrafanaValueBoolTrue(INFLUXDB_TAG_NODE, 'L', 'PidH_bLimitHigh')
     self.__objGrafanaValue_DACzeroHeat = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'z', 'fDACzeroHeat_V', 1000.0)
-    self.__objGrafanaValue_SupplyVoltage = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'U', 'fSupplyVoltage_V', 1.0)
+    self.__objGrafanaValue_SupplyVoltage = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'U', 'fSupplyVoltage_V', 10.0)
     self.__objGrafanaValue_DiskFree = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'F', 'fDiskFree_MBytes', 100.0)
 
   def writeHeader(self, iI2cFrequencySelected):
