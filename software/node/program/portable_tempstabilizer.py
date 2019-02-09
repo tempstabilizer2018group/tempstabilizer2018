@@ -91,7 +91,7 @@ class TempStabilizer:
   def fHeat_W(self):
     return self._objPidH.fOutputValueLimited
 
-  def fDac_V(self, fSupplyHV_V):
+  def fDac_V(self, objHw, fSupplyHV_V):
     # [V]
     # 0 bis 3.3V
 
@@ -101,12 +101,12 @@ class TempStabilizer:
     # Limitieren auf den möglichen Spannungsbereich des DAC
     fDAC_V = min(max(0.0, fDAC_V), 3.3)
     
-#    Todo Peter mit Hans: korrekt machen
-#    if bZeroHeatForecast == False and bZeroHeat == True:
-#      self.fDACzeroHeat_V += 0.00001
-#    if bZeroHeatForecast == True and bZeroHeat == False:
-#      self.fDACzeroHeat_V -= 0.00001
-#    self.bZeroHeatForecast = fCurrent < 0.004 # Prognose wie bZeroHeat sein sollte
+    if (not self.bZeroHeatForecast) and objHw.bZeroHeat:
+      self.fDACzeroHeat_V += 0.00001
+    if self.bZeroHeatForecast and (not objHw.bZeroHeat):
+      self.fDACzeroHeat_V -= 0.00001
+    # Prognose wie bZeroHeat sein sollte
+    self.bZeroHeatForecast = fCurrent < 0.004
     return fDAC_V
 
   @property
@@ -169,7 +169,6 @@ class TempStabilizer:
 
   def processH(self, iTime_ms, fTempH_Sensor, fTempO_Sensor, bZeroHeat):
     portable_ticks.count('TempStabilizer.processH()')
-    # self.__ajust_fDACzeroHeat_V__(bZeroHeat)
 
     fTimeDelta_s = self._objPidH.process(iTime_ms,
                          fSetpoint=self.fTempH_Setpoint_C,
@@ -198,17 +197,6 @@ class TempStabilizer:
       # Achtung, wir sind zu heiss: Leistung senken
       portable_ticks.count('portable_tempstabilizer.TempStabilizer.__ajust_fHeat_W_LimitHigh__(Leistung senken)')
       self.fHeat_W_LimitHigh -= fTimeDelta_s * fHeat_W_reduction_per_s
-
-#  def __ajust_fDACzeroHeat_V__(self, bZeroHeat):
-#    if self._objPidH.bLimitLow:
-#      if bZeroHeat:
-#        self.fDACzeroHeat_V += 0.00001
-#        return
-#      self.fDACzeroHeat_V -= 0.00005
-#      return
-#    
-#    if bZeroHeat:
-#      self.fDACzeroHeat_V += 0.00001
 
   def logHeader(self, fLog):
     listColumns = (

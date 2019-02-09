@@ -211,7 +211,7 @@ class Controller:
     portable_ticks.stopwatch_end(iStopwatch_us, 'self.objTs.processH(...)')
 
     iStopwatch_us = portable_ticks.stopwatch()
-    self.objHw.fDac_V = self.objTs.fDac_V(self.objHw.messe_fSupplyHV_V)
+    self.objHw.fDac_V = self.objTs.fDac_V(self.objHw, self.objHw.messe_fSupplyHV_V)
     portable_ticks.stopwatch_end(iStopwatch_us, 'self.objTs.fDac_V')
     return True
 
