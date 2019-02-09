@@ -12,7 +12,10 @@ config_app.bUseNetwork = True
 config_app.bHwDoLightSleep = True
 config_app.bWriteLogStatistics = False
 
-hw_controller.updateConfigAppByVERSION()
+try:
+  hw_controller.updateConfigAppByVERSION()
 
-controller = hw_controller.HwController(__file__)
-controller.runForever()
+  controller = hw_controller.HwController(__file__)
+  controller.runForever()
+except Exception as e:
+  hw_controller.logException(e, 'Mainloop')

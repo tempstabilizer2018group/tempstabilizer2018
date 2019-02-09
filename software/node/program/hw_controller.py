@@ -15,33 +15,51 @@ import portable_constants
 import portable_firmware_constants
 import portable_grafana_log_writer
 
+bDataDirectoryExists = False
+def createDataDirectory():
+  global bDataDirectoryExists
+  if bDataDirectoryExists:
+    return
+  try:
+    uos.mkdir(config_app.DIRECTORY_DATA)
+    print('Created directory: "%s"' % config_app.DIRECTORY_DATA)
+  except:
+    print('Directory already exists: "%s"' % config_app.DIRECTORY_DATA)
+
+def logException(objException, strMsg):
+  print(strMsg)
+  sys.print_exception(objException)
+
+  createDataDirectory()
+  with open(config_app.DIRECTORY_DATA + '/' + config_app.LOGFILENAME_ERROR, 'w') as fError:
+    fError.write(strMsg)
+    fError.write('\n\n\n')
+    sys.print_exception(objException, fError)
+
 def updateConfigAppByVERSION():
-  with open(portable_firmware_constants.strFILENAME_VERSION, 'r') as f:
-    # strVersion = heads/master;1;iPollForWlanInterval_ms=60*1000;iHwLedModulo=10
-    strVersion = f.read()
+  try:
+    strAux = '-'
+    # hw_update_ota.strSwVersion = heads/master;1;iPollForWlanInterval_ms=60*1000;iHwLedModulo=10
+    print('MAC:', config_app.strMAC)
+    print('VERSION.TXT:', hw_update_ota.strSwVersion)
 
-  print('MAC:', config_app.strMAC)
-  print('VERSION.TXT:', strVersion)
+    # strAux = 1;config-UNDERSCORE-app.iPollForWlanInterval-UNDERSCORE-ms=60*1000;config-UNDERSCORE-app.iHwLedModulo=12
+    strAux = hw_update_ota.strSwVersion.split(';', 1)[1]
+    # Unescape
+    for strChar, strEscape in portable_constants.listReplacements:
+      strAux = strAux.replace(strEscape, strChar)
+    # strAux = 1;iPollForWlanInterval_ms=60*1000;iHwLedModulo=12
 
-  # strAux = 1;config-UNDERSCORE-app.iPollForWlanInterval-UNDERSCORE-ms=60*1000;config-UNDERSCORE-app.iHwLedModulo=12
-  strAux = strVersion.split(';', 1)[1]
-  # Unescape
-  for strChar, strEscape in portable_constants.listReplacements:
-    strAux = strAux.replace(strEscape, strChar)
-  # strAux = 1;iPollForWlanInterval_ms=60*1000;iHwLedModulo=12
-
-  print('exec("' + strAux + '")')
-  exec(strAux)
+    print('exec("' + strAux + '")')
+    exec(strAux)
+  except Exception as e:
+    logException(e, 'update configuration from "config_nodes.py" for %s: %s' % (config_app.strMAC, strAux))
 
 class HwController(portable_controller.Controller):
   def __init__(self, strFilenameFull):
     self.strFilenameFull = strFilenameFull
     print('Programm: %s' % self.strFilenameFull)
-    try:
-      uos.mkdir(config_app.DIRECTORY_DATA)
-      print('Created directory: "%s"' % config_app.DIRECTORY_DATA)
-    except:
-      print('Directory already exists: "%s"' % config_app.DIRECTORY_DATA)
+    createDataDirectory()
     portable_controller.Controller.__init__(self)
     self.__objLogConsoleInterval = portable_ticks.Interval(iInterval_ms=config_app.iLogHwConsoleInterval_ms)
     self.__objWlan = network.WLAN(network.STA_IF)
@@ -60,6 +78,9 @@ class HwController(portable_controller.Controller):
   def factoryHw(self):
     return hw_hal.Hw()
 
+  def logException2(self, objException, strMsg):
+    logException(objException, strMsg)
+
   def logConsole(self):
     bIntervalOver, iEffectiveIntervalDuration_ms = self.__objLogConsoleInterval.isIntervalOver()
     portable_ticks.bDoStopwatch = False
@@ -73,6 +94,7 @@ class HwController(portable_controller.Controller):
       print('%0.3fs %s %0.2f(%0.2f)C %0.2f(%0.2f)C %0.3f' % (portable_ticks.objTicks.ticks_ms()/1000.0, strTempEnvirons_C, self.objTs.fTempO_C, self.objTs.fTempO_Setpoint_C, self.objTs.fTempH_C, self.objTs.fTempH_Setpoint_C, self.objHw.fDac_V))
 
   def reboot(self):
+    hw_update_ota.objGpio.pwmLedReboot()
     machine.reset()
 
   def remove(self, strFilenameFull):
@@ -86,6 +108,7 @@ class HwController(portable_controller.Controller):
     if config_app.strWlanSidForTrigger == None:
       return True
 
+    hw_update_ota.objGpio.pwmLedWlanScan()
     self.__objWlan.active(True)
     # wlan.scan(scan_time_ms, channel)
     # scan_time_ms > 0: Active scan
@@ -125,10 +148,12 @@ class HwController(portable_controller.Controller):
     print('networkConnect("%s")' % config_app.strWlanSsid)
     if not self.__objWlan.active():
       self.__objWlan.active(True)
+    hw_update_ota.objGpio.pwmLedWlanConnected()
     self.__objWlan.connect(config_app.strWlanSsid, config_app.strWlanPw)
     # Wait some time to get connected
     for iPause in range(10):
       # Do not use self.delay_ms(): Light sleep will kill the wlan!
+      hw_hal.feedWatchdog()
       utime.sleep_ms(1000)
       if self.__objWlan.isconnected():
         return
@@ -158,12 +183,15 @@ class HwController(portable_controller.Controller):
       if strFromFilename == config_app.LOGFILENAME_PERSIST:
         # This is a persistent file and must not be processed
         continue
+      hw_hal.feedWatchdog()
       strFilenameFull = '%s/%s' % (config_app.DIRECTORY_DATA, strFromFilename)
       strFilenameBase = strFromFilename.split('.')[0]
       self.__doHttpPost(strFilenameFull, strFilenameBase)
 
+    hw_hal.feedWatchdog()
     bNewSwVersion = hw_update_ota.checkIfNewSwVersion(self.__objWlan)
     if bNewSwVersion:
+      hw_hal.feedWatchdog()
       self.objHw.fDac_V = 0.0
       hw_update_ota.formatAndReboot()
 
