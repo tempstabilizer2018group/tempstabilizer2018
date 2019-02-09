@@ -193,7 +193,10 @@ class HwController(portable_controller.Controller):
     if bNewSwVersion:
       hw_hal.feedWatchdog()
       self.objHw.fDac_V = 0.0
-      hw_update_ota.formatAndReboot()
+      uos.remove(portable_firmware_constants.strFILENAME_VERSION)
+      self.__objWlan.disconnect()
+      print('Reboot for Software update.')
+      machine.reset()
 
   def __doHttpPost(self, strFilenameFull, strFilenameBase):
     import gc

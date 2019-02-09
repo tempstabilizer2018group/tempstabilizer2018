@@ -9,9 +9,13 @@ import config_app
 
 dictCounter = {}
 
-def count(strTag):
-  iCount = dictCounter.get(strTag, 0)
-  dictCounter[strTag] = iCount+1
+if config_app.bRunStatisticsCounter:
+  def count(strTag):
+    iCount = dictCounter.get(strTag, 0)
+    dictCounter[strTag] = iCount+1
+else:
+  def count(strTag):
+    pass
 
 objTicks = None
 
@@ -54,8 +58,9 @@ if sys.platform == 'esp32':
     def statistics(self):
       print('TicksHw.statistics() not implemented on the hardware')
 
-    def print_statistics(self):
-      print(self.statistics())
+    def print_statistics(self, fOut=sys.stdout):
+      for strTag in sorted(dictCounter.keys()):
+        fOut.write('Counter %8d: %s\n' % (dictCounter[strTag], strTag))
 
     def ticks_ms(self):
       '''
@@ -95,10 +100,6 @@ if sys.platform == 'esp32':
       See: https://docs.micropython.org/en/latest/pyboard/library/utime.html
       '''
       utime.sleep_ms(ms)
-
-    def print_statistics(self, fOut=sys.stdout):
-      for strTag in sorted(dictCounter.keys()):
-        fOut.write('Counter %8d: %s\n' % (dictCounter[strTag], strTag))
 
 else:
   #

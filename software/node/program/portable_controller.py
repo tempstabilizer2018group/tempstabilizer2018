@@ -275,8 +275,10 @@ class Controller:
       self.handleButton()
 
       portable_ticks.count('portable_controller.runForever().runOnce()')
+      self.ledBlink()
       iStopwatch_us = portable_ticks.stopwatch()
       bSuccess = self.runOnce()
+      self.objHw.setLed(False)
       portable_ticks.stopwatch_end(iStopwatch_us, 'self.runOnce()')
       if bSuccess:
         portable_ticks.count('portable_controller.runForever().logOnce()')
@@ -289,9 +291,7 @@ class Controller:
       self.sleepOnce(iStartTicks_ms)
       if self.exit():
         break
-      self.ledBlink()
       self.objHw.startTempMeasurement()
-      self.objHw.setLed(False)
     self.done()
 
   def handleButton(self):

@@ -63,6 +63,7 @@ bWriteLogStatistics = True
 #   Stopwatch 03 ms: self.objTs.processH(...)
 #   Stopwatch 125 ms: self.runOnce()
 bRunStopwatch = False
+bRunStatisticsCounter = False
 
 iGrafanaLogInterval_ms = 1 * portable_constants.SECOND_MS
 # After this interval portable_pid_controller O and H will be called
