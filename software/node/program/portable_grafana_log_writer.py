@@ -60,6 +60,7 @@ class GrafanaProtocol:
     self.__objGrafanaValue_DACzeroHeat = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'z', 'fDACzeroHeat_V', 1000.0)
     self.__objGrafanaValue_SupplyVoltage = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'U', 'fSupplyVoltage_V', 10.0)
     self.__objGrafanaValue_DiskFree = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'F', 'fDiskFree_MBytes', 100.0)
+    self.__objGrafanaValue_MemFree = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'B', 'fMemFree_Bytes', 0.001)
 
   def writeHeader(self, iI2cFrequencySelected):
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VERSION, '1.0')
@@ -79,6 +80,7 @@ class GrafanaProtocol:
     logAuxiliary(self.__objGrafanaValue_DACzeroHeat, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
     logAuxiliary(self.__objGrafanaValue_SupplyVoltage, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
     logAuxiliary(self.__objGrafanaValue_DiskFree, config_app.iMODULO_GRAFANALOG_SLOW_PULL)
+    logAuxiliary(self.__objGrafanaValue_MemFree, config_app.iMODULO_GRAFANALOG_SLOW_PULL)
 
     for objGrafanaValue in self.__listGrafanaValueTempEnvirons:
       logAuxiliary(objGrafanaValue, config_app.iMODULO_GRAFANALOG_SLOW_PULL)
@@ -162,11 +164,16 @@ class GrafanaProtocol:
     if (self.__iCounter % config_app.iMODULO_GRAFANALOG_SLOW_PULL) == 0:
       for objGrafanaValueTempEnviron_C in self.__listGrafanaValueTempEnvirons:
         pullValue(objGrafanaValueTempEnviron_C)
-  
+
       # self.__objGrafanaValue_DiskFree is not AVG. So we only need to pushValue() once per pullValue()
       iDiskFree_MBytes = objHw.messe_iDiskFree_MBytes
       self.__objGrafanaValue_DiskFree.pushValue(iDiskFree_MBytes)
       pullValue(self.__objGrafanaValue_DiskFree)
+
+      # self.__objGrafanaValue_MemFree is not AVG. So we only need to pushValue() once per pullValue()
+      iMemFree_Bytes = objHw.messe_iMemFree_Bytes
+      self.__objGrafanaValue_MemFree.pushValue(iMemFree_Bytes)
+      pullValue(self.__objGrafanaValue_MemFree)
 
     if len(listValues) > 0:
       self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VALUE, ''.join(listValues))

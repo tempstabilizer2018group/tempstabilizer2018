@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import gc
 import uos
 import utime
 import uerrno
@@ -140,6 +141,10 @@ class Hw:
     l = uos.statvfs('/')
     free_bytes = l[0]*l[3]
     return free_bytes/1000000.0
+
+  @property
+  def messe_iMemFree_Bytes(self):
+    return gc.mem_free()
 
   @property
   def bZeroHeat(self):
