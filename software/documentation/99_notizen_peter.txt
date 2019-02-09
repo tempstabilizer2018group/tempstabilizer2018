@@ -1,0 +1,14 @@
+alte befehle:
+history
+!nummer ist diesen befehl ausfuehren
+
+visual studio code:
+cd ~/tempstabilizer2018/software
+code-oss project_http_server.code-workspace
+
+seriell pico com:
+sudo picocom -b 115200 /dev/ttyUSB0
+
+verlassen: control a, dann control x
+
+HTTP-Get http://192.168.4.1/softwareupdate?mac=B4E62DF69969&version=none
