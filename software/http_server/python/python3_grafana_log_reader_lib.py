@@ -106,7 +106,10 @@ class GrafanaDumper:
 
   def handleMeasurements(self, iTime_ms, strPayload):
     for strTag, strValue in ValuesIterator(strPayload):
-      objGrafanaValue = self.__dictObjGrafana[strTag]
+      objGrafanaValue = self.__dictObjGrafana.get(strTag, None)
+      if objGrafanaValue == None:
+        print('INFO: Missing tag "%s". This may happen, if a Environs-Sensor was plugged in during operation.' % strTag)
+        continue
 
       if strValue == '':
         strValue = self.__dictLastValues.get(strTag, None)
