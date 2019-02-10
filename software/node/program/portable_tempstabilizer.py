@@ -190,6 +190,7 @@ class TempStabilizer:
     if fTempDiff_HO_C < fTempLimit_C:
       # Leistung erhöhen
       self.fHeat_W_LimitHigh = max(self.fHeat_W_LimitHigh, self.fHeat_W_gefiltert + 0.5)
+      self.fHeat_W_LimitHigh = min(self.fHeat_W_LimitHigh, 8.0) # maximal 8 W gemaess Datenblatt BUK9875-100A
       portable_ticks.count('portable_tempstabilizer.TempStabilizer.__ajust_fHeat_W_LimitHigh__(Leistung erhoehen)')
       return
 
