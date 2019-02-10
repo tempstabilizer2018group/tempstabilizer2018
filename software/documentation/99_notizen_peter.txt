@@ -11,6 +11,5 @@ sudo picocom -b 115200 /dev/ttyUSB0
 
 verlassen: control a, dann control x
 
-
-
-
+Firmware brennen:
+software_firmware/flash_node_readme.md
