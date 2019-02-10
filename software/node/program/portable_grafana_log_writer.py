@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 import os
+import sys
+
+if sys.platform == 'esp32':
+  import gc
 
 import portable_grafana_datatypes
 from portable_grafana_datatypes import INFLUXDB_TAG_NODE
@@ -24,8 +28,14 @@ class CachedLog:
 
   def write(self, strMessage):
     self.listBuf.append(strMessage)
-    if len(self.listBuf) < 20:
-      return
+    if sys.platform == 'esp32':
+      gc.collect()
+      if gc.mem_free() > 10:
+        # More the 10kBytes free
+        return
+    else:
+      if len(self.listBuf) < 20:
+        return
     self.__flush()
 
   def __flush(self):
