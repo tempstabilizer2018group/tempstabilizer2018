@@ -79,7 +79,7 @@ class Hw:
     self.MCP4725.config(power_down='Off', value=0x0000, eeprom=True)
 
   def findAndSetSpeedI2C(self):
-    SAFETY_FACTOR = 8 # 2019-02-10 Bei Faktor 5 hatte Regler 17 manchmal Fehler. Die HV Spannung wurde dann falsch gemessen. Daher erhoeht auf Faktor 8
+    SAFETY_FACTOR = 5
     MINFREQ = 1000
     MAXFREQ = 1000000*SAFETY_FACTOR
     STEP = 10000
