@@ -55,7 +55,7 @@ listLabs.append({
     ('20181217_18', ''),
     ('20181217_21', ''),
     ('20181217_22', ''),
-    ('20181217_23', ';config_app.setFixtemp(23.0)'),
+    ('20181217_23', ';config_app.setFixtemp(24.0)'),
     ('20181217_24', ';config_app.setFixtemp(23.0)'),
   )
 })
