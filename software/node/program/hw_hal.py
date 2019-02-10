@@ -144,6 +144,7 @@ class Hw:
 
   @property
   def messe_iMemFree_Bytes(self):
+    gc.collect()
     return gc.mem_free()
 
   @property
