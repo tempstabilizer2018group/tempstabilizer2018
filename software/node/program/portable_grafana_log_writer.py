@@ -31,7 +31,7 @@ class CachedLog:
     if sys.platform == 'esp32':
       gc.collect()
       if gc.mem_free() > 10000:
-        # More the 20kBytes free
+        # More the 10kBytes free
         return
     else:
       if len(self.listBuf) < 20:
