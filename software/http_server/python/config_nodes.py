@@ -18,13 +18,13 @@ listNodes.append({ MAC: '3C71BF16D064', SERIAL: '20181217_15', NAME: '15', })
 listNodes.append({ MAC: '3C71BF16D038', SERIAL: '20181217_16', NAME: '16', })
 listNodes.append({ MAC: '3C71BF16D098', SERIAL: '20181217_17', NAME: '17', })
 listNodes.append({ MAC: '807D3AF3288C', SERIAL: '20181217_18', NAME: '18', })
-listNodes.append({ MAC: '3C71BF16D044', SERIAL: '20181217_19', NAME: '19ETH_Alu_20', })
+listNodes.append({ MAC: '3C71BF16D044', SERIAL: '20181217_19', NAME: '19ETH_Alu_40_mitte', })
 listNodes.append({ MAC: '3C71BF16D020', SERIAL: '20181217_20', NAME: '20ETH_Alu_40_isol', })
 listNodes.append({ MAC: 'B4E62DF69969', SERIAL: '20181217_21', NAME: '21', })
 listNodes.append({ MAC: '3C71BF16BCA0', SERIAL: '20181217_22', NAME: '22', })
 listNodes.append({ MAC: '3C71BF16BCC0', SERIAL: '20181217_23', NAME: '23', })
 listNodes.append({ MAC: '3C71BF16D05C', SERIAL: '20181217_24', NAME: '24', })
-listNodes.append({ MAC: '3C71BF16BCA4', SERIAL: '20181217_25', NAME: '25ETH_Alu_40_mitte', })
+listNodes.append({ MAC: '3C71BF16BCA4', SERIAL: '20181217_25', NAME: '25', })
 
 listLabs.append({
   LAB_LABEL: 'labHombi',
@@ -41,7 +41,7 @@ listLabs.append({
   # ;config_app.setFixtemp(27.0)
   # ;config_app.iPollForWlanInterval_ms=60*60*1000
   # ;config_app.setOff()
-  GIT_TAGS: 'heads/master;1;config_app.iPollForWlanInterval_ms=10*60*1000',
+  GIT_TAGS: 'heads/master;1;config_app.iPollForWlanInterval_ms=120*60*1000',
   NODES: (
     ('20180907_01', ''),
 
@@ -74,13 +74,13 @@ listLabs.append({
   # ;config_app.setVirgin()
   # ;config_app.iHwLedModulo=30
   # ;config_app.setFixtemp(27.0)
-  # ;config_app.iPollForWlanInterval_ms=60*60*1000
+  # ;config_app.iPollForWlanInterval_ms=3*60*1000
   # ;config_app.setOff()
-  GIT_TAGS: 'heads/master;8;config_app.iPollForWlanInterval_ms=120*60*1000',
+  GIT_TAGS: 'heads/master;6;config_app.iPollForWlanInterval_ms=2*60*1000',
   NODES: (
-    ('20181217_19', ';config_app.setFixtemp(25.0)'),
-    ('20181217_20', ';config_app.setFixtemp(25.0)'),
-    ('20181217_25', ';config_app.setFixtemp(25.0)'),
+    ('20181217_19', ';config_app.setFixtemp(26.0)'),
+    ('20181217_20', ';config_app.setFixtemp(20.0)'),
+    ('20181217_25', ';config_app.setFixtemp(26.0)'),
   )
 })
 
