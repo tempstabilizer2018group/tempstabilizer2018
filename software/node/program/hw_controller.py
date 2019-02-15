@@ -116,7 +116,7 @@ class HwController(portable_controller.Controller):
     # channel: 0: All 11 channels
     scan_time_ms = 200
     if config_app.strWlanChannel == 0:
-      scan_time_ms = 1500
+      scan_time_ms = 2200
     channel = config_app.strWlanChannel
     listWlans = self.__objWlan.scan(scan_time_ms, channel)
     # wlan.scan()
