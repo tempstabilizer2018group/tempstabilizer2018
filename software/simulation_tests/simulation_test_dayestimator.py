@@ -10,7 +10,7 @@ def doit(iTimeEnd_ms, iIncrementTicks_ms, strFilename):
   portable_ticks.reset()
   portable_ticks.init(iMaxTicks_ms=portable_constants.YEAR_MS)
 
-  objTagesmodell = portable_simuliert_tagesmodell.Tagesmodell()
+  objTagesmodell = portable_simuliert_tagesmodell.Tagesmodell(iTimeOffset = -8*portable_constants.HOUR_MS)
   objDayMaxEstimator = portable_daymaxestimator.DayMaxEstimator(portable_ticks.objTicks.ticks_ms())
   fTempO_Sensor = objTagesmodell.get_fTemp_C(iTime_ms=0)
   objDayMaxEstimator.start(portable_ticks.objTicks.ticks_ms(), fTempO_Sensor=fTempO_Sensor)
@@ -36,12 +36,12 @@ def doit(iTimeEnd_ms, iIncrementTicks_ms, strFilename):
 
 def run():
   doit(iTimeEnd_ms=2*portable_constants.WEEK_MS,
-       iIncrementTicks_ms=6*portable_constants.MINUTE_MS,
-       strFilename='simulation_test_dayestimator.png')
+    iIncrementTicks_ms=6*portable_constants.MINUTE_MS,
+    strFilename='simulation_test_dayestimator.png')
 
-  doit(iTimeEnd_ms=10*portable_constants.HOUR_MS,
-       iIncrementTicks_ms=portable_constants.MINUTE_MS,
-       strFilename='simulation_test_dayestimator_short.png')
+  doit(iTimeEnd_ms=18*portable_constants.HOUR_MS,
+    iIncrementTicks_ms=portable_constants.MINUTE_MS,
+    strFilename='simulation_test_dayestimator_short.png')
 
 if __name__ == "__main__":
   run()

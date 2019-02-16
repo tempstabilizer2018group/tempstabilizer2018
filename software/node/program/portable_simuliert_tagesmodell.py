@@ -6,8 +6,9 @@ import portable_constants
 import config_app
 
 class Tagesmodell:
-  def __init__(self, fRandom=0.1, fTempBase_C=22.0, fFactorDay_C=2.0, fFactorWeek_C=1.0):
+  def __init__(self, iTimeOffset=0, fRandom=0.1, fTempBase_C=22.0, fFactorDay_C=2.0, fFactorWeek_C=1.0):
     random.seed(9001)
+    self.iTimeOffset = iTimeOffset
     self.fRandom = fRandom
     self.fTempBase_C = fTempBase_C
     self.fFactorDay_C = fFactorDay_C
@@ -15,7 +16,7 @@ class Tagesmodell:
 
   def get_fTemp_C(self, iTime_ms):
     assert type(iTime_ms) == type(0)
-    fTime_s = iTime_ms/1000.0
+    fTime_s = (iTime_ms+self.iTimeOffset)/1000.0
     fTemp_C = self.fTempBase_C + math.sin(2.0*math.pi*fTime_s/portable_constants.DAY_S)*self.fFactorDay_C + math.sin(2.0*math.pi*fTime_s/portable_constants.WEEK_S)*self.fFactorWeek_C
     if self.fRandom != None:
       fTemp_C += random.uniform(-self.fRandom, self.fRandom)
