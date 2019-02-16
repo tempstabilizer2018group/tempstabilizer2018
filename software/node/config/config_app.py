@@ -118,6 +118,10 @@ bSetpointFix = False
 # Setpoint if 'bSetpointFix = True'
 fTempSetpointFix_C = 0.0
 
+bPowerOffset = False
+fPowerOffsetMin_W = 0.1
+fPowerOffsetRangeOk_W = 0.1
+
 def setVirgin():
   setFixtemp(0.0)
 
