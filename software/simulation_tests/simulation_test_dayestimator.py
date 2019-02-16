@@ -6,11 +6,11 @@ import portable_ticks
 import portable_simuliert_tagesmodell
 import portable_daymaxestimator
 
-def doit(iTimeEnd_ms, iIncrementTicks_ms, strFilename):
+def doit(iTimeEnd_ms, iIncrementTicks_ms, strFilename, fFactorWeek_C=1.0, bPowerOffset=False):
   portable_ticks.reset()
   portable_ticks.init(iMaxTicks_ms=portable_constants.YEAR_MS)
 
-  objTagesmodell = portable_simuliert_tagesmodell.Tagesmodell(iTimeOffset = -8*portable_constants.HOUR_MS)
+  objTagesmodell = portable_simuliert_tagesmodell.Tagesmodell(iTimeOffset=-8*portable_constants.HOUR_MS, fFactorWeek_C=fFactorWeek_C)
   objDayMaxEstimator = portable_daymaxestimator.DayMaxEstimator(portable_ticks.objTicks.ticks_ms())
   fTempO_Sensor = objTagesmodell.get_fTemp_C(iTime_ms=0)
   objDayMaxEstimator.start(portable_ticks.objTicks.ticks_ms(), fTempO_Sensor=fTempO_Sensor)
@@ -35,6 +35,16 @@ def doit(iTimeEnd_ms, iIncrementTicks_ms, strFilename):
   portable_ticks.objTicks.print_statistics()
 
 def run():
+  doit(iTimeEnd_ms=1*portable_constants.WEEK_MS,
+    iIncrementTicks_ms=6*portable_constants.MINUTE_MS,
+    strFilename='simulation_test_dayestimator_fFactorWeek0_bPowerOffsetFalse.png',
+    fFactorWeek_C=0.0, bPowerOffset=False)
+
+  doit(iTimeEnd_ms=1*portable_constants.WEEK_MS,
+    iIncrementTicks_ms=6*portable_constants.MINUTE_MS,
+    strFilename='simulation_test_dayestimator_fFactorWeek0.png',
+    fFactorWeek_C=0.0)
+
   doit(iTimeEnd_ms=2*portable_constants.WEEK_MS,
     iIncrementTicks_ms=6*portable_constants.MINUTE_MS,
     strFilename='simulation_test_dayestimator.png')
