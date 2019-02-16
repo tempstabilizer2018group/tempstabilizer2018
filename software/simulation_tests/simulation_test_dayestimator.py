@@ -5,6 +5,7 @@ import portable_ticks
 
 import portable_simuliert_tagesmodell
 import portable_daymaxestimator
+import portable_tempstabilizer
 
 def doit(iTimeEnd_ms, iIncrementTicks_ms, strFilename, fFactorWeek_C=1.0, bPowerOffset=False):
   portable_ticks.reset()
@@ -24,7 +25,12 @@ def doit(iTimeEnd_ms, iIncrementTicks_ms, strFilename, fFactorWeek_C=1.0, bPower
     assert iTime_ms == portable_ticks.objTicks.ticks_ms()
     portable_ticks.objTicks.increment_ticks_ms(iIncrementTicks_ms)
     bFetMin_W_Limit_Low = fTempO_Sensor >= fTempO_Setpoint_C
-    objDayMaxEstimator.process(portable_ticks.objTicks.ticks_ms(), fTempO_Sensor=fTempO_Sensor, bFetMin_W_Limit_Low=bFetMin_W_Limit_Low)
+    objAvgTempO_C = portable_tempstabilizer.FloatAvg()
+    objAvgTempO_C.push(fTempO_Sensor)
+    objAvgHeat_W = portable_tempstabilizer.FloatAvg()
+    fSimulatedAvgHeat_W = 1.0*(fTempO_Setpoint_C-fTempO_Sensor)
+    objAvgHeat_W.push(fSimulatedAvgHeat_W)
+    objDayMaxEstimator.process(portable_ticks.objTicks.ticks_ms(), objAvgTempO_C=objAvgTempO_C, objAvgHeat_W=objAvgHeat_W, bFetMin_W_Limit_Low=bFetMin_W_Limit_Low)
     fTempO_Setpoint_C = objDayMaxEstimator.fOutputValue
     objCurveTempSensor.point(float(iTime_ms)/portable_constants.HOUR_MS, fTempO_Sensor)
     objCurveTempSetpoint.point(float(iTime_ms)/portable_constants.HOUR_MS, fTempO_Setpoint_C)

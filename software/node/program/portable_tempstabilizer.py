@@ -21,11 +21,34 @@ fTauIncrease_fHeat_s = 10.0
 # Falls zu heiss: Leistungslimit reduzieren
 fHeat_W_reduction_per_s = 0.1
 
+class FloatAvg:
+  '''
+    Averaging.
+  '''
+  def __init__(self):
+    self.__reset()
+
+  def __reset(self):
+    self.__fSum = 0.0
+    self.__iCount = 0
+
+  def push(self, fValue):
+    self.__fSum += fValue
+    self.__iCount += 1
+
+  def getValueAndReset(self):
+    assert self.__iCount > 0
+    fAvg = self.__fSum/self.__iCount
+    self.__reset()
+    return fAvg
+
 class TempStabilizer:
   def __init__(self, objDayMaxEstimator=None, objPidO=None, objPidH=None):
     self.fHeat_W_gefiltert = 0.0
     self.fHeat_W_LimitHigh = 0.0
     self.bZeroHeatForecast = False
+    self.objAvgHeat_W = FloatAvg()
+    self.objAvgTempO_C = FloatAvg()
 
     self._objDayMaxEstimator = objDayMaxEstimator
     if objDayMaxEstimator == None:
@@ -149,7 +172,8 @@ class TempStabilizer:
   # Aktualisiert: self._objDayMaxEstimator.fOutputValue
   def processDayMaxEstimator(self, iTime_ms, fTempO_Sensor):
     portable_ticks.count('TempStabilizer.processDayMaxEstimator()')
-    self._objDayMaxEstimator.process(iTicks_ms=iTime_ms, fTempO_Sensor=fTempO_Sensor, bFetMin_W_Limit_Low=self.bFetMin_W_Limit_Low)
+    self.objAvgTempO_C.push(fTempO_Sensor)
+    self._objDayMaxEstimator.process(iTicks_ms=iTime_ms, objAvgTempO_C=self.objAvgTempO_C, objAvgHeat_W=self.objAvgHeat_W, bFetMin_W_Limit_Low=self.bFetMin_W_Limit_Low)
 
   def processO(self, iTime_ms, fTempO_Sensor):
     portable_ticks.count('TempStabilizer.processO()')
@@ -175,6 +199,8 @@ class TempStabilizer:
                          fSensorValue=fTempH_Sensor,
                          fLimitOutLow=fFetMin_W,
                          fLimitOutHigh=self.fHeat_W_LimitHigh)
+
+    self.objAvgHeat_W.push(self.fHeat_W)
 
     self.__ajust_fHeat_W_LimitHigh__(fTimeDelta_s, fTempH_Sensor, fTempO_Sensor)
 

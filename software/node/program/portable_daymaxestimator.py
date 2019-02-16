@@ -111,7 +111,7 @@ class DayMaxEstimator:
     self.objTemperatureList = TemperatureList()
     self.iStartTime_ms = iTicks_ms
 
-  def process(self, iTicks_ms, fTempO_Sensor, bFetMin_W_Limit_Low):
+  def process(self, iTicks_ms, objAvgTempO_C, objAvgHeat_W, bFetMin_W_Limit_Low):
     iDiffTicks_ms = portable_ticks.objTicks.ticks_diff(iTicks_ms, self.iNextDayEstimatorTicks_ms)
     if iDiffTicks_ms > 0:
       if self.fOutputValue != None:
@@ -120,20 +120,22 @@ class DayMaxEstimator:
 
     self.iNextDayEstimatorTicks_ms = portable_ticks.objTicks.ticks_add(iTicks_ms, TIME_PROCESS_DAYMAXESTIMATOR_MS)
 
-    self.fOutputValue = self.__process(iTicks_ms, fTempO_Sensor, bFetMin_W_Limit_Low)
+    self.fOutputValue = self.__process(iTicks_ms, objAvgTempO_C, objAvgHeat_W, bFetMin_W_Limit_Low)
 
-  def __process(self, iTicks_ms, fTempO_Sensor, bFetMin_W_Limit_Low):
+  def __process(self, iTicks_ms, objAvgTempO_C, objAvgHeat_W, bFetMin_W_Limit_Low):
     portable_ticks.count('DayMaxEstimator.__process()')
 
     iTimeDelta_ms = portable_ticks.objTicks.ticks_diff(iTicks_ms, self.iStartTime_ms)
     if iTimeDelta_ms > TIME_CALC_FTEMPO_SETPOINT_MS:
+      fAvgHeat_W = objAvgHeat_W.getValueAndReset()
+      fAvgTempO_C = objAvgTempO_C.getValueAndReset()
       # Alle 6 Minuten wird die Temperatur in objTemperatureList gespeichert und der Setpoint neu berechnet.
       self.iStartTime_ms = portable_ticks.objTicks.ticks_add(self.iStartTime_ms, TIME_CALC_FTEMPO_SETPOINT_MS)
       if bDebug: print(10*'****')
       if bDebug: print('**** self.iStartTime_ms:', self.iStartTime_ms, ', bFetMin_W_Limit_Low:', bFetMin_W_Limit_Low)
       if bFetMin_W_Limit_Low:
         # No heating
-        self.objTemperatureList.appendLastDatapoint(fTempO_Sensor)
+        self.objTemperatureList.appendLastDatapoint(fAvgTempO_C)
         return self.__updateSetpoint(iTicks_ms)
       # Heating
       self.objTemperatureList.appendLastDatapoint()
