@@ -1,0 +1,3 @@
+
+strSite = 'AEDW'
+strNode = 'restaurant'

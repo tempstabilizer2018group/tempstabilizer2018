@@ -5,7 +5,7 @@
     <ProjectGuid>9a703754-eb4e-4c84-acfb-d2ae12c6d6f8</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>http_server\python\python3_httpserver_standalone.py</StartupFile>
-    <SearchPath>tools_pyplot;simulation;http_server\python;node\config;node\program</SearchPath>
+    <SearchPath>tools_pyplot;simulation;http_server\python;node\config;node\program;http_server\python</SearchPath>
     <WorkingDirectory>simulation_tests</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>project</Name>
@@ -45,6 +45,7 @@
     <Folder Include="http_server\webroot\" />
     <Folder Include="tools_pyplot\" />
     <Compile Include="node\program\portable_persist.py" />
+    <Compile Include="simulation\config_node.py" />
     <Compile Include="simulation\simulation_http_server_utils.py" />
     <Compile Include="simulation_tests\simulation_test_pidh_pido_day_http.py" />
     <Compile Include="simulation_tests\simulation_test_pidh_pido_log_grafana.py" />

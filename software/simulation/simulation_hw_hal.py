@@ -53,6 +53,8 @@ class Hw:
     Die Hardware abstrahiert fTempH und fTempO.
   """
   def __init__(self, objTagesmodell=None):
+    self.listEnvironsAddressI2C = []
+    self.iI2cFrequencySelected = 4711
     assert objTagesmodell != None
     self.objTagesmodell = objTagesmodell
     # Startwerte
@@ -146,6 +148,27 @@ class Hw:
   def toggleLed(self):
     # print('toggleLed()')
     pass
+
+  def isPowerOnReboot(self):
+    return True
+
+  @property
+  def messe_fSupplyHV_V(self):
+    # We don't know the supply voltage - this may happen on old hardware.
+    # We assume a high supply voltage to prevent overheat.
+    return 47.11
+
+  @property
+  def messe_listTempEnvirons_C(self):
+    return []
+
+  @property
+  def messe_iDiskFree_MBytes(self):
+    return 47.11
+
+  @property
+  def messe_iMemFree_Bytes(self):
+    return 47.11
 
 def my_function(a, b):
   """

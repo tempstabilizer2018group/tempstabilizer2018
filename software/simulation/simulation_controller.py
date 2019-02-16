@@ -84,7 +84,9 @@ class SimuliertController(portable_controller.Controller):
       simulation_pyplot.plot_plot(self.objTs, self.objHw)
 
   def delay_ms(self, iDelay_ms):
-    self.objHw.timeIncrement(iDelay_ms=iDelay_ms, fDac_V=self.objTs.fDac_V)
+    # self.objHw.timeIncrement(iDelay_ms=iDelay_ms, fDac_V=self.objTs.fDac_V)
+    self.objHw.fDac_V = self.objTs.fDac_V(self.objHw, self.objHw.messe_fSupplyHV_V)
+    self.objHw.timeIncrement(iDelay_ms=iDelay_ms, fDac_V=self.objHw.fDac_V)
 
   def networkFindWlans(self):
     '''Return true if required Wlan found'''
