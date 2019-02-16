@@ -3,15 +3,17 @@ import pyplot
 import portable_constants
 import portable_ticks
 
+import config_app
 import portable_simuliert_tagesmodell
 import portable_daymaxestimator
 import portable_tempstabilizer
 
-def doit(iTimeEnd_ms, iIncrementTicks_ms, strFilename, fFactorWeek_C=1.0, bPowerOffset=False):
+def doit(iTimeEnd_ms, iIncrementTicks_ms, strFilename, fFactorWeek_C=1.0, fRandom=0.1, fFactorDay_C=2.0, bPowerOffset=True):
+  config_app.bPowerOffset = bPowerOffset
   portable_ticks.reset()
   portable_ticks.init(iMaxTicks_ms=portable_constants.YEAR_MS)
 
-  objTagesmodell = portable_simuliert_tagesmodell.Tagesmodell(iTimeOffset=-8*portable_constants.HOUR_MS, fFactorWeek_C=fFactorWeek_C)
+  objTagesmodell = portable_simuliert_tagesmodell.Tagesmodell(iTimeOffset=-8*portable_constants.HOUR_MS, fFactorWeek_C=fFactorWeek_C, fRandom=fRandom, fFactorDay_C=fFactorDay_C)
   objDayMaxEstimator = portable_daymaxestimator.DayMaxEstimator(portable_ticks.objTicks.ticks_ms())
   fTempO_Sensor = objTagesmodell.get_fTemp_C(iTime_ms=0)
   objDayMaxEstimator.start(portable_ticks.objTicks.ticks_ms(), fTempO_Sensor=fTempO_Sensor)
@@ -44,12 +46,14 @@ def run():
   doit(iTimeEnd_ms=1*portable_constants.WEEK_MS,
     iIncrementTicks_ms=6*portable_constants.MINUTE_MS,
     strFilename='simulation_test_dayestimator_fFactorWeek0_bPowerOffsetFalse.png',
-    fFactorWeek_C=0.0, bPowerOffset=False)
+    fFactorWeek_C=0.0, fRandom=0.001, fFactorDay_C=0.1,
+    bPowerOffset=False)
 
   doit(iTimeEnd_ms=1*portable_constants.WEEK_MS,
     iIncrementTicks_ms=6*portable_constants.MINUTE_MS,
     strFilename='simulation_test_dayestimator_fFactorWeek0.png',
-    fFactorWeek_C=0.0)
+    fFactorWeek_C=0.0, fRandom=0.001, fFactorDay_C=0.1,
+    bPowerOffset=True)
 
   doit(iTimeEnd_ms=2*portable_constants.WEEK_MS,
     iIncrementTicks_ms=6*portable_constants.MINUTE_MS,
