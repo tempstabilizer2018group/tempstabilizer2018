@@ -2,6 +2,7 @@
 # https://github.com/micropython/micropython-lib/blob/master/urequests/urequests.py
 
 import usocket
+import hw_hal
 
 class Response:
 
@@ -85,12 +86,13 @@ def request(method, url, data=None, json=None, headers={}, stream=None, streamle
         if stream:
           # print('******* streamlen: %d' % streamlen)
           while True:
-            junk = stream.read(128)
+            junk = stream.read(2048)
             # print('******* junk: %d' % len(junk))
             if junk == '':
               break
             # print('******* junk bytes: %d' % len(bytes(junk, 'ansi')))
             s.write(bytes(junk, 'ansi'))
+            hw_hal.feedWatchdog()
         l = s.readline()
         #print(l)
         l = l.split(None, 2)

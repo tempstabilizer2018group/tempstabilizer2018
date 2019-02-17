@@ -68,10 +68,13 @@ class TempO_SetpointWhenSet:
   def adjust(self, iTicks_ms, fTempIncrease_C):
     self.fTempO_C += fTempIncrease_C
     # Subtrakt PeakDelay to avoid that a peak increases the setpoint again
-    self.iTicks_ms = portable_ticks.objTicks.ticks_add(iTicks_ms, -iTimePeakDelay_ms)
+    iTimeSince_ms = portable_ticks.objTicks.ticks_diff(iTicks_ms, self.iTicks_ms)
+    if iTimeSince_ms > iTimePeakDelay_ms:
+      # Make sure, we only set the time forward and never backward
+      self.iTicks_ms = portable_ticks.objTicks.ticks_add(iTicks_ms, -iTimePeakDelay_ms)
 
 TEMP_LOW_C = -100.00
-HEAT_HIGH_W = 47.11
+HEAT_HIGH_W = config_app.fPowerOffsetMin_W+config_app.fPowerOffsetRangeOk_W
 
 class TemperatureList:
   def __init__(self):
@@ -146,6 +149,10 @@ class DayMaxEstimator:
       self.iStartTime_ms = portable_ticks.objTicks.ticks_add(self.iStartTime_ms, TIME_CALC_FTEMPO_SETPOINT_MS)
       if bDebug: print(10*'****')
       if bDebug: print('**** self.iStartTime_ms:', self.iStartTime_ms, ', bFetMin_W_Limit_Low:', bFetMin_W_Limit_Low)
+
+      if config_app.bPowerOffset:
+        self.__adjustPowerOffset(iTicks_ms)
+
       if bFetMin_W_Limit_Low:
         # No heating
         self.objTemperatureList.appendLastDatapoint(fHeat_W=fAvgHeat_W, fTemp_C=fAvgTempO_C)
@@ -161,28 +168,10 @@ class DayMaxEstimator:
     fSetpoint_C = self.objTempO_SetpointWhenSet.calculateSetpoint(iTicks_ms)
     if bDebug: print('**** fTempPast_C, fSetpoint_C:', fTempPast_C, fSetpoint_C)
     if fTempPast_C < fSetpoint_C:
-      if config_app.bPowerOffset:
-        bAdjusted = self.__adjustPowerOffset(iTicks_ms)
-        if bAdjusted:
-          fSetpoint_C = self.objTempO_SetpointWhenSet.calculateSetpoint(iTicks_ms)
       return fSetpoint_C
     if bDebug: print('**** self.objTempO_SetpointWhenSet.restart:', fTempPast_C)
     self.objTempO_SetpointWhenSet.restart(iTicks_ms, fTempPast_C)
     return fTempPast_C
-
-  def __adjustPowerOffset(self, iTicks_ms):
-    fHeat_W = self.objTemperatureList.getHeatMedian_W()
-    if fHeat_W < config_app.fPowerOffsetMin_W:
-      # Power too low: Increase setpoint slowly
-      self.objTempO_SetpointWhenSet.adjust(iTicks_ms, fTempIncrease_C=0.001)
-      return True
-
-    if fHeat_W < config_app.fPowerOffsetMin_W+config_app.fPowerOffsetRangeOk_W:
-      # Power ok (in good-range): Do not decrease setpoint in the long run
-      self.objTempO_SetpointWhenSet.adjust(iTicks_ms, fTempIncrease_C=0.0)
-      return True
-
-    return False
 
   def __getTempPast_C(self, iTicks_ms):
     iTimeSinceLastSetpointSet_ms = portable_ticks.objTicks.ticks_diff(iTicks_ms, self.objTempO_SetpointWhenSet.iTicks_ms)
@@ -198,4 +187,16 @@ class DayMaxEstimator:
     # Setpoint has not been set during last 20min
     if bDebug: print('**** median')
     return self.objTemperatureList.getTempMedian_C()
+
+  def __adjustPowerOffset(self, iTicks_ms):
+    fHeat_W = self.objTemperatureList.getHeatMedian_W()
+    if fHeat_W < config_app.fPowerOffsetMin_W:
+      # Power too low: Increase setpoint slowly
+      self.objTempO_SetpointWhenSet.adjust(iTicks_ms, fTempIncrease_C=0.001)
+      return
+
+    if fHeat_W < config_app.fPowerOffsetMin_W+config_app.fPowerOffsetRangeOk_W:
+      # Power ok (in good-range): Do not decrease setpoint in the long run
+      self.objTempO_SetpointWhenSet.adjust(iTicks_ms, fTempIncrease_C=0.0)
+      return
 

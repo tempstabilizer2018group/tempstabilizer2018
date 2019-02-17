@@ -118,7 +118,7 @@ bSetpointFix = False
 # Setpoint if 'bSetpointFix = True'
 fTempSetpointFix_C = 0.0
 
-bPowerOffset = False
+bPowerOffset = True
 fPowerOffsetMin_W = 0.1
 fPowerOffsetRangeOk_W = 0.1
 

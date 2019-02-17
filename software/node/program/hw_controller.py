@@ -199,9 +199,6 @@ class HwController(portable_controller.Controller):
       machine.reset()
 
   def __doHttpPost(self, strFilenameFull, strFilenameBase):
-    import gc
-    gc.collect()
-
     # uos.stat('main.py')
     # (32768, 0, 0, 0, 0, 0, 318, 595257990, 595257990, 595257990)
     iStreamlen = uos.stat(strFilenameFull)[6]
