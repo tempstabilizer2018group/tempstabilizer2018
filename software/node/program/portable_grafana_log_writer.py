@@ -30,15 +30,14 @@ class CachedLog:
     self.listBuf.append(strMessage)
     if sys.platform == 'esp32':
       gc.collect()
-      if gc.mem_free() > 30000:
-        # More the x Bytes free
+      if gc.mem_free() > 10000:
+        # More than x Bytes free
         return
-    else:
-      if len(self.listBuf) < 20:
-        return
-    self.__flush()
+    if len(self.listBuf) < 100:
+      return
+    self.flush()
 
-  def __flush(self):
+  def flush(self):
     print('flush()', self.strFilename)
     with open(self.strFilename, 'a') as fLog:
       for strLine in self.listBuf:
@@ -46,7 +45,7 @@ class CachedLog:
     self.listBuf = []
 
   def close(self):
-    self.__flush()
+    self.flush()
 
 class GrafanaProtocol:
   def __init__(self, listAddressI2C):
@@ -99,6 +98,9 @@ class GrafanaProtocol:
     assert self.__objLog == None, 'There is already a file attached!'
     self.__objLog = objLog
 
+  def flush(self):
+    self.__objLog.flush()
+
   def close(self):
     self.__objLog.close()
     self.__objLog = None
@@ -116,6 +118,9 @@ class GrafanaProtocol:
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_NTP, str(int(iSecondsSince1970_UnixEpoch)))
 
   def logLine(self, strTag, strPayload):
+    if self.__objLog == None:
+      print('WARNING: Can not write to grafana log - this might happen during a replication.', strTag, strPayload)
+      return
     iTicksNow_ms = portable_ticks.objTicks.ticks_ms()
     iTicksDiff_ms = portable_ticks.objTicks.ticks_diff(iTicksNow_ms, self.__iLastTicks_ms)
     self.__objLog.write('%d %s %s\n' % (iTicksDiff_ms, strTag, strPayload))

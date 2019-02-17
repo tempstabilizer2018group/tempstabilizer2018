@@ -192,6 +192,7 @@ class Controller:
         print('WARNING: self.objHw.messe_fTempH_C() diff = %f C' % fTempDiff_C)
         return False
     except Exception as e:
+      # TODO(Hans): Is this exception needed?
       self.logException(e, 'self.objHw.messe_fTempO_C / self.objHw.messe_fTempH_C')
       self.delay_ms(iDelay_ms=1000)
       return
@@ -292,6 +293,7 @@ class Controller:
       if self.exit():
         break
       self.objHw.startTempMeasurement()
+
     self.done()
 
   def handleButton(self):
@@ -356,6 +358,9 @@ class Controller:
     bIntervalOver, iEffectiveIntervalDuration_ms = self.__objPollForWlanInterval.isIntervalOver()
     if not bIntervalOver:
       return 0
+
+    # Flush the filebuffer to make sure there is sufficient memory available for network communication
+    self.objGrafanaProtocol.flush()
 
     portable_ticks.count('portable_controller.networkOnce() find wlan')
     if self.networkFindWlans():
