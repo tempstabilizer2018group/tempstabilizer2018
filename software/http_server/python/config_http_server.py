@@ -11,7 +11,7 @@ strInfluxDbNameOrigin = 'origin'
 
 # True: Don't connect to www.github.com and get the files locally
 # False: Get files from www.github.com
-bGithubPullLocal = False
+bGithubPullLocal = True
 
 # True: If a update-tar-file is already in the cache: Use it
 #   Use this option on a productive system or not at all...
