@@ -377,7 +377,6 @@ class Controller:
         print('Not connected!')
       self.networkFreeResources()
 
-    self.objGrafanaProtocol.logInfo('networkDone()')
 
     iTimeDelta_ms = self.__objPollForWlanInterval.iTimeElapsed_ms(portable_ticks.objTicks.ticks_ms())
     if iTimeDelta_ms > 100:

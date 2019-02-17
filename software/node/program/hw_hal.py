@@ -71,23 +71,18 @@ class I2cWrapper:
 
   def readfrom(self, i2cAddress, *args, **kwargs):
     return self.__wrapper('readfrom', i2cAddress, *args, **kwargs)
-    # return self.i2c_native.readfrom(i2cAddress, *args, **kwargs)
 
   def writeto_mem(self, i2cAddress, *args, **kwargs):
     return self.__wrapper('writeto_mem', i2cAddress, *args, **kwargs)
-    # return self.i2c_native.writeto_mem(i2cAddress, *args, **kwargs)
 
   def readfrom_mem(self, i2cAddress, *args, **kwargs):
     return self.__wrapper('readfrom_mem', i2cAddress, *args, **kwargs)
-    # return self.i2c_native.readfrom_mem(i2cAddress, *args, **kwargs)
 
   def readfrom_into(self, i2cAddress, *args, **kwargs):
     return self.__wrapper('readfrom_into', i2cAddress, *args, **kwargs)
-    # return self.i2c_native.readfrom_into(i2cAddress, *args, **kwargs)
 
   def writeto(self, i2cAddress, *args, **kwargs):
     return self.__wrapper('writeto', i2cAddress, *args, **kwargs)
-    # return self.i2c_native.writeto(i2cAddress, *args, **kwargs)
 
 class Hw:
   def __init__(self):
