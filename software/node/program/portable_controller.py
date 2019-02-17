@@ -173,29 +173,23 @@ class Controller:
     '''
       return False: I2C-Readerror. Tray again next time
     '''
-    try:
-      iStopwatch_us = portable_ticks.stopwatch()
-      fTempO_Sensor = self.objHw.messe_fTempO_C
-      portable_ticks.stopwatch_end(iStopwatch_us, 'self.objHw.messe_fTempO_C')
-      fTempDiff_C = abs(fTempO_Sensor - self.__fTempO_SensorLast)
-      self.__fTempO_SensorLast = fTempO_Sensor
-      if fTempDiff_C > 10.0:
-        print('WARNING: self.objHw.messe_fTempO_C() diff = %f C' % fTempDiff_C)
-        return False
+    iStopwatch_us = portable_ticks.stopwatch()
+    fTempO_Sensor = self.objHw.messe_fTempO_C
+    portable_ticks.stopwatch_end(iStopwatch_us, 'self.objHw.messe_fTempO_C')
+    fTempDiff_C = abs(fTempO_Sensor - self.__fTempO_SensorLast)
+    self.__fTempO_SensorLast = fTempO_Sensor
+    if fTempDiff_C > 10.0:
+      print('WARNING: self.objHw.messe_fTempO_C() diff = %f C' % fTempDiff_C)
+      return False
 
-      iStopwatch_us = portable_ticks.stopwatch()
-      fTempH_Sensor = self.objHw.messe_fTempH_C  
-      portable_ticks.stopwatch_end(iStopwatch_us, 'self.objHw.messe_fTempH_C')
-      fTempDiff_C = abs(fTempH_Sensor - self.__fTempH_SensorLast)
-      self.__fTempH_SensorLast = fTempH_Sensor
-      if fTempDiff_C > 10.0:
-        print('WARNING: self.objHw.messe_fTempH_C() diff = %f C' % fTempDiff_C)
-        return False
-    except Exception as e:
-      # TODO(Hans): Is this exception needed?
-      self.logException(e, 'self.objHw.messe_fTempO_C / self.objHw.messe_fTempH_C')
-      self.delay_ms(iDelay_ms=1000)
-      return
+    iStopwatch_us = portable_ticks.stopwatch()
+    fTempH_Sensor = self.objHw.messe_fTempH_C  
+    portable_ticks.stopwatch_end(iStopwatch_us, 'self.objHw.messe_fTempH_C')
+    fTempDiff_C = abs(fTempH_Sensor - self.__fTempH_SensorLast)
+    self.__fTempH_SensorLast = fTempH_Sensor
+    if fTempDiff_C > 10.0:
+      print('WARNING: self.objHw.messe_fTempH_C() diff = %f C' % fTempDiff_C)
+      return False
 
     iNowTicks_ms = portable_ticks.objTicks.ticks_ms()
 
@@ -260,41 +254,48 @@ class Controller:
   def runForever(self):
     self.prepare()
     while True:
-      iStartTicks_ms = portable_ticks.objTicks.ticks_ms()
-
-      iStopwatch_us = portable_ticks.stopwatch()
-      self.networkOnce()
-      portable_ticks.stopwatch_end(iStopwatch_us, 'self.networkOnce()')
-
-      if False:
-        iTimeDelta_ms = portable_ticks.objTicks.ticks_diff(portable_ticks.objTicks.ticks_ms(), iStartTicks_ms)
-        if iTimeDelta_ms > 100:
-          strMsg = 'networkOnce() took %s ms' % iTimeDelta_ms
-          self.objGrafanaProtocol.logInfo(strMsg)
-          print(strMsg)
-
-      self.handleButton()
-
-      portable_ticks.count('portable_controller.runForever().runOnce()')
-      self.ledBlink()
-      iStopwatch_us = portable_ticks.stopwatch()
-      bSuccess = self.runOnce()
-      self.objHw.setLed(False)
-      portable_ticks.stopwatch_end(iStopwatch_us, 'self.runOnce()')
-      if bSuccess:
-        portable_ticks.count('portable_controller.runForever().logOnce()')
-        iStopwatch_us = portable_ticks.stopwatch()
-        self.logOnce()
-        portable_ticks.stopwatch_end(iStopwatch_us, 'self.logOnce()')
-        self.__objPersist.persist()
-
-      portable_ticks.count('portable_controller.runForever().sleepOnce()')
-      self.sleepOnce(iStartTicks_ms)
       if self.exit():
         break
-      self.objHw.startTempMeasurement()
-
+      try:
+        self.runForeverInner()
+      except portable_ticks.I2cException as e:
+        self.objGrafanaProtocol.logError('I2C-Error: %s' % str(e))
+        raise
+       
     self.done()
+
+  def runForeverInner(self):
+    iStartTicks_ms = portable_ticks.objTicks.ticks_ms()
+
+    iStopwatch_us = portable_ticks.stopwatch()
+    self.networkOnce()
+    portable_ticks.stopwatch_end(iStopwatch_us, 'self.networkOnce()')
+
+    if False:
+      iTimeDelta_ms = portable_ticks.objTicks.ticks_diff(portable_ticks.objTicks.ticks_ms(), iStartTicks_ms)
+      if iTimeDelta_ms > 100:
+        strMsg = 'networkOnce() took %s ms' % iTimeDelta_ms
+        self.objGrafanaProtocol.logInfo(strMsg)
+        print(strMsg)
+
+    self.handleButton()
+
+    portable_ticks.count('portable_controller.runForever().runOnce()')
+    self.ledBlink()
+    iStopwatch_us = portable_ticks.stopwatch()
+    bSuccess = self.runOnce()
+    self.objHw.setLed(False)
+    portable_ticks.stopwatch_end(iStopwatch_us, 'self.runOnce()')
+    if bSuccess:
+      portable_ticks.count('portable_controller.runForever().logOnce()')
+      iStopwatch_us = portable_ticks.stopwatch()
+      self.logOnce()
+      portable_ticks.stopwatch_end(iStopwatch_us, 'self.logOnce()')
+      self.__objPersist.persist()
+
+    portable_ticks.count('portable_controller.runForever().sleepOnce()')
+    self.sleepOnce(iStartTicks_ms)
+    self.objHw.startTempMeasurement()
 
   def handleButton(self):
     if self.__iTicksButtonPressed_ms == None:
@@ -363,8 +364,10 @@ class Controller:
     self.objGrafanaProtocol.flush()
 
     portable_ticks.count('portable_controller.networkOnce() find wlan')
+    self.objGrafanaProtocol.logInfo('networkFindWlans()')
     if self.networkFindWlans():
       portable_ticks.count('portable_controller.networkOnce() found wlan')
+      self.objGrafanaProtocol.logInfo('networkConnect()')
       self.networkConnect()
       if self.isNetworkConnected():
         portable_ticks.count('portable_controller.networkOnce() replication started')
@@ -373,6 +376,8 @@ class Controller:
       else:
         print('Not connected!')
       self.networkFreeResources()
+
+    self.objGrafanaProtocol.logInfo('networkDone()')
 
     iTimeDelta_ms = self.__objPollForWlanInterval.iTimeElapsed_ms(portable_ticks.objTicks.ticks_ms())
     if iTimeDelta_ms > 100:

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-TAG_GRAFANA_VERSION = 'version'
+TAG_GRAFANA_VERSION_PROTOCOL = 'version_protocol'
+TAG_GRAFANA_VERSION_SW = 'version_sw'
+TAG_GRAFANA_VERSION_FIRMWARE = 'version_firmware'
 TAG_GRAFANA_MAC = 'mac'
 TAG_GRAFANA_DATATYPE = 'grafana_type'
 TAG_GRAFANA_VALUE = 'v'

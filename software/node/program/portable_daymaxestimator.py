@@ -176,7 +176,9 @@ class DayMaxEstimator:
   def __getTempPast_C(self, iTicks_ms):
     iTimeSinceLastSetpointSet_ms = portable_ticks.objTicks.ticks_diff(iTicks_ms, self.objTempO_SetpointWhenSet.iTicks_ms)
     if bDebug: print('**** iTimeSinceLastSetpointSet_s:', iTimeSinceLastSetpointSet_ms//1000)
-    assert iTimeSinceLastSetpointSet_ms >= 0
+    # assert iTimeSinceLastSetpointSet_ms >= 0
+    if iTimeSinceLastSetpointSet_ms < 0:
+      raise Exception('iTimeSinceLastSetpointSet_ms should be >= 0, but is %d' % iTimeSinceLastSetpointSet_ms)
     if bDebug: print('**** self.objTemperatureList.listTemp_C:', self.objTemperatureList.getListAsString())
 
     if iTimeSinceLastSetpointSet_ms < iTimePeakDelay_ms:

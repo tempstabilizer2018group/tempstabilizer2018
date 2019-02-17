@@ -54,13 +54,48 @@ if config_app.bUseWatchdog:
 
 feedWatchdog = hw_update_ota.feedWatchdog
 
+class I2cWrapper:
+  '''
+    Wraps i2c and creates readable exceptions
+  '''
+  def __init__(self, i2c_native, strChipName):
+    self.i2c_native = i2c_native
+    self.strChipName = strChipName
+  
+  def __wrapper(self, strMethod, i2cAddress, *args, **kwargs):
+    f = getattr(self.i2c_native, strMethod)
+    try:
+      return f(i2cAddress, *args, **kwargs)
+    except OSError as e:
+      raise portable_ticks.I2cException('%s.%s(i2c=%d=0x0%2X): %s' % (self.strChipName, strMethod, i2cAddress, i2cAddress, str(e)))
+
+  def readfrom(self, i2cAddress, *args, **kwargs):
+    return self.__wrapper('readfrom', i2cAddress, *args, **kwargs)
+    # return self.i2c_native.readfrom(i2cAddress, *args, **kwargs)
+
+  def writeto_mem(self, i2cAddress, *args, **kwargs):
+    return self.__wrapper('writeto_mem', i2cAddress, *args, **kwargs)
+    # return self.i2c_native.writeto_mem(i2cAddress, *args, **kwargs)
+
+  def readfrom_mem(self, i2cAddress, *args, **kwargs):
+    return self.__wrapper('readfrom_mem', i2cAddress, *args, **kwargs)
+    # return self.i2c_native.readfrom_mem(i2cAddress, *args, **kwargs)
+
+  def readfrom_into(self, i2cAddress, *args, **kwargs):
+    return self.__wrapper('readfrom_into', i2cAddress, *args, **kwargs)
+    # return self.i2c_native.readfrom_into(i2cAddress, *args, **kwargs)
+
+  def writeto(self, i2cAddress, *args, **kwargs):
+    return self.__wrapper('writeto', i2cAddress, *args, **kwargs)
+    # return self.i2c_native.writeto(i2cAddress, *args, **kwargs)
+
 class Hw:
   def __init__(self):
     self.iTimeStart_ms = utime.ticks_ms()
     self.__objHwI2cEnvironsInterval = portable_ticks.Interval(iInterval_ms=config_app.iHwI2cEnvironsInterval_ms, bForceFirstTime=True)
 
-    self.i2c = machine.I2C(freq=1000, scl=pin_scl, sda=pin_sda)
-    self.listAddressI2C = self.i2c.scan()
+    self.i2c_native = machine.I2C(freq=1000, scl=pin_scl, sda=pin_sda)
+    self.listAddressI2C = self.i2c_native.scan()
     self.findAndSetSpeedI2C()
 
     self.listAddressI2C = sorted(self.listAddressI2C)
@@ -70,11 +105,11 @@ class Hw:
     print('listAddressI2C:', listToHexString(self.listAddressI2C))
     print('listEnvironsAddressI2C:', listToHexString(self.listEnvironsAddressI2C))
 
-    self.MAX30205 = hw_max30205.MAX30205(self.i2c)
-    self.MCP4725 = hw_mcp4725.MCP4725(self.i2c)
+    self.MAX30205 = hw_max30205.MAX30205(I2cWrapper(self.i2c_native, 'Temp_MAX30205'))
+    self.MCP4725 = hw_mcp4725.MCP4725(I2cWrapper(self.i2c_native, 'DAC_MCP4725'))
     self.MCP3021 = None
     if hw_mcp3021.I2C_ADDRESS in self.listAddressI2C:
-      self.MCP3021 = hw_mcp3021.MCP3021(self.i2c)
+      self.MCP3021 = hw_mcp3021.MCP3021(I2cWrapper(self.i2c_native, 'ADC_MCP3021'))
 
     self.MCP4725.config(power_down='Off', value=0x0000, eeprom=True)
 
@@ -87,14 +122,14 @@ class Hw:
     print('findAndSetSpeedI2C')
     for iI2cFrequency in range(MINFREQ, MAXFREQ+STEP, STEP):
       hw_update_ota.feedWatchdog()
-      self.i2c.init(scl=pin_scl, sda=pin_sda, freq=iI2cFrequency)
-      listAddressI2C = self.i2c.scan()
+      self.i2c_native.init(scl=pin_scl, sda=pin_sda, freq=iI2cFrequency)
+      listAddressI2C = self.i2c_native.scan()
 
       if self.listAddressI2C != listAddressI2C:
         print('findAndSetSpeedI2C: I2C errors at frequency', iI2cFrequency)
         self.iI2cFrequencySelected = iI2cFrequency // SAFETY_FACTOR
         break
-    self.i2c.init(scl=pin_scl, sda=pin_sda, freq=self.iI2cFrequencySelected)
+    self.i2c_native.init(scl=pin_scl, sda=pin_sda, freq=self.iI2cFrequencySelected)
     print('findAndSetSpeedI2C: iI2cFrequencySelected:', self.iI2cFrequencySelected)
 
   def startTempMeasurement(self):

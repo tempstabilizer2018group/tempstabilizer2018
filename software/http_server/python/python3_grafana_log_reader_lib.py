@@ -80,7 +80,7 @@ class GrafanaDumper:
       iSecondsSince1970_UnixEpoch = int(strPayload)
       self.handleNtpTime(iTime_ms, iSecondsSince1970_UnixEpoch)
 
-    if strVerb == portable_grafana_datatypes.TAG_GRAFANA_VERSION:
+    if strVerb == portable_grafana_datatypes.TAG_GRAFANA_VERSION_PROTOCOL:
       self.strVersion = strPayload
       return
 

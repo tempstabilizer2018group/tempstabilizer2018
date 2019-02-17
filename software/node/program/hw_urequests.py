@@ -86,7 +86,7 @@ def request(method, url, data=None, json=None, headers={}, stream=None, streamle
         if stream:
           # print('******* streamlen: %d' % streamlen)
           while True:
-            junk = stream.read(2048)
+            junk = stream.read(1024)
             # print('******* junk: %d' % len(junk))
             if junk == '':
               break

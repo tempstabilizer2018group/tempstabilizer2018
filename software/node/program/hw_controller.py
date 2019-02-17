@@ -208,7 +208,8 @@ class HwController(portable_controller.Controller):
       portable_firmware_constants.strHTTP_ARG_MAC, config_app.strMAC,
       portable_firmware_constants.strHTTP_ARG_FILENAME, strFilenameBase
     )
-    print('POST: %s, len: %s' % (strHttpPostUrl, iStreamlen))
+
+    print('POST %dBytes: %s' % (iStreamlen, strHttpPostUrl))
 
     # strHttpPostUrl: http://www.tempstabilizer2018.org/upload?mac=ab01cd02ef03&filename=grafana
     with open(strFilenameFull, 'r') as fStream:

@@ -24,7 +24,7 @@ class InfluxDumper:
       self.strSite, self.strNode = strPayload.split()
       return
 
-    if strVerb == TAG_GRAFANA_VERSION:
+    if strVerb == TAG_GRAFANA_VERSION_PROTOCOL:
       self.handleMeasurements(iTime_ms, strPayload)
       return
 

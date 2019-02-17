@@ -7,6 +7,8 @@ import config_app
     Time-Methods only exist on the simulator. The hardware only knows portable_ticks. The server then must count the overflows.
 '''
 
+class I2cException(Exception): pass
+
 dictCounter = {}
 
 if config_app.bRunStatisticsCounter:

@@ -18,4 +18,8 @@ try:
   controller = hw_controller.HwController(__file__)
   controller.runForever()
 except Exception as e:
+  try:
+    controller.objGrafanaProtocol.flush()
+  except Exception as e1:
+    print('controller.objGrafanaProtocol.flush() failed: %s' % str(e1))
   hw_controller.logException(e, 'Mainloop')
