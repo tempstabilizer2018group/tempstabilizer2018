@@ -120,9 +120,9 @@ class TempStabilizer:
 
     # Fehlerkorrektur:
     fCurrent = self.fHeat_W / fSupplyHV_V
-    fDAC_V = -0.2724*math.exp(-fCurrent/0.01068)+3.003*fCurrent+0.3045 + self.fDACzeroHeat_V - 0.161
+    fDac_V_ = -0.2724*math.exp(-fCurrent/0.01068)+3.003*fCurrent+0.3045 + self.fDACzeroHeat_V - 0.161
     # Limitieren auf den möglichen Spannungsbereich des DAC
-    fDAC_V = min(max(0.0, fDAC_V), 3.3)
+    fDac_V_ = min(max(0.0, fDac_V_), 3.3)
     
     if (not self.bZeroHeatForecast) and objHw.bZeroHeat:
       self.fDACzeroHeat_V += 0.00001
@@ -130,7 +130,7 @@ class TempStabilizer:
       self.fDACzeroHeat_V -= 0.00001
     # Prognose wie bZeroHeat sein sollte
     self.bZeroHeatForecast = fCurrent < 0.004
-    return fDAC_V
+    return fDac_V_
 
   @property
   def bFetMax_W_Limit_High(self):
@@ -255,7 +255,7 @@ class TempStabilizer:
                     '%0.1f' % (portable_ticks.objTicks.ticks_ms()/1000.0),
                     '%0.2f' % self.fTempH_C,
                     '%0.3f' % self.fTempO_C,
-                    '%0.2f' % self.fDac_V,
+                    '%0.2f' % objHw.fDac_V,
                     '%0.2f' % self.fHeat_W,
                     '%0.2f' % self.fTempH_Setpoint_C,
                     '%0.3f' % self.fTempO_Setpoint_C,

@@ -31,6 +31,8 @@ class Controller:
     self.objGrafanaProtocol = self.factoryGrafanaProtocol()
     self.attachFileToGrafanaProtocol()
     self.objTs = self.factoryTempStabilizer()
+    if self.fLog != None:
+      self.objTs.logHeader(self.fLog)
 
   def __forceWlanFirstTime(self):
     # On PowerOn: start with Wlan
@@ -66,8 +68,6 @@ class Controller:
 
   def openLogs(self):
     self.fLog = self.factoryLog()
-    if self.fLog != None:
-      self.objTs.logHeader(self.fLog)
 
   def closeLogs(self):
     if self.fLog != None:

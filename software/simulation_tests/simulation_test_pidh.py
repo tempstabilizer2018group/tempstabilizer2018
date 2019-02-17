@@ -9,8 +9,7 @@ import portable_simuliert_tagesmodell
 import simulation_pyplot
 
 config_app.iLogSimuliertPlotInterval_ms = 1000
-# TODO(Hans): Fix crash when enabling log
-# config_app.iLogInterval_ms = config_app.iLogSimuliertPlotInterval_ms
+config_app.iLogInterval_ms = config_app.iLogSimuliertPlotInterval_ms
 config_app.iExperimentDuration_ms = 100 * 1000
 config_app.iTimeProcess_O_H_ms = 10
 config_app.fStart_Increment_fTempO_C = 0.1 # Damit es etwas zu Heizen gibt
