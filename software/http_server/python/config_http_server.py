@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import socket
 
 strInfluxDbDatabase = 'tempstabilizer2018'
 strInfluxDbHost = 'www.tempstabilizer2018.org'
@@ -12,6 +13,9 @@ strInfluxDbNameOrigin = 'origin'
 # True: Don't connect to www.github.com and get the files locally
 # False: Get files from www.github.com
 bGithubPullLocal = False
+if socket.gethostname() == 'raspberrypi':
+  # On the raspberry pi, we usually want to update the local files
+  bGithubPullLocal = True
 
 # True: If a update-tar-file is already in the cache: Use it
 #   Use this option on a productive system or not at all...

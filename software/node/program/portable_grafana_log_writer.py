@@ -33,13 +33,13 @@ class CachedLog:
 
   def write(self, strMessage):
     self.listBuf.append(strMessage)
-    if funcMemfree() > 10000:
+    if len(self.listBuf) > 100:
+      self.flush()
+      return
+    if funcMemfree() < 20000:
       # More than x Bytes free
       # Add more data to the buffer
-      return
-    if len(self.listBuf) < 100:
-      return
-    self.flush()
+      self.flush()
 
   def flush(self):
     print('flush()', self.strFilename)
