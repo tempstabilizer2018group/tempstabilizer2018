@@ -21,7 +21,7 @@ if socket.gethostname() == 'raspberrypi':
 #   Use this option on a productive system or not at all...
 # False: Create a update-tar-file even and override a file which is already in the cache.
 #   Use this option when developing locally on the software.
-bCacheTarFiles = False
+bCacheTarFiles = True
 
 if bGithubPullLocal:
   # If we pull local, we also want the locally changed files be in the next download.
