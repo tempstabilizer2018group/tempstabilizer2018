@@ -2,6 +2,7 @@
 import os
 import shutil
 import traceback
+import threading
 
 import python3_rfc3339
 import influxdb
@@ -46,7 +47,8 @@ def http_write_data(strMac, strFilename, strLogData):
 
   strFilenameFull = write_data(strMac, strFilename, strLogData)
 
-  __processFiles()
+  thread = threading.Thread(target=__processFiles, args=())
+  thread.start()
 
   return strFilenameFull
 
@@ -82,6 +84,7 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
     self.__listMeasurements = []
 
     p = config_http_server.factoryGitHubPull()
+    p.setMac(strMac)
     self.__strNodeName = p.objNode.strName
     self.__strLabLabel = p.objNode.strLabLabel
 

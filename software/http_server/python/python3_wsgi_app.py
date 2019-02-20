@@ -155,6 +155,9 @@ def handle_post(environ, start_response):
     strLogData = environ['wsgi.input'].read(request_body_size)
     strLogData = strLogData.decode('utf-8')
 
+    if len(strLogData) == 0:
+      return badRequest(start_response, 'No data received!')
+
     strFilenameFull = python3_http_influxdb_loadfiles.http_write_data(strMac, strFilename, strLogData)
     strRespone = "<p>strLogData: '%s'...<p>\n" % strLogData[0:10]
     strRespone += "<p>strFilenameFull: '%s'<p>\n" % strFilenameFull
