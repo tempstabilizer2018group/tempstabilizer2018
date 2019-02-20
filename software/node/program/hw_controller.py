@@ -168,6 +168,8 @@ class HwController(portable_controller.Controller):
 
     try:
       self.__networkReplicate()
+    except MemoryError:
+      raise
     except Exception as e:
       self.logException(e, '__networkReplicate()')
 
@@ -212,7 +214,7 @@ class HwController(portable_controller.Controller):
     print('POST %dBytes: %s' % (iStreamlen, strHttpPostUrl))
 
     # strHttpPostUrl: http://www.tempstabilizer2018.org/upload?mac=ab01cd02ef03&filename=grafana
-    with open(strFilenameFull, 'r') as fStream:
+    with open(strFilenameFull, 'rb') as fStream:
       dictHeaders = {'Content-Type': 'application/text'}
       objResponse = hw_urequests.post(strHttpPostUrl, stream=fStream, streamlen=iStreamlen, headers=dictHeaders)
 

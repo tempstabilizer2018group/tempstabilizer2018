@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # https://github.com/micropython/micropython-lib/blob/master/urequests/urequests.py
 
+import gc
+import sys
+import utime
 import usocket
 import hw_hal
 
@@ -60,6 +63,7 @@ def request(method, url, data=None, json=None, headers={}, stream=None, streamle
     s = usocket.socket(ai[0], ai[1], ai[2])
     try:
         s.connect(ai[-1])
+        s.settimeout(4.0)
         if proto == "https:":
             s = ussl.wrap_socket(s, server_hostname=host)
         s.write(b"%s /%s HTTP/1.0\r\n" % (method, path))
@@ -88,11 +92,14 @@ def request(method, url, data=None, json=None, headers={}, stream=None, streamle
           while True:
             junk = stream.read(1024)
             # print('******* junk: %d' % len(junk))
-            if junk == '':
+            if len(junk) == 0:
               break
             # print('******* junk bytes: %d' % len(bytes(junk, 'ansi')))
-            s.write(bytes(junk, 'ansi'))
+            sys.stdout.write('.')
             hw_hal.feedWatchdog()
+            s.write(junk)
+            hw_hal.feedWatchdog()
+            utime.sleep_ms(20)
         l = s.readline()
         #print(l)
         l = l.split(None, 2)
