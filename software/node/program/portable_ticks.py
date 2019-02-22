@@ -217,13 +217,15 @@ class Interval:
     if bForceFirstTime:
       self.doForce()
 
-  def doForce(self, iNextTick_ms=0):
+  def doForce(self, iNextIriggerIn_ms=0):
     '''
-      Next time isIntervalOver() will be called it will trigger.
+      isIntervalOver() will be triggered in 'iNextTriggerIn_ms'.
     '''
-    if iNextTick_ms > self.__iInterval_ms:
+    if iNextIriggerIn_ms > self.__iInterval_ms:
+      # The forced pause should not be longer as the predifined interval.
       return
-    self.__iLastTicks_ms = objTicks.ticks_add(self.__iLastTicks_ms, iNextTick_ms-self.__iInterval_ms)
+    iTicksNow_ms = objTicks.ticks_ms()
+    self.__iLastTicks_ms = objTicks.ticks_add(iTicksNow_ms, iNextIriggerIn_ms-self.__iInterval_ms)
 
   def iTimeElapsed_ms(self, iTicksNow_ms):
     '''

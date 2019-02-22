@@ -45,7 +45,7 @@ class Controller:
     if not bForceWlanFirstTime:
       return
 
-    self.__objPollForWlanInterval.doForce(iNextTick_ms=config_app.iPollForWlanOnce_ms)
+    self.__objPollForWlanInterval.doForce(iNextIriggerIn_ms=config_app.iPollForWlanOnce_ms)
     print('bForceWlanFirstTime=True: Will replicate in %ds' % (config_app.iPollForWlanOnce_ms // 1000))
 
   def ticks_init(self):
