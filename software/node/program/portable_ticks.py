@@ -212,7 +212,7 @@ class Interval:
     doForce() may be forced next isIntervalOver() to trigger.
   '''
   def __init__(self, iInterval_ms, bForceFirstTime=True):
-    self.__iLastTicks_ms = objTicks.ticks_ms()
+    self.__iLastTicksEff_ms = self.__iLastTicks_ms = objTicks.ticks_ms()
     self.__iInterval_ms = iInterval_ms
     if bForceFirstTime:
       self.doForce()
@@ -221,17 +221,17 @@ class Interval:
     '''
       isIntervalOver() will be triggered in 'iNextTriggerIn_ms'.
     '''
-    if iNextIriggerIn_ms > self.__iInterval_ms:
-      # The forced pause should not be longer as the predifined interval.
-      return
     iTicksNow_ms = objTicks.ticks_ms()
-    self.__iLastTicks_ms = objTicks.ticks_add(iTicksNow_ms, iNextIriggerIn_ms-self.__iInterval_ms)
+    iLastTicks_ms = objTicks.ticks_add(iTicksNow_ms, iNextIriggerIn_ms-self.__iInterval_ms)
+    if iLastTicks_ms < self.__iLastTicks_ms:
+      # Only apply the force trigger if it arrives earlier than the interval trigger!
+      self.__iLastTicks_ms = iLastTicks_ms
 
   def iTimeElapsed_ms(self, iTicksNow_ms):
     '''
       Returns the time already spent in this interval
     '''
-    return objTicks.ticks_diff(iTicksNow_ms, self.__iLastTicks_ms)
+    return objTicks.ticks_diff(iTicksNow_ms, self.__iLastTicksEff_ms)
 
   def isIntervalOver(self):
     '''
@@ -240,12 +240,14 @@ class Interval:
       iEffectiveIntervalDuration_ms: The time of the last interval
     '''
     iTicksNow_ms = objTicks.ticks_ms()
-    iEffectiveIntervalDuration_ms = self.iTimeElapsed_ms(iTicksNow_ms)
-    assert iEffectiveIntervalDuration_ms >= 0
-    if iEffectiveIntervalDuration_ms >= self.__iInterval_ms:
-      self.__iLastTicks_ms = iTicksNow_ms
+    iIntervalDurationEff_ms = self.iTimeElapsed_ms(iTicksNow_ms)
+    iIntervalDuration_ms = objTicks.ticks_diff(iTicksNow_ms, self.__iLastTicks_ms)
+    assert iIntervalDurationEff_ms >= 0
+    assert iIntervalDuration_ms >= 0
+    if iIntervalDuration_ms >= self.__iInterval_ms:
+      self.__iLastTicksEff_ms = self.__iLastTicks_ms = iTicksNow_ms
       # Triggered
-      return True, iEffectiveIntervalDuration_ms
+      return True, iIntervalDurationEff_ms
     # We still have to wait for the interval to finish
     return False, 0
 

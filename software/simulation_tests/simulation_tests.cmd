@@ -4,6 +4,7 @@ call ../set_environment.cmd
 del simulation_test_*.txt
 del simulation_test_*.png
 
+%PYTHON% simulation_test_hw_ticks.py
 %PYTHON% simulation_test_hw_hal.py
 %PYTHON% simulation_test_schrittantwort.py
 %PYTHON% simulation_test_tagesmodell.py
