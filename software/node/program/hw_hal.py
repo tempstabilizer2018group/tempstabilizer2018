@@ -132,10 +132,11 @@ class Hw:
     self.MAX30205.oneShotNormalA(I2C_ADDRESS_TempH)
     self.MAX30205.oneShotNormalA(I2C_ADDRESS_TempO)
 
-  def isPowerOnReboot(self):
+  def isPowerOnReset(self):
     return machine.PWRON_RESET == machine.reset_cause()
 
-  def isPowerOnWatchdog(self):
+  def isWatchdogReset(self):
+    # isWatchdogReset() doesn't work yet...
     return machine.WDT_RESET == machine.reset_cause()
 
   @property

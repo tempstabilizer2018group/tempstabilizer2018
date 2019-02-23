@@ -19,12 +19,14 @@ bDataDirectoryExists = False
 def createDataDirectory():
   global bDataDirectoryExists
   if bDataDirectoryExists:
-    return
+    return False
   try:
     uos.mkdir(config_app.DIRECTORY_DATA)
     print('Created directory: "%s"' % config_app.DIRECTORY_DATA)
+    return True
   except:
     print('Directory already exists: "%s"' % config_app.DIRECTORY_DATA)
+    return False
 
 def logException(objException, strMsg):
   print(strMsg)
@@ -59,10 +61,12 @@ class HwController(portable_controller.Controller):
   def __init__(self, strFilenameFull):
     self.strFilenameFull = strFilenameFull
     print('Programm: %s' % self.strFilenameFull)
-    createDataDirectory()
+    bCreated = createDataDirectory()
     portable_controller.Controller.__init__(self)
+    if bCreated:
+      self.objGrafanaProtocol.logWarning('SW-Update: ' + hw_update_ota.strSwVersion)
     self.__objLogConsoleInterval = portable_ticks.Interval(iInterval_ms=config_app.iLogHwConsoleInterval_ms)
-    self.__objWlan = network.WLAN(network.STA_IF)
+    self.__objWlan = None
 
   def directoryData(self):
     return config_app.DIRECTORY_DATA
@@ -103,12 +107,17 @@ class HwController(portable_controller.Controller):
   def delay_ms(self, iDelay_ms):
     portable_ticks.delay_ms(iDelay_ms)
 
+  def __createWlan(self):
+    if self.__objWlan is None:
+      self.__objWlan = network.WLAN(network.STA_IF)
+  
   def networkFindWlans(self):
     '''Return true if required Wlan found'''
     if config_app.strWlanSidForTrigger == None:
       return True
 
     hw_update_ota.objGpio.pwmLedWlanScan()
+    self.__createWlan()
     self.__objWlan.active(True)
     # wlan.scan(scan_time_ms, channel)
     # scan_time_ms > 0: Active scan
@@ -136,6 +145,8 @@ class HwController(portable_controller.Controller):
 
   def networkFreeResources(self):
     print('networkFreeResources()')
+    if self.__objWlan is None:
+      return
     if self.__objWlan.active():
       if self.__objWlan.isconnected():
         self.__objWlan.disconnect()
@@ -146,6 +157,7 @@ class HwController(portable_controller.Controller):
 
   def networkConnect(self):
     print('networkConnect("%s")' % config_app.strWlanSsid)
+    self.__createWlan()
     if not self.__objWlan.active():
       self.__objWlan.active(True)
     hw_update_ota.objGpio.pwmLedWlanConnected()

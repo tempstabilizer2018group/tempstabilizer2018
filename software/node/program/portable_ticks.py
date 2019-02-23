@@ -223,7 +223,8 @@ class Interval:
     '''
     iTicksNow_ms = objTicks.ticks_ms()
     iLastTicks_ms = objTicks.ticks_add(iTicksNow_ms, iNextIriggerIn_ms-self.__iInterval_ms)
-    if iLastTicks_ms < self.__iLastTicks_ms:
+    iDiff = objTicks.ticks_diff(iLastTicks_ms, self.__iLastTicks_ms)
+    if iDiff < 0:
       # Only apply the force trigger if it arrives earlier than the interval trigger!
       self.__iLastTicks_ms = iLastTicks_ms
 

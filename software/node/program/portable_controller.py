@@ -30,13 +30,15 @@ class Controller:
 
     self.objGrafanaProtocol = self.factoryGrafanaProtocol()
     self.attachFileToGrafanaProtocol()
+    self.logBootReason()
+
     self.objTs = self.factoryTempStabilizer()
     if self.fLog != None:
       self.objTs.logHeader(self.fLog)
 
   def __forceWlanFirstTime(self):
     # On PowerOn: start with Wlan
-    bForceWlanFirstTime = self.objHw.isPowerOnReboot()
+    bForceWlanFirstTime = self.objHw.isPowerOnReset()
     if self.__fileExists(config_app.FILENAME_REPLICATE_ONCE):
       self.remove(config_app.FILENAME_REPLICATE_ONCE)
       print('removed:', config_app.FILENAME_REPLICATE_ONCE)
@@ -110,6 +112,16 @@ class Controller:
     self.objGrafanaProtocol.attachFile(objCachedFile)
     if not bFileExists:
       self.objGrafanaProtocol.writeHeader(self.objHw.iI2cFrequencySelected)
+
+  def logBootReason(self):
+    if self.objHw.isWatchdogReset():
+      # isWatchdogReset() doesn't work yet...
+      self.objGrafanaProtocol.logError('Watchdog-Reboot')
+      return
+    if self.objHw.isPowerOnReset():
+      self.objGrafanaProtocol.logWarning('Power On')
+      return
+    self.objGrafanaProtocol.logInfo('Software-Reboot')
 
   def factoryLog(self):
     # May be derived and overridden
@@ -243,7 +255,7 @@ class Controller:
     # if type(objException) == OSError:
     #  uerrno.errorcode[uerrno.EEXIST]
     strMsg = '%s returned %s' % (strFunction, str(objException))
-    self.objGrafanaProtocol.logWarning(strMsg)
+    self.objGrafanaProtocol.logError(strMsg)
     self.logException2(objException, strMsg)
 
   def logException2(self, objException, strMsg):

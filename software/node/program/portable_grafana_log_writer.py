@@ -112,12 +112,15 @@ class GrafanaProtocol:
     self.__objLog = None
 
   def logInfo(self, strMessage):
+    print('TAG_GRAFANA_INFO:', strMessage)
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_INFO, strMessage)
 
   def logWarning(self, strMessage):
+    print('TAG_GRAFANA_WARNING:', strMessage)
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_WARNING, strMessage)
 
   def logError(self, strMessage):
+    print('TAG_GRAFANA_ERROR:', strMessage)
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_ERROR, strMessage)
 
   def logNtpTime(self, iSecondsSince1970_UnixEpoch):
