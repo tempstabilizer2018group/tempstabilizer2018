@@ -30,14 +30,16 @@ curl -i -XPOST 'http://localhost:8086/write?db=tempstabilizer' --data-binary 'fT
 curl -i -XPOST 'http://localhost:8086/write?db=tempstabilizer' --data-binary 'tempO,node=node4711 value=21.0'
 
 https://maxchadwick.xyz/blog/grafana-influxdb-annotations
-curl -i -XPOST 'http://localhost:8086/write?db=tempstabilizer' --data-binary 'events title="Reboot",text="<a href='https://github.com'>Release notes</a>",tags="node4711,node4712"'
-curl -i -XPOST 'http://localhost:8086/write?db=tempstabilizer' --data-binary 'events title="Reboot",text="Hello <b>World</b>",tags="node4711,node4712"'
+curl -i -XPOST 'http://localhost:8086/write?db=tempstabilizer2018' --data-binary 'events title="Reboot",text="<a href='https://github.com'>Release notes</a>",tags="node4711,node4712"'
+curl -i -XPOST 'http://localhost:8086/write?db=tempstabilizer2018' --data-binary 'events title="Reboot",text="Hello <b>World</b>",tags="node4711,node4712"'
 
 
 ## Useful Queries
 USE tempstabilizer2018
 
 drop series from labHombi
+
+> SELECT * FROM EVENTS
 
 https://indico.cern.ch/event/664210/contributions/2712273/attachments/1526684/2387385/Andrei_DUMITRU_-_InfluxDB.pdf
 > SHOW MEASUREMENTS
@@ -97,9 +99,10 @@ labHombi,node=24,origin=tempstabilizer2018
 name: labHombi
 tagKey
 ------
+tagKey
+environs
 node
-
-> SELECT * FROM EVENTS
+origin
 
 > SHOW TAG KEYS FROM labHombi
 name: labHombi
@@ -211,3 +214,30 @@ key  value
 ---  -----
 node 4713
 node 4714
+
+
+=================================================
+Grafana Annotations
+
+http://docs.grafana.org/reference/annotations/
+https://maxchadwick.xyz/blog/grafana-influxdb-annotations
+http://docs.grafana.org/http_api/annotations/
+https://github.com/sitespeedio/sitespeed.io/issues/1984
+https://github.com/underley/annotate-influxdb/pull/3/commits/18ebfa31bc6dcb58a7120c9d6f29952d0cc8c709
+
+> SELECT title,text,tags,severity FROM /.*/ where type = 'event' limit 10
+name: ETH-E9
+------------
+time                    title                           text                            tags    severity
+1549093627000000000     INFO ETH-E9 20ETH_Alu_40_isol   networkOnce() took 6440 ms      info    info
+
+name: labHombi
+--------------
+time                    title                   text                            tags    severity
+1548942037000000000     INFO labHombi 17        networkOnce() took 4107 ms      info    info
+1549094146000000000     INFO labHombi 24        networkOnce() took 6957 ms      info    info
+1549097114000000000     INFO labHombi 23        networkOnce() took 7975 ms      info    info
+
+
+> SELECT title,text,tags,severity FROM /.*/ where type = 'event' and severity = 'info' limit 10
+dito

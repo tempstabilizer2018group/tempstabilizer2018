@@ -91,9 +91,7 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
   def handleMac(self, iTime_ms, strMac):
     assert self.__strMac == strMac
 
-  def addMeasurement(self, objGrafanaValue, iTime_ms, strValue):
-    fValue = objGrafanaValue.convert2float(strValue)
-
+  def getTimeRfc3339(self, iTime_ms):
     # 09/15/2018 17:37:30
 
     #import time
@@ -116,6 +114,11 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
     # strTime = time.strftime('%Y-%m-%dT%H:%M:%SZ', t)
     assert self.__fSecondsSince1970_UnixEpochStart != None
     strTime = python3_rfc3339.timestamptostr(iTime_ms/1000.0 + self.__fSecondsSince1970_UnixEpochStart)
+    return strTime
+
+  def addMeasurement(self, objGrafanaValue, iTime_ms, strValue):
+    strTime = self.getTimeRfc3339(iTime_ms)
+    fValue = objGrafanaValue.convert2float(strValue)
 
     # fDiskFree_MBytes
     strFieldName = objGrafanaValue.strName
@@ -141,6 +144,30 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
 
     self.__listMeasurements.append(dictMeasurement)
 
+  def handleAnnotation(self, iTime_ms, strVerb, strPayload):
+    strTime = self.getTimeRfc3339(iTime_ms)
+    # 17
+    strNodeName = self.__strNodeName
+    # LabHombi
+    strLabLabel = self.__strLabLabel
+    dictAnnotation = {
+                'time': strTime,
+                'measurement': strLabLabel,
+                'fields': {
+                  'title': '%s %s %s' % (strVerb.upper(), strLabLabel, strNodeName),
+                  'text': strPayload,
+                  'tags': strVerb,  # Comma separated string
+                },
+                'tags': {
+                  'node': strNodeName,
+                  'type': 'event',
+                  'severity': strVerb,
+                  config_http_server.strInfluxDbNameOrigin: config_http_server.strInfluxDbTagOrigin,
+                },
+    }
+
+    self.__listMeasurements.append(dictAnnotation)
+
   def __writeToInfluxDB(self, strFilenameFull):
     # Set up influxDB connection
     # url, port, user, pw, db
@@ -150,9 +177,10 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
     # Write data to influxDB
     # https://influxdb-python.readthedocs.io/en/latest/api-documentation.html?highlight=time_precision
     print('%s: Writing %d measurements to InfluxDB...' % (os.path.basename(strFilenameFull), len(self.__listMeasurements)))
-    objInfluxDBClient.write_points(self.__listMeasurements, time_precision='s', protocol='json')
+    bSuccess = objInfluxDBClient.write_points(self.__listMeasurements, time_precision='s', protocol='json')
 
     objInfluxDBClient.close()
+    assert bSuccess, 'Failed to write to influxdb.'
 
   def readFileAndWriteToDB(self, strFilenameFull):
     self.readFile(strFilenameFull)

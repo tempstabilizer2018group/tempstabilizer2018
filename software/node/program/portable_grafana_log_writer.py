@@ -111,14 +111,14 @@ class GrafanaProtocol:
     self.__objLog.close()
     self.__objLog = None
 
-  def logInfo(self, strWarning):
-    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_INFO, strWarning)
+  def logInfo(self, strMessage):
+    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_INFO, strMessage)
 
-  def logWarning(self, strWarning):
-    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_WARNING, strWarning)
+  def logWarning(self, strMessage):
+    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_WARNING, strMessage)
 
-  def logError(self, strWarning):
-    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_ERROR, strWarning)
+  def logError(self, strMessage):
+    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_ERROR, strMessage)
 
   def logNtpTime(self, iSecondsSince1970_UnixEpoch):
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_NTP, str(int(iSecondsSince1970_UnixEpoch)))

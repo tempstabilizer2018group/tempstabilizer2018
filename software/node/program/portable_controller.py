@@ -310,7 +310,7 @@ class Controller:
       self.objHw.setLed(bOn=True)
       if not self.objHw.bButtonPressed:
         strMsg = 'Button pressed < 2s: Force WLAN replication'
-        self.objGrafanaProtocol.logInfo(strMsg)
+        self.objGrafanaProtocol.logWarning(strMsg)
         print(strMsg)
         self.__objPollForWlanInterval.doForce()
         self.__iTicksButtonPressed_ms = None
@@ -321,7 +321,7 @@ class Controller:
       self.objHw.setLed(bOn=False)
       if not self.objHw.bButtonPressed:
         strMsg = 'Button pressed < 10s: Flush logs and %s, than reboot' % config_app.LOGFILENAME_PERSIST
-        self.objGrafanaProtocol.logInfo(strMsg)
+        self.objGrafanaProtocol.logWarning(strMsg)
         print(strMsg)
         # Write Logs
         self.__objPersist.persist(bForce=True)
@@ -334,7 +334,7 @@ class Controller:
     self.objHw.setLed(bOn=True)
     if not self.objHw.bButtonPressed:
       strMsg = 'Button pressed > 10s: Delete "%s" and Reboot' % config_app.LOGFILENAME_PERSIST
-      self.objGrafanaProtocol.logInfo(strMsg)
+      self.objGrafanaProtocol.logWarning(strMsg)
       print(strMsg)
 
       # Write Logs

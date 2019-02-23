@@ -104,6 +104,14 @@ class GrafanaDumper:
       self.handleMeasurements(iTime_ms, strPayload)
       return
 
+    if strVerb in (portable_grafana_datatypes.TAG_GRAFANA_INFO, portable_grafana_datatypes.TAG_GRAFANA_WARNING, portable_grafana_datatypes.TAG_GRAFANA_ERROR):
+      self.handleAnnotation(iTime_ms, strVerb, strPayload)
+      return
+
+  def handleAnnotation(self, iTime_ms, strVerb, strPayload):
+    # May be overritten
+    return
+
   def handleMeasurements(self, iTime_ms, strPayload):
     for strTag, strValue in ValuesIterator(strPayload):
       objGrafanaValue = self.__dictObjGrafana.get(strTag, None)

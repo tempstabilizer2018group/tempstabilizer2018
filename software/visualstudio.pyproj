@@ -26,6 +26,7 @@
     <Compile Include="http_server\python\python3_github_pull.py" />
     <Compile Include="http_server\python\python3_httpserver_standalone.py" />
     <Compile Include="http_server\python\python3_wsgi_app.py" />
+    <Compile Include="http_server\python\python_test_ifluxdb.py" />
     <Compile Include="node\program\portable_firmware_constants.py" />
     <Compile Include="node\program\hw_mcp3021.py" />
     <Compile Include="python3_grafana_log_reader_test.py" />
