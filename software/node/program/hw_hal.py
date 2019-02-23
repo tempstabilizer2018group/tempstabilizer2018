@@ -135,6 +135,9 @@ class Hw:
   def isPowerOnReboot(self):
     return machine.PWRON_RESET == machine.reset_cause()
 
+  def isPowerOnWatchdog(self):
+    return machine.WDT_RESET == machine.reset_cause()
+
   @property
   def messe_fSupplyHV_V(self):
     if self.MCP3021 != None:
