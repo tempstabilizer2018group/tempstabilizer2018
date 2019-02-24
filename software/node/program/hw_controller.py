@@ -60,24 +60,28 @@ def updateConfigAppByVERSION():
 
 class HwController(portable_controller.Controller):
   def __init__(self, strFilenameFull):
+    self.__objWlan = None
     self.strFilenameFull = strFilenameFull
     print('Programm: %s' % self.strFilenameFull)
     bCreated = createDataDirectory()
     portable_controller.Controller.__init__(self)
+    self.__objLogConsoleInterval = portable_ticks.Interval(iInterval_ms=config_app.iLogHwConsoleInterval_ms)
+    self.logResetCause(bCreated)
+    self.__objPersist.setValue(portable_controller.PERSIST_SW_REBOOT, '0')
+
+  def logResetCause(self, bCreated):
     if bCreated:
       self.objGrafanaProtocol.logWarning('SW-Update: ' + hw_update_ota.strSwVersion)
-    else:
-      # isWatchdogReset() doesn't work yet...
-      # if self.objHw.isWatchdogReset():
-      if self.objHw.isPowerOnReset():
-        self.objGrafanaProtocol.logWarning('Power On')
-        return
-      if self.__objPersist.getValue(portable_controller.PERSIST_SW_REBOOT) == '1':
-        self.objGrafanaProtocol.logInfo('Software-Reboot')
-        return
-      self.objGrafanaProtocol.logError('Watchdog-Reboot')
-    self.__objLogConsoleInterval = portable_ticks.Interval(iInterval_ms=config_app.iLogHwConsoleInterval_ms)
-    self.__objWlan = None
+      return
+    # isWatchdogReset() doesn't work yet...
+    # if self.objHw.isWatchdogReset():
+    if self.objHw.isPowerOnReset():
+      self.objGrafanaProtocol.logWarning('Power On')
+      return
+    if self.__objPersist.getValue(portable_controller.PERSIST_SW_REBOOT) == '1':
+      self.objGrafanaProtocol.logInfo('Software-Reboot')
+      return
+    self.objGrafanaProtocol.logError('Watchdog-Reboot')
 
   def directoryData(self):
     return config_app.DIRECTORY_DATA

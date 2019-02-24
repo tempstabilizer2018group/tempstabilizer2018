@@ -12,6 +12,7 @@ if sys.platform == 'esp32':
 import portable_grafana_datatypes
 from portable_grafana_datatypes import INFLUXDB_TAG_NODE
 from portable_grafana_datatypes import INFLUXDB_TAG_ENVIRONS
+from portable_daymaxestimator import PERSIST_SETPOINT_TIMESINCE_MS
 import portable_ticks
 import config_app
 import hw_update_ota
@@ -68,6 +69,7 @@ class GrafanaProtocol:
 
     self.__objGrafanaValue_TempO = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'O', 'fTempO_C', 1000.0)
     self.__objGrafanaValue_TempO_Setpoint = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'S', 'fTempO_Setpoint_C', 1000.0)
+    self.__objGrafanaValue_TimeSince_Setpoint = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'T', 'fTimeSince_Setpoint_ms', 0.001)
     self.__objGrafanaValue_Heat = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'H', 'fHeat_W', 100.0)
     self.__objGrafanaValue_PidH_bLimitHigh = portable_grafana_datatypes.GrafanaValueBoolTrue(INFLUXDB_TAG_NODE, 'L', 'PidH_bLimitHigh')
     self.__objGrafanaValue_DACzeroHeat = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'z', 'fDACzeroHeat_V', 1000.0)
@@ -90,6 +92,7 @@ class GrafanaProtocol:
 
     logAuxiliary(self.__objGrafanaValue_TempO, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
     logAuxiliary(self.__objGrafanaValue_TempO_Setpoint, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
+    logAuxiliary(self.__objGrafanaValue_TimeSince_Setpoint, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
     logAuxiliary(self.__objGrafanaValue_Heat, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
     logAuxiliary(self.__objGrafanaValue_PidH_bLimitHigh, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
     logAuxiliary(self.__objGrafanaValue_DACzeroHeat, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
@@ -105,7 +108,8 @@ class GrafanaProtocol:
     self.__objLog = objLog
 
   def flush(self):
-    self.__objLog.flush()
+    if self.__objLog != None:
+      self.__objLog.flush()
 
   def close(self):
     self.__objLog.close()
@@ -138,7 +142,7 @@ class GrafanaProtocol:
   def __logLine(self, iEffectiveIntervalDuration_ms, strTag, strPayload):
     self.__objLog.write('%d %s %s\n' % (iEffectiveIntervalDuration_ms, strTag, strPayload))
 
-  def logTempstablilizer(self, objTs, objHw):
+  def logTempstablilizer(self, objTs, objHw, objPersist):
     bIntervalOver, iEffectiveIntervalDuration_ms = self.__objInterval.isIntervalOver()
     if not bIntervalOver:
       return
@@ -178,6 +182,12 @@ class GrafanaProtocol:
       # self.__objGrafanaValue_TempO_Setpoint is not AVG. So we only need to pushValue() once per pullValue()
       self.__objGrafanaValue_TempO_Setpoint.pushValue(objTs.fTempO_Setpoint_C)
       pullValue(self.__objGrafanaValue_TempO_Setpoint)
+
+      # self.__objGrafanaValue_TimeSince_Setpoint is not AVG. So we only need to pushValue() once per pullValue()
+      iTimeSince_Setpoint_ms = objPersist.getValue(PERSIST_SETPOINT_TIMESINCE_MS, None)
+      if iTimeSince_Setpoint_ms != None:
+        self.__objGrafanaValue_TimeSince_Setpoint.pushValue(iTimeSince_Setpoint_ms)
+        pullValue(self.__objGrafanaValue_TimeSince_Setpoint)
 
     if (self.__iCounter % config_app.iMODULO_GRAFANALOG_SLOW_PUSH) == 0:
       listTempEnvirons_C = objHw.messe_listTempEnvirons_C
