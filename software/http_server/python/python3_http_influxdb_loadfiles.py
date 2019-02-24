@@ -4,7 +4,6 @@ import shutil
 import traceback
 import threading
 
-import python3_rfc3339
 import influxdb
 
 import config_app
@@ -65,22 +64,22 @@ def openInfluxDb():
 class GrafanaInfluxGetNtpTime(python3_grafana_log_reader_lib.GrafanaDumper):
   def __init__(self):
     python3_grafana_log_reader_lib.GrafanaDumper.__init__(self)
-    self.fSecondsSince1970_UnixEpochStart_StartOfFile = None
+    self.iMillisecondsSince1970_UnixEpochStart_StartOfFile = None
     self.strMac = None
 
   def handleMac(self, iTime_ms, strMac):
     self.strMac = strMac
 
-  def handleNtpTime(self, iTime_ms, iSecondsSince1970_UnixEpoch):
-    self.fSecondsSince1970_UnixEpochStart_StartOfFile = iSecondsSince1970_UnixEpoch - iTime_ms/1000.0
+  def handleNtpTime(self, iTime_ms, fSecondsSince1970_UnixEpoch):
+    self.iMillisecondsSince1970_UnixEpochStart_StartOfFile = int(fSecondsSince1970_UnixEpoch*1000.0) - iTime_ms
 
 class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
-  def __init__(self, strMac, fSecondsSince1970_UnixEpochStart_StartOfFile):
+  def __init__(self, strMac, iMillisecondsSince1970_UnixEpochStart_StartOfFile):
     assert strMac != None
-    assert fSecondsSince1970_UnixEpochStart_StartOfFile != None
+    assert iMillisecondsSince1970_UnixEpochStart_StartOfFile != None
     python3_grafana_log_reader_lib.GrafanaDumper.__init__(self)
     self.__strMac = strMac
-    self.__fSecondsSince1970_UnixEpochStart = fSecondsSince1970_UnixEpochStart_StartOfFile
+    self.__iMillisecondsSince1970_UnixEpochStart = iMillisecondsSince1970_UnixEpochStart_StartOfFile
     self.__listMeasurements = []
 
     p = config_http_server.factoryGitHubPull()
@@ -91,33 +90,14 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
   def handleMac(self, iTime_ms, strMac):
     assert self.__strMac == strMac
 
-  def getTimeRfc3339(self, iTime_ms):
-    # 09/15/2018 17:37:30
+  def getTimeGrafana_ms(self, iTime_ms):
+    # https://github.com/influxdata/influxdb-python/blob/master/examples/tutorial_server_data.py
+    assert self.__iMillisecondsSince1970_UnixEpochStart != None
+    return iTime_ms + self.__iMillisecondsSince1970_UnixEpochStart
 
-    #import time
-    #x = rfc3339.timestamptostr(time.time())
-    # 09/15/2018 20:27:42
-    #print(strTime, x)
-
-    # time.strftime('%Y-%m-%dT%H:%M:%SZ', time.localtime(1541350369))
-    # '2018-11-04T17:52:49Z'
-    # rfc3339.timestramptostr(1541350369)
-    # Traceback (most recent call last):
-    #   File "<stdin>", line 1, in <module>
-    # AttributeError: 'module' object has no attribute 'timestramptostr'
-    # rfc3339.timestamptostr(1541350369)
-    # '2018-11-04T16:52:49Z'
-
-    # https://github.com/BeyondTheClouds/enos/blob/master/enos/ansible/plugins/callback/influxdb_events.py
-    # import time
-    # t = time.localtime(self.fSecondsSince1970_UnixEpoch + 0.001*iTime_ms)
-    # strTime = time.strftime('%Y-%m-%dT%H:%M:%SZ', t)
-    assert self.__fSecondsSince1970_UnixEpochStart != None
-    strTime = python3_rfc3339.timestamptostr(iTime_ms/1000.0 + self.__fSecondsSince1970_UnixEpochStart)
-    return strTime
 
   def addMeasurement(self, objGrafanaValue, iTime_ms, strValue):
-    strTime = self.getTimeRfc3339(iTime_ms)
+    iTime_ms = self.getTimeGrafana_ms(iTime_ms)
     fValue = objGrafanaValue.convert2float(strValue)
 
     # fDiskFree_MBytes
@@ -131,7 +111,7 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
       strTagName += '-' + objGrafanaValue.strName
 
     dictMeasurement = {
-      'time': strTime,
+      'time': iTime_ms,
       'measurement': self.__strLabLabel,
       'tags': {
         objGrafanaValue.strInfluxDbTag: strTagName,
@@ -145,13 +125,13 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
     self.__listMeasurements.append(dictMeasurement)
 
   def handleAnnotation(self, iTime_ms, strVerb, strPayload):
-    strTime = self.getTimeRfc3339(iTime_ms)
+    iTime_ms = self.getTimeGrafana_ms(iTime_ms)
     # 17
     strNodeName = self.__strNodeName
     # LabHombi
     strLabLabel = self.__strLabLabel
     dictAnnotation = {
-                'time': strTime,
+                'time': iTime_ms,
                 'measurement': strLabLabel,
                 'fields': {
                   'title': '%s %s %s' % (strVerb.upper(), strLabLabel, strNodeName),
@@ -177,7 +157,7 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
     # Write data to influxDB
     # https://influxdb-python.readthedocs.io/en/latest/api-documentation.html?highlight=time_precision
     print('%s: Writing %d measurements to InfluxDB...' % (os.path.basename(strFilenameFull), len(self.__listMeasurements)))
-    bSuccess = objInfluxDBClient.write_points(self.__listMeasurements, time_precision='s', protocol='json')
+    bSuccess = objInfluxDBClient.write_points(self.__listMeasurements, time_precision='ms', protocol='json')
 
     objInfluxDBClient.close()
     assert bSuccess, 'Failed to write to influxdb.'
@@ -192,11 +172,11 @@ def loadFileIntoInfluxDb(strFilenameFull):
   strMac = objNtpTimeDumper.strMac
   if strMac == None:
     raise Exception('This file has no strMac: ' + strMac)
-  fSecondsSince1970_UnixEpochStart_StartOfFile = objNtpTimeDumper.fSecondsSince1970_UnixEpochStart_StartOfFile
-  if fSecondsSince1970_UnixEpochStart_StartOfFile == None:
+  iMillisecondsSince1970_UnixEpochStart_StartOfFile = objNtpTimeDumper.iMillisecondsSince1970_UnixEpochStart_StartOfFile
+  if iMillisecondsSince1970_UnixEpochStart_StartOfFile == None:
     raise Exception('This file has no StartOfFile-Time: ' + strFilenameFull)
 
-  objInfluxDbDumper = GrafanaInfluxDbDumper(strMac, fSecondsSince1970_UnixEpochStart_StartOfFile)
+  objInfluxDbDumper = GrafanaInfluxDbDumper(strMac, iMillisecondsSince1970_UnixEpochStart_StartOfFile)
   objInfluxDbDumper.readFileAndWriteToDB(strFilenameFull)
 
 def writePng(strFilenameFull):
