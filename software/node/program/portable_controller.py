@@ -13,6 +13,8 @@ import portable_controller
 import portable_tempstabilizer
 import portable_grafana_log_writer
 
+PERSIST_SW_REBOOT = 'Sw_Reboot'
+
 class Controller:
   def __init__(self):
     self.ticks_init()
@@ -30,7 +32,6 @@ class Controller:
 
     self.objGrafanaProtocol = self.factoryGrafanaProtocol()
     self.attachFileToGrafanaProtocol()
-    self.logBootReason()
 
     self.objTs = self.factoryTempStabilizer()
     if self.fLog != None:
@@ -112,16 +113,6 @@ class Controller:
     self.objGrafanaProtocol.attachFile(objCachedFile)
     if not bFileExists:
       self.objGrafanaProtocol.writeHeader(self.objHw.iI2cFrequencySelected)
-
-  def logBootReason(self):
-    if self.objHw.isWatchdogReset():
-      # isWatchdogReset() doesn't work yet...
-      self.objGrafanaProtocol.logError('Watchdog-Reboot')
-      return
-    if self.objHw.isPowerOnReset():
-      self.objGrafanaProtocol.logWarning('Power On')
-      return
-    self.objGrafanaProtocol.logInfo('Software-Reboot')
 
   def factoryLog(self):
     # May be derived and overridden
@@ -254,15 +245,17 @@ class Controller:
   def logException(self, objException, strFunction):
     # if type(objException) == OSError:
     #  uerrno.errorcode[uerrno.EEXIST]
-    strMsg = '%s returned %s' % (strFunction, str(objException))
-    self.objGrafanaProtocol.logError(strMsg)
-    self.logException2(objException, strMsg)
+    iErrorId = self.objHw.randint(1000, 10000)
+    strError = 'iErrorId=%d. %s returned %s' % (iErrorId, strFunction, str(objException))
+    self.objGrafanaProtocol.logError(strError)
+    self.objGrafanaProtocol.flush()
+    self.logException2(objException, strError, iErrorId)
 
-  def logException2(self, objException, strMsg):
+  def logException2(self, objException, strError, iErrorId=None):
     # May be derived and overridden
-    print(strMsg)
+    print(strError)
     sys.print_exception(objException)
-
+  
   def runForever(self):
     self.prepare()
     while True:
@@ -288,7 +281,6 @@ class Controller:
       if iTimeDelta_ms > 100:
         strMsg = 'networkOnce() took %s ms' % iTimeDelta_ms
         self.objGrafanaProtocol.logInfo(strMsg)
-        print(strMsg)
 
     self.handleButton()
 
@@ -416,3 +408,5 @@ class Controller:
 
   def networkDisconnect(self):
     raise Exception('Needs to be derived...')
+
+

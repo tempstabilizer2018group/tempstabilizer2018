@@ -23,18 +23,19 @@ def createDataDirectory():
   try:
     uos.mkdir(config_app.DIRECTORY_DATA)
     print('Created directory: "%s"' % config_app.DIRECTORY_DATA)
+    bDataDirectoryExists = True
     return True
   except:
     print('Directory already exists: "%s"' % config_app.DIRECTORY_DATA)
     return False
 
-def logException(objException, strMsg):
-  print(strMsg)
+def logException(objException, strError, iErrorId=None):
+  print(strError)
   sys.print_exception(objException)
 
   createDataDirectory()
   with open(config_app.DIRECTORY_DATA + '/' + config_app.LOGFILENAME_ERROR, 'w') as fError:
-    fError.write(strMsg)
+    fError.write(strError)
     fError.write('\n\n\n')
     sys.print_exception(objException, fError)
 
@@ -65,6 +66,16 @@ class HwController(portable_controller.Controller):
     portable_controller.Controller.__init__(self)
     if bCreated:
       self.objGrafanaProtocol.logWarning('SW-Update: ' + hw_update_ota.strSwVersion)
+    else:
+      # isWatchdogReset() doesn't work yet...
+      # if self.objHw.isWatchdogReset():
+      if self.objHw.isPowerOnReset():
+        self.objGrafanaProtocol.logWarning('Power On')
+        return
+      if self.__objPersist.getValue(portable_controller.PERSIST_SW_REBOOT) == '1':
+        self.objGrafanaProtocol.logInfo('Software-Reboot')
+        return
+      self.objGrafanaProtocol.logError('Watchdog-Reboot')
     self.__objLogConsoleInterval = portable_ticks.Interval(iInterval_ms=config_app.iLogHwConsoleInterval_ms)
     self.__objWlan = None
 
@@ -82,8 +93,8 @@ class HwController(portable_controller.Controller):
   def factoryHw(self):
     return hw_hal.Hw()
 
-  def logException2(self, objException, strMsg):
-    logException(objException, strMsg)
+  def logException2(self, objException, strError, iErrorId=None):
+    logException(objException, strError, iErrorId)
 
   def logConsole(self):
     bIntervalOver, iEffectiveIntervalDuration_ms = self.__objLogConsoleInterval.isIntervalOver()
@@ -99,6 +110,8 @@ class HwController(portable_controller.Controller):
 
   def reboot(self):
     hw_update_ota.objGpio.pwmLedReboot()
+    self.__objPersist.setValue(portable_controller.PERSIST_SW_REBOOT, '1')
+    self.__objPersist.persist(bForce=True)
     machine.reset()
 
   def remove(self, strFilenameFull):

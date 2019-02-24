@@ -3,6 +3,7 @@ import gc
 import uos
 import utime
 import uerrno
+import urandom
 import machine
 import config_app
 import hw_update_ota
@@ -207,6 +208,9 @@ class Hw:
   def setLed(self, bOn):
     hw_update_ota.objGpio.setLed(bOn)
 
+  def randint(self, l, u):
+    return urandom.randint(l, u)
+    
 def setTempOS():
   hw = Hw()
   print('fTempH: %03f %03f' % (hw.messe_fTempH_C, hw.messe_fTempO_C))
