@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>9a703754-eb4e-4c84-acfb-d2ae12c6d6f8</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>simulation_tests\simulation_test_hw_ticks.py</StartupFile>
+    <StartupFile>http_server\python\python3_http_influxdb_loadfiles.py</StartupFile>
     <SearchPath>tools_pyplot;simulation;http_server\python;node\config;node\program;http_server\python</SearchPath>
     <WorkingDirectory>simulation_tests</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -35,7 +35,6 @@
     <Compile Include="http_server\python\python3_grafana_log_reader_lib.py" />
     <Compile Include="http_server\python\python3_http_influxdb_loadfiles.py" />
     <Compile Include="http_server\python\python3_http_server_lib.py" />
-    <Compile Include="http_server\python\python3_rfc3339.py" />
     <Compile Include="node\program\hw_urequests.py" />
     <Compile Include="node\program\portable_grafana_datatypes.py" />
   </ItemGroup>

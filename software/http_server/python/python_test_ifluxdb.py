@@ -1,14 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import python3_rfc3339
 import influxdb
 import config_http_server
 
 def doit():
-  # fSecondsSince1970_UnixEpochStart_EndOfFile = time.time()
-  # strTime = time.strftime('%Y-%m-%d_%H-%M-%S', time.localtime(fSecondsSince1970_UnixEpochStart_EndOfFile))
-  # strTimeEnd = python3_rfc3339.timestamptostr(iTime_ms/1000.0 + self.__fSecondsSince1970_UnixEpochStart + 60*1000)
-
   listMeasurements = []
 
   for strTime, strTimeEnd in (

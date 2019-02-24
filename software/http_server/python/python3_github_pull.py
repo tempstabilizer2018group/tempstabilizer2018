@@ -301,9 +301,12 @@ class GitHubPublicPull(GithubPullBase):
 
   def getFromHttp(self, strUrl):
     logging.info('get %s' % strUrl)
-    with urllib.request.urlopen(strUrl) as f:
-      bData = f.read()
-      return bData
+    try:
+      with urllib.request.urlopen(strUrl) as f:
+        bData = f.read()
+        return bData
+    except Exception as e:
+      raise Exception('Failed to get "%s": %s' % (strUrl, str(e)))
 
   def __init__(self, strDirectory=None):
     GithubPullBase.__init__(self, strDirectory)

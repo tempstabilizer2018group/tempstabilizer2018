@@ -105,10 +105,10 @@ class SimuliertController(portable_controller.Controller):
     if not config_app.bSimulationUseHttpPost:
       if self.objGrafanaProtocol != None:
         # Add a timestamp to the file
-        # iSecondsSince1970_UnixEpoch = self.__iSecondsSince1970_UnixEpochStart + portable_ticks.objTicks.time_ms()/1000.0
-        # iSecondsSince1970_UnixEpoch = time.time() + portable_ticks.objTicks.time_ms()/1000.0
-        iSecondsSince1970_UnixEpoch = time.time()
-        self.objGrafanaProtocol.logNtpTime(iSecondsSince1970_UnixEpoch)
+        # fSecondsSince1970_UnixEpoch = self.__iSecondsSince1970_UnixEpochStart + portable_ticks.objTicks.time_ms()/1000.0
+        # fSecondsSince1970_UnixEpoch = time.time() + portable_ticks.objTicks.time_ms()/1000.0
+        fSecondsSince1970_UnixEpoch = time.time()
+        self.objGrafanaProtocol.logNtpTime(fSecondsSince1970_UnixEpoch)
 
     portable_controller.Controller.closeLogs(self)
 
