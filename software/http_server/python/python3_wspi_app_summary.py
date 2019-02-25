@@ -5,6 +5,7 @@ import influxdb
 import config_http_server
 import portable_grafana_datatypes
 import python3_config_nodes_lib
+import python3_github_pull
 import config_nodes
 
 listColumnsConfig = (
@@ -39,7 +40,7 @@ def getSummary():
 
   db = influxdb.InfluxDBClient(config_http_server.strInfluxDbHost, config_http_server.strInfluxDbPort, '', '', config_http_server.strInfluxDbDatabase)
   assert db != None
-  q = db.query("SELECT * FROM /.*/ where type = '%s' group by node limit 1" % portable_grafana_datatypes.INFLUXDB_TYPE_SUMMARY)
+  q = db.query("SELECT * FROM /.*/ where type = '%s' group by node order by time desc limit 1" % portable_grafana_datatypes.INFLUXDB_TYPE_SUMMARY)
   dictGrafanaNodes = {}
   for objPoint in q.get_points():
     dictGrafanaNodes[objPoint['mac']] = objPoint
@@ -72,6 +73,11 @@ def getSummary():
             continue
           if strValue == None:
             strValue = '-'
+          if strTag == portable_grafana_datatypes.TAG_GRAFANA_VERSION_SW:
+            # heads-SLA-master;2;strRepro=-APR-local-SP-on-SP-raspberrypi-APR-
+            # ->
+            # heads/master;2
+            strValue = python3_github_pull.unescapeSwVersion(strValue)
           strHtml += '<td>' + strValue + '</td>\n'
       strHtml += '</tr>\n'
 

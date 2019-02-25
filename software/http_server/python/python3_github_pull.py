@@ -39,10 +39,25 @@ assert '\\' not in strDIRECTORY_NODE
 
 listGitPrefixes = ('heads', 'tags')
 
+URL_TAG_REPO = ';strRepo='
+
 def escape(s):
   for strChar, strEscape in portable_constants.listReplacements:
     s = s.replace(strChar, strEscape)
   return s
+
+def unescapeSwVersion(strVersionFull):
+  # heads-SLA-master;2;strRepro=-APR-local-SP-on-SP-raspberrypi-APR-
+  # ->
+  # heads/master;2
+  l = strVersionFull.split(URL_TAG_REPO, 2)
+  if len(l) != 2:
+    return strVersionFull
+  strVersion, strDummy = strVersionFull.split(URL_TAG_REPO, 2)
+  for strChar, strEscape in portable_constants.listReplacements:
+    strVersion = strVersion.replace(strEscape, strChar)
+  # heads/master;2
+  return strVersion
 
 class GithubPullBase:
   def __init__(self, strDirectory=None):
@@ -72,7 +87,7 @@ class GithubPullBase:
     self._strGitRepo = strGitRepo
     self._strGitTags = strGitTags
 
-    strGitTags += ";strRepro='%s'" % self._getRepro()
+    strGitTags += "%s'%s'" % (URL_TAG_REPO, self._getRepro())
     # Escape characters in the tags, but not the ';' between the git-tags
     self._strGitTagsEscaped = ';'.join(map(escape, strGitTags.split(';')))
 
