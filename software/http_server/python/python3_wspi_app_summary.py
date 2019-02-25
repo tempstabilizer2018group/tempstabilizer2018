@@ -50,7 +50,7 @@ def getSummary():
 
   for dictLab, iterLabs in objConfigNodes.iterLabs():
     strLabLabel = dictLab[python3_config_nodes_lib.LAB_LABEL]
-    strHtml += '<tr><th colspan="%d">%s</th></tr>\n' % (len(listColumnsConfig)+len(listColumnsGrafana), strLabLabel)
+    strHtml += '<tr><th colspan="%d">%</th></tr>\n' % (len(listColumnsConfig)+len(listColumnsGrafana), strLabLabel)
     # Data rows
     for objNode in iterLabs:
       strHtml += '<tr>\n'
