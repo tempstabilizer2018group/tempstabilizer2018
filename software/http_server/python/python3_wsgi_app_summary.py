@@ -74,7 +74,7 @@ def getSummary():
           if strValue == None:
             strValue = '-'
           if strTag == portable_grafana_datatypes.TAG_GRAFANA_VERSION_SW:
-            # heads-SLA-master;2;strRepro=-APR-local-SP-on-SP-raspberrypi-APR-
+            # heads-SLA-master;2;strRepo=-APR-local-SP-on-SP-raspberrypi-APR-
             # ->
             # heads/master;2
             strValue = python3_github_pull.unescapeSwVersion(strValue)

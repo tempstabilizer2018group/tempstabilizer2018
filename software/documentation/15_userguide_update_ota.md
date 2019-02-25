@@ -35,10 +35,10 @@ The softwareupdate may come from four places:
 
 HTTP-Server               | local/remote | http://<server>/versioncheck?mac=3C71BF0F97A4&version=none
 :------------------------:|:------------:| ----------------------------------------------------------
-rpi                       | local        | ...;strRepro='local on raspberrypi'
-rpi                       | remote       | ...;strRepro='github.com via raspberrypi'
-tempstabilizer2018.org    | local        | ...;strRepro='local on tempstabilizer2018.org'
-tempstabilizer2018.org    | remote       | ...;strRepro='github.com via tempstabilizer2018.org'
+rpi                       | local        | ...;strRepo='local on raspberrypi'
+rpi                       | remote       | ...;strRepo='github.com via raspberrypi'
+tempstabilizer2018.org    | local        | ...;strRepo='local on tempstabilizer2018.org'
+tempstabilizer2018.org    | remote       | ...;strRepo='github.com via tempstabilizer2018.org'
 
 You may open `http://<server>\intro.html` and call `/versioncheck`. This will display the versionstring as shown in the table above.
 

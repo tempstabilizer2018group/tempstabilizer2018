@@ -47,7 +47,7 @@ def escape(s):
   return s
 
 def unescapeSwVersion(strVersionFull):
-  # heads-SLA-master;2;strRepro=-APR-local-SP-on-SP-raspberrypi-APR-
+  # heads-SLA-master;2;strRepo=-APR-local-SP-on-SP-raspberrypi-APR-
   # ->
   # heads/master;2
   l = strVersionFull.split(URL_TAG_REPO, 2)
@@ -87,7 +87,7 @@ class GithubPullBase:
     self._strGitRepo = strGitRepo
     self._strGitTags = strGitTags
 
-    strGitTags += "%s'%s'" % (URL_TAG_REPO, self._getRepro())
+    strGitTags += "%s'%s'" % (URL_TAG_REPO, self._getRepo())
     # Escape characters in the tags, but not the ';' between the git-tags
     self._strGitTagsEscaped = ';'.join(map(escape, strGitTags.split(';')))
 
@@ -210,7 +210,7 @@ class GitHubPullLocal(GithubPullBase):
     self.__dictConfigNodes = self._getDictNodesFromString(strConfigNodes)
     GithubPullBase.__init__(self, strDirectory)
 
-  def _getRepro(self):
+  def _getRepo(self):
     return 'local on ' + socket.gethostname()
 
   def _getConfigNodesFromGithub2(self):
@@ -257,17 +257,17 @@ class GitHubApiPull(GithubPullBase):
       objGithub = github.Github(login_or_token=strGithubToken)
     return objGithub.get_repo(strGithubRepo)
 
-  def _getRepro(self):
+  def _getRepo(self):
     return 'www.github.com via %s' % socket.gethostname()
 
   def _getConfigNodesFromGithub2(self):
-    objGitRepro = self.__openRepo(strGithubRepoConfig)
-    objGitFile = objGitRepro.get_file_contents(path=strFILENAME_CONFIG_NODES, ref='heads/master')
+    objGitRepo = self.__openRepo(strGithubRepoConfig)
+    objGitFile = objGitRepo.get_file_contents(path=strFILENAME_CONFIG_NODES, ref='heads/master')
     strConfigNodes = objGitFile.decoded_content
     return self._getDictNodesFromString(strConfigNodes)
 
   def _fetchFromGithub(self):
-    objGitRepro = self.__openRepo(self._strGitRepo)
+    objGitRepo = self.__openRepo(self._strGitRepo)
 
     dictFiles = {}
 
@@ -277,11 +277,11 @@ class GitHubApiPull(GithubPullBase):
         # User Tags don't pull from github
         continue
       try:
-        objGitTag = objGitRepro.get_git_ref(strGitTag)
+        objGitTag = objGitRepo.get_git_ref(strGitTag)
       except github.UnknownObjectException:
         raise Exception('Tag "%s" does not exist in git-repository "%s"' % (strGitTag, self._strGitRepo))
 
-      objGitTree = objGitRepro.get_git_tree(objGitTag.object.sha, recursive=True)
+      objGitTree = objGitRepo.get_git_tree(objGitTag.object.sha, recursive=True)
       for objGitFile in objGitTree.tree:
         logging.debug('    File: %s' % objGitFile.path)
         strFilenameRelative2 = self._selectFile(objGitFile.path)
@@ -293,7 +293,7 @@ class GitHubApiPull(GithubPullBase):
         if objGitFile.type != 'blob':
           logging.debug('      Not a blob, skipped....')
           continue
-        objGitContents = objGitRepro.get_file_contents(path=objGitFile.path, ref=strGitTag)
+        objGitContents = objGitRepo.get_file_contents(path=objGitFile.path, ref=strGitTag)
         dictFiles[strFilenameRelative2] = objGitContents.decoded_content
     return dictFiles
 
@@ -326,7 +326,7 @@ class GitHubPublicPull(GithubPullBase):
   def __init__(self, strDirectory=None):
     GithubPullBase.__init__(self, strDirectory)
 
-  def _getRepro(self):
+  def _getRepo(self):
     return 'www.github.com via %s' % socket.gethostname()
 
   def _getConfigNodesFromGithub2(self):
@@ -345,7 +345,7 @@ class GitHubPublicPull(GithubPullBase):
     return objGithub.get_repo(strGithubRepo)
 
   def _fetchFromGithub(self):
-    objGitRepro = self.__openRepo(self._strGitRepo)
+    objGitRepo = self.__openRepo(self._strGitRepo)
 
     dictFiles = {}
 
@@ -355,11 +355,11 @@ class GitHubPublicPull(GithubPullBase):
         # User Tags don't pull from github
         continue
       try:
-        objGitTag = objGitRepro.get_git_ref(strGitTag)
+        objGitTag = objGitRepo.get_git_ref(strGitTag)
       except github.UnknownObjectException:
         raise Exception('Tag "%s" does not exist in git-repository "%s"' % (strGitTag, self._strGitRepo))
 
-      objGitTree = objGitRepro.get_git_tree(objGitTag.object.sha, recursive=True)
+      objGitTree = objGitRepo.get_git_tree(objGitTag.object.sha, recursive=True)
       for objGitFile in objGitTree.tree:
         logging.debug('    File: %s' % objGitFile.path)
         strFilenameRelative2 = self._selectFile(objGitFile.path)
