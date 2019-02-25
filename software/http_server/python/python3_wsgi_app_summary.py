@@ -43,7 +43,8 @@ def getSummary():
   q = db.query("SELECT * FROM /.*/ where type = '%s' group by node order by time desc limit 1" % portable_grafana_datatypes.INFLUXDB_TYPE_SUMMARY)
   dictGrafanaNodes = {}
   for objPoint in q.get_points():
-    dictGrafanaNodes[objPoint['mac']] = objPoint
+    strMac_ = objPoint[config_http_server.strInfluxDbSummaryPrefix+'mac']
+    dictGrafanaNodes[strMac_] = objPoint
 
   p = config_http_server.factoryGitHubPull()
   objConfigNodes = p._getConfigNodesFromGithub()
@@ -66,8 +67,8 @@ def getSummary():
         strHtml += '<td colspan="%d">node not seen</td>\n' % len(listColumnsGrafana)
       else:
         for strDummy, strTag in listColumnsGrafana:
-          strValue = dictGrafanaNode.get(strTag, None)
-          if strTag == portable_grafana_datatypes.TAG_GRAFANA_NTP:
+          strValue = dictGrafanaNode.get(config_http_server.strInfluxDbSummaryPrefix+strTag, None)
+          if strTag == config_http_server.strInfluxDbSummaryPrefix+portable_grafana_datatypes.TAG_GRAFANA_NTP:
             iAge_min = (int(time.time()) - int(strValue)//1000)//60
             strHtml += '<td>%ds</td>\n' % iAge_min
             continue
@@ -78,7 +79,7 @@ def getSummary():
             # ->
             # heads/master;2
             strValue = python3_github_pull.unescapeSwVersion(strValue)
-          strHtml += '<td>' + strValue + '</td>\n'
+          strHtml += '<td>%s</td>\n' % strValue
       strHtml += '</tr>\n'
 
   strHtml += '''

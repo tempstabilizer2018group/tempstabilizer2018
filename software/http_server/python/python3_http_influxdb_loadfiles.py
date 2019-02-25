@@ -99,19 +99,24 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
   def handleLine(self, iTime_ms, strVerb, strPayload):
     python3_grafana_log_reader_lib.GrafanaDumper.handleLine(self, iTime_ms, strVerb, strPayload)
 
-    if strVerb == portable_grafana_datatypes.TAG_GRAFANA_NTP:
-      iSecondsSince1970_UnixEpoch = int(strPayload)
-      self.__dictSummaryFields[portable_grafana_datatypes.TAG_GRAFANA_NTP] = 1000*iSecondsSince1970_UnixEpoch
-      return
-
     if strVerb in (
+            portable_grafana_datatypes.TAG_GRAFANA_NTP,
             portable_grafana_datatypes.TAG_GRAFANA_I2C_FREQUENCY_SELECTED_HZ,
             portable_grafana_datatypes.TAG_GRAFANA_MAC,
             portable_grafana_datatypes.TAG_GRAFANA_VERSION_FIRMWARE,
             portable_grafana_datatypes.TAG_GRAFANA_VERSION_SW,
             portable_grafana_datatypes.TAG_GRAFANA_ERROR,
           ):
-      self.__dictSummaryFields[strVerb] = strPayload
+      if strVerb == portable_grafana_datatypes.TAG_GRAFANA_NTP:
+        iSecondsSince1970_UnixEpoch = int(strPayload)
+        strPayload = 1000*iSecondsSince1970_UnixEpoch
+
+      if strVerb == portable_grafana_datatypes.TAG_GRAFANA_I2C_FREQUENCY_SELECTED_HZ:
+        strPayload = int(strPayload)
+      self.__addSummaryField(strVerb, strPayload)
+
+  def __addSummaryField(self, strVerb, value):
+      self.__dictSummaryFields[config_http_server.strInfluxDbSummaryPrefix+strVerb] = value
 
   def addMeasurement(self, objGrafanaValue, iTime_ms, strValue):
     iTime_ms = self.getTimeGrafana_ms(iTime_ms)
@@ -170,9 +175,9 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
     strNodeName = self.__strNodeName
     # LabHombi
     strLabLabel = self.__strLabLabel
-    self.__dictSummaryFields[portable_grafana_datatypes.TAG_GRAFANA_NTP] = self.__iMillisecondsSince1970_UnixEpochStart
-    self.__dictSummaryFields[portable_grafana_datatypes.INFLUXDB_TAG_NODE] = strNodeName
-    self.__dictSummaryFields[portable_grafana_datatypes.INFLUXDB_TAG_SITE] = strLabLabel
+    self.__addSummaryField(portable_grafana_datatypes.TAG_GRAFANA_NTP, self.__iMillisecondsSince1970_UnixEpochStart)
+    self.__addSummaryField(portable_grafana_datatypes.INFLUXDB_TAG_NODE, strNodeName)
+    self.__addSummaryField(portable_grafana_datatypes.INFLUXDB_TAG_SITE, strLabLabel)
     dictSummary = {
                 'time': self.__iMillisecondsSince1970_UnixEpochStart,
                 'measurement': strLabLabel,
