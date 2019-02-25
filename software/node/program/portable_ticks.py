@@ -252,8 +252,6 @@ class Interval:
     # We still have to wait for the interval to finish
     return False, 0
 
-
-
 bDoStopwatch = False
 
 def stopwatch():

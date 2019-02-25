@@ -58,7 +58,7 @@ class TempStabilizer:
             self.fOutputValue = config_app.fTempSetpointFix_C
           def start(self, iTicks_ms, fTempO_Sensor, objPersist=None):
             pass
-          def process(self, iTicks_ms, fTempO_Sensor, bFetMin_W_Limit_Low):
+          def process(self, iTicks_ms, objAvgTempO_C, objAvgHeat_W, bFetMin_W_Limit_Low):
             pass
         self._objDayMaxEstimator = SetpointFix()
       else:
