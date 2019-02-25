@@ -76,6 +76,7 @@ def handle_get(environ, start_response):
 
     addLink('github', 'https://github.com/tempstabilizer2018group/tempstabilizer2018')
     addLink('grafana', 'http://%(HTTP_HOST)s:3000' % environ)
+    addLink('summary (summary of configured against live nodes)', 'summary.html')
     addLink(portable_firmware_constants.strHTTP_PATH_VERSIONCHECK, '%(strHTTP_PATH_VERSIONCHECK)s?%(strHTTP_ARG_MAC)s=3C71BF0F97A4&%(strHTTP_ARG_VERSION)s=heads-SLASH-master;1' % portable_firmware_constants.__dict__)
     addLink(portable_firmware_constants.strHTTP_PATH_SOFTWAREUPDATE, '%(strHTTP_PATH_SOFTWAREUPDATE)s?%(strHTTP_ARG_MAC)s=3C71BF0F97A4&%(strHTTP_ARG_VERSION)s=heads-SLASH-master;1' % portable_firmware_constants.__dict__)
 
@@ -93,6 +94,11 @@ def handle_get(environ, start_response):
     </body>
     </html>
     ''' % strLinks
+    return ok(start_response, strHtml, strContentType=strCONTENTTYPE_HTML)
+
+  if strPathInfo == '/summary.html':
+    import python3_wspi_app_summary
+    strHtml = python3_wspi_app_summary.getSummary()
     return ok(start_response, strHtml, strContentType=strCONTENTTYPE_HTML)
 
   if strPathInfo == strHTTP_PATH_INFLUXDB_DELETE:

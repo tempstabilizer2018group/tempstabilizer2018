@@ -18,14 +18,13 @@ strHttpPostPath = '/upload'
 strHttpPostServer = 'http://www.tempstabilizer2018.org'
 # strHttpPostServer = 'http://192.168.4.1'
 
-strSwVersion = 'swversion_not_set'
+strFirmwareVersion = 'swversion_not_set'
 strMAC = 'softmac'
 if sys.platform == 'esp32':
   import hw_update_ota
   strMAC = hw_update_ota.strMAC
   import uos
-  # uos.uname().version
-  strSwVersion = uos.uname().version
+  strFirmwareVersion = uos.uname().version
 
 strWlanSsid = portable_firmware_constants.strWLAN_SSID
 strWlanPw = portable_firmware_constants.strWLAN_PW

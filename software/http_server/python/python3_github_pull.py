@@ -55,7 +55,7 @@ class GithubPullBase:
 
   def setMac(self, strMac):
     # Get the most actual config file from github
-    objConfigNodes = self.__getConfigNodesFromGithub()
+    objConfigNodes = self._getConfigNodesFromGithub()
 
     # Find the mac we are looking for
     self.objNode = objConfigNodes.findNodeByMac(strMac)
@@ -130,7 +130,7 @@ class GithubPullBase:
     exec(strConfigNodes, dictGlobals, dictLocals)
     return dictLocals['dictConfigNodes']
 
-  def __getConfigNodesFromGithub(self):
+  def _getConfigNodesFromGithub(self):
     '''
       We read 'config_nodes.py' from github.
       Then we call findTagsByMac(strMac) to get strGitTags

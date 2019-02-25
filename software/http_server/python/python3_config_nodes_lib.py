@@ -37,7 +37,7 @@ class ConfigNode:
 
   @property
   def strMac(self):
-    return self.__dictLab[MAC]
+    return self.__dictNode[MAC]
 
   @property
   def strSerial(self):
@@ -59,6 +59,20 @@ class ConfigNodes:
   def __init__(self, dictConfigNodes):
     self.__dictConfigNodes = dictConfigNodes
 
+  def iterLabs(self):
+    for dictLab in self.__dictConfigNodes[LIST_LABS]:
+
+      def iterNodes():
+        for strSerial, strConfigAux in dictLab[NODES]:
+          for dictNode in self.__dictConfigNodes[LIST_NODES]:
+            if strSerial == dictNode[SERIAL]:
+              yield ConfigNode(dictLab, dictNode, strConfigAux)
+              break
+          else:
+            raise Exception('No node with serial "%s" found.' % strSerial)
+
+      yield dictLab, iterNodes()
+
   def findNodeByMac(self, strMac):
     # Find first the node
     for dictNode in self.__dictConfigNodes[LIST_NODES]:
@@ -68,7 +82,7 @@ class ConfigNodes:
       raise Exception('No node with mac "%s" found.' % strMac)
 
     strSerial = dictNode[SERIAL]
-    for dictLab in  self.__dictConfigNodes[LIST_LABS]:
+    for dictLab in self.__dictConfigNodes[LIST_LABS]:
       for strSerial_, strConfigAux in dictLab[NODES]:
         if strSerial_ == strSerial:
           return ConfigNode(dictLab, dictNode, strConfigAux)

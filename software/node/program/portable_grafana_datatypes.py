@@ -14,6 +14,9 @@ TAG_GRAFANA_MAXTICK_MS = 'portable_ticks.iMaxTick_ms'
 TAG_GRAFANA_I2C_FREQUENCY_SELECTED_HZ = 'iI2cFrequencySelected_Hz'
 INFLUXDB_TAG_NODE = 'node'
 INFLUXDB_TAG_ENVIRONS = 'environs'
+INFLUXDB_TAG_SITE = 'site'
+INFLUXDB_TYPE_SUMMARY = 'summary'
+INFLUXDB_TYPE_EVENT = 'event'
 
 def Instantiate(strConstructor):
   objGrafanaValue = eval(strConstructor)
