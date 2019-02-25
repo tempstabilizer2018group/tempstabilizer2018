@@ -68,7 +68,7 @@ def getSummary():
       else:
         for strDummy, strTag in listColumnsGrafana:
           strValue = dictGrafanaNode.get(config_http_server.strInfluxDbSummaryPrefix+strTag, None)
-          if strTag == config_http_server.strInfluxDbSummaryPrefix+portable_grafana_datatypes.TAG_GRAFANA_NTP:
+          if strTag == portable_grafana_datatypes.TAG_GRAFANA_NTP:
             iAge_min = (int(time.time()) - int(strValue)//1000)//60
             strHtml += '<td>%ds</td>\n' % iAge_min
             continue
