@@ -42,9 +42,15 @@ class TempO_SetpointWhenSet:
     if objPersist != None:
       if objPersist.loaded:
         # Restore the value from the previous run
-        self.fTempO_C = objPersist.getValue(PERSIST_SETPOINT_TEMPO_C)
-        iTimeSince_ms = objPersist.getValue(PERSIST_SETPOINT_TIMESINCE_MS)
-        self.iTicks_ms = portable_ticks.objTicks.ticks_add(iTicks_ms, iTimeSince_ms)
+        fTempO_C = objPersist.getValue(PERSIST_SETPOINT_TEMPO_C, None)
+        if fTempO_C != None:
+          self.fTempO_C = fTempO_C
+          print('persist start: fTempO_C=%0.2f' % self.fTempO_C)
+        iTimeSince_ms = objPersist.getValue(PERSIST_SETPOINT_TIMESINCE_MS, None)
+        if iTimeSince_ms != None:
+          # TODO(Hans): add/diff?
+          self.iTicks_ms = portable_ticks.objTicks.ticks_diff(iTicks_ms, iTimeSince_ms)
+          print('persist start: iTimeSince_ms=%d' % iTimeSince_ms)
 
   def __calculateSetpointReduction(self, iTicks_now_ms):
     iAgeParabel_ms = iTicks_now_ms - self.iTicks_ms - SETPOINT_CONSTANT_MS

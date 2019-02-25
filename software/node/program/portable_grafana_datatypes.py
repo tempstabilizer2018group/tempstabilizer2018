@@ -42,7 +42,7 @@ class GrafanaValueBase:
 class GrafanaValueFloatAvg(GrafanaValueBase):
   '''
     Der Wert wird gemittelt.
-    Hat der Wert sich nicht geändert, so wird '' zurückgegeben.
+    Hat der Wert sich nicht geändert, so wird None zurückgegeben.
   '''
   def __init__(self, strInfluxDbTag, strTag, strName, __fFactor=100000.0):
     GrafanaValueBase.__init__(self, strInfluxDbTag, strTag, strName)
@@ -75,7 +75,7 @@ class GrafanaValueFloatAvg(GrafanaValueBase):
 
 class GrafanaValueFloat(GrafanaValueBase):
   '''
-    Hat der Wert sich nicht geändert, so wird '' zurückgegeben.
+    Hat der Wert sich nicht geändert, so wird None zurückgegeben.
   '''
   def __init__(self, strInfluxDbTag, strTag, strName, __fFactor=100000.0):
     GrafanaValueBase.__init__(self, strInfluxDbTag, strTag, strName)
@@ -91,7 +91,7 @@ class GrafanaValueFloat(GrafanaValueBase):
     # Diese Funktion bildet keinen Mittelwert. pushValue() und pullValue() sollten abwechsungsweise aufgerufen werden.
     assert self.fValue != None
     strValue = str(int(self.__fFactor*self.fValue))
-    v= self._pullValue(strValue)
+    v = self._pullValue(strValue)
     self.fValue = None
     return v
 
@@ -105,7 +105,7 @@ class GrafanaValueFloat(GrafanaValueBase):
 class GrafanaValueBoolTrue(GrafanaValueBase):
   '''
     Falls der Wert irgendwann True war, wird '+' zurückgegeben, sonst '-'.
-    Hat der Wert sich nicht geändert, so wird '' zurückgegeben.
+    Hat der Wert sich nicht geändert, so wird None zurückgegeben.
   '''
   def __init__(self, strInfluxDbTag, strTag, strName):
     GrafanaValueBase.__init__(self, strInfluxDbTag, strTag, strName)

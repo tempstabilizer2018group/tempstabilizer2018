@@ -19,7 +19,7 @@ try:
   controller.runForever()
 
 except KeyboardInterrupt:
-  controller.flushGrafanaWithExceptionHandler()
-
+  controller.flush()
+    
 except Exception as e:
   controller.logException(e, 'Mainloop')

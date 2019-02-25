@@ -167,10 +167,11 @@ class Controller:
       Turns the LED on after some time. The LED will be switched off after the PID-calculation.
     '''
     self.__iLedModulo += 1
-    if self.__iTicksButtonPressed_ms == None:
-      bOn = self.__iLedModulo % config_app.iHwLedModulo == 0
-      if bOn:
-        self.objHw.setLed(True)
+    bOn = self.__iLedModulo % config_app.iHwLedModulo == 0
+    if bOn:
+      if self.objHw.bButtonPressed:
+        return
+      self.objHw.setLed(True)
 
   def runOnce(self):
     '''
@@ -214,7 +215,7 @@ class Controller:
     return True
 
   def logOnce(self):
-    self.objGrafanaProtocol.logTempstablilizer(self.objTs, self.objHw)
+    self.objGrafanaProtocol.logTempstablilizer(self.objTs, self.objHw, self.__objPersist)
     self.logConsole()
 
     if self.fLog != None:
@@ -242,13 +243,18 @@ class Controller:
   def delay_ms(self, iDelay_ms):
     raise Exception('Needs to be derived...')
 
+  def flush(self):
+    if self.__objPersist != None:
+      self.__objPersist.persist(bForce=True)
+    self.objGrafanaProtocol.flush()
+
   def logException(self, objException, strFunction):
     # if type(objException) == OSError:
     #  uerrno.errorcode[uerrno.EEXIST]
     iErrorId = self.objHw.randint(1000, 10000)
     strError = 'iErrorId=%d. %s returned %s' % (iErrorId, strFunction, str(objException))
     self.objGrafanaProtocol.logError(strError)
-    self.objGrafanaProtocol.flush()
+    self.flush()
     self.logException2(objException, strError, iErrorId)
 
   def logException2(self, objException, strError, iErrorId=None):
@@ -288,7 +294,8 @@ class Controller:
     self.ledBlink()
     iStopwatch_us = portable_ticks.stopwatch()
     bSuccess = self.runOnce()
-    self.objHw.setLed(False)
+    if not self.objHw.bButtonPressed:
+      self.objHw.setLed(False)
     portable_ticks.stopwatch_end(iStopwatch_us, 'self.runOnce()')
     if bSuccess:
       portable_ticks.count('portable_controller.runForever().logOnce()')
@@ -306,12 +313,13 @@ class Controller:
       if self.objHw.bButtonPressed:
         # Button was released and now is pressed
         self.__iTicksButtonPressed_ms = portable_ticks.objTicks.ticks_ms()
+        self.objHw.setLed(False)
       return
     iButtonPressed_ms = portable_ticks.objTicks.ticks_diff(portable_ticks.objTicks.ticks_ms(), self.__iTicksButtonPressed_ms)
 
     if iButtonPressed_ms < 2*portable_constants.SECOND_MS:
       # 0-2s: LED off
-      self.objHw.setLed(bOn=True)
+      self.objHw.setLed(True)
       if not self.objHw.bButtonPressed:
         strMsg = 'Button pressed < 2s: Force WLAN replication'
         self.objGrafanaProtocol.logWarning(strMsg)
@@ -322,7 +330,7 @@ class Controller:
 
     if iButtonPressed_ms < 10*portable_constants.SECOND_MS:
       # 2-10s: LED on
-      self.objHw.setLed(bOn=False)
+      self.objHw.setLed(False)
       if not self.objHw.bButtonPressed:
         strMsg = 'Button pressed < 10s: Flush logs and %s, than reboot' % config_app.LOGFILENAME_PERSIST
         self.objGrafanaProtocol.logWarning(strMsg)
@@ -335,7 +343,7 @@ class Controller:
       return
 
     # 10-99s: LED off
-    self.objHw.setLed(bOn=True)
+    self.objHw.setLed(True)
     if not self.objHw.bButtonPressed:
       strMsg = 'Button pressed > 10s: Delete "%s" and Reboot' % config_app.LOGFILENAME_PERSIST
       self.objGrafanaProtocol.logWarning(strMsg)
@@ -345,16 +353,12 @@ class Controller:
       self.done()
 
       # Delete the file after self.done(): self.done() writes it!
-      self.deletePersist()
+      # Delete setpoint of previous session in 'persist.txt'
+      self.__objPersist.trash()
 
       self.reboot()
-      # Will never get here!
-      return
 
-  def deletePersist(self):
-    # Delete setpoint of previous session in 'persist.txt'
-    self.__objPersist.delete(self.remove)
-
+    
   def networkOnce(self):
     '''Return ms spent'''
     if not config_app.bUseNetwork:
@@ -365,7 +369,8 @@ class Controller:
       return 0
 
     # Flush the filebuffer to make sure there is sufficient memory available for network communication
-    self.objGrafanaProtocol.flush()
+    # Write persist.txt in case we will be restarted by the watchdog
+    self.flush()
 
     portable_ticks.count('portable_controller.networkOnce() find wlan')
     self.objGrafanaProtocol.logInfo('networkFindWlans()')

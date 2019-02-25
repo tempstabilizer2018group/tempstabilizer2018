@@ -15,9 +15,10 @@ class Persist:
       self.__dictPersist = hw_rtc_mem.objRtcMem.readRtcMemDict()
       if len(self.__dictPersist) > 0:
         # It was a warm reboot and the rtc-mem was defined
-        print('Restore persist from rtc-mem!')
+        print('Restore persist from rtc-mem!', str(self.__dictPersist))
         self.__bLoaded = True
         return
+      # Fallback (common case) read from file.
       with open(self.__strFilenameFull, 'r') as fIn:
         strPersist = fIn.read()
       self.__dictPersist = eval(strPersist)
@@ -31,19 +32,17 @@ class Persist:
   def loaded(self):
     return self.__bLoaded
 
-  def delete(self, funcRemove):
-    # Delete persist-file
-    try:
-      funcRemove(self.__strFilenameFull)
-      print(config_app.LOGFILENAME_PERSIST + ': deleted')
-    except:
-      print(config_app.LOGFILENAME_PERSIST + ': not deleted (does not exist)')
+  def trash(self):
+    # Trash contents of persist.txt
+    self.__dictPersist = {}
+    self.persist(bForce=False)
+    print(config_app.LOGFILENAME_PERSIST + ': trashed')
 
   def setValue(self, strTag, strValue):
     self.__dictPersist[strTag] = strValue
 
-  def getValue(self, strTag):
-    return self.__dictPersist.get(strTag, '')
+  def getValue(self, strTag, strDefault=None):
+    return self.__dictPersist.get(strTag, strDefault)
 
   def persist(self, bForce=False):
     if config_app.iPersistInterval_ms == None:
