@@ -81,6 +81,7 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
     self.__strMac = strMac
     self.__iMillisecondsSince1970_UnixEpochStart = iMillisecondsSince1970_UnixEpochStart_StartOfFile
     self.__listMeasurements = []
+    self.__dictSummaryFields = {}
 
     p = config_http_server.factoryGitHubPull()
     p.setMac(strMac)
@@ -95,6 +96,16 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
     assert self.__iMillisecondsSince1970_UnixEpochStart != None
     return iTime_ms + self.__iMillisecondsSince1970_UnixEpochStart
 
+  def handleLine(self, iTime_ms, strVerb, strPayload):
+    python3_grafana_log_reader_lib.GrafanaDumper.handleLine(self, iTime_ms, strVerb, strPayload)
+    if strVerb in (
+            portable_grafana_datatypes.TAG_GRAFANA_I2C_FREQUENCY_SELECTED_HZ,
+            portable_grafana_datatypes.TAG_GRAFANA_MAC,
+            portable_grafana_datatypes.TAG_GRAFANA_VERSION_FIRMWARE,
+            portable_grafana_datatypes.TAG_GRAFANA_VERSION_SW,
+            portable_grafana_datatypes.TAG_GRAFANA_ERROR,
+          ):
+      self.__dictSummaryFields[strVerb] = strPayload
 
   def addMeasurement(self, objGrafanaValue, iTime_ms, strValue):
     iTime_ms = self.getTimeGrafana_ms(iTime_ms)
@@ -140,7 +151,7 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
                 },
                 'tags': {
                   'node': strNodeName,
-                  'type': 'event',
+                  'type': portable_grafana_datatypes.INFLUXDB_TYPE_EVENT,
                   'severity': strVerb,
                   config_http_server.strInfluxDbNameOrigin: config_http_server.strInfluxDbTagOrigin,
                 },
@@ -148,11 +159,33 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
 
     self.__listMeasurements.append(dictAnnotation)
 
+  def __addSummary(self):
+    # 17
+    strNodeName = self.__strNodeName
+    # LabHombi
+    strLabLabel = self.__strLabLabel
+    self.__dictSummaryFields[portable_grafana_datatypes.TAG_GRAFANA_NTP] = self.__iMillisecondsSince1970_UnixEpochStart
+    self.__dictSummaryFields[portable_grafana_datatypes.INFLUXDB_TAG_NODE] = strNodeName
+    self.__dictSummaryFields[portable_grafana_datatypes.INFLUXDB_TAG_SITE] = strLabLabel
+    dictSummary = {
+                'time': self.__iMillisecondsSince1970_UnixEpochStart,
+                'measurement': strLabLabel,
+                'fields': self.__dictSummaryFields,
+                'tags': {
+                  'node': strNodeName,
+                  'type': portable_grafana_datatypes.INFLUXDB_TYPE_SUMMARY,
+                  config_http_server.strInfluxDbNameOrigin: config_http_server.strInfluxDbTagOrigin,
+                },
+              }
+    self.__listMeasurements.append(dictSummary)
+
   def __writeToInfluxDB(self, strFilenameFull):
     # Set up influxDB connection
     # url, port, user, pw, db
     print('InfluxDB %s:%d %s' % (config_http_server.strInfluxDbHost, config_http_server.strInfluxDbPort, config_http_server.strInfluxDbDatabase))
     objInfluxDBClient = openInfluxDb()
+
+    self.__addSummary()
 
     # Write data to influxDB
     # https://influxdb-python.readthedocs.io/en/latest/api-documentation.html?highlight=time_precision

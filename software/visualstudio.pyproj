@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>9a703754-eb4e-4c84-acfb-d2ae12c6d6f8</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>http_server\python\python3_http_influxdb_loadfiles.py</StartupFile>
+    <StartupFile>http_server\python\python3_wspi_app_summary.py</StartupFile>
     <SearchPath>tools_pyplot;simulation;http_server\python;node\config;node\program;http_server\python</SearchPath>
     <WorkingDirectory>simulation_tests</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -26,6 +26,7 @@
     <Compile Include="http_server\python\python3_github_pull.py" />
     <Compile Include="http_server\python\python3_httpserver_standalone.py" />
     <Compile Include="http_server\python\python3_wsgi_app.py" />
+    <Compile Include="http_server\python\python3_wspi_app_summary.py" />
     <Compile Include="http_server\python\python_test_ifluxdb.py" />
     <Compile Include="node\program\portable_firmware_constants.py" />
     <Compile Include="node\program\hw_mcp3021.py" />

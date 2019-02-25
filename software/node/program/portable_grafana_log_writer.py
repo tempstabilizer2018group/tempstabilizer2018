@@ -77,8 +77,8 @@ class GrafanaProtocol:
 
   def writeHeader(self, iI2cFrequencySelected):
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VERSION_PROTOCOL, '1.0')
-    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VERSION_FIRMWARE, hw_update_ota.strSwVersion)
-    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VERSION_SW, config_app.strSwVersion)
+    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VERSION_FIRMWARE, config_app.strFirmwareVersion)
+    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VERSION_SW, hw_update_ota.strSwVersion)
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MAC, config_app.strMAC)
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MAXTICK_MS, portable_ticks.objTicks.iMaxTicks_ms)
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_I2C_FREQUENCY_SELECTED_HZ, iI2cFrequencySelected)
