@@ -97,8 +97,8 @@ def handle_get(environ, start_response):
     return ok(start_response, strHtml, strContentType=strCONTENTTYPE_HTML)
 
   if strPathInfo == '/summary.html':
-    import python3_wspi_app_summary
-    strHtml = python3_wspi_app_summary.getSummary()
+    import python3_wsgi_app_summary
+    strHtml = python3_wsgi_app_summary.getSummary()
     return ok(start_response, strHtml, strContentType=strCONTENTTYPE_HTML)
 
   if strPathInfo == strHTTP_PATH_INFLUXDB_DELETE:
