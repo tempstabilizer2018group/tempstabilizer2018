@@ -48,7 +48,7 @@ bUseWatchdog = True
 # fTempO_Start = messe_fTempO_C + fStart_Increment_fTempO_C
 # fStart_Increment_fTempO_C>0.0: Setpoint higher than ambient, so we start with heating
 # fStart_Increment_fTempO_C<0.0: Setpoint lower than ambient, so we start without heating
-fStart_Increment_fTempO_C = -10.0 # Setpoint bezüglich fTempO_C nach einem Reset
+fStart_Increment_fTempO_C = -1.0 # Setpoint bezüglich fTempO_C nach einem Reset
 
 # None: Forever
 iExperimentDuration_ms = None
