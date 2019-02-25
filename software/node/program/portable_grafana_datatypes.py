@@ -17,6 +17,7 @@ INFLUXDB_TAG_ENVIRONS = 'environs'
 INFLUXDB_TAG_SITE = 'site'
 INFLUXDB_TYPE_SUMMARY = 'summary'
 INFLUXDB_TYPE_EVENT = 'event'
+INFLUXDB_TYPE_MEASUREMENT = 'measurement'
 
 def Instantiate(strConstructor):
   objGrafanaValue = eval(strConstructor)
