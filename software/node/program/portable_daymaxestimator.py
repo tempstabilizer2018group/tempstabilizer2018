@@ -14,7 +14,7 @@ TIME_CALC_FTEMPO_SETPOINT_MS = portable_constants.TIME_CALC_FTEMPO_SETPOINT_MS
 TIME_INTERVAL_FTEMPO_SETPOINT_MS = portable_constants.TIME_INTERVAL_FTEMPO_SETPOINT_MS
 
 # SetpointReduction
-SETPOINT_CONSTANT_MS = 24 * portable_constants.HOUR_MS
+SETPOINT_CONSTANT_MS = 24 * portable_constants.HOUR_MS  # Todo(Peter) spaeter auf 3 Tage setzen
 # Parabel: Nach __SETPOINT_ABNAHME_MS nimmt die Temperatur um __SETPOINT_ABNAHME_C ab.
 __SETPOINT_ABNAHME_MS = 24 * portable_constants.HOUR_MS
 __SETPOINT_ABNAHME_C = 0.01
@@ -73,6 +73,9 @@ class TempO_SetpointWhenSet:
 
   def adjust(self, iTicks_ms, fTempIncrease_C):
     self.fTempO_C += fTempIncrease_C
+    # Todo(Peter) vermutlich waere besser:
+    # self.fTempO_C = calculateSetpoint(iTicks_ms) + fTempIncrease_C
+    
     # Subtrakt PeakDelay to avoid that a peak increases the setpoint again
     iTimeSince_ms = portable_ticks.objTicks.ticks_diff(iTicks_ms, self.iTicks_ms)
     if iTimeSince_ms > iTimePeakDelay_ms:
