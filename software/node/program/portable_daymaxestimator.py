@@ -14,11 +14,13 @@ TIME_CALC_FTEMPO_SETPOINT_MS = portable_constants.TIME_CALC_FTEMPO_SETPOINT_MS
 TIME_INTERVAL_FTEMPO_SETPOINT_MS = portable_constants.TIME_INTERVAL_FTEMPO_SETPOINT_MS
 
 # SetpointReduction
-SETPOINT_CONSTANT_MS = 24 * portable_constants.HOUR_MS  # Todo(Peter) spaeter auf 3 Tage setzen
+SETPOINT_CONSTANT_MS = 1 * portable_constants.HOUR_MS  # Todo(Peter) spaeter auf 3 Tage setzen
 # Parabel: Nach __SETPOINT_ABNAHME_MS nimmt die Temperatur um __SETPOINT_ABNAHME_C ab.
 __SETPOINT_ABNAHME_MS = 24 * portable_constants.HOUR_MS
-__SETPOINT_ABNAHME_C = 0.01
+__SETPOINT_ABNAHME_C = 1.1
 SETPOINT_K_MS = __SETPOINT_ABNAHME_MS/math.sqrt(__SETPOINT_ABNAHME_C)
+# Anstieg bei Leistund zu klein pro Tag
+SETPOINT_INCREASE_C = 0.02 * TIME_CALC_FTEMPO_SETPOINT_MS / ( 24 * portable_constants.HOUR_MS)
 
 PERSIST_SETPOINT_TEMPO_C = 'TempO_SetpointWhenSet.fTempO_C'
 PERSIST_SETPOINT_TIMESINCE_MS = 'TempO_SetpointWhenSet.iTimeSince_ms'
@@ -72,9 +74,7 @@ class TempO_SetpointWhenSet:
     self.iTicks_ms = iTicks_ms
 
   def adjust(self, iTicks_ms, fTempIncrease_C):
-    self.fTempO_C += fTempIncrease_C
-    # Todo(Peter) vermutlich waere besser:
-    # self.fTempO_C = calculateSetpoint(iTicks_ms) + fTempIncrease_C
+    self.fTempO_C = self.calculateSetpoint(iTicks_ms) + fTempIncrease_C
     
     # Subtrakt PeakDelay to avoid that a peak increases the setpoint again
     iTimeSince_ms = portable_ticks.objTicks.ticks_diff(iTicks_ms, self.iTicks_ms)
@@ -203,7 +203,7 @@ class DayMaxEstimator:
     fHeat_W = self.objTemperatureList.getHeatMedian_W()
     if fHeat_W < config_app.fPowerOffsetMin_W:
       # Power too low: Increase setpoint slowly
-      self.objTempO_SetpointWhenSet.adjust(iTicks_ms, fTempIncrease_C=0.001)
+      self.objTempO_SetpointWhenSet.adjust(iTicks_ms, fTempIncrease_C=SETPOINT_INCREASE_C)
       return
 
     if fHeat_W < config_app.fPowerOffsetMin_W+config_app.fPowerOffsetRangeOk_W:
