@@ -14,10 +14,10 @@ TIME_CALC_FTEMPO_SETPOINT_MS = portable_constants.TIME_CALC_FTEMPO_SETPOINT_MS
 TIME_INTERVAL_FTEMPO_SETPOINT_MS = portable_constants.TIME_INTERVAL_FTEMPO_SETPOINT_MS
 
 # SetpointReduction
-SETPOINT_CONSTANT_MS = 1 * portable_constants.HOUR_MS  # Todo(Peter) spaeter auf 3 Tage setzen
+SETPOINT_CONSTANT_MS = 3 * 24 * portable_constants.HOUR_MS
 # Parabel: Nach __SETPOINT_ABNAHME_MS nimmt die Temperatur um __SETPOINT_ABNAHME_C ab.
 __SETPOINT_ABNAHME_MS = 24 * portable_constants.HOUR_MS
-__SETPOINT_ABNAHME_C = 1.1
+__SETPOINT_ABNAHME_C = 0.01
 SETPOINT_K_MS = __SETPOINT_ABNAHME_MS/math.sqrt(__SETPOINT_ABNAHME_C)
 # Anstieg bei Leistund zu klein pro Tag
 SETPOINT_INCREASE_C = 0.02 * TIME_CALC_FTEMPO_SETPOINT_MS / ( 24 * portable_constants.HOUR_MS)
