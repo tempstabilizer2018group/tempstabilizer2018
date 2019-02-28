@@ -206,7 +206,7 @@ class DayMaxEstimator:
     if fHeat_W < config_app.fPowerOffsetMin_W:
       # Power too low: Increase setpoint slowly
       if bDebug: print('__adjustPowerOffset: Power too low: Increase setpoint slowly')
-      self.objTempO_SetpointWhenSet.adjust(iTicks_ms, fTempIncrease_C=SETPOINT_INCREASE_C) 
+      self.objTempO_SetpointWhenSet.adjust(iTicks_ms, fTempIncrease_C=SETPOINT_INCREASE_C)
       return
 
     if fHeat_W < config_app.fPowerOffsetMin_W+config_app.fPowerOffsetRangeOk_W:
