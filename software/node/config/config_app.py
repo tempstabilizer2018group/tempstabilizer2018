@@ -122,7 +122,9 @@ bSetpointFix = False
 fTempSetpointFix_C = 0.0
 
 bPowerOffset = True
-fPowerOffsetMin_W = 0.1
+# If median power is less than fPowerOffsetMin_W, SetTemp_O will be slowly increased  
+fPowerOffsetMin_W = 0.1 
+# If median power is within the range fPowerOffsetMin_W to fPowerOffsetMin_W + fPowerOffsetRangeOk_W, SetTemp_O will not be decreased
 fPowerOffsetRangeOk_W = 0.1
 
 def setVirgin():
