@@ -22,8 +22,12 @@ SETPOINT_K_MS = __SETPOINT_ABNAHME_MS/math.sqrt(__SETPOINT_ABNAHME_C)
 # Anstieg bei Leistund zu klein pro Tag
 SETPOINT_INCREASE_C = 0.02 * TIME_CALC_FTEMPO_SETPOINT_MS / ( 24 * portable_constants.HOUR_MS)
 
-PERSIST_SETPOINT_TEMPO_C = 'TempO_SetpointWhenSet.fTempO_C'
-PERSIST_SETPOINT_TIMESINCE_MS = 'TempO_SetpointWhenSet.iTimeSince_ms'
+PERSIST_SETPOINT_TEMPO_C = 'SetpointWhenSet.fTempO_C'
+PERSIST_SETPOINT_TIMESINCE_MS = 'SetpointWhenSet.iTimeSince_ms'
+
+PERSIST_SETPOINT_LIST_LAST = 'SetpointList.iLast'
+PERSIST_SETPOINT_LIST_TEMP_C = 'SetpointList.fTemp_C'
+PERSIST_SETPOINT_LIST_HEAT_W = 'SetpointList.fHeat_W'
 
 iTimePeakDelay_ms = 20*portable_constants.MINUTE_MS
 bDebug = False
@@ -41,18 +45,18 @@ class TempO_SetpointWhenSet:
     self.iTicks_ms = iTicks_ms
     self.fTempO_C = fTempO_C
     self.__objPersist = objPersist
-    if objPersist != None:
-      if objPersist.loaded:
-        # Restore the value from the previous run
-        fTempO_C = objPersist.getValue(PERSIST_SETPOINT_TEMPO_C, None)
-        if fTempO_C != None:
-          self.fTempO_C = fTempO_C
-          print('persist start: fTempO_C=%0.6f' % self.fTempO_C)
-        iTimeSince_ms = objPersist.getValue(PERSIST_SETPOINT_TIMESINCE_MS, None)
-        if iTimeSince_ms != None:
-          # TODO(Hans): add/diff?
-          self.iTicks_ms = portable_ticks.objTicks.ticks_diff(iTicks_ms, iTimeSince_ms)
-          print('persist start: iTimeSince_ms=%d' % iTimeSince_ms)
+    if objPersist.loaded:
+      print('Initialize from persist: Setpoint fTemp_C, iTimeSince_ms')
+      # Restore the value from the previous run
+      fTempO_C = objPersist.getValue(PERSIST_SETPOINT_TEMPO_C, None)
+      if fTempO_C != None:
+        self.fTempO_C = fTempO_C
+        # print('persist start: fTempO_C=%0.6f' % self.fTempO_C)
+      iTimeSince_ms = objPersist.getValue(PERSIST_SETPOINT_TIMESINCE_MS, None)
+      if iTimeSince_ms != None:
+        # TODO(Hans): add/diff?
+        self.iTicks_ms = portable_ticks.objTicks.ticks_diff(iTicks_ms, iTimeSince_ms)
+        # print('persist start: iTimeSince_ms=%d' % iTimeSince_ms)
 
   def __calculateSetpointReduction(self, iTicks_now_ms):
     iAgeParabel_ms = iTicks_now_ms - self.iTicks_ms - SETPOINT_CONSTANT_MS
@@ -67,6 +71,7 @@ class TempO_SetpointWhenSet:
       iTimeSince_ms = portable_ticks.objTicks.ticks_diff(iTicks_now_ms, self.iTicks_ms)
       self.__objPersist.setValue(PERSIST_SETPOINT_TEMPO_C, self.fTempO_C)
       self.__objPersist.setValue(PERSIST_SETPOINT_TIMESINCE_MS, iTimeSince_ms)
+
     return self.fTempO_C + self.__calculateSetpointReduction(iTicks_now_ms)
 
   def restart(self, iTicks_ms, fTempO_C):
@@ -87,12 +92,23 @@ TEMP_LOW_C = -100.00
 HEAT_HIGH_W = config_app.fPowerOffsetMin_W+config_app.fPowerOffsetRangeOk_W
 
 class TemperatureList:
-  def __init__(self):
+  def __init__(self, objPersist):
+    self.__objPersist = objPersist
     self.iDatapoints = int(TIME_INTERVAL_FTEMPO_SETPOINT_MS/TIME_CALC_FTEMPO_SETPOINT_MS)
+    self.iIndexMiddle = int(self.iDatapoints/2)
+
+    if objPersist.loaded:
+      print('Initialize from persist: listTempC, listHeat_W')
+      # Restore the value from the previous run
+      self.iLastDatapoint = objPersist.getValue(PERSIST_SETPOINT_LIST_LAST, None)
+      self.listTemp_C = objPersist.getValue(PERSIST_SETPOINT_LIST_TEMP_C, None)
+      self.listHeat_W = objPersist.getValue(PERSIST_SETPOINT_LIST_HEAT_W, None)
+      if (self.iLastDatapoint != None) and (self.listTemp_C != None) and (self.listHeat_W != None):
+        return
+
     self.iLastDatapoint = 0
     self.listTemp_C = [TEMP_LOW_C,]*self.iDatapoints
     self.listHeat_W = [HEAT_HIGH_W,]*self.iDatapoints
-    self.iIndexMiddle = int(self.iDatapoints/2)
 
   def appendLastDatapoint(self, fHeat_W, fTemp_C=TEMP_LOW_C):
     self.iLastDatapoint += 1
@@ -100,6 +116,10 @@ class TemperatureList:
       self.iLastDatapoint = 0
     self.listTemp_C[self.iLastDatapoint] = fTemp_C
     self.listHeat_W[self.iLastDatapoint] = fHeat_W
+    if self.__objPersist != None:
+      self.__objPersist.setValue(PERSIST_SETPOINT_LIST_LAST, self.iLastDatapoint)
+      self.__objPersist.setValue(PERSIST_SETPOINT_LIST_TEMP_C, self.listTemp_C)
+      self.__objPersist.setValue(PERSIST_SETPOINT_LIST_HEAT_W, self.listHeat_W)
 
   def getTempMedian_C(self):
     listTempSorted_C = sorted(self.listTemp_C)
@@ -134,7 +154,7 @@ class DayMaxEstimator:
   def start(self, iTicks_ms, fTempO_Sensor, objPersist=None):
     # Initial values
     self.objTempO_SetpointWhenSet = TempO_SetpointWhenSet(iTicks_ms=iTicks_ms, fTempO_C=fTempO_Sensor, objPersist=objPersist)
-    self.objTemperatureList = TemperatureList()
+    self.objTemperatureList = TemperatureList(objPersist)
     self.iStartTime_ms = iTicks_ms
 
   def process(self, iTicks_ms, objAvgTempO_C, objAvgHeat_W, bFetMin_W_Limit_Low):
@@ -171,6 +191,7 @@ class DayMaxEstimator:
       # Heating
       self.objTemperatureList.appendLastDatapoint(fHeat_W=fAvgHeat_W)
     # if bDebug: print('**** self.objTempO_SetpointWhenSet.calculateSetpoint:%0.6f' % self.objTempO_SetpointWhenSet.calculateSetpoint(iTicks_ms))
+
     return self.objTempO_SetpointWhenSet.calculateSetpoint(iTicks_ms)
 
   def __updateSetpoint(self, iTicks_ms):

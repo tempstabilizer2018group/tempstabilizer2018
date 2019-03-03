@@ -3,7 +3,7 @@
 
 import gc
 import sys
-import utime
+# import utime
 import usocket
 import hw_hal
 
@@ -96,10 +96,10 @@ def request(method, url, data=None, json=None, headers={}, stream=None, streamle
               break
             # print('******* junk bytes: %d' % len(bytes(junk, 'ansi')))
             sys.stdout.write('.')
-            hw_hal.feedWatchdog()
+            # hw_hal.feedWatchdog()
             s.write(junk)
             hw_hal.feedWatchdog()
-            utime.sleep_ms(20)
+            # utime.sleep_ms(20)
         l = s.readline()
         #print(l)
         l = l.split(None, 2)

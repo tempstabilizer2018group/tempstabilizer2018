@@ -107,7 +107,7 @@ class TempStabilizer:
   def start(self, iTimeOH_ms=0, iTimeDayMaxEstimator=0, fTempH_Start=47.11, fTempO_Sensor=47.11, objPersist=None):
     assert self.fDACzeroHeat_V!= None
     self._objDayMaxEstimator.start(iTicks_ms=iTimeDayMaxEstimator, fTempO_Sensor=fTempO_Sensor, objPersist=objPersist)
-    self._objPidO.start(iTimeOH_ms, fKp=8.0, fKi=0.1*2.0, fKd=0.0, fOutputValue=fTempH_Start-0.5)
+    self._objPidO.start(iTimeOH_ms, fKp=8.0, fKi=0.1*2.0, fKd=0.0, fOutputValue=fTempH_Start-0.5, objPersist=objPersist)
     self._objPidH.start(iTimeOH_ms, fKp=0.6, fKi=0.06, fKd=0.0)
 
   @property

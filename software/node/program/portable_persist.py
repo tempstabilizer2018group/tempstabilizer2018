@@ -9,8 +9,10 @@ class Persist:
     self.__dictPersist = {}
     self.__bLoaded = False
     self.__strFilenameFull = '%s/%s' % (strDirectory, config_app.LOGFILENAME_PERSIST)
-    if config_app.iPersistInterval_ms != None:
-      self.__objInterval = portable_ticks.Interval(iInterval_ms=config_app.iPersistInterval_ms, bForceFirstTime=False)
+    if config_app.iPersistInterval_ms is None:
+      print(config_app.LOGFILENAME_PERSIST + ': inactiv')
+      return
+    self.__objInterval = portable_ticks.Interval(iInterval_ms=config_app.iPersistInterval_ms, bForceFirstTime=False)
     try:
       self.__dictPersist = hw_rtc_mem.objRtcMem.readRtcMemDict()
       if len(self.__dictPersist) > 0:
@@ -60,6 +62,6 @@ class Persist:
       with open(self.__strFilenameFull, 'w') as fOut:
         strPersist = str(self.__dictPersist)
         fOut.write(strPersist)
-        print(config_app.LOGFILENAME_PERSIST + ': written')
-    except:
-        print(config_app.LOGFILENAME_PERSIST + ': failed to write')
+      print(config_app.LOGFILENAME_PERSIST + ': written')
+    except Exception as e:
+      print(config_app.LOGFILENAME_PERSIST + ': failed to write. ' + str(e))

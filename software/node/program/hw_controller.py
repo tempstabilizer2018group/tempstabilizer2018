@@ -4,6 +4,7 @@ import sys
 import utime
 import machine
 import network
+import micropython
 
 import hw_hal
 import hw_urequests
@@ -60,6 +61,7 @@ def updateConfigAppByVERSION():
 
 class HwController(portable_controller.Controller):
   def __init__(self, strFilenameFull):
+    micropython.alloc_emergency_exception_buf(100)
     self.__objWlan = None
     self.strFilenameFull = strFilenameFull
     print('Programm: %s' % self.strFilenameFull)

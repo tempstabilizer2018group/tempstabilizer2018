@@ -172,7 +172,7 @@ class Hw:
     return listTempEnvirons_C
 
   @property
-  def messe_iDiskFree_MBytes(self):
+  def messe_fDiskFree_MBytes(self):
     l = uos.statvfs('/')
     free_bytes = l[0]*l[3]
     return free_bytes/1000000.0

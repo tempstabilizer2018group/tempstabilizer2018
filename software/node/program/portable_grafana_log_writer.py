@@ -3,11 +3,11 @@ import os
 import sys
 
 funcMemfree = lambda: 1
+funcCollect = lambda: 1
 if sys.platform == 'esp32':
   import gc
-  def funcMemfree():
-    gc.collect()
-    return gc.mem_free()
+  funcMemfree = gc.mem_free
+  funcCollect = gc.collect
 
 import portable_grafana_datatypes
 from portable_grafana_datatypes import INFLUXDB_TAG_NODE
@@ -37,6 +37,7 @@ class CachedLog:
     if len(self.listBuf) > 100:
       self.flush()
       return
+    funcCollect()
     if funcMemfree() < 20000:
       # More than x Bytes free
       # Add more data to the buffer
@@ -48,6 +49,7 @@ class CachedLog:
       for strLine in self.listBuf:
         fLog.write(strLine)
     self.listBuf = []
+    funcCollect()
 
   def close(self):
     self.flush()
@@ -200,8 +202,8 @@ class GrafanaProtocol:
         pullValue(objGrafanaValueTempEnviron_C)
 
       # self.__objGrafanaValue_DiskFree is not AVG. So we only need to pushValue() once per pullValue()
-      iDiskFree_MBytes = objHw.messe_iDiskFree_MBytes
-      self.__objGrafanaValue_DiskFree.pushValue(iDiskFree_MBytes)
+      fDiskFree_MBytes = objHw.messe_fDiskFree_MBytes
+      self.__objGrafanaValue_DiskFree.pushValue(fDiskFree_MBytes)
       pullValue(self.__objGrafanaValue_DiskFree)
 
       # self.__objGrafanaValue_MemFree is not AVG. So we only need to pushValue() once per pullValue()

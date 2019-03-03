@@ -248,6 +248,13 @@ class Controller:
       self.__objPersist.persist(bForce=True)
     self.objGrafanaProtocol.flush()
 
+    fDiskFree_MBytes = self.objHw.messe_fDiskFree_MBytes
+    if fDiskFree_MBytes < config_app.fDiskGrafanaTrash_MBytes:
+      print('***** Out of disk space')
+      # We remove the grafana file and brutally reboot
+      self.remove(self.filenameGrafanaLog())
+      self.reboot()
+
   def logException(self, objException, strFunction):
     # if type(objException) == OSError:
     #  uerrno.errorcode[uerrno.EEXIST]

@@ -4,10 +4,13 @@
 import portable_ticks
 import config_app
 
+PERSIST_PID_fI = 'Pid.%s.fI'
 
 class PidController():
   def __init__(self, strName):
     self.strName = strName
+    self.PERSIST_PID_fI = PERSIST_PID_fI % strName
+
 
   """
   Implements a PID control loop, but acts like a simple integer or float value in most use cases.
@@ -32,7 +35,8 @@ class PidController():
             # fSensorValue value
             fSensorValue = 0.0,    
             # and fOutputValue
-            fOutputValue = 0.0       
+            fOutputValue = 0.0,
+            objPersist=None
           ):
     """
     Given the initial PID loop portable_constants Kpid, and fSetpoint, fSensorValue and target fOutputValue values,
@@ -41,6 +45,7 @@ class PidController():
     avoiding a large instantaneous fD (rate of change of the error term) on startup.  This allows
     us to enter a fSensorValue already under way with a steady state PID control loop.
     """
+    self.__objPersist = objPersist
     self.fKp, self.fKi, self.fKd = fKp, fKi, fKd
 
     self.fSetpoint = fSetpoint
@@ -64,7 +69,12 @@ class PidController():
     #   --------------- = fI
     #       fKi
     if fKi > 0.0:
-      self.fI = (fOutputValue - self.fP * self.fKp) / self.fKi
+      self.fI = None
+      if self.__objPersist.loaded:
+        print('Initialize from persist: ' + self.PERSIST_PID_fI)
+        self.fI = self.__objPersist.getValue(self.PERSIST_PID_fI, None)
+      if self.fI == None:
+        self.fI = (fOutputValue - self.fP * self.fKp) / self.fKi
     else:
       self.fI = 0.0
 
@@ -126,6 +136,9 @@ class PidController():
     self.fP = fP              
     # (not necessary, but useful for monitoring)
     self.fD = fD            
+
+    if self.__objPersist != None:
+      self.__objPersist.setValue(self.PERSIST_PID_fI, self.fI)
 
     # Compute tentative Output value, clamp Output to saturation limits, and perform
     # Integral anti-windup computation -- only remembering new Integral if fOutputValue value not
