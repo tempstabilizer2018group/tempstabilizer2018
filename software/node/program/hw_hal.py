@@ -168,6 +168,7 @@ class Hw:
   @property
   def messe_listTempEnvirons_C(self):
     map(self.MAX30205.oneShotNormalA, self.listEnvironsAddressI2C)
+    portable_ticks.delay_ms(CONVERSION_TIME_MS)
     listTempEnvirons_C = list(map(self.MAX30205.oneShotNormalB, self.listEnvironsAddressI2C))
     return listTempEnvirons_C
 

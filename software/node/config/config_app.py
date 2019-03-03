@@ -68,7 +68,6 @@ bWriteLogStatistics = True
 bRunStopwatch = False
 bRunStatisticsCounter = False
 
-iGrafanaLogInterval_ms = 1 * portable_constants.SECOND_MS
 # After this interval portable_pid_controller O and H will be called
 iTimeProcess_O_H_ms = 200
 fTimeDeltaMax_s = 5.0*iTimeProcess_O_H_ms/1000.0
@@ -102,6 +101,7 @@ bSimulationUseHttpPost = False
 iSimulationMaxTicks_ms = portable_constants.YEAR_MS
 
 # Grafana Log Writer
+iGrafanaLogInterval_ms = 1 * portable_constants.SECOND_MS
 # If True: The grafana-log-file will be smaller, but the logic to read is complexer
 bGrafanaSkipEqualValues = True
 # Different values need to be logged more or less frequently.
@@ -112,10 +112,9 @@ bGrafanaSkipEqualValues = True
 iMODULO_GRAFANALOG_MEDIUM_PUSH = 1
 iMODULO_GRAFANALOG_MEDIUM_PULL = 5
 iMODULO_GRAFANALOG_SLOW_PUSH = 10
-iMODULO_GRAFANALOG_SLOW_PULL = 50
+iMODULO_GRAFANALOG_SLOW_PULL = 120
 # When this level is reached, the Grafana Logfile will be deleted and the node restarted
 fDiskGrafanaTrash_MBytes = 0.05
-
 
 # True: Setpoint is 'fTempFixEstimator_C'
 # False: Use DayMaxEstimator

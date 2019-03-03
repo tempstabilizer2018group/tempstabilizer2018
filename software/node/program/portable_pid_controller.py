@@ -70,9 +70,10 @@ class PidController():
     #       fKi
     if fKi > 0.0:
       self.fI = None
-      if self.__objPersist.loaded:
-        print('Initialize from persist: ' + self.PERSIST_PID_fI)
-        self.fI = self.__objPersist.getValue(self.PERSIST_PID_fI, None)
+      if self.__objPersist != None:
+        if self.__objPersist.loaded:
+          print('Initialize from persist: ' + self.PERSIST_PID_fI)
+          self.fI = self.__objPersist.getValue(self.PERSIST_PID_fI, None)
       if self.fI == None:
         self.fI = (fOutputValue - self.fP * self.fKp) / self.fKi
     else:
