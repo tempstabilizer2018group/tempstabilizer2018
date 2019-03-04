@@ -36,11 +36,13 @@ listLabs.append({
   # GIT_TAGS: 'tags/x1.0;tags/y1.1',
   #
   # Examples
+  # setVirgin: as new, no persistent history, no heating, polling for new version
   # ;config_app.setVirgin()
-  # ;config_app.iHwLedModulo=30
+  # setFixtemp: heating to fix temperature
   # ;config_app.setFixtemp(27.0)
-  # ;config_app.iPollForWlanInterval_ms=60*60*1000
+  # setOff: heating off, Setpoint and history persist, temperatures are measured and loged to grafana
   # ;config_app.setOff()
+  # ;config_app.iPollForWlanInterval_ms=60*60*1000
   GIT_TAGS: 'heads/master;1',
   NODES: (
     ('20180907_01', ''),
@@ -66,20 +68,10 @@ listLabs.append({
   LAB_NAME: 'Hoenggerberg',
   RESPONSIBLE: 'Peter Maerki',
   GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
-  # Select a tag: 'tags/v1.0.0'
-  # Select the head of a branch: 'heads/master', 'heads/branchX'
-  # GIT_TAGS: 'tags/x1.0;tags/y1.1',
-  #
-  # Examples
-  # ;config_app.setVirgin()
-  # ;config_app.iHwLedModulo=30
-  # ;config_app.setFixtemp(27.0)
-  # ;config_app.iPollForWlanInterval_ms=3*60*1000
-  # ;config_app.setOff()
-  GIT_TAGS: 'heads/master;8;config_app.iPollForWlanInterval_ms=60*60*1000',
+  GIT_TAGS: 'heads/master;15;config_app.iPollForWlanInterval_ms=60*60*1000',
   NODES: (
     ('20181217_19', ''),
-    ('20181217_20', ''),
+    ('20181217_20', ';config_app.setFixtemp(15.0)'),
     ('20181217_25', ''),
   )
 })
@@ -90,7 +82,6 @@ listLabs.append({
   LAB_NAME: 'ETH, LabY',
   RESPONSIBLE: 'Robin',
   GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
-  # GIT_TAGS: 'tags/y1.1;tags/x1.0',
   GIT_TAGS: 'heads/master;1',
   NODES: (
     ('20180907_03', ''),
