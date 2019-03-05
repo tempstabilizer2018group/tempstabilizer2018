@@ -53,7 +53,6 @@ listLabs.append({
     ('20181217_14', ''),
     ('20181217_15', ''),
     ('20181217_16', ''),
-    ('20181217_17', ''),
     ('20181217_18', ''),
     ('20181217_21', ''),
     ('20181217_22', ''),
@@ -70,6 +69,7 @@ listLabs.append({
   GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
   GIT_TAGS: 'heads/master;15;config_app.iPollForWlanInterval_ms=60*60*1000',
   NODES: (
+    ('20181217_17', ';config_app.setFixtemp(15.0)'),
     ('20181217_19', ''),
     ('20181217_20', ';config_app.setFixtemp(15.0)'),
     ('20181217_25', ''),
