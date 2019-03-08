@@ -13,8 +13,6 @@ import portable_ticks
 # A2, A1, A0
 I2C_ADDRESS_A = 0x48 # 0x90  # 0, 0, 0
 I2C_ADDRESS_B = 0x49 # 0x92  # 0, 0, 1
-I2C_ADDRESS_C = 0x4A # 0x94 # 0, 1, 0
-I2C_ADDRESS_D = 0x4B # 0x96 # 0, 1, 1
 
 I2C_ADDRESS_MIN = 0x40 # 0x80
 I2C_ADDRESS_MAX = 0x5F # 0xBE
