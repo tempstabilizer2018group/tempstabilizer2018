@@ -256,15 +256,18 @@ class Controller:
       self.reboot()
 
   def logException(self, objException, strFunction):
-    # if type(objException) == OSError:
-    #  uerrno.errorcode[uerrno.EEXIST]
+    self.formatIfFilesystemError(objException)
     iErrorId = self.objHw.randint(1000, 10000)
     strError = 'iErrorId=%d. %s returned %s' % (iErrorId, strFunction, str(objException))
     self.objGrafanaProtocol.logError(strError)
     self.flush()
-    self.logException2(objException, strError, iErrorId)
+    self.logExceptionHw(objException, strError, iErrorId)
 
-  def logException2(self, objException, strError, iErrorId=None):
+  def formatIfFilesystemError(self, objException):
+    # May be derived and overridden
+    pass
+
+  def logExceptionHw(self, objException, strError, iErrorId=None):
     # May be derived and overridden
     print(strError)
     sys.print_exception(objException)

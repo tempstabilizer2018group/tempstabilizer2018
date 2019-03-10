@@ -30,7 +30,8 @@ def createDataDirectory():
     print('Directory already exists: "%s"' % config_app.DIRECTORY_DATA)
     return False
 
-def logException(objException, strError, iErrorId=None):
+def _logExceptionHw(objException, strError, iErrorId=None):
+  _formatIfFilesystemError(objException)
   print(strError)
   sys.print_exception(objException)
 
@@ -39,6 +40,15 @@ def logException(objException, strError, iErrorId=None):
     fError.write(strError)
     fError.write('\n\n\n')
     sys.print_exception(objException, fError)
+
+def _formatIfFilesystemError(osError):
+  # If the error indicates a problem with filesystem: We do a brute force reformat.
+  if type(osError) == OSError:
+    import uerrno
+    if osError.args[0] in (uerrno.ENODEV, uerrno.ENOENT, uerrno.ENOBUFS):
+      print('Filesystem may be broken: Reformat!')
+      import main
+      main._delete()
 
 def updateConfigAppByVERSION():
   try:
@@ -57,7 +67,7 @@ def updateConfigAppByVERSION():
     print('exec("' + strAux + '")')
     exec(strAux)
   except Exception as e:
-    logException(e, 'update configuration from "config_nodes.py" for %s: %s' % (config_app.strMAC, strAux))
+    _logExceptionHw(e, 'update configuration from "config_nodes.py" for %s: %s' % (config_app.strMAC, strAux))
 
 class HwController(portable_controller.Controller):
   def __init__(self, strFilenameFull):
@@ -99,8 +109,11 @@ class HwController(portable_controller.Controller):
   def factoryHw(self):
     return hw_hal.Hw()
 
-  def logException2(self, objException, strError, iErrorId=None):
-    logException(objException, strError, iErrorId)
+  def logExceptionHw(self, objException, strError, iErrorId=None):
+    _logExceptionHw(objException, strError, iErrorId)
+
+  def formatIfFilesystemError(self, objException):
+    _formatIfFilesystemError(objException)
 
   def logConsole(self):
     bIntervalOver, iEffectiveIntervalDuration_ms = self.__objLogConsoleInterval.isIntervalOver()
