@@ -113,6 +113,7 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
 
       if strVerb == portable_grafana_datatypes.TAG_GRAFANA_I2C_FREQUENCY_SELECTED_HZ:
         strPayload = int(strPayload)
+
       self.__addSummaryField(strVerb, strPayload)
 
   def __addSummaryField(self, strVerb, value):
@@ -175,7 +176,6 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
     strNodeName = self.__strNodeName
     # LabHombi
     strLabLabel = self.__strLabLabel
-    self.__addSummaryField(portable_grafana_datatypes.TAG_GRAFANA_NTP, self.__iMillisecondsSince1970_UnixEpochStart)
     self.__addSummaryField(portable_grafana_datatypes.INFLUXDB_TAG_NODE, strNodeName)
     self.__addSummaryField(portable_grafana_datatypes.INFLUXDB_TAG_SITE, strLabLabel)
     dictSummary = {
