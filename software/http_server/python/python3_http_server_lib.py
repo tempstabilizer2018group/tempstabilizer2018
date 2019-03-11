@@ -6,6 +6,7 @@ strHttpServerDirectory = os.path.dirname(os.path.dirname(__file__))
 strHttpServerToProcessDirectory = os.path.join(strHttpServerDirectory, 'node_data', 'grafana_to_process')
 strHttpServerProcessedDirectory = os.path.join(strHttpServerDirectory, 'node_data', 'grafana_processed')
 strHttpServerFailedDirectory = os.path.join(strHttpServerDirectory, 'node_data', 'grafana_failed')
+strHttpServerSwDownloadDirectory = os.path.join(strHttpServerDirectory, 'node_data', 'swdownload')
 
 def getTimeGmt():
   t = time.gmtime()

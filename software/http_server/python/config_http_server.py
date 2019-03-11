@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 import socket
 
 strInfluxDbDatabase = 'tempstabilizer2018'
@@ -18,6 +19,14 @@ bGithubPullLocal = False
 if socket.gethostname() == 'raspberrypi':
   # On the raspberry pi, we usually want to update the local files
   bGithubPullLocal = True
+
+bDoMpyCrossCompile = True
+strMpyCrossFilename = 'mpy-cross_debian'
+if socket.gethostname() == 'raspberrypi':
+  bDoMpyCrossCompile = False
+  strMpyCrossFilename = 'mpy-cross_raspberrypi'
+strMpyCrossFilenameFull = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'bin', strMpyCrossFilename))
+
 
 # True: If a update-tar-file is already in the cache: Use it
 #   Use this option on a productive system or not at all...

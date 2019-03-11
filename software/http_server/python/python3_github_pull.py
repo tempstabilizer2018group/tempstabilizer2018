@@ -21,6 +21,7 @@ import github
 # https://raw.githubusercontent.com/hmaerki/temp_stabilizer_2018/master/software/http_server/python/config_http_server.py
 
 import python3_config_nodes_lib
+import python3_http_server_lib
 import portable_firmware_constants
 import portable_constants
 import config_http_server
@@ -62,7 +63,7 @@ def unescapeSwVersion(strVersionFull):
 class GithubPullBase:
   def __init__(self, strDirectory=None):
     if strDirectory == None:
-      strDirectory = os.path.join(os.path.dirname(__file__), '..', 'node_data', 'swdownload')
+      strDirectory = python3_http_server_lib.strHttpServerSwDownloadDirectory
       # strDirectory = '/tmp'
     self.__strDirectory = os.path.abspath(strDirectory)
     self._strGitRepo = None
@@ -105,6 +106,8 @@ class GithubPullBase:
         return self.__strTarFilenameFull
 
     dictFiles = self._fetchFromGithub()
+    if config_http_server.bDoMpyCrossCompile:
+      dictFiles = self.crossCompilePythonFiles(dictFiles)
     self.__writeTar(dictFiles)
     return self.__strTarFilenameFull
 
@@ -117,6 +120,44 @@ class GithubPullBase:
       strTarContent = f.read()
     return strTarContent
 
+  def crossCompilePythonFiles(self, dictFiles):
+    dictFiles2 = {}
+
+    for strFilename, byteData in sorted(dictFiles.items()):
+      if not strFilename.endswith('.py'):
+        # Non python file: skip
+        dictFiles2[strFilename] = byteData
+        continue
+
+      # Python file: compile
+      strFilename2, byteData2 = self.crossCompilePythonFile(strFilename, byteData)
+      dictFiles2[strFilename2] = byteData2
+
+    return dictFiles2
+
+  def crossCompilePythonFile(self, strFilename, byteData):
+    strFilenameMpy = strFilename.replace('.py', '.mpy')
+    assert strFilenameMpy != strFilename
+    if os.path.exists(strFilename):
+      os.remove(strFilename)
+    if os.path.exists(strFilenameMpy):
+      os.remove(strFilenameMpy)
+
+    TMPDIR = '/tmp/mpy-cross-tmp'
+    strFilenameFull = os.path.join(TMPDIR, strFilename)
+    strBaseDir = os.path.dirname(strFilenameFull)
+    if not os.path.exists(strBaseDir):
+      os.makedirs(strBaseDir)
+    with open(strFilenameFull, 'wb') as f:
+      f.write(byteData)
+    import subprocess
+    # subprocess.check_call([config_http_server.strMpyCrossFilenameFull, '-v', '-mno-unicode', '-X', 'emit=bytecode', strFilenameFull])
+    subprocess.check_call([config_http_server.strMpyCrossFilenameFull, strFilenameFull])
+    strFilenameMpyFull = os.path.join(TMPDIR, strFilenameMpy)
+    with open(strFilenameMpyFull, 'rb') as f:
+      byteDataMpy = f.read()
+    return strFilenameMpy, byteDataMpy
+  
   '''
     'heads/master' is a Git-Tag: It may be retrieved from git
     '5' is a User-Tag: Just to distinguish one version from another.
@@ -167,6 +208,9 @@ class GithubPullBase:
     strFilenameRelative2 = strFilenameRelative[len(strDIRECTORY_NODE)+1:]
     if strFilenameRelative2.endswith('.py'):
       # We are only interested in python-files
+      return strFilenameRelative2
+    if strFilenameRelative2.endswith('.TXT'):
+      # REPLICATE_ONCE.TXT
       return strFilenameRelative2
     return None
 
