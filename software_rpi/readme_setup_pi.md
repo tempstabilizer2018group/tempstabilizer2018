@@ -38,7 +38,7 @@ reboot
 update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 LANGUAGE
 reboot
 
-## PREPARATION ONLY HTTP-Server: User pi
+## PREPARATION ONLY HTTP-Server
 As root:
 useradd pi --create-home --shell /bin/bash
 adduser pi sudo
@@ -63,7 +63,7 @@ git config --global user.email "hans@maerki.com"
 git config --global user.name "Hans Maerki"
 git clone https://github.com/tempstabilizer2018group/tempstabilizer2018.git
 
-bash -x ~pi/tempstabilizer2018/software_rpi/install_after_git_clone_http.sh
+bash -x ./install_after_git_clone_http.sh | tee install_after_git_clone_http.log 2>&1
 
 
 ## INSTALL PACKAGES REQUIRED BY TEMPSTABILIZER
@@ -75,9 +75,9 @@ sudo bash -x ./install_packages_http.sh | tee install_packages_http.log 2>&1
 sudo bash -x ./root_copyfiles_pi.sh | tee root_copyfiles_pi.log 2>&1
 sudo bash -x ./root_copyfiles_http.sh | tee root_copyfiles_http.log 2>&1
 
-## COPY CONFIGURATION FILES
-cd ~pi/tempstabilizer2018/software_rpi
-sudo bash -x ./install_after_git_clone_http.sh | tee install_after_git_clone_http.log 2>&1
+## PREPARATION ONLY HTTP-Server
+sudo chmod +x /etc/init.d/hostname_vps
+sudo update-rc.d hostname_vps defaults 09
 
 ## Reboot to activate access-point
 sudo reboot
