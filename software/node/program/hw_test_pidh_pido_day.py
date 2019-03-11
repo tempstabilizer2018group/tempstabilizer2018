@@ -20,12 +20,12 @@ def f(*args):
 try:
   hw_controller.updateConfigAppByVERSION()
 
-  controller = hw_controller.HwController(__file__)
+  controller = hw_controller.HwController('hw_test_pidh_pido_day.py')
   controller.runForever()
 
 except KeyboardInterrupt:
   schedule(f, None)
-    
+
 except Exception as e:
   controller.logException(e, 'Mainloop')
 

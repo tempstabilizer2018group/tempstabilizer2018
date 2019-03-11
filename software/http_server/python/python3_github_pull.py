@@ -124,7 +124,7 @@ class GithubPullBase:
     dictFiles2 = {}
 
     for strFilename, byteData in sorted(dictFiles.items()):
-      if not strFilename.endswith('.py'):
+      if (not strFilename.endswith('.py')) or (strFilename == 'main.py'):
         # Non python file: skip
         dictFiles2[strFilename] = byteData
         continue
