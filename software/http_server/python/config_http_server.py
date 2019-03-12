@@ -23,7 +23,6 @@ if socket.gethostname() == 'raspberrypi':
 bDoMpyCrossCompile = True
 strMpyCrossFilename = 'mpy-cross_debian'
 if socket.gethostname() == 'raspberrypi':
-  bDoMpyCrossCompile = False
   strMpyCrossFilename = 'mpy-cross_raspberrypi'
 strMpyCrossFilenameFull = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'bin', strMpyCrossFilename))
 
