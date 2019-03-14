@@ -26,6 +26,8 @@ listNodes.append({ MAC: '3C71BF16BCC0', SERIAL: '20181217_23', NAME: '23', })
 listNodes.append({ MAC: '3C71BF16D05C', SERIAL: '20181217_24', NAME: '24', })
 listNodes.append({ MAC: '3C71BF16BCA4', SERIAL: '20181217_25', NAME: '25', })
 
+listNodes.append({ MAC: '3C71BFA6E474', SERIAL: '20181217_99', NAME: '99', })
+
 listLabs.append({
   LAB_LABEL: 'labHombi',
   LAB_NAME: 'hombrechtikon',
@@ -43,7 +45,7 @@ listLabs.append({
   # setOff: heating off, Setpoint and history persist, temperatures are measured and loged to grafana
   # ;config_app.setOff()
   # ;config_app.iPollForWlanInterval_ms=60*60*1000
-  GIT_TAGS: 'heads/master;1',
+  GIT_TAGS: 'heads/master;2',
   NODES: (
     ('20180907_01', ''),
 
@@ -58,6 +60,8 @@ listLabs.append({
     ('20181217_22', ''),
     ('20181217_23', ''),
     ('20181217_24', ''),
+
+    ('20181217_99', ''),
   )
 })
 
