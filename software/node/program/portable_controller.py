@@ -41,8 +41,6 @@ class Controller:
     # On PowerOn: start with Wlan
     bForceWlanFirstTime = self.objHw.isPowerOnReset()
     if self.__fileExists(config_app.FILENAME_REPLICATE_ONCE):
-      self.remove(config_app.FILENAME_REPLICATE_ONCE)
-      print('removed:', config_app.FILENAME_REPLICATE_ONCE)
       bForceWlanFirstTime = True
 
     if not bForceWlanFirstTime:
@@ -134,6 +132,9 @@ class Controller:
     raise Exception('Needs to be derived...')
   
   def remove(self, strFilenameFull):
+    raise Exception('Needs to be derived...')
+
+  def create(self, strFilenameFull):
     raise Exception('Needs to be derived...')
 
   def prepare(self):
@@ -292,12 +293,6 @@ class Controller:
     self.networkOnce()
     portable_ticks.stopwatch_end(iStopwatch_us, 'self.networkOnce()')
 
-    if False:
-      iTimeDelta_ms = portable_ticks.objTicks.ticks_diff(portable_ticks.objTicks.ticks_ms(), iStartTicks_ms)
-      if iTimeDelta_ms > 100:
-        strMsg = 'networkOnce() took %s ms' % iTimeDelta_ms
-        self.objGrafanaProtocol.logInfo(strMsg)
-
     self.handleButton()
 
     portable_ticks.count('portable_controller.runForever().runOnce()')
@@ -331,9 +326,7 @@ class Controller:
       # 0-2s: LED off
       self.objHw.setLed(True)
       if not self.objHw.bButtonPressed:
-        strMsg = 'Button pressed < 2s: Force WLAN replication'
-        self.objGrafanaProtocol.logWarning(strMsg)
-        print(strMsg)
+        self.objGrafanaProtocol.logWarning('Button pressed < 2s: Force WLAN replication')
         self.__objPollForWlanInterval.doForce()
         self.__iTicksButtonPressed_ms = None
       return
@@ -342,9 +335,7 @@ class Controller:
       # 2-10s: LED on
       self.objHw.setLed(False)
       if not self.objHw.bButtonPressed:
-        strMsg = 'Button pressed < 10s: Flush logs and %s, than reboot' % config_app.LOGFILENAME_PERSIST
-        self.objGrafanaProtocol.logWarning(strMsg)
-        print(strMsg)
+        self.objGrafanaProtocol.logWarning('Button pressed < 10s: Flush logs and %s, than reboot' % config_app.LOGFILENAME_PERSIST)
         # Write Logs
         self.__objPersist.persist(bForce=True)
         self.done()
@@ -386,6 +377,18 @@ class Controller:
     self.objGrafanaProtocol.logInfo('networkFindWlans()')
     if self.networkFindWlans():
       portable_ticks.count('portable_controller.networkOnce() found wlan')
+      if self.__fileExists(config_app.FILENAME_REPLICATE_ONCE):
+        # The file is presnet after SW-Installation or after a Watchdog-Reboot.
+        # We do exactly on retry
+        self.remove(config_app.FILENAME_REPLICATE_ONCE)
+        print('removed:', config_app.FILENAME_REPLICATE_ONCE)
+      else:
+        # If it is not a retry, we create a file to do a retry in case of a watchdog reboot
+        self.create(config_app.FILENAME_REPLICATE_ONCE)
+        print('created:', config_app.FILENAME_REPLICATE_ONCE)
+
+      portable_ticks.funcMemUsage()
+
       self.objGrafanaProtocol.logInfo('networkConnect()')
       self.networkConnect()
       if self.isNetworkConnected():
@@ -396,12 +399,13 @@ class Controller:
         print('Not connected!')
       self.networkFreeResources()
 
+    if self.__fileExists(config_app.FILENAME_REPLICATE_ONCE):
+      self.remove(config_app.FILENAME_REPLICATE_ONCE)
+      print('removed:', config_app.FILENAME_REPLICATE_ONCE)
 
     iTimeDelta_ms = self.__objPollForWlanInterval.iTimeElapsed_ms(portable_ticks.objTicks.ticks_ms())
     if iTimeDelta_ms > 100:
-      strMsg = 'networkOnce() took %s ms' % iTimeDelta_ms
-      self.objGrafanaProtocol.logInfo(strMsg)
-      print(strMsg)
+      self.objGrafanaProtocol.logInfo('networkOnce() took %s ms' % iTimeDelta_ms)
 
   def writeStatisticsFile(self):
     if not config_app.bWriteLogStatistics:

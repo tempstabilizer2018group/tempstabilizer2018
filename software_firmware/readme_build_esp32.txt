@@ -16,11 +16,14 @@ git clone https://github.com/micropython/micropython.git
 cd micropython
 git submodule update --init
 
+git clone https://github.com/micropython/micropython-lib.git
+cd micropython-lib
+git checkout 1.9.3
 
 git clone https://github.com/espressif/esp-idf.git
 grep ESPIDF_SUPHASH micropython/ports/esp32/Makefile
-  -> 9a55b42f0841b3d38a61089b1dda4bf28135decd
-git checkout 9a55b42f0841b3d38a61089b1dda4bf28135decd
+  -> 30545f4cccec7460634b656d278782dd7151098e
+git checkout 30545f4cccec7460634b656d278782dd7151098e
 git submodule update --init --recursive
 
 

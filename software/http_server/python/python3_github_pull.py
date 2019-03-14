@@ -95,6 +95,19 @@ class GithubPullBase:
     self.__strTarFilename = 'node_%s.tar' % self._strGitTagsEscaped
     self.__strTarFilenameFull = os.path.join(self.__strDirectory, self.__strTarFilename)
 
+
+  def skipDirectory(self, strDirectory):
+    if strDirectory.find('.git') >= 0:
+      return True
+    return False
+    
+  def skipFile(self, strFilename):
+    if strFilename.find('.git') >= 0:
+      return True
+    if strFilename.find('_SKIP') >= 0:
+      return True
+    return False
+
   @property
   def strTarFilename(self):
     return self.__strTarFilename
@@ -259,11 +272,11 @@ class GitHubPullLocal(GithubPullBase):
 
   def _getConfigNodesFromGithub2(self):
     return self.__dictConfigNodes
-
+ 
   def _fetchFromGithub(self):
     dictFiles = {}
     for strRootDirectory, listDirsDummy, listFilenames in os.walk(self.__strSourceDirectory):
-      if strRootDirectory.find('.git') >= 0:
+      if self.skipDirectory(strRootDirectory):
         # For example the '.git'-directory
         continue
 
@@ -271,7 +284,7 @@ class GitHubPullLocal(GithubPullBase):
       strRootDirectoryRelative = strRootDirectory[len(self.__strSourceDirectory)+1:]
       strRootDirectoryRelative = strRootDirectoryRelative.replace('\\', '/')
       for strFilename in listFilenames:
-        if strFilename.find('.git') >= 0:
+        if self.skipFile(strFilename):
           # For example '.gitignore'
           continue
         strFilenameRelative = strRootDirectoryRelative + '/' + strFilename
@@ -330,6 +343,8 @@ class GitHubApiPull(GithubPullBase):
         logging.debug('    File: %s' % objGitFile.path)
         strFilenameRelative2 = self._selectFile(objGitFile.path)
         if strFilenameRelative2 == None:
+          continue
+        if self.skipFile(strFilenameRelative2):
           continue
         if objGitFile.path in dictFiles:
           logging.debug('      Alreadey added, would be overwritten - skipped....')
@@ -408,6 +423,8 @@ class GitHubPublicPull(GithubPullBase):
         logging.debug('    File: %s' % objGitFile.path)
         strFilenameRelative2 = self._selectFile(objGitFile.path)
         if strFilenameRelative2 == None:
+          continue
+        if self.skipFile(strFilenameRelative2):
           continue
         if objGitFile.path in dictFiles:
           logging.debug('      Alreadey added, would be overwritten - skipped....')
