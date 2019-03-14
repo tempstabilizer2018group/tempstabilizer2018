@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from micropython import schedule
+import micropython
 import portable_constants
 import config_app
 import hw_controller
@@ -15,8 +15,10 @@ config_app.bWriteLogStatistics = False
 
 def f(*args):
   print('******* KeyboardInterrupt')
-  controller.flush()
+  if controller:
+    controller.flush()
 
+controller = None
 try:
   hw_controller.updateConfigAppByVERSION()
 
@@ -24,8 +26,10 @@ try:
   controller.runForever()
 
 except KeyboardInterrupt:
-  schedule(f, None)
+  micropython.schedule(f, None)
 
 except Exception as e:
+  if controller is None:
+    raise
   controller.logException(e, 'Mainloop')
 

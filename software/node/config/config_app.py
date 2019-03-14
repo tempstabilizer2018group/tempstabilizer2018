@@ -21,9 +21,9 @@ strHttpPostServer = 'http://www.tempstabilizer2018.org'
 strFirmwareVersion = 'swversion_not_set'
 strMAC = 'softmac'
 if sys.platform == 'esp32':
-  import hw_update_ota
-  strMAC = hw_update_ota.strMAC
+  import hw_utils
   import uos
+  strMAC = hw_utils.strMAC
   strFirmwareVersion = uos.uname().version
 
 strWlanSsid = portable_firmware_constants.strWLAN_SSID
