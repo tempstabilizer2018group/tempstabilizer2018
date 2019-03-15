@@ -8,7 +8,7 @@ import micropython
 
 import hw_hal
 import hw_urequests
-import hw_update_ota
+import hw_utils
 import config_app
 import portable_ticks
 import portable_controller
@@ -53,12 +53,12 @@ def _formatIfFilesystemError(osError):
 def updateConfigAppByVERSION():
   try:
     strAux = '-'
-    # hw_update_ota.strSwVersion = heads/master;1;iPollForWlanInterval_ms=60*1000;iHwLedModulo=10
+    # hw_utils.strSwVersion = heads/master;1;iPollForWlanInterval_ms=60*1000;iHwLedModulo=10
     print('MAC:', config_app.strMAC)
-    print('VERSION.TXT:', hw_update_ota.strSwVersion)
+    print('VERSION.TXT:', hw_utils.strSwVersion)
 
     # strAux = 1;config-UNDERSCORE-app.iPollForWlanInterval-UNDERSCORE-ms=60*1000;config-UNDERSCORE-app.iHwLedModulo=12
-    strAux = hw_update_ota.strSwVersion.split(';', 1)[1]
+    strAux = hw_utils.strSwVersion.split(';', 1)[1]
     # Unescape
     for strChar, strEscape in portable_constants.listReplacements:
       strAux = strAux.replace(strEscape, strChar)
@@ -71,19 +71,23 @@ def updateConfigAppByVERSION():
 
 class HwController(portable_controller.Controller):
   def __init__(self, strFilenameFull):
+    print_mem_usage('hw_controller' + '_init_a')
     micropython.alloc_emergency_exception_buf(100)
     self.__objWlan = None
     self.strFilenameFull = strFilenameFull
     print('Programm: %s' % self.strFilenameFull)
     bCreated = createDataDirectory()
+    print_mem_usage('hw_controller' + '_init_b')
     portable_controller.Controller.__init__(self)
+    print_mem_usage('hw_controller' + '_init_c')
     self.__objLogConsoleInterval = portable_ticks.Interval(iInterval_ms=config_app.iLogHwConsoleInterval_ms)
     self.logResetCause(bCreated)
     self.__objPersist.setValue(portable_controller.PERSIST_SW_REBOOT, '0')
+    print_mem_usage('hw_controller' + '_init_d')
 
   def logResetCause(self, bCreated):
     if bCreated:
-      self.objGrafanaProtocol.logWarning('SW-Update: ' + hw_update_ota.strSwVersion)
+      self.objGrafanaProtocol.logWarning('SW-Update: ' + hw_utils.strSwVersion)
       return
     # isWatchdogReset() doesn't work yet...
     # if self.objHw.isWatchdogReset():
@@ -128,13 +132,17 @@ class HwController(portable_controller.Controller):
       print('%0.3fs %s %0.2f(%0.2f)C %0.2f(%0.2f)C %0.3f' % (portable_ticks.objTicks.ticks_ms()/1000.0, strTempEnvirons_C, self.objTs.fTempO_C, self.objTs.fTempO_Setpoint_C, self.objTs.fTempH_C, self.objTs.fTempH_Setpoint_C, self.objHw.fDac_V))
 
   def reboot(self):
-    hw_update_ota.objGpio.pwmLedReboot()
+    hw_utils.objGpio.pwmLedReboot()
     self.__objPersist.setValue(portable_controller.PERSIST_SW_REBOOT, '1')
     self.__objPersist.persist(bForce=True)
     machine.reset()
 
   def remove(self, strFilenameFull):
     uos.remove(strFilenameFull)
+
+  def create(self, strFilenameFull):
+    with open(strFilenameFull, 'w') as f:
+      pass
 
   def delay_ms(self, iDelay_ms):
     portable_ticks.delay_ms(iDelay_ms)
@@ -148,7 +156,7 @@ class HwController(portable_controller.Controller):
     if config_app.strWlanSidForTrigger == None:
       return True
 
-    hw_update_ota.objGpio.pwmLedWlanScan()
+    hw_utils.objGpio.pwmLedWlanScan()
     self.__createWlan()
     self.__objWlan.active(True)
     # wlan.scan(scan_time_ms, channel)
@@ -192,7 +200,7 @@ class HwController(portable_controller.Controller):
     self.__createWlan()
     if not self.__objWlan.active():
       self.__objWlan.active(True)
-    hw_update_ota.objGpio.pwmLedWlanConnected()
+    hw_utils.objGpio.pwmLedWlanConnected()
     self.__objWlan.connect(config_app.strWlanSsid, config_app.strWlanPw)
     # Wait some time to get connected
     for iPause in range(10):
@@ -235,7 +243,7 @@ class HwController(portable_controller.Controller):
       self.__doHttpPost(strFilenameFull, strFilenameBase)
 
     hw_hal.feedWatchdog()
-    bNewSwVersion = hw_update_ota.checkIfNewSwVersion(self.__objWlan)
+    bNewSwVersion = hw_utils.checkIfNewSwVersion(self.__objWlan)
     if bNewSwVersion:
       hw_hal.feedWatchdog()
       self.objHw.fDac_V = 0.0

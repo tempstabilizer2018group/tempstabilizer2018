@@ -7,19 +7,19 @@ import portable_ticks
 import portable_pid_controller
 
 # Hardware Limits [C]
-fTempO_Limit_Low = -30.0
-fTempO_Limit_High = 40.0
-fTempH_Limit_High = 140.0
+# _fTempO_Limit_Low = -30.0
+# _fTempO_Limit_High = 40.0
+_fTempH_Limit_High = 140.0
 
-fFetMin_W = 0.0 # [W] Limiten des H-Reglers
+_fFetMin_W = 0.0 # [W] Limiten des H-Reglers
 
-fTemp_Tolerance_MAX30205 = 0.5
+_fTemp_Tolerance_MAX30205 = 0.5
 
 # Zeitkonstante zum Erhoehen der Spannung
-fTauIncrease_fHeat_s = 10.0
+_fTauIncrease_fHeat_s = 10.0
 
 # Falls zu heiss: Leistungslimit reduzieren
-fHeat_W_reduction_per_s = 0.1
+_fHeat_W_reduction_per_s = 0.1
 
 class FloatAvg:
   '''
@@ -177,7 +177,7 @@ class TempStabilizer:
 
   def processO(self, iTime_ms, fTempO_Sensor):
     portable_ticks.count('TempStabilizer.processO()')
-    fTempH_Limit_Low = fTempO_Sensor - fTemp_Tolerance_MAX30205
+    fTempH_Limit_Low = fTempO_Sensor - _fTemp_Tolerance_MAX30205
 
     # Falls der H-Regler ansteht, so soll der I-Anteil des O-Regler nicht verschlimmert werden.
     bAllowIncreaseI=not self._objPidH.bLimitHigh
@@ -187,7 +187,7 @@ class TempStabilizer:
                          fSetpoint=self.fTempO_Setpoint_C,
                          fSensorValue=fTempO_Sensor,
                          fLimitOutLow=fTempH_Limit_Low,
-                         fLimitOutHigh=fTempH_Limit_High,
+                         fLimitOutHigh=_fTempH_Limit_High,
                          bAllowIncreaseI=bAllowIncreaseI,
                          bAllowDecreaseI=bAllowDecreaseI)
 
@@ -197,7 +197,7 @@ class TempStabilizer:
     fTimeDelta_s = self._objPidH.process(iTime_ms,
                          fSetpoint=self.fTempH_Setpoint_C,
                          fSensorValue=fTempH_Sensor,
-                         fLimitOutLow=fFetMin_W,
+                         fLimitOutLow=_fFetMin_W,
                          fLimitOutHigh=self.fHeat_W_LimitHigh)
 
     self.objAvgHeat_W.push(self.fHeat_W)
@@ -205,7 +205,7 @@ class TempStabilizer:
     self.__ajust_fHeat_W_LimitHigh__(fTimeDelta_s, fTempH_Sensor, fTempO_Sensor)
 
   def __ajust_fHeat_W_LimitHigh__(self, fTimeDelta_s, fTempH_Sensor, fTempO_Sensor):
-    self.fHeat_W_gefiltert = self.fHeat_W_gefiltert + (self.fHeat_W - self.fHeat_W_gefiltert) / fTauIncrease_fHeat_s * fTimeDelta_s
+    self.fHeat_W_gefiltert = self.fHeat_W_gefiltert + (self.fHeat_W - self.fHeat_W_gefiltert) / _fTauIncrease_fHeat_s * fTimeDelta_s
 
     fTempDiff_HO_C = fTempH_Sensor - fTempO_Sensor
 
@@ -223,7 +223,7 @@ class TempStabilizer:
     if fTempDiff_HO_C > (fTempLimit_C + 0.2):
       # Achtung, wir sind zu heiss: Leistung senken
       portable_ticks.count('portable_tempstabilizer.TempStabilizer.__ajust_fHeat_W_LimitHigh__(Leistung senken)')
-      self.fHeat_W_LimitHigh -= fTimeDelta_s * fHeat_W_reduction_per_s
+      self.fHeat_W_LimitHigh -= fTimeDelta_s * _fHeat_W_reduction_per_s
 
   def logHeader(self, fLog):
     listColumns = (

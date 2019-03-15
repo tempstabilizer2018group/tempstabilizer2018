@@ -2,20 +2,18 @@
 import os
 import sys
 
-funcMemfree = lambda: 1
-funcCollect = lambda: 1
-if sys.platform == 'esp32':
-  import gc
-  funcMemfree = gc.mem_free
-  funcCollect = gc.collect
-
 import portable_grafana_datatypes
 from portable_grafana_datatypes import INFLUXDB_TAG_NODE
 from portable_grafana_datatypes import INFLUXDB_TAG_ENVIRONS
 from portable_daymaxestimator import PERSIST_SETPOINT_TIMESINCE_MS
+
 import portable_ticks
 import config_app
-import hw_update_ota
+import hw_utils
+
+
+funcMemfree = portable_ticks.funcMemfree
+funcCollect = portable_ticks.funcCollect
 
 def nextFilename(strFilenameTemplate='test_hw_pidh_pido_day_log_%02d.txt'):
   listFiles = os.listdir()
@@ -82,7 +80,7 @@ class GrafanaProtocol:
   def writeHeader(self, iI2cFrequencySelected):
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VERSION_PROTOCOL, '1.0')
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VERSION_FIRMWARE, config_app.strFirmwareVersion)
-    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VERSION_SW, hw_update_ota.strSwVersion)
+    self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VERSION_SW, hw_utils.strSwVersion)
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MAC, config_app.strMAC)
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_MAXTICK_MS, portable_ticks.objTicks.iMaxTicks_ms)
     self.logLine(portable_grafana_datatypes.TAG_GRAFANA_I2C_FREQUENCY_SELECTED_HZ, iI2cFrequencySelected)

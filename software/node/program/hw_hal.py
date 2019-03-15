@@ -6,7 +6,7 @@ import uerrno
 import urandom
 import machine
 import config_app
-import hw_update_ota
+import hw_utils
 
 import hw_max30205
 import hw_mcp4725
@@ -39,7 +39,7 @@ pin_button = machine.Pin(16, machine.Pin.IN, machine.Pin.PULL_UP)
 pin_hv_ok = machine.Pin(17, machine.Pin.IN)
 # zero_heat
 pin_zero_heat = machine.Pin(21, machine.Pin.IN)
-# LED - this is implemented in the Firmware 'hw_update_ota'.
+# LED - this is implemented in the Firmware 'hw_utils'.
 # pin_led = machine.Pin(22, machine.Pin.OUT)
 
 # KO
@@ -51,9 +51,9 @@ pin_sda = machine.Pin(15, machine.Pin.IN, machine.Pin.PULL_UP)
 pin_scl = machine.Pin(2, machine.Pin.IN, machine.Pin.PULL_UP)
 
 if config_app.bUseWatchdog:
-  hw_update_ota.activateWatchdog()
+  hw_utils.activateWatchdog()
 
-feedWatchdog = hw_update_ota.feedWatchdog
+feedWatchdog = hw_utils.feedWatchdog
 
 class I2cWrapper:
   '''
@@ -117,7 +117,7 @@ class Hw:
     self.iI2cFrequencySelected = MAXFREQ // SAFETY_FACTOR
     print('findAndSetSpeedI2C')
     for iI2cFrequency in range(MINFREQ, MAXFREQ+STEP, STEP):
-      hw_update_ota.feedWatchdog()
+      hw_utils.feedWatchdog()
       self.i2c_native.init(scl=pin_scl, sda=pin_sda, freq=iI2cFrequency)
       listAddressI2C = self.i2c_native.scan()
 
@@ -129,7 +129,7 @@ class Hw:
     print('findAndSetSpeedI2C: iI2cFrequencySelected:', self.iI2cFrequencySelected)
 
   def startTempMeasurement(self):
-    hw_update_ota.feedWatchdog()
+    hw_utils.feedWatchdog()
     self.MAX30205.oneShotNormalA(I2C_ADDRESS_TempH)
     self.MAX30205.oneShotNormalA(I2C_ADDRESS_TempO)
 
@@ -200,14 +200,14 @@ class Hw:
   # Voltage between 0.0 and 3.3V
   @fDac_V.setter
   def fDac_V(self, fDac_V_param):
-    hw_update_ota.feedWatchdog()
+    hw_utils.feedWatchdog()
     self.__fDac_V__ = fDac_V_param
     iDac = int(fDac_V_param * 0x0FFF / 3.3)
     iDac = min(0x0FFF, max(0, iDac))
     self.MCP4725.write(iDac)
 
   def setLed(self, bOn):
-    hw_update_ota.objGpio.setLed(bOn)
+    hw_utils.objGpio.setLed(bOn)
 
   def randint(self, l, u):
     return urandom.randint(l, u)
