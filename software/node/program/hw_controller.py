@@ -71,19 +71,15 @@ def updateConfigAppByVERSION():
 
 class HwController(portable_controller.Controller):
   def __init__(self, strFilenameFull):
-    print_mem_usage('hw_controller' + '_init_a')
     micropython.alloc_emergency_exception_buf(100)
     self.__objWlan = None
     self.strFilenameFull = strFilenameFull
     print('Programm: %s' % self.strFilenameFull)
     bCreated = createDataDirectory()
-    print_mem_usage('hw_controller' + '_init_b')
     portable_controller.Controller.__init__(self)
-    print_mem_usage('hw_controller' + '_init_c')
     self.__objLogConsoleInterval = portable_ticks.Interval(iInterval_ms=config_app.iLogHwConsoleInterval_ms)
     self.logResetCause(bCreated)
     self.__objPersist.setValue(portable_controller.PERSIST_SW_REBOOT, '0')
-    print_mem_usage('hw_controller' + '_init_d')
 
   def logResetCause(self, bCreated):
     if bCreated:
