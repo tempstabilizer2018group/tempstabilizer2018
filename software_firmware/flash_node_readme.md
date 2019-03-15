@@ -13,7 +13,7 @@ python3 -m esptool --chip esp32 --port /dev/ttyUSB0 --baud 460800 erase_flash
 
 cd ~/tempstabilizer2018/software_firmware
 
-python3 -m esptool --chip esp32 --port /dev/ttyUSB0 --baud 460800 write_flash -z --flash_mode dio --flash_freq 40m 0x1000 firmware/firmware_tempstab1.0.3.bin
+python3 -m esptool --chip esp32 --port /dev/ttyUSB0 --baud 460800 write_flash -z --flash_mode dio --flash_freq 40m 0x1000 firmware/firmware_tempstab1.0.6.bin
 
 ## Connect to the ESP32-Console
 picocom -b 115200 /dev/ttyUSB0
