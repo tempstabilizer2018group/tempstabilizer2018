@@ -12,15 +12,7 @@ try:
   funcCollect = gc.collect
   funcMemUsage = hw_utils.print_mem_usage
 
-  def delay_ms(iDelay_ms):
-    if config_app.bHwDoLightSleep:
-      hw_hal.pin_gpio5.value(True)
-      # TODO: Do we use the correct sleep?
-      machine.sleep(iDelay_ms)
-      hw_hal.pin_gpio5.value(False)
-      return
-    # TODO: Do we use the correct sleep?
-    utime.sleep_ms(iDelay_ms)
+  strSwVersion = hw_utils.strSwVersion
 
 except ImportError:
   import simulation_ticks as portable_ticks
@@ -28,6 +20,8 @@ except ImportError:
   funcMemfree = lambda: 1
   funcCollect = lambda: None
   funcMemUsage = lambda: None
+
+  strSwVersion = 'soft'
 
 class I2cException(Exception): pass
 
@@ -41,12 +35,19 @@ else:
   def count(strTag):
     pass
 
-objTicks = None
+delay_ms = portable_ticks.delay_ms
 
-def init(iMaxTicks_ms=20000):
+# def init(iMaxTicks_ms=1000000000):
+def init(iMaxTicks_ms):
   global objTicks
   assert objTicks == None
-  objTicks = portable_ticks.Ticks()
+  objTicks = portable_ticks.Ticks(iMaxTicks_ms)
+
+def reset():
+  global objTicks
+  objTicks = None
+
+objTicks = None
 
 class Interval:
   '''

@@ -65,6 +65,10 @@ class Hw:
     self.__fDac_V__ = 3.3 # V
     self.fDac_V = 0.0
     self.fHeat_W = 0.0
+    self.messe_fDiskFree_MBytes = 1.5
+
+  def isPowerOnReset(self):
+    return True
 
   def timeIncrement(self, iDelay_ms, fDac_V):
     self.fDac_V = fDac_V

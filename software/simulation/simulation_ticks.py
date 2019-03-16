@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 import sys
+import portable_ticks
 
+#
+# We are running on Windows or Unix
+#
+def delay_ms(iDelay_ms):
+  # Simulation: We never wait!
+  pass
 
 '''
   TICKS: a unsigned integer which overflows. The methods ticks_add() and ticks_diff() must be used.
@@ -28,8 +35,8 @@ class Ticks:
 
   def print_statistics(self, fOut=sys.stdout):
     fOut.write(self.statistics())
-    for strTag in sorted(dictCounter.keys()):
-      fOut.write('Counter %8d: %s\n' % (dictCounter[strTag], strTag))
+    for strTag in sorted(portable_ticks.dictCounter.keys()):
+      fOut.write('Counter %8d: %s\n' % (portable_ticks.dictCounter[strTag], strTag))
 
   def ticks_ms(self):
     '''

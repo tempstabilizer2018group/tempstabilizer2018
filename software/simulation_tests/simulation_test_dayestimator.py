@@ -4,7 +4,7 @@ import portable_constants
 import portable_ticks
 
 import config_app
-import portable_simuliert_tagesmodell
+import portable_simuliert_tagesmodell_SKIP as portable_simuliert_tagesmodell
 import portable_daymaxestimator
 import portable_tempstabilizer
 

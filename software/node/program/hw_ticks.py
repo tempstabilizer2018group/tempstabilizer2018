@@ -6,12 +6,22 @@ import machine
 
 import hw_hal
 import config_app
+
+def delay_ms(iDelay_ms):
+  if config_app.bHwDoLightSleep:
+    hw_hal.pin_gpio5.value(True)
+    # TODO: Do we use the correct sleep?
+    machine.sleep(iDelay_ms)
+    hw_hal.pin_gpio5.value(False)
+    return
+  # TODO: Do we use the correct sleep?
+  utime.sleep_ms(iDelay_ms)
+
 '''
   TICKS: a unsigned integer which overflows. The methods ticks_add() and ticks_diff() must be used.
   TIME: a unsigned integer or float which does NOT overlow.
     Time-Methods only exist on the simulator. The hardware only knows portable_ticks. The server then must count the overflows.
 '''
-
 class Ticks:
   def __init__(self):
     # >> '0x%X' % utime.ticks_add(0, -1)

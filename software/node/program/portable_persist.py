@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 
-import hw_rtc_mem
+try:
+  import hw_rtc_mem
+  objRtcMem = hw_rtc_mem.objRtcMem
+except ModuleNotFoundError:
+  class RtcMem:
+    @property
+    def loaded(self): return False
+    def writeRtcMemDict(self, d): pass
+  objRtcMem = RtcMem()
 import config_app
 import portable_ticks
 
@@ -15,7 +23,7 @@ class Persist:
       return
     self.__objInterval = portable_ticks.Interval(iInterval_ms=config_app.iPersistInterval_ms, bForceFirstTime=False)
     try:
-      self.__dictPersist = hw_rtc_mem.objRtcMem.readRtcMemDict()
+      self.__dictPersist = objRtcMem.readRtcMemDict()
       if len(self.__dictPersist) > 0:
         # It was a warm reboot and the rtc-mem was defined
         print('Restore persist from rtc-mem!', str(self.__dictPersist))
@@ -26,7 +34,7 @@ class Persist:
         strPersist = fIn.read()
       self.__dictPersist = eval(strPersist)
       self.__bLoaded = True
-      hw_rtc_mem.objRtcMem.writeRtcMemDict(self.__dictPersist)
+      objRtcMem.writeRtcMemDict(self.__dictPersist)
       print(config_app.LOGFILENAME_PERSIST + ': loaded')
     except:
       print(config_app.LOGFILENAME_PERSIST + ': missing')
@@ -58,7 +66,7 @@ class Persist:
       self.__persist()
 
   def __persist(self):
-    hw_rtc_mem.objRtcMem.writeRtcMemDict(self.__dictPersist)
+    objRtcMem.writeRtcMemDict(self.__dictPersist)
     try:
       with open(self.__strFilenameFull, 'w') as fOut:
         strPersist = str(self.__dictPersist)

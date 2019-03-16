@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>9a703754-eb4e-4c84-acfb-d2ae12c6d6f8</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>http_server\python\python3_http_influxdb_loadfiles.py</StartupFile>
+    <StartupFile>simulation_tests\simulation_test_pidh_pido_day.py</StartupFile>
     <SearchPath>tools_pyplot;simulation;http_server\python;node\config;node\program;http_server\python</SearchPath>
     <WorkingDirectory>simulation_tests</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -28,15 +28,18 @@
     <Compile Include="http_server\python\python3_wsgi_app.py" />
     <Compile Include="http_server\python\python3_wsgi_app_summary.py" />
     <Compile Include="http_server\python\python_test_ifluxdb.py" />
+    <Compile Include="node\program\hw_test_pidh_pido_SKIP.py" />
+    <Compile Include="node\program\hw_test_pidh_SKIP.py" />
+    <Compile Include="node\program\hw_ticks.py" />
     <Compile Include="node\program\portable_firmware_constants.py" />
     <Compile Include="node\program\hw_mcp3021.py" />
+    <Compile Include="node\program\portable_simuliert_tagesmodell_SKIP.py" />
     <Compile Include="python3_grafana_log_reader_test.py" />
     <Compile Include="http_server\python\config_http_server.py" />
     <Compile Include="http_server\python\python3_grafana_log_config.py" />
     <Compile Include="http_server\python\python3_grafana_log_reader_lib.py" />
     <Compile Include="http_server\python\python3_http_influxdb_loadfiles.py" />
     <Compile Include="http_server\python\python3_http_server_lib.py" />
-    <Compile Include="node\program\hw_urequests.py" />
     <Compile Include="node\program\portable_grafana_datatypes.py" />
   </ItemGroup>
   <ItemGroup>
@@ -47,11 +50,13 @@
     <Folder Include="tools_pyplot\" />
     <Compile Include="node\program\portable_persist.py" />
     <Compile Include="simulation\simulation_http_server_utils.py" />
+    <Compile Include="simulation\simulation_ticks.py" />
     <Compile Include="simulation_tests\config_node.py" />
     <Compile Include="simulation_tests\simulation_test_hw_hal.py" />
     <Compile Include="simulation_tests\simulation_test_hw_ticks.py" />
     <Compile Include="simulation_tests\simulation_test_pidh_pido_day_http.py" />
     <Compile Include="simulation_tests\simulation_test_pidh_pido_log_grafana.py" />
+    <Compile Include="simulation_tests\simulation_test_tagesmodell.py" />
     <Compile Include="tools_pyplot\pyplot.py" />
   </ItemGroup>
   <ItemGroup>
@@ -76,8 +81,6 @@
     <Compile Include="node\program\hw_hal.py" />
     <Compile Include="node\program\hw_max30205.py" />
     <Compile Include="node\program\hw_mcp4725.py" />
-    <Compile Include="node\program\hw_test_pidh.py" />
-    <Compile Include="node\program\hw_test_pidh_pido.py" />
     <Compile Include="node\program\hw_test_pidh_pido_day.py" />
     <Compile Include="node\program\hw_controller.py" />
     <Compile Include="node\program\portable_constants.py" />
@@ -85,7 +88,6 @@
     <Compile Include="node\program\portable_daymaxestimator.py" />
     <Compile Include="node\program\portable_grafana_log_writer.py" />
     <Compile Include="node\program\portable_pid_controller.py" />
-    <Compile Include="node\program\portable_simuliert_tagesmodell.py" />
     <Compile Include="node\program\portable_tempstabilizer.py" />
     <Compile Include="node\program\portable_ticks.py" />
   </ItemGroup>

@@ -15,7 +15,7 @@ import portable_constants
 import portable_controller
 import portable_grafana_log_writer
 import simulation_hw_hal
-import portable_simuliert_tagesmodell
+import portable_simuliert_tagesmodell_SKIP as portable_simuliert_tagesmodell
 import portable_grafana_datatypes
 import simulation_pyplot
 import simulation_http_server_utils
@@ -58,6 +58,8 @@ class SimuliertController(portable_controller.Controller):
     # Make shure, that we don't start with the setpoint of a previous measurement.
     self.deletePersist()
 
+  def deletePersist(self):
+    pass
 
   def reboot(self):
     print('reboot()...')

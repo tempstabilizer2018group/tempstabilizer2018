@@ -3,7 +3,7 @@ import config_app
 import portable_ticks
 import portable_constants
 import simulation_hw_hal
-import portable_simuliert_tagesmodell
+import portable_simuliert_tagesmodell_SKIP as portable_simuliert_tagesmodell
 
 config_app.iTimeProcess_O_H_ms = 10
 

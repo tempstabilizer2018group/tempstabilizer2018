@@ -5,7 +5,7 @@ import config_app
 import portable_tempstabilizer
 import simulation_controller
 import simulation_hw_hal
-import portable_simuliert_tagesmodell
+import portable_simuliert_tagesmodell_SKIP as portable_simuliert_tagesmodell
 import simulation_pyplot
 
 config_app.iLogSimuliertPlotInterval_ms = 1000

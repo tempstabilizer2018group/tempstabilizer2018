@@ -51,7 +51,7 @@ class TempO_SetpointWhenSet:
     self.iTicks_ms = iTicks_ms
     self.fTempO_C = fTempO_C
     self.__objPersist = objPersist
-    if objPersist.loaded:
+    if objPersist and objPersist.loaded:
       print('Initialize from persist: Setpoint fTemp_C, iTimeSince_ms')
       # Restore the value from the previous run
       fTempO_C = objPersist.getValue(_PERSIST_SETPOINT_TEMPO_C, None)
@@ -103,7 +103,7 @@ class TemperatureList:
     self.iDatapoints = int(_TIME_INTERVAL_FTEMPO_SETPOINT_MS/_TIME_CALC_FTEMPO_SETPOINT_MS)
     self.iIndexMiddle = int(self.iDatapoints/2)
 
-    if objPersist.loaded:
+    if objPersist and objPersist.loaded:
       print('Initialize from persist: listTempC, listHeat_W')
       # Restore the value from the previous run
       self.iLastDatapoint = objPersist.getValue(_PERSIST_SETPOINT_LIST_LAST, None)

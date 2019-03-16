@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import config_app
 import portable_constants
-import portable_simuliert_tagesmodell
+import portable_simuliert_tagesmodell_SKIP as portable_simuliert_tagesmodell
 
 def run1(objTagesmodell, strFilename, iTimeEnd_ms, iTimeIncrement_ms, iX_ms, strX_ms):
   import pyplot

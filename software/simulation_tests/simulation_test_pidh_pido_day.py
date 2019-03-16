@@ -5,7 +5,7 @@ import config_app
 import portable_daymaxestimator
 import simulation_controller
 
-iMaxTicks_ms = portable_daymaxestimator.TIME_PROCESS_DAYMAXESTIMATOR_MS
+iMaxTicks_ms = portable_daymaxestimator._TIME_PROCESS_DAYMAXESTIMATOR_MS
 config_app.iSimulationInitiMaxTicks_ms = int(1.33*iMaxTicks_ms)
 
 config_app.iLogSimuliertPlotInterval_ms = min(iMaxTicks_ms, portable_constants.HOUR_MS)
