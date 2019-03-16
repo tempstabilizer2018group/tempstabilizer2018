@@ -80,7 +80,7 @@ iPollForWlanInterval_ms = 10 * portable_constants.MINUTE_MS
 iPollForWlanOnce_ms = 10 * portable_constants.SECOND_MS
 
 # Interval to write persist setpoint temperature and time
-# None: Do not persist
+# None: Do not persist. And delete the persist-file too!
 iPersistInterval_ms = 10 * portable_constants.MINUTE_MS
 
 # Hardware only

@@ -15,5 +15,9 @@
 	],
 	"settings": {
 		"python.pythonPath": "/usr/bin/python3;${workspaceFolder}/http_server/node/program;${workspaceFolder}/http_server/python",
+		"files.exclude": {
+			"**/__pycache__/**": true,
+			"**/node_data/**": true
+		},
 	}
 }

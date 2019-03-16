@@ -10,6 +10,7 @@ class Persist:
     self.__bLoaded = False
     self.__strFilenameFull = '%s/%s' % (strDirectory, config_app.LOGFILENAME_PERSIST)
     if config_app.iPersistInterval_ms is None:
+      self.trash()
       print(config_app.LOGFILENAME_PERSIST + ': inactiv')
       return
     self.__objInterval = portable_ticks.Interval(iInterval_ms=config_app.iPersistInterval_ms, bForceFirstTime=False)
@@ -37,7 +38,7 @@ class Persist:
   def trash(self):
     # Trash contents of persist.txt
     self.__dictPersist = {}
-    self.persist(bForce=False)
+    self.__persist()
     print(config_app.LOGFILENAME_PERSIST + ': trashed')
 
   def setValue(self, strTag, strValue):
