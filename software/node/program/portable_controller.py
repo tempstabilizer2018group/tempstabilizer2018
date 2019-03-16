@@ -207,7 +207,7 @@ class Controller:
     portable_ticks.stopwatch_end(iStopwatch_us, 'self.objTs.processO(...)')
 
     iStopwatch_us = portable_ticks.stopwatch()
-    self.objTs.processH(iNowTicks_ms, fTempH_Sensor, fTempO_Sensor, self.objHw.bZeroHeat)
+    self.objTs.processH(iNowTicks_ms, fTempH_Sensor, fTempO_Sensor)
     portable_ticks.stopwatch_end(iStopwatch_us, 'self.objTs.processH(...)')
 
     iStopwatch_us = portable_ticks.stopwatch()

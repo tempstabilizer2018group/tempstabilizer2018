@@ -99,14 +99,14 @@ class PidController():
             bAllowIncreaseI=True,
             bAllowDecreaseI=True
          ):
-    portable_ticks.count('PidController("%s").process()' % self.strName)
-
     """
     Compute the new fOutputValue value, based on the latest fSetpoint and fSensorValue value.  Optionally
     perform fOutputValue limiting and Integral anti-windup (if fOutputValue is saturated).  We do fOutputValue
     limiting here (instead of remembering it in __init__), to allow for dynamic fOutputValue limits
     that change over time.
     """
+    portable_ticks.count('PidController("%s").process()' % self.strName)
+
     fTimeDelta_s = portable_ticks.objTicks.ticks_diff(iTick_ms, self.iTicksLast_ms)/1000.0
     assert fTimeDelta_s > 0
     self.iTicksLast_ms = iTick_ms

@@ -123,6 +123,9 @@ bSetpointFix = False
 # Setpoint if 'bSetpointFix = True'
 fTempSetpointFix_C = 0.0
 
+# [W] Limiten des H-Reglers
+fFetMin_W = 0.0
+
 bPowerOffset = True
 # If median power is less than fPowerOffsetMin_W, SetTemp_O will be slowly increased  
 fPowerOffsetMin_W = 0.1 

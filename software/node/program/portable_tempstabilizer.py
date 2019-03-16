@@ -11,8 +11,6 @@ import portable_pid_controller
 # _fTempO_Limit_High = 40.0
 _fTempH_Limit_High = 140.0
 
-_fFetMin_W = 0.0 # [W] Limiten des H-Reglers
-
 _fTemp_Tolerance_MAX30205 = 0.5
 
 # Zeitkonstante zum Erhoehen der Spannung
@@ -56,10 +54,10 @@ class TempStabilizer:
         class SetpointFix:
           def __init__(self):
             self.fOutputValue = config_app.fTempSetpointFix_C
-          def start(self, iTicks_ms, fTempO_Sensor, objPersist=None):
-            pass
-          def process(self, iTicks_ms, objAvgTempO_C, objAvgHeat_W, bFetMin_W_Limit_Low):
-            pass
+            self.fFetMin_W = config_app.fFetMin_W
+          def start(self, *args, **kwargs): pass
+          def process(self, *args, **kwargs): pass
+
         self._objDayMaxEstimator = SetpointFix()
       else:
         self._objDayMaxEstimator = portable_daymaxestimator.DayMaxEstimator(portable_ticks.objTicks.ticks_ms())
@@ -191,13 +189,13 @@ class TempStabilizer:
                          bAllowIncreaseI=bAllowIncreaseI,
                          bAllowDecreaseI=bAllowDecreaseI)
 
-  def processH(self, iTime_ms, fTempH_Sensor, fTempO_Sensor, bZeroHeat):
+  def processH(self, iTime_ms, fTempH_Sensor, fTempO_Sensor):
     portable_ticks.count('TempStabilizer.processH()')
 
     fTimeDelta_s = self._objPidH.process(iTime_ms,
                          fSetpoint=self.fTempH_Setpoint_C,
                          fSensorValue=fTempH_Sensor,
-                         fLimitOutLow=_fFetMin_W,
+                         fLimitOutLow=self._objDayMaxEstimator.fFetMin_W,
                          fLimitOutHigh=self.fHeat_W_LimitHigh)
 
     self.objAvgHeat_W.push(self.fHeat_W)

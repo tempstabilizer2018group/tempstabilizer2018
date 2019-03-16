@@ -58,3 +58,14 @@ The node gets the update from Rpi if:
 - Rpi-Apache is running
 - Rpi-Wlan in on
 
+## `HTTP-Get http://192.168.4.1/softwareupdate?mac=...` returns HTTP 400 (error) instead of 200
+
+When this error is displayed on the rs232 console of the node, it might be that the HTTP-server can't compile the python files.
+
+Switch off precompiling of the python files:
+
+`config_http_server.py`: `bDoMpyCrossCompile = False`
+
+`sudo systemctl restart apache2`
+
+Now, the node may be updated and the compile-error will be displayed on the nodes-console.
