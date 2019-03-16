@@ -95,7 +95,7 @@ class TempO_SetpointWhenSet:
       self.iTicks_ms = portable_ticks.objTicks.ticks_add(iTicks_ms, -_iTimePeakDelay_ms)
 
 _fTEMP_LOW_C = -100.0
-_fHEAT_HIGH_W = config_app.fPowerOffsetMin_W+config_app.fPowerOffsetRangeOk_W
+_fHEAT_HIGH_W = config_app.fPowerOffsetMin_W + config_app.fPowerOffsetRangeOk_W
 
 class TemperatureList:
   def __init__(self, objPersist):
@@ -116,7 +116,7 @@ class TemperatureList:
     self.iLastDatapoint = 0
     self.listTemp_C = [_fTEMP_LOW_C,]*self.iDatapoints
     self.listHeat_W = [_fHEAT_HIGH_W,]*self.iDatapoints
-    self.fFetMin_W = _fHEAT_HIGH_W / 2.0
+    self.fFetMin_W = config_app.fPowerOffsetMin_W + config_app.fPowerOffsetRangeOk_W / 2.0
 
   def appendLastDatapoint(self, fHeat_W, fTemp_C=_fTEMP_LOW_C):
     self.iLastDatapoint += 1

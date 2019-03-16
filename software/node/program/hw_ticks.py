@@ -23,7 +23,7 @@ def delay_ms(iDelay_ms):
     Time-Methods only exist on the simulator. The hardware only knows portable_ticks. The server then must count the overflows.
 '''
 class Ticks:
-  def __init__(self):
+  def __init__(self, iMaxTicksDummy_ms=0):
     # >> '0x%X' % utime.ticks_add(0, -1)
     # 0x3FFFFFFF
     # >> '0x%X' % (2**30-1)
