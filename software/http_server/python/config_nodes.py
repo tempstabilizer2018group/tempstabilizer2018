@@ -60,22 +60,6 @@ listLabs.append({
 })
 
 
-listLabs.append({
-  LAB_LABEL: 'labDummy',
-  LAB_NAME: 'dummy',
-  RESPONSIBLE: 'Peter Maerki',
-  GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
-  GIT_TAGS: 'heads/master;1',
-  NODES: (
-    ('20180907_01', ''),
-    ('20181217_12', ''),
-    ('20181217_15', ''),
-    ('20181217_21', ''),
-    ('20181217_23', ''),
-    ('20181217_24', ''),
-  )
-})
-
 
 listLabs.append({
   LAB_LABEL: 'ETH-E9',
@@ -100,8 +84,25 @@ listLabs.append({
   GIT_TAGS: 'heads/master;1',
   NODES: (
     ('20180907_03', ''),
+    ('20181217_21', ''),
   )
 })
+
+listLabs.append({
+  LAB_LABEL: 'labDummy',
+  LAB_NAME: 'dummy',
+  RESPONSIBLE: 'Peter Maerki',
+  GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
+  GIT_TAGS: 'heads/master;1',
+  NODES: (
+    ('20180907_01', ''),
+    ('20181217_12', ''),
+    ('20181217_15', ''),
+    ('20181217_23', ''),
+    ('20181217_24', ''),
+  )
+})
+
 
 dictConfigNodes = {
   LIST_LABS: listLabs,
