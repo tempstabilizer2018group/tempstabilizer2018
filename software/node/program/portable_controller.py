@@ -322,31 +322,19 @@ class Controller:
       return
     iButtonPressed_ms = portable_ticks.objTicks.ticks_diff(portable_ticks.objTicks.ticks_ms(), self.__iTicksButtonPressed_ms)
 
-    if iButtonPressed_ms < 2*portable_constants.SECOND_MS:
-      # 0-2s: LED off
+    if iButtonPressed_ms < 5*portable_constants.SECOND_MS:
+      # 0-5s: LED on
       self.objHw.setLed(True)
       if not self.objHw.bButtonPressed:
-        self.objGrafanaProtocol.logWarning('Button pressed < 2s: Force WLAN replication')
+        self.objGrafanaProtocol.logWarning('Button pressed < 5s: Force WLAN replication')
         self.__objPollForWlanInterval.doForce()
         self.__iTicksButtonPressed_ms = None
       return
 
-    if iButtonPressed_ms < 10*portable_constants.SECOND_MS:
-      # 2-10s: LED on
-      self.objHw.setLed(False)
-      if not self.objHw.bButtonPressed:
-        self.objGrafanaProtocol.logWarning('Button pressed < 10s: Flush logs and %s, than reboot' % config_app.LOGFILENAME_PERSIST)
-        # Write Logs
-        self.__objPersist.persist(bForce=True)
-        self.done()
-        self.reboot()
-        # Will never get here!
-      return
-
-    # 10-99s: LED off
-    self.objHw.setLed(True)
+    # 5-99s: LED off
+    self.objHw.setLed(False)
     if not self.objHw.bButtonPressed:
-      strMsg = 'Button pressed > 10s: Delete "%s" and Reboot' % config_app.LOGFILENAME_PERSIST
+      strMsg = 'Button pressed > 5s: Delete "%s" and Reboot' % config_app.LOGFILENAME_PERSIST
       self.objGrafanaProtocol.logWarning(strMsg)
       print(strMsg)
 
