@@ -128,9 +128,11 @@ fFetMin_W = 0.0
 
 bPowerOffset = True
 # If median power is less than fPowerOffsetMin_W, SetTemp_O will be slowly increased  
-fPowerOffsetMin_W = 0.1 
+# A good value could be 0.02 W (0.06K ; Alublock 160x80x12 typically 3K/W)
+fPowerOffsetMin_W = 0.02 
 # If median power is within the range fPowerOffsetMin_W to fPowerOffsetMin_W + fPowerOffsetRangeOk_W, SetTemp_O will not be decreased
-fPowerOffsetRangeOk_W = 0.1
+# A good value could be 0.33 W (1K ; Alublock 160x80x12 typically 3K/W)
+fPowerOffsetRangeOk_W = 0.33
 
 def setVirgin():
   setFixtemp(0.0)
