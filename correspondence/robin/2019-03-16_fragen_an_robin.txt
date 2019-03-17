@@ -1,0 +1,22 @@
+Grafana-Auswahl der Nodes
+-------------------------
+In Grafana können die Nodes ausgewählt werden (All, 11, 13, 14, ...).
+Es werden aber auch Nodes angezeigt, die schon lange nicht mehr im Lab sind.
+
+Frage/Aufgabe für Dich:
+Ist es möglich, die Query der Variable zu erweitern, so dass nur die Nodes der letzten 2 Tage berücksichtigt werden.
+Bisher: SHOW TAG VALUES from /^$site$/ with key = "node"
+Neu: SHOW TAG VALUES from /^$site$/ with key = "node" where time > now()-2d
+
+Dito für Environs.
+
+
+Grafana: Anzeige des Setpoint
+-----------------------------
+Wird der Setpoint nur ein Mal pro Tag gesetzt und der sichtbare Ausschnitt umfasst diesen Tag nicht, so wird der Setpoint gar nicht mehr angezeigt.
+
+Frage/Aufgabe für Dich:
+Ist es möglich, die Query so anzupassen, das auch Messpunkte ausserhalb des Ausschnitts berücksichtigt werden?
+Bisher: SELECT mean("fTempO_Setpoint_C") FROM /^$site$/ WHERE ("node" =~ /^$node$/) AND $timeFilter GROUP BY time($__interval), "node" fill(none)
+Neu: ???
+
