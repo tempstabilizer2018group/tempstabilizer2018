@@ -47,11 +47,6 @@ listLabs.append({
   # ;config_app.iPollForWlanInterval_ms=60*60*1000
   GIT_TAGS: 'heads/master;1',
   NODES: (
-    ('20181217_11', ''),
-    ('20181217_13', ''),
-    ('20181217_14', ''),
-    ('20181217_16', ''),
-    ('20181217_18', ''),
     ('20181217_22', ''),
     ('20181217_99', ''),
   )
@@ -64,10 +59,9 @@ listLabs.append({
   LAB_NAME: 'Hoenggerberg',
   RESPONSIBLE: 'Peter Maerki',
   GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
-  GIT_TAGS: 'heads/master;3;config_app.iPollForWlanInterval_ms=60*60*1000',
+  GIT_TAGS: 'heads/master;3;config_app.iPollForWlanInterval_ms=20*60*1000',
   NODES: (
     ('20181217_17', ''),
-    ('20181217_19', ';config_app.setFixtemp(15.0)'),
     ('20181217_20', ';config_app.setFixtemp(15.0)'),
     ('20181217_25', ''),
   )
@@ -95,9 +89,15 @@ listLabs.append({
   NODES: (
     ('20180907_01', ''),
     ('20181217_12', ''),
-    ('20181217_15', ''),
+    ('20181217_15', ''), # heizt nicht, defekt   
     ('20181217_23', ''),
     ('20181217_24', ''),
+    ('20181217_11', ''), # parat für Experimente 
+    ('20181217_13', ''), # parat für Experimente 
+    ('20181217_14', ''), # parat für Experimente 
+    ('20181217_16', ''), # parat für Experimente 
+    ('20181217_18', ''), # parat für Experimente 
+    ('20181217_19', ''), # parat für Experimente 
   )
 })
 
