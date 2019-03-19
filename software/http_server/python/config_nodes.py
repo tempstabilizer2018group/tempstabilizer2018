@@ -81,11 +81,11 @@ listLabs.append({
 })
 
 listLabs.append({
-  LAB_LABEL: 'labDummy',
+  LAB_LABEL: 'labReserve',
   LAB_NAME: 'dummy',
   RESPONSIBLE: 'Peter Maerki',
   GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
-  GIT_TAGS: 'heads/master;1',
+  GIT_TAGS: 'heads/master;1;config_app.setVirgin()',
   NODES: (
     ('20180907_01', ''),
     ('20181217_12', ''),
