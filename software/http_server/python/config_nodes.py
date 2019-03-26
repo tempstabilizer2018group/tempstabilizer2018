@@ -73,7 +73,7 @@ listLabs.append({
   LAB_NAME: 'ETH, HPF B18',
   RESPONSIBLE: 'Robin',
   GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
-  GIT_TAGS: 'heads/master;1',
+  GIT_TAGS: 'heads/master;13;config_app.iPollForWlanInterval_ms=60*60*1000',
   NODES: (
     ('20180907_03', ''), 
     ('20181217_13', ''), # Aluklotz A, gross, mit EOM
