@@ -69,8 +69,8 @@ listLabs.append({
 
 
 listLabs.append({
-  LAB_LABEL: 'labY',
-  LAB_NAME: 'ETH, LabY',
+  LAB_LABEL: 'HPF B18',
+  LAB_NAME: 'ETH, HPF B18',
   RESPONSIBLE: 'Robin',
   GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
   GIT_TAGS: 'heads/master;1',
