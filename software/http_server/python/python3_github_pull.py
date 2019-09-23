@@ -62,6 +62,9 @@ def unescapeSwVersion(strVersionFull):
   # heads/master;2
   return strVersion
 
+def writeToApacheErrorLog(msg):
+  sys.stderr.write(msg + '\n')
+
 class GithubPullBase:
   def __init__(self, strDirectory=None):
     if strDirectory == None:
@@ -131,7 +134,7 @@ class GithubPullBase:
     if strFilenameFull == None:
       # Unknown Mac
       # https://modwsgi.readthedocs.io/en/develop/user-guides/debugging-techniques.html
-      sys.stderr.write('Unknown Mac\n')
+      writeToApacheErrorLog('Unknown Mac')
       return None
     with open(strFilenameFull, 'rb') as f:
       strTarContent = f.read()
@@ -413,12 +416,13 @@ class GitHubPublicPull(GithubPullBase):
     LOW_LIMIT = 5
     rate_remaining, rate_limit = objGithub.rate_limiting
     rate_resettime = objGithub.rate_limiting_resettime
-    msg = 'Github Ratelimits: Remaining %d of %d. Limit set to %d. Will reset in %0.1f min.' % (rate_remaining, rate_limit, LOW_LIMIT, (rate_resettime - time.time())/60.0)
+    msg = 'Github Ratelimit: Remaining %d of %d. Limit set to %d. Will reset in %0.1f min.' % (rate_remaining, rate_limit, LOW_LIMIT, (rate_resettime - time.time())/60.0)
     if rate_remaining < LOW_LIMIT:
-      sys.stderr.write('Exeption: %s\n' % msg)
+      writeToApacheErrorLog('Exeption: %s' % msg)
       raise Exception(msg)
+
     # Write to apache-log file
-    sys.stdout.write(msg + '\n')
+    writeToApacheErrorLog(msg)
 
   def _fetchFromGithub(self):
     objGitRepo = self.__openRepo(self._strGitRepo)
