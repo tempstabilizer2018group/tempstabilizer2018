@@ -2,6 +2,8 @@
 
 import io
 import os
+import sys
+import time
 import socket
 import urllib
 import logging
@@ -128,6 +130,8 @@ class GithubPullBase:
     strFilenameFull = self.getTar()
     if strFilenameFull == None:
       # Unknown Mac
+      # https://modwsgi.readthedocs.io/en/develop/user-guides/debugging-techniques.html
+      sys.stderr.write('Unknown Mac\n')
       return None
     with open(strFilenameFull, 'rb') as f:
       strTarContent = f.read()
@@ -380,7 +384,7 @@ class GitHubPublicPull(GithubPullBase):
         bData = f.read()
         return bData
     except Exception as e:
-      raise Exception('Failed to get "%s": %s' % (strUrl, str(e)))
+      raise Exception('Failed to get "%s": %s, code=' % (strUrl, str(e), f.code()))
 
   def __init__(self, strDirectory=None):
     GithubPullBase.__init__(self, strDirectory)
@@ -401,7 +405,20 @@ class GitHubPublicPull(GithubPullBase):
       objGithub = github.Github()
     else:
       objGithub = github.Github(login_or_token=strGithubToken)
+    self.throwRateLimitException(objGithub)
     return objGithub.get_repo(strGithubRepo)
+
+  def throwRateLimitException(self, objGithub):
+    # Empirical measurments given that the counter decrements by 3 for one software update.
+    LOW_LIMIT = 5
+    rate_remaining, rate_limit = objGithub.rate_limiting
+    rate_resettime = objGithub.rate_limiting_resettime
+    msg = 'Github Ratelimits: Remaining %d of %d. Limit set to %d. Will reset in %0.1f min.' % (rate_remaining, rate_limit, LOW_LIMIT, (rate_resettime - time.time())/60.0)
+    if rate_remaining < LOW_LIMIT:
+      sys.stderr.write('Exeption: %s\n' % msg)
+      raise Exception(msg)
+    # Write to apache-log file
+    sys.stdout.write(msg + '\n')
 
   def _fetchFromGithub(self):
     objGitRepo = self.__openRepo(self._strGitRepo)

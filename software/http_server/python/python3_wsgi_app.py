@@ -111,9 +111,11 @@ def handle_get(environ, start_response):
     return ok(start_response, 'done', strContentType=strCONTENTTYPE_TEXT)
 
   if strPathInfo == '/':
-    response_headers = [('Content-type', strCONTENTTYPE_TEXT),
-                ('Content-Length', '0'),
-                ('Location', '/index.html')]
+    response_headers = [
+            ('Content-type', strCONTENTTYPE_TEXT),
+            ('Content-Length', '0'),
+            ('Location', '/index.html'),
+    ]
     start_response(strSTATUS_301, response_headers)
     return [b'']
 
@@ -188,5 +190,6 @@ def application(environ, start_response):
   except:
     import traceback
     strResonse = traceback.format_exc()
+    sys.stderr.write(strResonse + '\n')
     return badRequest(start_response, strResonse)
 
