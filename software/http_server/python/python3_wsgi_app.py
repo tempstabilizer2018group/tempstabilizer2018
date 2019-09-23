@@ -190,6 +190,7 @@ def application(environ, start_response):
   except:
     import traceback
     strResonse = traceback.format_exc()
+    import python3_github_pull
     python3_github_pull.writeToApacheErrorLog('>>>>> %s' % strResonse)
     return badRequest(start_response, strResonse)
 
