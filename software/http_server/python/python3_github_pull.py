@@ -418,7 +418,7 @@ class GitHubPublicPull(GithubPullBase):
     rate_resettime = objGithub.rate_limiting_resettime
     msg = 'Github Ratelimit: Remaining %d of %d. Limit set to %d. Will reset in %0.1f min.' % (rate_remaining, rate_limit, LOW_LIMIT, (rate_resettime - time.time())/60.0)
     if rate_remaining < LOW_LIMIT:
-      writeToApacheErrorLog('Exeption: %s' % msg)
+      writeToApacheErrorLog('Exception: %s' % msg)
       raise Exception(msg)
 
     # Write to apache-log file
