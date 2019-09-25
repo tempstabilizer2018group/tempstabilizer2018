@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
-import socket
+
+# After changing this file you might need to restart apache!
+# sudo systemctl restart apache2
 
 strInfluxDbDatabase = 'tempstabilizer2018'
 strInfluxDbHost = 'www.tempstabilizer2018.org'
@@ -10,19 +12,23 @@ strInfluxDbNameOrigin = 'origin'
 
 strInfluxDbSummaryPrefix = 'sy_'
 
-# After changing this file you might need to restart apache!
-# sudo systemctl restart apache2
+bIsRaspberryPi = False
+if os.path.exists('/sys/firmware/devicetree/base/model'):
+  with open('/sys/firmware/devicetree/base/model', 'r') as f:
+    strModel = f.read()
+    # strModel: Raspberry Pi 3 Model B Plus Rev 1.3
+    bIsRaspberryPi = strModel.startswith('Raspberry Pi')
 
 # True: Don't connect to www.github.com and get the files locally
 # False: Get files from www.github.com
 bGithubPullLocal = False
-if socket.gethostname() == 'raspberrypi':
+if bIsRaspberryPi:
   # On the raspberry pi, we usually want to update the local files
   bGithubPullLocal = True
 
 bDoMpyCrossCompile = True
 strMpyCrossFilename = 'mpy-cross_debian'
-if socket.gethostname() == 'raspberrypi':
+if bIsRaspberryPi:
   strMpyCrossFilename = 'mpy-cross_raspberrypi'
 strMpyCrossFilenameFull = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'bin', strMpyCrossFilename))
 
