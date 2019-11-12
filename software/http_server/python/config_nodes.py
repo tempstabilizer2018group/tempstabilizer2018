@@ -16,10 +16,10 @@ listNodes.append({ MAC: '3C71BF16D070', SERIAL: '20181217_13', NAME: '13', })
 listNodes.append({ MAC: '3C71BF16BC9C', SERIAL: '20181217_14', NAME: '14', })
 listNodes.append({ MAC: '3C71BF16D064', SERIAL: '20181217_15', NAME: '15', })
 listNodes.append({ MAC: '3C71BF16D038', SERIAL: '20181217_16', NAME: '16', })
-listNodes.append({ MAC: '3C71BF16D098', SERIAL: '20181217_17', NAME: '17ETH_Alu_40_mitte', })
+listNodes.append({ MAC: '3C71BF16D098', SERIAL: '20181217_17', NAME: '17', })
 listNodes.append({ MAC: '807D3AF3288C', SERIAL: '20181217_18', NAME: '18', })
 listNodes.append({ MAC: '3C71BF16D044', SERIAL: '20181217_19', NAME: '19', })
-listNodes.append({ MAC: '3C71BF16D020', SERIAL: '20181217_20', NAME: '20ETH_Alu_40_isol', })
+listNodes.append({ MAC: '3C71BF16D020', SERIAL: '20181217_20', NAME: '20', })
 listNodes.append({ MAC: 'B4E62DF69969', SERIAL: '20181217_21', NAME: '21', }) # viele Bauteile ersetzt, uebel geloetet 
 listNodes.append({ MAC: '3C71BF16BCA0', SERIAL: '20181217_22', NAME: '22', })
 listNodes.append({ MAC: '3C71BF16BCC0', SERIAL: '20181217_23', NAME: '23', })
@@ -53,7 +53,6 @@ listLabs.append({
 })
 
 
-
 listLabs.append({
   LAB_LABEL: 'ETH-E9',
   LAB_NAME: 'Hoenggerberg',
@@ -61,9 +60,19 @@ listLabs.append({
   GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
   GIT_TAGS: 'heads/master;3;config_app.iPollForWlanInterval_ms=20*60*1000',
   NODES: (
-    ('20181217_17', ''),
-    ('20181217_20', ';config_app.setFixtemp(15.0)'),
     ('20181217_25', ''),
+  )
+})
+
+listLabs.append({
+  LAB_LABEL: 'ETH-eichlera',
+  LAB_NAME: 'Hoenggerberg',
+  RESPONSIBLE: 'Alexander Eichler',
+  GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
+  GIT_TAGS: 'heads/master;3;config_app.iPollForWlanInterval_ms=20*60*1000',
+  NODES: (
+    ('20181217_17', ''),
+    ('20181217_20', ''),
   )
 })
 
