@@ -71,8 +71,8 @@ listLabs.append({
   GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
   GIT_TAGS: 'heads/master;3;config_app.iPollForWlanInterval_ms=20*60*1000',
   NODES: (
-    ('20181217_17', ';config_app.setVirgin()'),
-    ('20181217_20', ';config_app.setVirgin()'),
+    ('20181217_17', ''),
+    ('20181217_20', ''),
   )
 })
 
