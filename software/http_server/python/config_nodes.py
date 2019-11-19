@@ -69,7 +69,7 @@ listLabs.append({
   LAB_NAME: 'Hoenggerberg',
   RESPONSIBLE: 'Alexander Eichler',
   GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
-  GIT_TAGS: 'heads/master;3;config_app.iPollForWlanInterval_ms=20*60*1000,config_app.fPowerOffsetRangeOk_W=0.8',
+  GIT_TAGS: 'heads/master;3;config_app.iPollForWlanInterval_ms=20*60*1000,config_app.fPowerOffsetRangeOk_W=0.8;config_app.setVirgin()',
   NODES: (
     ('20181217_17', ''),
     ('20181217_20', ''),
