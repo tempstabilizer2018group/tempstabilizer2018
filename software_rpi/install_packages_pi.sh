@@ -8,3 +8,6 @@ rpi-update
 # python 3.5
 pip3 install mpfshell esptool matplotlib
 
+# Disable (Zeroconf/Bonjour/Avahi) Service (UDP Port 5353)
+systemctl disable avahi-daemon
+systemctl stop avahi-daemon
