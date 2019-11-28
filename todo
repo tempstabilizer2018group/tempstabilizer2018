@@ -1,2 +1,1 @@
-fTimeSince_Setpoint_ms overflow
-falls kein accespoint vorhanden: beim connect gibts vermutlich einen reboot bei welchem die Regelwerte verloren gehen. Temperaturdip. Kein Reboot.
+fTimeSince_Setpoint_ms overflow 6 Tage in grafana. Ist das ein Ueberlauf in grafana oder beim node? Korrektur?
