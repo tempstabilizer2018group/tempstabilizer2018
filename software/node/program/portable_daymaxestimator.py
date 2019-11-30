@@ -14,22 +14,22 @@ _TIME_CALC_FTEMPO_SETPOINT_MS = portable_constants.TIME_CALC_FTEMPO_SETPOINT_MS
 _TIME_INTERVAL_FTEMPO_SETPOINT_MS = portable_constants.TIME_INTERVAL_FTEMPO_SETPOINT_MS
 
 # SetpointReduction
-_SETPOINT_CONSTANT_MS = 3 * 24 * portable_constants.HOUR_MS
-# Parabel: Nach __SETPOINT_ABNAHME_MS nimmt die Temperatur um __SETPOINT_ABNAHME_C ab.
-__SETPOINT_ABNAHME_MS = 24 * portable_constants.HOUR_MS
+_SETPOINT_CONSTANT_S = 3 * 24 * portable_constants.HOUR_S
+# Parabel: Nach __SETPOINT_ABNAHME_S nimmt die Temperatur um __SETPOINT_ABNAHME_C ab.
+__SETPOINT_ABNAHME_S = 24 * portable_constants.HOUR_S
 __SETPOINT_ABNAHME_C = 0.01
-_SETPOINT_K_MS = __SETPOINT_ABNAHME_MS/math.sqrt(__SETPOINT_ABNAHME_C)
+_SETPOINT_K_S = __SETPOINT_ABNAHME_S/math.sqrt(__SETPOINT_ABNAHME_C)
 # Anstieg bei Leistund zu klein pro Tag
 _SETPOINT_INCREASE_C = 0.02 * _TIME_CALC_FTEMPO_SETPOINT_MS / ( 24 * portable_constants.HOUR_MS)
 
 _PERSIST_SETPOINT_TEMPO_C = 'SetpointWhenSet.fTempO_C'
-PERSIST_SETPOINT_TIMESINCE_MS = 'SetpointWhenSet.iTimeSince_ms'
+PERSIST_SETPOINT_TIMESINCE_S = 'SetpointWhenSet.iTimeSince_s'
 
 _PERSIST_SETPOINT_LIST_LAST = 'SetpointList.iLast'
 _PERSIST_SETPOINT_LIST_TEMP_C = 'SetpointList.fTemp_C'
 _PERSIST_SETPOINT_LIST_HEAT_W = 'SetpointList.fHeat_W'
 
-_iTimePeakDelay_ms = 20*portable_constants.MINUTE_MS
+_iTimePeakDelay_s = 20*portable_constants.MINUTE_S
 bDebug = False
 if bDebug:
   debug_print = print
@@ -46,53 +46,78 @@ class TempO_SetpointWhenSet:
       - Die Zeit, seit der fTempO_C gesetzt wurde.
         iTimeSince_ms = ticks_diff(iTicks_now_ms, iTicks_ms)
     Das File soll jede Stunde geschrieben werden.
+
+    Alle '_TIME_CALC_FTEMPO_SETPOINT_MS' wird 'self.iTicksSetpointPersisted_ms' inkrementiert.
+    'self.iTicksSetpointPersisted_ms' ist der Zeitpunkt, wenn das letzte Mal 'self.iTicksSetpointPersisted_ms'
+    inkrementiert und in Persist geschrieben wurde.
+
+    'self.iTicksSetpointPersisted_ms': The ticks at the moment, when 'self.iPersistSetpointTimeSince_s' was updated and stored.
+    The effecive time is calculated in '_calculate_iSetpointTimeSince_s()'
   '''
   def __init__(self, iTicks_ms, fTempO_C, objPersist=None):
-    self.iTicks_ms = iTicks_ms
-    self.fTempO_C = fTempO_C
+    self.restart(iTicks_ms, fTempO_C)
     self.__objPersist = objPersist
     if objPersist and objPersist.loaded:
-      print('Initialize from persist: Setpoint fTemp_C, iTimeSince_ms')
+      print('Initialize from persist: Setpoint fTemp_C, iTimeSince_s')
       # Restore the value from the previous run
       fTempO_C = objPersist.getValue(_PERSIST_SETPOINT_TEMPO_C, None)
       if fTempO_C != None:
         self.fTempO_C = fTempO_C
         # print('persist start: fTempO_C=%0.6f' % self.fTempO_C)
-      iTimeSince_ms = objPersist.getValue(PERSIST_SETPOINT_TIMESINCE_MS, None)
-      if iTimeSince_ms != None:
-        # TODO(Hans): add/diff?
-        self.iTicks_ms = portable_ticks.objTicks.ticks_diff(iTicks_ms, iTimeSince_ms)
-        # print('persist start: iTimeSince_ms=%d' % iTimeSince_ms)
+      self.iPersistSetpointTimeSince_s = objPersist.getValue(PERSIST_SETPOINT_TIMESINCE_S, 0)
+      if self.iPersistSetpointTimeSince_s < 0:
+        # The setpoint is in the Future!
+        # This does not make sense and should never happen.
+        self.iPersistSetpointTimeSince_s = 0
+  
+  def _calculate_iSetpointTimeSince_s(self, iTicks_now_ms):
+    '''
+    The effective time of SetpointTimeSince:
+    iTicks_now_ms - iTicksSetpointPersisted_ms + iPersistSetpointTimeSince_s
+    '''
+    iTimeSincePersit_ms = portable_ticks.objTicks.ticks_diff(iTicks_now_ms, self.iTicksSetpointPersisted_ms)
+    if iTimeSincePersit_ms < 0:
+      # In the future? This does not make sence!
+      iTimeSincePersit_ms = 0
+    return iTimeSincePersit_ms//1000 + self.iPersistSetpointTimeSince_s
 
   def __calculateSetpointReduction(self, iTicks_now_ms):
-    iAgeParabel_ms = iTicks_now_ms - self.iTicks_ms - _SETPOINT_CONSTANT_MS
-    if iAgeParabel_ms < 0:
+    iAgeParabel_s = self._calculate_iSetpointTimeSince_s(iTicks_now_ms) - _SETPOINT_CONSTANT_S
+    if iAgeParabel_s < 0:
       return 0.0
-    fTmp = float(iAgeParabel_ms)/_SETPOINT_K_MS
+    fTmp = float(iAgeParabel_s)/_SETPOINT_K_S
     return -fTmp*fTmp
 
   def calculateSetpoint(self, iTicks_now_ms):
     if self.__objPersist != None:
       # Save actual value in Persist-Object
-      iTimeSince_ms = portable_ticks.objTicks.ticks_diff(iTicks_now_ms, self.iTicks_ms)
+      self.iPersistSetpointTimeSince_s = self._calculate_iSetpointTimeSince_s(iTicks_now_ms)
+      self.iTicksSetpointPersisted_ms = iTicks_now_ms
       self.__objPersist.setValue(_PERSIST_SETPOINT_TEMPO_C, self.fTempO_C)
-      self.__objPersist.setValue(PERSIST_SETPOINT_TIMESINCE_MS, iTimeSince_ms)
+      self.__objPersist.setValue(PERSIST_SETPOINT_TIMESINCE_S, self.iPersistSetpointTimeSince_s)
 
     return self.fTempO_C + self.__calculateSetpointReduction(iTicks_now_ms)
 
   def restart(self, iTicks_ms, fTempO_C):
     self.fTempO_C = fTempO_C
-    self.iTicks_ms = iTicks_ms
+    self.iPersistSetpointTimeSince_s = 0
+    self.iTicksSetpointPersisted_ms = iTicks_ms
 
   def adjust(self, iTicks_ms, fTempIncrease_C):
+    '''
+    The DaymaxEstimator wants to increase the setpoint-temperature.
+    We set the setpoint _iTimePeakDelay_s in the past to avoid, that
+    a small peak increases the setpoint again.
+    '''
     debug_print('old fTempO_C=%0.6f' % self.fTempO_C)
     self.fTempO_C = self.calculateSetpoint(iTicks_ms) + fTempIncrease_C
     debug_print('new fTempO_C=%0.6f' % self.fTempO_C)
-    # Subtrakt PeakDelay to avoid that a peak increases the setpoint again
-    iTimeSince_ms = portable_ticks.objTicks.ticks_diff(iTicks_ms, self.iTicks_ms)
-    if iTimeSince_ms > _iTimePeakDelay_ms:
-      # Make sure, we only set the time forward and never backward
-      self.iTicks_ms = portable_ticks.objTicks.ticks_add(iTicks_ms, -_iTimePeakDelay_ms)
+
+    iSetpointTimeSince_s = self._calculate_iSetpointTimeSince_s(iTicks_ms)
+    if iSetpointTimeSince_s > _iTimePeakDelay_s:
+      # Make sure, we only set the setpoint-time forward and never backward
+      self.iPersistSetpointTimeSince_s = _iTimePeakDelay_s
+      self.iTicksSetpointPersisted_ms = iTicks_ms
 
 _fTEMP_LOW_C = -100.0
 _fHEAT_HIGH_W = config_app.fPowerOffsetMin_W + config_app.fPowerOffsetRangeOk_W
@@ -219,14 +244,7 @@ class DayMaxEstimator:
     return fTempPast_C
 
   def __getTempPast_C(self, iTicks_ms):
-    iTimeSinceLastSetpointSet_ms = portable_ticks.objTicks.ticks_diff(iTicks_ms, self.objTempO_SetpointWhenSet.iTicks_ms)
-    debug_print('**** iTimeSinceLastSetpointSet_s:', iTimeSinceLastSetpointSet_ms//1000)
-    # assert iTimeSinceLastSetpointSet_ms >= 0
-    if iTimeSinceLastSetpointSet_ms < 0:
-      raise Exception('iTimeSinceLastSetpointSet_ms should be >= 0, but is %d' % iTimeSinceLastSetpointSet_ms)
-    debug_print('**** self.objTemperatureList.listTemp_C:', self.objTemperatureList.getListAsString())
-
-    if iTimeSinceLastSetpointSet_ms < _iTimePeakDelay_ms:
+    if self.objTempO_SetpointWhenSet._calculate_iSetpointTimeSince_s(iTicks_ms) < _iTimePeakDelay_s:
       # Setpoint was set within the last 20min
       debug_print('**** max')
       return self.objTemperatureList.getTempMax_C()

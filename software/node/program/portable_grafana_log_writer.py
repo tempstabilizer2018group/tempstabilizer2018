@@ -5,7 +5,7 @@ import sys
 import portable_grafana_datatypes
 from portable_grafana_datatypes import INFLUXDB_TAG_NODE
 from portable_grafana_datatypes import INFLUXDB_TAG_ENVIRONS
-from portable_daymaxestimator import PERSIST_SETPOINT_TIMESINCE_MS
+from portable_daymaxestimator import PERSIST_SETPOINT_TIMESINCE_S
 
 import portable_ticks
 import config_app
@@ -68,7 +68,7 @@ class GrafanaProtocol:
 
     self.__objGrafanaValue_TempO = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'O', 'fTempO_C', 1000.0)
     self.__objGrafanaValue_TempO_Setpoint = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'S', 'fTempO_Setpoint_C', 10000.0)
-    self.__objGrafanaValue_TimeSince_Setpoint = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'T', 'fTimeSince_Setpoint_ms', 0.001)
+    self.__objGrafanaValue_TimeSince_Setpoint = portable_grafana_datatypes.GrafanaValueFloat(INFLUXDB_TAG_NODE, 'T', 'fTimeSince_Setpoint_s', 0.01)
     self.__objGrafanaValue_Heat = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'H', 'fHeat_W', 100.0)
     self.__objGrafanaValue_PidH_bLimitHigh = portable_grafana_datatypes.GrafanaValueBoolTrue(INFLUXDB_TAG_NODE, 'L', 'PidH_bLimitHigh')
     self.__objGrafanaValue_DACzeroHeat = portable_grafana_datatypes.GrafanaValueFloatAvg(INFLUXDB_TAG_NODE, 'z', 'fDACzeroHeat_V', 1000.0)
@@ -183,9 +183,9 @@ class GrafanaProtocol:
       pullValue(self.__objGrafanaValue_TempO_Setpoint)
 
       # self.__objGrafanaValue_TimeSince_Setpoint is not AVG. So we only need to pushValue() once per pullValue()
-      iTimeSince_Setpoint_ms = objPersist.getValue(PERSIST_SETPOINT_TIMESINCE_MS, None)
-      if iTimeSince_Setpoint_ms != None:
-        self.__objGrafanaValue_TimeSince_Setpoint.pushValue(iTimeSince_Setpoint_ms)
+      iTimeSince_Setpoint_s = objPersist.getValue(PERSIST_SETPOINT_TIMESINCE_S, None)
+      if iTimeSince_Setpoint_s != None:
+        self.__objGrafanaValue_TimeSince_Setpoint.pushValue(iTimeSince_Setpoint_s)
         pullValue(self.__objGrafanaValue_TimeSince_Setpoint)
 
     if (self.__iCounter % config_app.iMODULO_GRAFANALOG_SLOW_PUSH) == 0:
