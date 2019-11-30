@@ -47,8 +47,8 @@ def _formatIfFilesystemError(osError):
     import uerrno
     if osError.args[0] in (uerrno.ENODEV, uerrno.ENOENT, uerrno.ENOBUFS):
       print('Filesystem may be broken: Reformat!')
-      import main
-      main._delete()
+      import hw_utils
+      hw_utils.formatAndReboot()
 
 def updateConfigAppByVERSION():
   try:
