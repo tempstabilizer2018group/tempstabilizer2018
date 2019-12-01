@@ -45,7 +45,7 @@ listLabs.append({
   # setOff: heating off, Setpoint and history persist, temperatures are measured and loged to grafana
   # ;config_app.setOff()
   # ;config_app.iPollForWlanInterval_ms=60*60*1000
-  GIT_TAGS: 'heads/master;3',
+  GIT_TAGS: 'heads/master;4',
   NODES: (
     ('20181217_22', ''),
     ('20181217_23', ''),

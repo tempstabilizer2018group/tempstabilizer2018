@@ -91,10 +91,9 @@ class TempO_SetpointWhenSet:
   def calculateSetpoint(self, iTicks_now_ms):
     if self.__objPersist != None:
       # Save actual value in Persist-Object
-      self.iPersistSetpointTimeSince_s = self._calculate_iSetpointTimeSince_s(iTicks_now_ms)
-      self.iTicksSetpointPersisted_ms = iTicks_now_ms
+      iPersistSetpointTimeSince_s = self._calculate_iSetpointTimeSince_s(iTicks_now_ms)
       self.__objPersist.setValue(_PERSIST_SETPOINT_TEMPO_C, self.fTempO_C)
-      self.__objPersist.setValue(PERSIST_SETPOINT_TIMESINCE_S, self.iPersistSetpointTimeSince_s)
+      self.__objPersist.setValue(PERSIST_SETPOINT_TIMESINCE_S, iPersistSetpointTimeSince_s)
 
     return self.fTempO_C + self.__calculateSetpointReduction(iTicks_now_ms)
 
