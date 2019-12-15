@@ -91,11 +91,11 @@ class GrafanaProtocol:
 
     logAuxiliary(self.__objGrafanaValue_TempO, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
     logAuxiliary(self.__objGrafanaValue_TempO_Setpoint, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
-    logAuxiliary(self.__objGrafanaValue_TimeSince_Setpoint, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
     logAuxiliary(self.__objGrafanaValue_Heat, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
     logAuxiliary(self.__objGrafanaValue_PidH_bLimitHigh, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
     logAuxiliary(self.__objGrafanaValue_DACzeroHeat, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
     logAuxiliary(self.__objGrafanaValue_SupplyVoltage, config_app.iMODULO_GRAFANALOG_MEDIUM_PULL)
+    logAuxiliary(self.__objGrafanaValue_TimeSince_Setpoint, config_app.iMODULO_GRAFANALOG_SLOW_PULL)
     logAuxiliary(self.__objGrafanaValue_DiskFree, config_app.iMODULO_GRAFANALOG_SLOW_PULL)
     logAuxiliary(self.__objGrafanaValue_MemFree, config_app.iMODULO_GRAFANALOG_SLOW_PULL)
 
@@ -182,12 +182,6 @@ class GrafanaProtocol:
       self.__objGrafanaValue_TempO_Setpoint.pushValue(objTs.fTempO_Setpoint_C)
       pullValue(self.__objGrafanaValue_TempO_Setpoint)
 
-      # self.__objGrafanaValue_TimeSince_Setpoint is not AVG. So we only need to pushValue() once per pullValue()
-      iTimeSince_Setpoint_s = objPersist.getValue(PERSIST_SETPOINT_TIMESINCE_S, None)
-      if iTimeSince_Setpoint_s != None:
-        self.__objGrafanaValue_TimeSince_Setpoint.pushValue(iTimeSince_Setpoint_s)
-        pullValue(self.__objGrafanaValue_TimeSince_Setpoint)
-
     if (self.__iCounter % config_app.iMODULO_GRAFANALOG_SLOW_PUSH) == 0:
       listTempEnvirons_C = objHw.messe_listTempEnvirons_C
       assert len(listTempEnvirons_C) == len(self.__listGrafanaValueTempEnvirons)
@@ -207,6 +201,12 @@ class GrafanaProtocol:
       iMemFree_Bytes = objHw.messe_iMemFree_Bytes
       self.__objGrafanaValue_MemFree.pushValue(iMemFree_Bytes)
       pullValue(self.__objGrafanaValue_MemFree)
+
+      # self.__objGrafanaValue_TimeSince_Setpoint is not AVG. So we only need to pushValue() once per pullValue()
+      iTimeSince_Setpoint_s = objPersist.getValue(PERSIST_SETPOINT_TIMESINCE_S, None)
+      if iTimeSince_Setpoint_s != None:
+        self.__objGrafanaValue_TimeSince_Setpoint.pushValue(iTimeSince_Setpoint_s)
+        pullValue(self.__objGrafanaValue_TimeSince_Setpoint)
 
     if len(listValues) > 0:
       self.logLine(portable_grafana_datatypes.TAG_GRAFANA_VALUE, ''.join(listValues))

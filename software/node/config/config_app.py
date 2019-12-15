@@ -111,8 +111,8 @@ bGrafanaSkipEqualValues = True
 # Pull means that a averaged measurment is written to the grafana-log
 iMODULO_GRAFANALOG_MEDIUM_PUSH = 1
 iMODULO_GRAFANALOG_MEDIUM_PULL = 5
-iMODULO_GRAFANALOG_SLOW_PUSH = 10
-iMODULO_GRAFANALOG_SLOW_PULL = 120
+iMODULO_GRAFANALOG_SLOW_PUSH = 10 # 10 s
+iMODULO_GRAFANALOG_SLOW_PULL = 120 # 2 min
 # When this level is reached, the Grafana Logfile will be deleted and the node restarted
 fDiskGrafanaTrash_MBytes = 0.05
 
