@@ -9,9 +9,15 @@
 		{
 			"path": "node"
 		},
-                {
-                        "path": "../software_firmware"
-                }
+		{
+			"path": "simulation"
+		},
+		{
+			"path": "simulation_tests"
+		},
+		{
+			"path": "../software_firmware"
+		}
 	],
 	"settings": {
 		"python.pythonPath": "/usr/bin/python3;${workspaceFolder}/http_server/node/program;${workspaceFolder}/http_server/python",
