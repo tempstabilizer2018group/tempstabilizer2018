@@ -11,7 +11,7 @@ long press. LED on again.  (longer than 5s)
 -delete persist data (SetPoint for example, history)
 
 switch power on while Key pressed
--delete flash, force WLAN, trie to get new software.
+-delete flash, force WLAN, try to get new software.
 
 ### Specification
 Supply Voltage
