@@ -40,11 +40,14 @@ def getSummary():
 
   db = influxdb.InfluxDBClient(config_http_server.strInfluxDbHost, config_http_server.strInfluxDbPort, '', '', config_http_server.strInfluxDbDatabase)
   assert db != None
-  q = db.query("SELECT * FROM /.*/ where type = '%s' group by node order by time desc limit 1" % portable_grafana_datatypes.INFLUXDB_TYPE_SUMMARY)
+  q = db.query("SELECT * FROM /.*/ where type = '%s' group by node order by time desc limit 1" % portable_grafana_datatypes.INFLUXDB_TYPE_SUMMARY, epoch='s')
   dictGrafanaNodes = {}
   for objPoint in q.get_points():
-    strMac_ = objPoint[config_http_server.strInfluxDbSummaryPrefix+'mac']
-    dictGrafanaNodes[strMac_] = objPoint
+    strNode_ = objPoint[config_http_server.strInfluxDbSummaryPrefix+portable_grafana_datatypes.INFLUXDB_TAG_NODE]
+    dictGrafanaNodes[strNode_] = objPoint
+    strHtml += '<!-- Node: %s -->\n' % str(objPoint)
+  db.close()
+  strHtml += '<!-- Nodes: %s -->\n\n' % (', '.join(dictGrafanaNodes.keys()))
 
   p = config_http_server.factoryGitHubPull()
   objConfigNodes = p._getConfigNodesFromGithub()
@@ -61,7 +64,7 @@ def getSummary():
         strHtml += '<td>' + func(objNode) + '</td>\n'
 
       # Grafana Columns
-      dictGrafanaNode = dictGrafanaNodes.get(objNode.strMac, None)
+      dictGrafanaNode = dictGrafanaNodes.get(objNode.strName, None)
       if dictGrafanaNode is None:
         # No data for this node
         strHtml += '<td colspan="%d">node not seen</td>\n' % len(listColumnsGrafana)
@@ -70,8 +73,14 @@ def getSummary():
           strValue = dictGrafanaNode.get(config_http_server.strInfluxDbSummaryPrefix+strTag, None)
           if strTag == portable_grafana_datatypes.TAG_GRAFANA_NTP:
             iAge_min = (int(time.time()) - int(strValue)//1000)//60
-            strHtml += '<td>%d</td>\n' % iAge_min
-            continue
+            strValue = str(iAge_min)
+
+            # The same, but with 'time' instead of 'ntptime'
+            # iTime = dictGrafanaNode['time']
+            # strTime = time.strftime('%Y-%m-%d_%H-%M-%S', time.localtime(iTime))
+            # iAge = (time.time()-iTime)/60.0
+
+            # strHtml += '%d - %s' % (iAge, strTime)
           if strValue == None:
             strValue = '-'
           if strTag == portable_grafana_datatypes.TAG_GRAFANA_VERSION_SW:
@@ -87,7 +96,6 @@ def getSummary():
     </body>
     </html>
     '''
-  db.close()
   return strHtml
 
 if __name__ == '__main__':

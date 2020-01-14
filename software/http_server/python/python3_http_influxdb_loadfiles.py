@@ -188,6 +188,7 @@ class GrafanaInfluxDbDumper(python3_grafana_log_reader_lib.GrafanaDumper):
                   config_http_server.strInfluxDbNameOrigin: config_http_server.strInfluxDbTagOrigin,
                 },
               }
+    print('*** Summary {}'.format(dictSummary))
     self.__listMeasurements.append(dictSummary)
 
   def __writeToInfluxDB(self, strFilenameFull):
