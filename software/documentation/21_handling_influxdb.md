@@ -5,7 +5,7 @@ https://docs.influxdata.com/influxdb/v1.7/concepts/key_concepts/
  Fields: butterflies, honeybees 
    fields are not indexed
  Tags: location scientist
-   tags are indext
+   tags are indexed
  Measurement: acts as a container for tags, fields, and the time column.
 
 ## Start/Stop
@@ -15,7 +15,7 @@ sudo service influxdb start
 # installation
 http://www.andremiller.net/content/grafana-and-influxdb-quickstart-on-ubuntu
 
-influx
+influx -precision rfc3339
 CREATE DATABASE tempstabilizer2018
 CREATE USER pi WITH PASSWORD '<<<strInfluxDbPw>>>' WITH ALL PRIVILEGES
 exit
@@ -215,6 +215,8 @@ key  value
 node 4713
 node 4714
 
+## Summary Page queries
+SELECT sy_node,sy_site,sy_ntptime,sy_mac,sy_version_firmware,sy_version_sw FROM /.*/ where type = 'summary' group by node order by time desc limit 1
 
 =================================================
 Grafana Annotations
