@@ -73,14 +73,14 @@ class TempO_SetpointWhenSet:
   def _calculate_iSetpointTimeSince_s(self, iTicks_now_ms):
     '''
     The effective time of SetpointTimeSince:
-    iTicks_now_ms - iTicksSetpointPersisted_ms + iPersistSetpointTimeSince_s
+    (iTicks_now_ms - iTicksSetpointPersisted_ms)//1000 + iPersistSetpointTimeSince_s
     '''
     iTimeSincePersit_ms = portable_ticks.objTicks.ticks_diff(iTicks_now_ms, self.iTicksSetpointPersisted_ms)
     if iTimeSincePersit_ms < 0:
       # In the future? This does not make sence!
       iTimeSincePersit_ms = 0
     return iTimeSincePersit_ms//1000 + self.iPersistSetpointTimeSince_s
-
+ 
   def __calculateSetpointReduction(self, iTicks_now_ms):
     iAgeParabel_s = self._calculate_iSetpointTimeSince_s(iTicks_now_ms) - _SETPOINT_CONSTANT_S
     if iAgeParabel_s < 0:
@@ -88,13 +88,14 @@ class TempO_SetpointWhenSet:
     fTmp = float(iAgeParabel_s)/_SETPOINT_K_S
     return -fTmp*fTmp
 
-  def calculateSetpoint(self, iTicks_now_ms):
-    if self.__objPersist != None:
-      # Save actual value in Persist-Object
-      self.iPersistSetpointTimeSince_s = self._calculate_iSetpointTimeSince_s(iTicks_now_ms)
-      self.iTicksSetpointPersisted_ms = iTicks_now_ms
-      self.__objPersist.setValue(_PERSIST_SETPOINT_TEMPO_C, self.fTempO_C)
-      self.__objPersist.setValue(PERSIST_SETPOINT_TIMESINCE_S, self.iPersistSetpointTimeSince_s)
+  def calculateSetpoint(self, iTicks_now_ms, do_persist=False):
+    if self.__objPersist is not None:
+      if do_persist:
+        # Save actual value in Persist-Object
+        self.iPersistSetpointTimeSince_s = self._calculate_iSetpointTimeSince_s(iTicks_now_ms)
+        self.iTicksSetpointPersisted_ms = iTicks_now_ms
+        self.__objPersist.setValue(_PERSIST_SETPOINT_TEMPO_C, self.fTempO_C)
+        self.__objPersist.setValue(PERSIST_SETPOINT_TIMESINCE_S, self.iPersistSetpointTimeSince_s)
 
     return self.fTempO_C + self.__calculateSetpointReduction(iTicks_now_ms)
 
@@ -210,7 +211,8 @@ class DayMaxEstimator:
     portable_ticks.count('DayMaxEstimator.__process()')
 
     iTimeDelta_ms = portable_ticks.objTicks.ticks_diff(iTicks_ms, self.iStartTime_ms)
-    if iTimeDelta_ms > _TIME_CALC_FTEMPO_SETPOINT_MS:
+    _6_minutes_over = iTimeDelta_ms > _TIME_CALC_FTEMPO_SETPOINT_MS
+    if _6_minutes_over:
       fAvgHeat_W = objAvgHeat_W.getValueAndReset()
       fAvgTempO_C = objAvgTempO_C.getValueAndReset()
       # Alle 6 Minuten wird die Temperatur in objTemperatureList gespeichert und der Setpoint neu berechnet.
@@ -230,7 +232,7 @@ class DayMaxEstimator:
       self.objTemperatureList.appendLastDatapoint(fHeat_W=fAvgHeat_W)
     # debug_print('**** self.objTempO_SetpointWhenSet.calculateSetpoint:%0.6f' % self.objTempO_SetpointWhenSet.calculateSetpoint(iTicks_ms))
 
-    return self.objTempO_SetpointWhenSet.calculateSetpoint(iTicks_ms)
+    return self.objTempO_SetpointWhenSet.calculateSetpoint(iTicks_ms, do_persist=_6_minutes_over)
 
   def __updateSetpoint(self, iTicks_ms):
     fTempPast_C = self.__getTempPast_C(iTicks_ms)
