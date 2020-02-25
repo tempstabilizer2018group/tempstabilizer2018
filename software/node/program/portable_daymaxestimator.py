@@ -91,9 +91,10 @@ class TempO_SetpointWhenSet:
   def calculateSetpoint(self, iTicks_now_ms):
     if self.__objPersist != None:
       # Save actual value in Persist-Object
-      iPersistSetpointTimeSince_s = self._calculate_iSetpointTimeSince_s(iTicks_now_ms)
+      self.iPersistSetpointTimeSince_s = self._calculate_iSetpointTimeSince_s(iTicks_now_ms)
+      self.iTicksSetpointPersisted_ms = iTicks_now_ms
       self.__objPersist.setValue(_PERSIST_SETPOINT_TEMPO_C, self.fTempO_C)
-      self.__objPersist.setValue(PERSIST_SETPOINT_TIMESINCE_S, iPersistSetpointTimeSince_s)
+      self.__objPersist.setValue(PERSIST_SETPOINT_TIMESINCE_S, self.iPersistSetpointTimeSince_s)
 
     return self.fTempO_C + self.__calculateSetpointReduction(iTicks_now_ms)
 
@@ -265,4 +266,3 @@ class DayMaxEstimator:
       debug_print('__adjustPowerOffset: Power ok (in good-range): Do not decrease setpoint in the long run')
       self.objTempO_SetpointWhenSet.adjust(iTicks_ms, fTempIncrease_C=0.0)
       return
-
