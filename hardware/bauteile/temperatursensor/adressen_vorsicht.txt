@@ -1,0 +1,4 @@
+2019-01-13_130815 Peter Maerki
+
+Vorsicht: Die Adressangaben auf Seite 9 sind falsch. Entsprechen nicht den I2C Spezifikationen. 
+Korrekte Adressen: angegebene durch 2 dividiert.
