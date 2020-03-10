@@ -1,0 +1,11 @@
+-----------------  Erledigt 2019-01-14 AB  ---------------
+
+2019-01-13_125353 Peter Maerki
+
+IC4
+alt: ADR:C0h
+neu: ADR:60h
+
+C11:
+alt: NA
+neu: 10n C0G

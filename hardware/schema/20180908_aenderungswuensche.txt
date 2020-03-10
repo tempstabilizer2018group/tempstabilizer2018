@@ -1,12 +1,23 @@
+
+
+
+Erledigt 17.12.2018 AB
+----------------------------------------------------
 2018-09-08_161131 Peter Maerki
 
 Notiz in Schema:
 "Pull up R6: minimal 47k, sonst Fehler bei Flashen"
 
+R5 alt: NA neu 47k
+R6 alt: NA neu 47k
+
+20181211_094509_aenderungswunsch.jpg
+
 2018-11-19 Hans Maerki
 
-Der Taster ist direkt neben der Spule und darum mit dem Finger schlecht zugÃ¤nglich.
+Der Taster ist direkt neben der Spule und darum mit dem Finger schlecht zugänglich.
   => Taster neben flachen Bauteilen
-
-Die LED ist direkt neben dem Taster und nicht mehr sichtbar, wenn der Taster gedrÃ¼ckt wird.
+Die LED ist direkt neben dem Taster und nicht mehr sichtbar, wenn der Taster gedrückt wird.
   => LED weit weg vom Taster
+  
+Peter meint: Die Position vom Taster, oben rechts am Print, finde ich gut. Die Spule müsste weg. Nur ist das schwierig zu machen. Ich schlage vor: nur LED weiter nach links zum wroom-32. Spule lassen.m

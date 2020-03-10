@@ -1,0 +1,49 @@
+Erledigt 18.12.2018 AB
+---------------------------------------------------
+
+2018-12-17_181039 Peter Maerki
+
+Hoi Andre
+
+Kannst Du 
+- 20 Leiterplatten temp_stabilizer_2018 bestellen, Solder Mask blau
+- 20 Leiterplatten tempsensor_max30205, Solder Mask blau
+- 40 Spacer
+
+Material bestellen und bestücken:
+15 temp_stabilizer_2018  mit Stiftenleisten kurz (hast du noch)
+15 tempsensor_max30205
+
+falls Du Lust zum Bestücken hast, sonst kann ich es dem Lehrling geben
+
+Schema noch aendern:
+- D1 alt red new green
+- R4 alt 5k1 neu 3k3
+
+
+NEUE MATERIALLISTE eingecheckt.
+Diese Liste ist nicht brauchbar ! Keine Stückzahlen, keine Beschreibung
+
+Bauteile, bitte in diesem Dokument dokumentieren falls anders
+Bin nicht sicher ob ich nichts vergessen habe
+
+- 579-MCP6V11T-E/OT
+- 771-BUK9875-100A/CUX
+- 604-APT2012LZGCK
+- 579-MCP4725A0TECH
+- 700-MAX30205MTA+
+- 963-HMK212BC7105KG
+- 771-BUK9875-100A/CUX
+- 80-C1206C474KMRECLR  ? glaubs nicht an lager, distrele hätte glaubs noch 50 v typen
+- 571-188275-4
+- 584-3991EMSE-3.3PBF  gibt’s glaubs bei digikey
+- 710-742792093
+- 81-KRM55WR71J226MH1K
+- 621-DFLS260-7
+- 77-VJ0805Y474JXJTBC
+- 851-CDR7D43MNNP120NC
+- 81-GRM21BR60J107ME5L
+- 611-KMR631NGULCLFS
+- 356-ESP-WROOM-32
+- 279-CRGH2010J3R0    3 Ohm anstelle von 2.7, dafür an Lager
+
