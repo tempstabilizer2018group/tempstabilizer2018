@@ -45,7 +45,7 @@ listLabs.append({
   # setOff: heating off, Setpoint and history persist, temperatures are measured and loged to grafana
   # ;config_app.setOff()
   # ;config_app.iPollForWlanInterval_ms=60*60*1000
-  GIT_TAGS: 'heads/master;6',
+  GIT_TAGS: 'heads/master;7',
   NODES: (
     ('20181217_22', ''),
     ('20181217_23', ''),
@@ -60,7 +60,7 @@ listLabs.append({
   LAB_NAME: 'Hoenggerberg',
   RESPONSIBLE: 'Peter Maerki',
   GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
-  GIT_TAGS: 'heads/master;3;config_app.iPollForWlanInterval_ms=20*60*1000',
+  GIT_TAGS: 'heads/master;4;config_app.iPollForWlanInterval_ms=20*60*1000',
   NODES: (
     ('20181217_25', ''),
   )
@@ -71,7 +71,7 @@ listLabs.append({
   LAB_NAME: 'Hoenggerberg',
   RESPONSIBLE: 'Alexander Eichler',
   GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
-  GIT_TAGS: 'heads/master;6;config_app.iPollForWlanInterval_ms=20*60*1000;config_app.fPowerOffsetRangeOk_W=0.8',
+  GIT_TAGS: 'heads/master;7;config_app.iPollForWlanInterval_ms=20*60*1000;config_app.fPowerOffsetRangeOk_W=0.8',
   NODES: (
     ('20181217_17', ''),
     ('20181217_20', ''),
@@ -84,7 +84,7 @@ listLabs.append({
   LAB_NAME: 'ETH, HPF B18',
   RESPONSIBLE: 'Robin',
   GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
-  GIT_TAGS: 'heads/master;13;config_app.iPollForWlanInterval_ms=60*60*1000',
+  GIT_TAGS: 'heads/master;14;config_app.iPollForWlanInterval_ms=60*60*1000',
   NODES: (
     ('20180907_03', ''), 
     ('20181217_13', ''), # Aluklotz A, gross, mit EOM
@@ -100,7 +100,7 @@ listLabs.append({
   LAB_NAME: 'dummy',
   RESPONSIBLE: 'Peter Maerki',
   GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
-  GIT_TAGS: 'heads/master;1',
+  GIT_TAGS: 'heads/master;2',
   NODES: (
     ('20180907_01', ''),
     ('20181217_12', ''),
