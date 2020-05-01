@@ -237,7 +237,7 @@ def writePng(strFilenameFull):
   objDumper.plot(strFilenamePngFull)
 
 def processFiles(strDirectoryToBeProcessed, strDirectoryProcessed=None, strDirectoryFailed=None, bWritePng=False):
-  for strFilename in os.listdir(strDirectoryToBeProcessed):
+  for strFilename in sorted(os.listdir(strDirectoryToBeProcessed), reverse=True):
     if not strFilename.endswith('.txt'):
       continue
     strFromFilenameFull = os.path.join(strDirectoryToBeProcessed, strFilename)

@@ -1,2 +1,2 @@
 export PYTHONPATH=.:../../node/config:../../node/program:${PYTHONPATH}
-python http_influxdb_loadfiles.py
+python3 python3_http_influxdb_loadfiles.py
