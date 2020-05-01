@@ -1,4 +1,5 @@
 #!/bin/bash 
+# See: https://gist.github.com/p3t3r67x0/0b2862188535d9da32e6
 ### BEGIN INIT INFO 
 # Provides: hostname_vps 
 # Required-Start: 
