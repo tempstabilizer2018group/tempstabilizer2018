@@ -27,4 +27,4 @@ do
   ln -s $ROOT/$f /$f
 done
 
-systemctl start apache2
+systemctl restart apache2

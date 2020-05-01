@@ -29,7 +29,7 @@ reboot
 
 -> you may use ssh now
 
-## PREPARATION ONLY HTTP-Server: Set Locale
+## PREPARATION ONLY HTTP-Server: Set Locale (not needed on debian10)
 As root:
 dpkg-reconfigure locales
   en_US.UTF-8 UTF-8
@@ -54,11 +54,13 @@ sudo apt-get -y autoremove
 
 ## pip3 is somehow buggy
 ## These sequences seemed to help
+sudo apt-get install -y python3-pip
 sudo pip3 install --upgrade pip
 sudo apt-get install python3-pip --reinstall
 sudo pip3 install --upgrade pip
 
 ## GIT REPOSITORY
+cd
 git config --global user.email "hans@maerki.com"
 git config --global user.name "Hans Maerki"
 git clone https://github.com/tempstabilizer2018group/tempstabilizer2018.git
@@ -86,11 +88,11 @@ sudo reboot
 
 ### Setup grafana as in 21_handling_grafana.md
 
-### Optional: Install Visual Studio Code
+### Optional: Install Visual Studio Code - only rpi!
 
 See: https://code.headmelted.com/#linux-install-scripts
 
-mkdir visual_studio_code
+mkdir ~/visual_studio_code
 cd visual_studio_code
 sudo -s
 

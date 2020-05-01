@@ -11,5 +11,7 @@ http://tempstabilizer2018.org:3000/datasources/new
   InfluxDB Details-User: pi
   InfluxDB Details-Password: <<<strInfluxDbPw>>>
 
-Create new Dashboard - New Panel - Graph
+Create new Dashboard - New Panel - Choose Visualization 0 Graph
   Query: SELECT "value" FROM "tempH" WHERE $timeFilter GROUP BY "host"
+
+Or: Create Dashboard - "New Dashboard" - Import dashboard - Paste JSON 'json_model_2020-05-01a.txt'
