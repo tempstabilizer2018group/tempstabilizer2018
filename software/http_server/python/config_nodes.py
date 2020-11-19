@@ -100,7 +100,7 @@ listLabs.append({
   LAB_NAME: 'dummy',
   RESPONSIBLE: 'Peter Maerki',
   GIT_REPO: 'tempstabilizer2018group/tempstabilizer2018',
-  GIT_TAGS: 'heads/master;2',
+  GIT_TAGS: 'heads/master;2;config_app.setFixtemp(27.0)',
   NODES: (
     ('20180907_01', ''),
     ('20181217_12', ''),
