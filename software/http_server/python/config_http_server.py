@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import sys
 
 # After changing this file you might need to restart apache!
 # sudo systemctl restart apache2
@@ -27,6 +28,9 @@ if bIsRaspberryPi:
   bGithubPullLocal = True
 
 bDoMpyCrossCompile = True
+if sys.platform == 'win32':
+  # We do not have a compiler for windows
+  bDoMpyCrossCompile = False
 strMpyCrossFilename = 'mpy-cross_debian'
 if bIsRaspberryPi:
   strMpyCrossFilename = 'mpy-cross_raspberrypi'

@@ -129,6 +129,7 @@ class GithubPullBase:
     self.__writeTar(dictFiles)
     return self.__strTarFilenameFull
 
+  # TODO: OBSOLETE REMOVE
   def getTarContent(self):
     strFilenameFull = self.getTar()
     if strFilenameFull == None:

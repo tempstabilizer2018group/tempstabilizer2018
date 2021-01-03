@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+# TODO: OBSOLETE: REMOVE
+
 import time
 import influxdb
 import config_http_server
