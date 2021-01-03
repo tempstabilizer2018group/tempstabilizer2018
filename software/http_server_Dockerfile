@@ -1,0 +1,21 @@
+FROM python:3.7-stretch
+
+LABEL version="0.2"
+
+WORKDIR /app
+ENV FLASK_APP __init__.py
+ENV FLASK_RUN_HOST 0.0.0.0
+COPY http_server/requirements.txt requirements.txt
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+COPY . .
+ENV HOST 0.0.0.0
+EXPOSE 80
+
+ENV FLASK_APP="/app/http_server/python/python3_http_flaskapp.py"
+ENV FLASK_ENV="development"
+ENV FLASK_DEBUG="1"
+ENV FLASK_RUN_PORT="80"
+
+ENV PATH="/app/http_server/python:/app/node/config:${PATH}"
+CMD ["flask", "run", "--no-debugger"]

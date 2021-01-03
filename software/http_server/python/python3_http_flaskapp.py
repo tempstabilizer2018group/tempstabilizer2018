@@ -34,6 +34,9 @@ def handle_exception(e):
 def index():
   return flask.render_template('index.html')
 
+@app.route('/index.html')
+def index_html():
+  return flask.redirect(flask.url_for('index'))
 
 @app.route('/intro.html')
 def intro():
