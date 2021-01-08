@@ -70,7 +70,7 @@ def summary_old():
 def summary():
   import python3_http_summary
   table = python3_http_summary.Table()
-  return flask.render_template('summary.html', table = table)
+  return flask.render_template('summary.html', table=table)
 
 
 @app.route('/influxdb_delete')
