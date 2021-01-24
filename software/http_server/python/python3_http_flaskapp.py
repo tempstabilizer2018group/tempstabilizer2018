@@ -38,6 +38,10 @@ def handle_exception(e):
 def index():
   return flask.render_template('index.html', host=flask.request.host)
 
+@app.route('/favicon.ico')
+def favicon_ico():
+  return '-'
+
 @app.route('/index.html')
 def index_html():
   return flask.redirect(flask.url_for('index'))
