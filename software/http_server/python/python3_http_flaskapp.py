@@ -1,6 +1,7 @@
 import os
 import sys
 import pathlib
+from urllib.parse import urlparse
 
 import flask
 import jinja2
@@ -50,7 +51,10 @@ def intro():
 
   addLink('github', 'https://github.com/tempstabilizer2018group/tempstabilizer2018')
   # addLink('grafana', 'http://%(HTTP_HOST)s:3000' % environ)
-  addLink('grafana', f'http://{flask.request.remote_addr}:3000')
+
+  url_parsed = urlparse(flask.request.base_url)
+
+  addLink('grafana', f'http://{url_parsed.hostname}:3000')
   addLink('summary (summary of configured against live nodes)', 'summary.html')
   addLink('summary_old (summary of configured against live nodes)', 'summary_old.html')
   addLink(portable_firmware_constants.strHTTP_PATH_VERSIONCHECK, '%(strHTTP_PATH_VERSIONCHECK)s?%(strHTTP_ARG_MAC)s=3C71BF0F97A4&%(strHTTP_ARG_VERSION)s=heads-SLASH-master;1' % portable_firmware_constants.__dict__)
