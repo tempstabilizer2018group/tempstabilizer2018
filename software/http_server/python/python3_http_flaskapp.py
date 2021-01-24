@@ -3,11 +3,14 @@ import sys
 import pathlib
 
 import flask
+import jinja2
 from werkzeug.exceptions import HTTPException
 
 app = flask.Flask(__name__)
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
+# This will force exceptions when a variable is missing in a template
+app.jinja_env.undefined = jinja2.StrictUndefined
 
 strFileDirectory = pathlib.Path(__file__).absolute().parent
 strHttpDirectory = strFileDirectory.parent.parent
@@ -32,7 +35,7 @@ def handle_exception(e):
 
 @app.route('/')
 def index():
-  return flask.render_template('index.html')
+  return flask.render_template('index.html', host=flask.request.host)
 
 @app.route('/index.html')
 def index_html():

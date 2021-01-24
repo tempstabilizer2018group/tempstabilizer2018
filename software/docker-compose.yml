@@ -17,7 +17,7 @@ services:
   grafana:
     depends_on:
       - influxdb
-    image: grafana/grafana:7.3.7-ubuntu
+    image: grafana/grafana:7.3.7
     container_name: grafana_container
     restart: always
     ports:
