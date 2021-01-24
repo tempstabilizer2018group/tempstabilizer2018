@@ -6,7 +6,11 @@ WORKDIR /app
 COPY http_server/requirements.txt requirements.txt
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-COPY . .
+
+COPY http_server http_server
+COPY node/config node/config
+COPY node/program/portable_*.py node/program/
+
 ENV HOST 0.0.0.0
 EXPOSE 80
 
