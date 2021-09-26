@@ -92,6 +92,7 @@ listLabs.append({
     ('20181217_18', ''), # Aluklotz B, klein, mit EOM
     ('20181217_19', ''), # Aluklotz B, klein, mit EOM
     ('20181217_21', ''), # Auf Aluklotz 180x80x20 in Flowbox
+    ('20181217_16', ''), # Heizung Spannungsreferenz
   )
 })
 
@@ -106,7 +107,6 @@ listLabs.append({
     ('20181217_12', ''),
     ('20181217_15', ''), # heizt nicht, defekt   
     ('20181217_11', ''), # parat fuer Experimente  
-    ('20181217_16', ''), # parat fuer Experimente 
 
   )
 })
