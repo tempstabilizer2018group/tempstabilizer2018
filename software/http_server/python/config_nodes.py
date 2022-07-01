@@ -48,7 +48,6 @@ listLabs.append({
   GIT_TAGS: 'heads/master;7',
   NODES: (
     ('20181217_22', ''),
-    ('20181217_23', ''),
     ('20181217_24', ''),
     ('20181217_99', ''),
   )
@@ -92,6 +91,8 @@ listLabs.append({
     ('20181217_18', ''), # Aluklotz B, klein, mit EOM
     ('20181217_19', ''), # Aluklotz B, klein, mit EOM
     ('20181217_21', ''), # Auf Aluklotz 180x80x20 in Flowbox
+    ('20181217_16', ''), # Heizung Spannungsreferenz gfabris@, Lancellotti?
+    ('20181217_23', ''), # David Holzapfel IQE TIQI
   )
 })
 
@@ -106,7 +107,6 @@ listLabs.append({
     ('20181217_12', ''),
     ('20181217_15', ''), # heizt nicht, defekt   
     ('20181217_11', ''), # parat fuer Experimente  
-    ('20181217_16', ''), # parat fuer Experimente 
 
   )
 })
