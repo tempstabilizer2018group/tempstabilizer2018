@@ -8,7 +8,7 @@ services:
     container_name: http_server_container
     restart: always
     ports:
-      - 3001:80
+      - 92.205.16.215:3001:80
     networks:
       - tempstab2018_network
     volumes:
@@ -21,7 +21,7 @@ services:
     container_name: grafana_container
     restart: always
     ports:
-      - 3000:3000
+      - 92.205.16.215:3000:3000
     networks:
       - tempstab2018_network
     volumes:
@@ -32,7 +32,7 @@ services:
     container_name: influxdb_container
     restart: always
     ports:
-      - 8086:8086
+      - 92.205.16.215:8086:8086
     networks:
       - tempstab2018_network
     volumes:

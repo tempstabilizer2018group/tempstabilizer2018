@@ -17,8 +17,8 @@ EXPOSE 80
 ENV FLASK_APP="/app/http_server/python/python3_http_flaskapp.py"
 ENV FLASK_RUN_PORT="80"
 ENV FLASK_RUN_HOST="0.0.0.0"
-ENV FLASK_ENV="production"
-ENV FLASK_DEBUG="0"
+ENV FLASK_ENV="testing"
+ENV FLASK_DEBUG="1"
 
 ENV PATH="/app/http_server/python:/app/node/config:${PATH}"
 CMD ["flask", "run", "--no-debugger"]
