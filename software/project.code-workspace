@@ -25,5 +25,6 @@
 			"**/__pycache__/**": true,
 			"**/node_data/**": true
 		},
+		"git.openRepositoryInParentFolders": "always"
 	}
 }
